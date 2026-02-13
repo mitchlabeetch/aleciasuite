@@ -146,12 +146,12 @@ export default function AdminSignInPage() {
 					{/* Additional Info */}
 					<div className="mt-6 text-center">
 						<p className="text-sm text-gray-500">
-							Besoin d'aide ?{" "}
+							Besoin d&apos;aide ?{" "}
 							<a
 								href="mailto:admin@alecia.markets"
 								className="text-alecia-mid-blue hover:underline"
 							>
-								Contactez l'administrateur
+								Contactez l&apos;administrateur
 							</a>
 						</p>
 					</div>

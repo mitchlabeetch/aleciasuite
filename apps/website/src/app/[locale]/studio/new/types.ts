@@ -1,7 +1,8 @@
-import { Id } from "convex/_generated/dataModel";
+// Transaction ID type (previously Convex Id, now using string)
+type TransactionId = string;
 
 export interface Transaction {
-	_id: Id<"transactions">;
+	_id: TransactionId;
 	clientName: string;
 	acquirerName?: string;
 	mandateType: string;
