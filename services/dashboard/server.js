@@ -13,7 +13,10 @@ const PORT = process.env.PORT || 3100;
 app.engine('hbs', engine({ 
   extname: '.hbs',
   defaultLayout: 'layout',
-  layoutsDir: path.join(__dirname, 'views')
+  layoutsDir: path.join(__dirname, 'views'),
+  helpers: {
+    eq: (a, b) => a === b
+  }
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
