@@ -77,6 +77,9 @@ services:
 
     next-marketing:
         image: alecia/website:latest
+        build:
+            context: .
+            dockerfile: apps/website/Dockerfile
         pull_policy: never
         container_name: alecia-website
         restart: unless-stopped
@@ -111,6 +114,9 @@ services:
 
     next-colab:
         image: alecia/colab:latest
+        build:
+            context: .
+            dockerfile: apps/colab/Dockerfile
         pull_policy: never
         container_name: alecia-colab
         restart: unless-stopped
@@ -148,6 +154,9 @@ services:
 
     hocuspocus:
         image: alecia/hocuspocus:latest
+        build:
+            context: .
+            dockerfile: services/hocuspocus/Dockerfile
         container_name: alecia-hocuspocus
         restart: unless-stopped
         environment:
@@ -168,6 +177,9 @@ services:
 
     strapi:
         image: alecia/cms:latest
+        build:
+            context: .
+            dockerfile: services/cms/Dockerfile
         pull_policy: never
         container_name: alecia-cms
         restart: unless-stopped
@@ -215,6 +227,9 @@ services:
 
     activepieces-app:
         image: alecia/flows:latest
+        build:
+            context: .
+            dockerfile: services/flows/Dockerfile
         pull_policy: never
         container_name: alecia-flows
         restart: unless-stopped
