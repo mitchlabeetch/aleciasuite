@@ -65,9 +65,10 @@ echo "OVH_APPLICATION_KEY=" >> .env
 echo "OVH_APPLICATION_SECRET=" >> .env
 echo "OVH_CONSUMER_KEY=" >> .env
 
+# Create backup before displaying messages
+cp .env .env.backup
+chmod 600 .env .env.backup
+
 echo "✅ Generated .env file"
 echo "⚠️  IMPORTANT: Edit .env and add your OVH DNS credentials"
 echo "📝 Keep .env.backup safe - it contains all your secrets!"
-
-cp .env .env.backup
-chmod 600 .env .env.backup

@@ -1,5 +1,5 @@
 {
-    email noreply@alecia.markets
+    email admin@alecia.markets
     acme_dns ovh {
         endpoint {$OVH_ENDPOINT}
         application_key {$OVH_APPLICATION_KEY}
