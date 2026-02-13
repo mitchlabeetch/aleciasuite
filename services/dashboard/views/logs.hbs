@@ -1,0 +1,27 @@
+<div class="logs-page">
+  <header class="logs-header">
+    <h2>{{service.icon}} Logs - {{service.name}}</h2>
+    <a href="/" class="btn">← Retour</a>
+  </header>
+  
+  <div class="logs-container">
+    <pre id="logs-output" class="logs-output"></pre>
+  </div>
+</div>
+
+<script>
+  const serviceName = '{{service.id}}';
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const ws = new WebSocket(`${protocol}//${window.location.host}?service=${serviceName}`);
+  
+  const logsOutput = document.getElementById('logs-output');
+  
+  ws.onmessage = (event) => {
+    logsOutput.textContent += event.data;
+    logsOutput.scrollTop = logsOutput.scrollHeight;
+  };
+  
+  ws.onerror = (error) => {
+    logsOutput.textContent += '\n❌ Erreur de connexion WebSocket\n';
+  };
+</script>

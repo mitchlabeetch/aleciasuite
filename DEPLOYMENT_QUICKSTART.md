@@ -57,6 +57,27 @@ All services should show "Up (healthy)".
 - https://vault.alecia.markets - Vaultwarden
 - https://docs.alecia.markets - Stirling-PDF
 - https://s3.alecia.markets - Minio console
+- https://serveradministration.alecia.markets - Dashboard d'administration
+
+## 📊 Dashboard d'Administration
+
+Le tableau de bord est accessible à : **https://serveradministration.alecia.markets**
+
+### Fonctionnalités
+
+- ✅ Vue d'ensemble de tous les services
+- 🔄 Démarrer/arrêter les services
+- 📋 Consulter les logs en temps réel
+- 🔄 Mettre à jour depuis GitHub
+- 🇫🇷 Interface 100% en français
+
+### Utilisation
+
+1. **Démarrer tous les services** : Bouton "▶️ Démarrer Tout"
+2. **Arrêter tous les services** : Bouton "⏹️ Arrêter Tout"
+3. **Mettre à jour** : Bouton "🔄 Mettre à Jour"
+4. **Gérer un service** : Utilisez les boutons sur chaque carte de service
+5. **Voir les logs** : Cliquez sur "📋 Logs" pour voir les logs en temps réel
 
 ## Troubleshooting
 

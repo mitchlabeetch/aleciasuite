@@ -72,3 +72,13 @@ s3.alecia.markets {
 storage.alecia.markets {
     reverse_proxy alecia-minio:9000
 }
+
+# Dashboard d'administration
+serveradministration.alecia.markets {
+    reverse_proxy alecia-dashboard:3100
+    
+    # Protection basique (optionnel)
+    # basicauth /* {
+    #     admin $2a$14$hashed_password
+    # }
+}
