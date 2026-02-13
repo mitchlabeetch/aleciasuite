@@ -1,0 +1,150 @@
+{
+	"common": {
+		"save": "Enregistrer",
+		"cancel": "Annuler",
+		"delete": "Supprimer",
+		"edit": "Modifier",
+		"create": "Créer",
+		"loading": "Chargement...",
+		"error": "Une erreur est survenue",
+		"success": "Succès",
+		"search": "Rechercher",
+		"filter": "Filtrer",
+		"close": "Fermer",
+		"confirm": "Confirmer",
+		"back": "Retour",
+		"next": "Suivant",
+		"previous": "Précédent",
+		"yes": "Oui",
+		"no": "Non",
+		"all": "Tous",
+		"none": "Aucun",
+		"more": "Plus",
+		"less": "Moins",
+		"viewAll": "Voir tout",
+		"noResults": "Aucun résultat",
+		"comingSoon": "Bientôt disponible"
+	},
+	"dashboard": {
+		"title": "Tableau de bord",
+		"welcome": "Bienvenue, {name}",
+		"stats": {
+			"documents": "Documents",
+			"deals": "Deals",
+			"templates": "Modèles",
+			"presentations": "Présentations",
+			"tasks": "Tâches",
+			"contacts": "Contacts"
+		},
+		"recentDocuments": "Documents récents",
+		"recentActivity": "Activité récente",
+		"quickActions": "Actions rapides",
+		"emptyState": {
+			"title": "Rien à afficher",
+			"description": "Vos documents et activités apparaîtront ici."
+		}
+	},
+	"documents": {
+		"title": "Documents",
+		"new": "Nouveau document",
+		"empty": "Aucun document",
+		"emptyDescription": "Créez votre premier document pour commencer.",
+		"untitled": "Sans titre",
+		"lastEdited": "Dernière modification",
+		"createdBy": "Créé par",
+		"shared": "Partagé",
+		"private": "Privé",
+		"template": "Modèle",
+		"duplicate": "Dupliquer",
+		"export": "Exporter",
+		"print": "Imprimer",
+		"types": {
+			"document": "Document",
+			"presentation": "Présentation",
+			"whiteboard": "Tableau blanc",
+			"template": "Modèle"
+		}
+	},
+	"pipeline": {
+		"title": "Pipeline",
+		"subtitle": "Gérez vos deals M&A",
+		"newDeal": "Nouveau deal",
+		"filters": "Filtres",
+		"stages": {
+			"qualification": "Qualification",
+			"initial_meeting": "Premier RDV",
+			"analysis": "Analyse",
+			"valuation": "Valorisation",
+			"negotiation": "Négociation",
+			"due_diligence": "Due Diligence",
+			"closing": "Closing",
+			"completed": "Terminé"
+		},
+		"deal": {
+			"value": "Valeur",
+			"stage": "Étape",
+			"assignee": "Responsable",
+			"priority": "Priorité",
+			"createdAt": "Créé le",
+			"company": "Société"
+		},
+		"priority": {
+			"low": "Basse",
+			"medium": "Moyenne",
+			"high": "Haute"
+		},
+		"empty": {
+			"title": "Aucun deal dans le pipeline",
+			"description": "Créez votre premier deal pour commencer."
+		}
+	},
+	"calendar": {
+		"title": "Calendrier",
+		"today": "Aujourd'hui",
+		"week": "Semaine",
+		"month": "Mois",
+		"newEvent": "Nouvel événement",
+		"noEvents": "Aucun événement"
+	},
+	"settings": {
+		"title": "Paramètres",
+		"profile": "Profil",
+		"account": "Compte",
+		"notifications": "Notifications",
+		"integrations": "Intégrations",
+		"security": "Sécurité",
+		"language": "Langue",
+		"theme": "Thème",
+		"themes": {
+			"light": "Clair",
+			"dark": "Sombre",
+			"system": "Système"
+		}
+	},
+	"navigation": {
+		"dashboard": "Tableau de bord",
+		"documents": "Documents",
+		"pipeline": "Pipeline",
+		"presentations": "Présentations",
+		"calendar": "Calendrier",
+		"settings": "Paramètres",
+		"adminPanel": "Panel Admin",
+		"whiteboard": "Tableau blanc",
+		"research": "Recherche",
+		"help": "Aide"
+	},
+	"auth": {
+		"signIn": "Se connecter",
+		"signOut": "Se déconnecter",
+		"signUp": "S'inscrire",
+		"email": "Email",
+		"password": "Mot de passe"
+	},
+	"errors": {
+		"notFound": "Page non trouvée",
+		"unauthorized": "Non autorisé",
+		"serverError": "Erreur serveur",
+		"networkError": "Erreur réseau",
+		"tryAgain": "Réessayer"
+	}
+}

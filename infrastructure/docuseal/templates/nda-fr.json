@@ -1,0 +1,62 @@
+{
+  "name": "Accord de Confidentialité (NDA)",
+  "description": "Accord de confidentialité standard pour les opérations de M&A",
+  "language": "fr",
+  "fields": [
+    {
+      "name": "disclosing_party_name",
+      "label": "Partie divulgatrice",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "disclosing_party_address",
+      "label": "Adresse de la partie divulgatrice",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "receiving_party_name",
+      "label": "Partie réceptrice",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "receiving_party_address",
+      "label": "Adresse de la partie réceptrice",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "project_codename",
+      "label": "Nom de code du projet",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "duration_months",
+      "label": "Durée de confidentialité (mois)",
+      "type": "number",
+      "required": true,
+      "default": 24
+    },
+    {
+      "name": "effective_date",
+      "label": "Date d'effet",
+      "type": "date",
+      "required": true
+    },
+    {
+      "name": "disclosing_signature",
+      "label": "Signature partie divulgatrice",
+      "type": "signature",
+      "required": true
+    },
+    {
+      "name": "receiving_signature",
+      "label": "Signature partie réceptrice",
+      "type": "signature",
+      "required": true
+    }
+  ]
+}

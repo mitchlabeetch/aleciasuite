@@ -1,0 +1,11 @@
+{
+  "name": "@activepieces/piece-alecia-docgen",
+  "version": "0.1.0",
+  "description": "M&A document generation for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "axios": "^1.6.0",
+    "form-data": "^4.0.0"
+  }
+}

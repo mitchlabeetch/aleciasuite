@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "location_images",
+  "info": {
+    "singularName": "location-image",
+    "pluralName": "location-images",
+    "displayName": "Location Image",
+    "description": "Interactive map and office locations"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "location_name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "alt_text": {
+      "type": "string",
+      "description": "Alternative text for accessibility"
+    },
+    "latitude": {
+      "type": "float",
+      "description": "Geographic latitude coordinate"
+    },
+    "longitude": {
+      "type": "float",
+      "description": "Geographic longitude coordinate"
+    },
+    "address": {
+      "type": "text",
+      "description": "Full address of the location"
+    },
+    "display_order": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    }
+  }
+}

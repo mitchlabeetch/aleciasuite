@@ -1,0 +1,24 @@
+# infrastructure/strapi/docker-compose.yml
+# Alecia CMS — Strapi CE headless CMS
+services:
+  strapi:
+    build: ../../services/cms
+    container_name: alecia-strapi
+    restart: unless-stopped
+    environment:
+      DATABASE_HOST: alecia-postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: alecia
+      DATABASE_USERNAME: alecia
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      DATABASE_SCHEMA: alecia_cms
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_ENDPOINT: https://s3.alecia.fr
+      MINIO_BUCKET: alecia-media
+      APP_KEYS: ${STRAPI_APP_KEYS}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+      JWT_SECRET: ${STRAPI_JWT_SECRET}
+    ports:
+      - "1337:1337"

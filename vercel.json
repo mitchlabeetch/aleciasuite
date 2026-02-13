@@ -1,0 +1,9 @@
+{
+	"$schema": "https://vercel.com/schema.json",
+	"version": 2,
+	"framework": "nextjs",
+	"buildCommand": "pnpm run build:website",
+	"outputDirectory": "apps/website/.next",
+	"installCommand": "pnpm install",
+	"devCommand": "pnpm run dev:website"
+}

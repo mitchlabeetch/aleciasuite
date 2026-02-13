@@ -1,0 +1,180 @@
+services:
+  # Infrastructure
+  postgres:
+    image: postgres:16-alpine
+    container_name: alecia-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: alecia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-alecia-secure-password-change-me}
+      POSTGRES_DB: alecia
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alecia"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: alecia-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-alecia-redis-password-change-me}
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  minio:
+    image: minio/minio:latest
+    container_name: alecia-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-alecia}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-alecia-minio-password-change-me}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # Core Apps (using Vercel for now, will migrate later)
+  # For local development, use: pnpm dev
+
+  # FOSS Tools
+  strapi:
+    image: strapi/strapi:latest
+    container_name: alecia-cms
+    restart: unless-stopped
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: alecia
+      DATABASE_USERNAME: alecia
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-alecia-secure-password-change-me}
+      DATABASE_SSL: false
+      NODE_ENV: production
+      APP_KEYS: ${STRAPI_APP_KEYS:-generate-secure-keys}
+      API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT:-generate-secure-salt}
+      ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET:-generate-secure-jwt}
+      JWT_SECRET: ${STRAPI_JWT_SECRET:-generate-secure-jwt-secret}
+    volumes:
+      - strapi_data:/srv/app
+    ports:
+      - "1337:1337"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  plausible:
+    image: plausible/analytics:latest
+    container_name: alecia-analytics
+    restart: unless-stopped
+    command: sh -c "sleep 10 && /entrypoint.sh db createdb && /entrypoint.sh db migrate && /entrypoint.sh run"
+    environment:
+      BASE_URL: https://analytics.alecia.fr
+      SECRET_KEY_BASE: ${PLAUSIBLE_SECRET_KEY:-generate-secure-plausible-secret}
+      DATABASE_URL: postgres://alecia:${POSTGRES_PASSWORD:-alecia-secure-password-change-me}@postgres:5432/alecia
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  docuseal:
+    image: docuseal/docuseal:latest
+    container_name: alecia-sign
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD:-alecia-secure-password-change-me}@postgres:5432/alecia
+      SECRET_KEY_BASE: ${DOCUSEAL_SECRET:-generate-secure-docuseal-secret}
+      HOST: https://sign.alecia.fr
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  miniflux:
+    image: miniflux/miniflux:latest
+    container_name: alecia-feeds
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://alecia:${POSTGRES_PASSWORD:-alecia-secure-password-change-me}@postgres:5432/alecia?sslmode=disable
+      RUN_MIGRATIONS: 1
+      CREATE_ADMIN: 1
+      ADMIN_USERNAME: ${MINIFLUX_ADMIN_USER:-admin}
+      ADMIN_PASSWORD: ${MINIFLUX_ADMIN_PASSWORD:-change-me}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: alecia-vault
+    restart: unless-stopped
+    environment:
+      DOMAIN: https://vault.alecia.fr
+      DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD:-alecia-secure-password-change-me}@postgres:5432/alecia
+    volumes:
+      - vaultwarden_data:/data
+    ports:
+      - "8081:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  searxng:
+    image: searxng/searxng:latest
+    container_name: alecia-search
+    restart: unless-stopped
+    volumes:
+      - searxng_data:/etc/searxng
+    ports:
+      - "8082:8080"
+
+  gotenberg:
+    image: gotenberg/gotenberg:latest
+    container_name: alecia-pdf-gen
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    container_name: alecia-pdf-tools
+    restart: unless-stopped
+    environment:
+      DOCKER_ENABLE_SECURITY: false
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: false
+      LANGS: en_US,fr_FR
+    volumes:
+      - stirling_data:/usr/share/tessdata
+    ports:
+      - "8083:8080"
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  strapi_data:
+  vaultwarden_data:
+  searxng_data:
+  stirling_data:
+
+networks:
+  default:
+    name: alecia-network

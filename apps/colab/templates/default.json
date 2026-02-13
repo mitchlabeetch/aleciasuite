@@ -1,0 +1,311 @@
+{
+	"type": "doc",
+	"content": [
+		{
+			"type": "heading",
+			"attrs": { "level": 1 },
+			"content": [{ "type": "text", "text": "Bienvenue sur Alecia Colab" }]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "Votre base de connaissances complète et plateforme de collaboration M&A. Rationalisez les flux de travail des deals, la due diligence et la planification d'intégration."
+				}
+			]
+		},
+		{
+			"type": "heading",
+			"attrs": { "level": 2 },
+			"content": [{ "type": "text", "text": "Guide de Démarrage Rapide" }]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "Utilisez la commande "
+				},
+				{ "type": "text", "marks": [{ "type": "code" }], "text": "/" },
+				{
+					"type": "text",
+					"text": " pour accéder aux modèles et aux options de formatage. Tapez "
+				},
+				{ "type": "text", "marks": [{ "type": "code" }], "text": "++" },
+				{
+					"type": "text",
+					"text": " pour activer les suggestions IA."
+				}
+			]
+		},
+		{
+			"type": "heading",
+			"attrs": { "level": 2 },
+			"content": [{ "type": "text", "text": "Modèles M&A" }]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "Accédez à des modèles spécialisés pour votre flux de travail M&A :"
+				}
+			]
+		},
+		{
+			"type": "bulletList",
+			"content": [
+				{
+					"type": "listItem",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"marks": [{ "type": "bold" }],
+									"text": "Pipeline de Deals"
+								},
+								{
+									"type": "text",
+									"text": " - Suivez les opportunités du sourcing à la clôture"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "listItem",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"marks": [{ "type": "bold" }],
+									"text": "Checklist Due Diligence"
+								},
+								{
+									"type": "text",
+									"text": " - Cadres de DD complets et questionnaires"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "listItem",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"marks": [{ "type": "bold" }],
+									"text": "Modèles de Valorisation"
+								},
+								{
+									"type": "text",
+									"text": " - Modélisation financière et modèles d'analyse"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "listItem",
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"marks": [{ "type": "bold" }],
+									"text": "Planification d'Intégration"
+								},
+								{
+									"type": "text",
+									"text": " - Checklists et calendriers d'intégration post-fusion"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{ "type": "horizontalRule" },
+		{
+			"type": "heading",
+			"attrs": { "level": 2 },
+			"content": [{ "type": "text", "text": "Fonctionnalités Clés" }]
+		},
+		{
+			"type": "taskList",
+			"content": [
+				{
+					"type": "taskItem",
+					"attrs": { "checked": true },
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Édition de texte enrichi avec commandes slash et menu contextuel"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "taskItem",
+					"attrs": { "checked": true },
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Suggestions de contenu et autocomplétion alimentées par IA"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "taskItem",
+					"attrs": { "checked": true },
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Téléchargement d'images par glisser-déposer ou copier-coller"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "taskItem",
+					"attrs": { "checked": true },
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Formules mathématiques et support LaTeX pour les modèles financiers"
+								}
+							]
+						}
+					]
+				},
+				{
+					"type": "taskItem",
+					"attrs": { "checked": false },
+					"content": [
+						{
+							"type": "paragraph",
+							"content": [
+								{
+									"type": "text",
+									"text": "Versionnage de documents et fonctionnalités de collaboration (bientôt disponible)"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"type": "heading",
+			"attrs": { "level": 3 },
+			"content": [
+				{ "type": "text", "text": "Exemple : Modèle de Résumé de Deal" }
+			]
+		},
+		{
+			"type": "heading",
+			"attrs": { "level": 4 },
+			"content": [
+				{ "type": "text", "text": "Société Cible : [Nom de la Société]" }
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"marks": [{ "type": "bold" }],
+					"text": "Étape du Deal :"
+				},
+				{
+					"type": "text",
+					"text": " [Sourcing / Due Diligence / Négociation / Clôture]"
+				}
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"marks": [{ "type": "bold" }],
+					"text": "Responsable du Deal :"
+				},
+				{ "type": "text", "text": " [Nom]" }
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"marks": [{ "type": "bold" }],
+					"text": "Valorisation :"
+				},
+				{ "type": "text", "text": " [Montant]" }
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"marks": [{ "type": "bold" }],
+					"text": "Raisonnement Stratégique :"
+				}
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "• Opportunités d'expansion de marché"
+				}
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "• Acquisition de technologie et de propriété intellectuelle"
+				}
+			]
+		},
+		{
+			"type": "paragraph",
+			"content": [
+				{
+					"type": "text",
+					"text": "• Synergies et optimisation des coûts"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,27 @@
+# infrastructure/searxng/settings.yml
+use_default_settings: true
+general:
+  instance_name: "Alecia Recherche"
+  debug: false
+search:
+  safe_search: 0
+  autocomplete: "google"
+  default_lang: "fr"
+server:
+  secret_key: "4a8e3c9b2f1d5e7a3c6b8d2e9f1a4c7b3e5d8a2f6c1b9e4a7d3f8c2b5e1a9d6f4c3b7e2a5d1f9c8b6e3a2d4f7c1b5e8a9d3f6c2b1e4a7d8f3c9b5e2a1d6f4c8b7e3a9d2f5c1b8e6a4d7f3c2b9e5a1d8f6c4b3e7a2d9f1c5b8e4a7d3f6c2b1e9a5d8f4c3b7e1a6d2f9c8b5e3a4d7f1c6b2e9a8d5f3c1b4e7a6d9f2c8b5e1a3d4f7c9b6e2a8d1f5c3b7e4a9d6f2c1b8e5a3d7f4c9b2e6a1d8f3c5b7e9a4d2f6c1b3e8a5d7f9c4b2e1a6d3f8c5b7e9a2d4f1c6b8e3a5d7f9c2b4e1a8d6f3c5b7e9a1d2f4c6b8e5a3d7f9c1b2e4a6d8f3c5b7e9a2d1f4c6b8e5a3d7f9c2b1e4a6d8f3c5"
+  bind_address: "0.0.0.0"
+  port: 8080
+  limiter: true
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+  - name: bing
+    engine: bing
+    shortcut: b
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: w

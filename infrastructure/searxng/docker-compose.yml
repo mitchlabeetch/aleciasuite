@@ -1,0 +1,12 @@
+# infrastructure/searxng/docker-compose.yml
+services:
+  searxng:
+    image: searxng/searxng:latest
+    container_name: alecia-searxng
+    restart: unless-stopped
+    volumes:
+      - ./settings.yml:/etc/searxng/settings.yml:ro
+    environment:
+      SEARXNG_BASE_URL: https://search.alecia.fr
+    ports:
+      - "8888:8080"

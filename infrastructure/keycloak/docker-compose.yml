@@ -1,0 +1,23 @@
+# infrastructure/keycloak/docker-compose.yml
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: alecia-keycloak
+    restart: unless-stopped
+    command: start --import-realm
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://alecia-postgres:5432/alecia
+      KC_DB_SCHEMA: public
+      KC_DB_USERNAME: alecia
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HOSTNAME: auth.alecia.fr
+      KC_PROXY: edge
+      KC_HTTP_ENABLED: "true"
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    volumes:
+      - ./themes/alecia:/opt/keycloak/themes/alecia
+      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+    ports:
+      - "8080:8080"

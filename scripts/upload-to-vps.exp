@@ -1,0 +1,22 @@
+#!/usr/bin/expect -f
+# Upload Alecia Suite codebase to VPS and build images
+
+set timeout 3600
+set vps_host "51.255.194.94"
+set vps_user "ubuntu"
+set vps_pass "0akNPw8LUX6RN8pC"
+
+puts "Uploading Alecia Suite to VPS..."
+
+# Create directory structure
+spawn ssh -o StrictHostKeyChecking=no $vps_user@$vps_host
+expect "password:"
+send "$vps_pass\r"
+expect "$ "
+send "mkdir -p ~/alecia && cd ~/alecia\r"
+expect "$ "
+send "exit\r"
+expect eof
+
+puts "✓ Created ~/alecia directory"
+puts "Now use: rsync -avz --exclude node_modules --exclude .git /Users/utilisateur/Desktop/alepanel/ ubuntu@51.255.194.94:~/alecia/"

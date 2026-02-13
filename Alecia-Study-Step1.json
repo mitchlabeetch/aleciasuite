@@ -1,0 +1,72 @@
+{
+  "name": "Alecia-Study-Step1-Optimized",
+  "description": "Workflow optimisé pour éviter les erreurs de type NoneType et valider les flux de données.",
+  "input_schema": {
+    "type": "object",
+    "required": ["LOCATION", "MARKET", "PERIOD", "BASE_YEAR", "PROJECTION_YEAR", "RECENT_EVENT", "CURRENCY", "SUBSEGMENTS"],
+    "properties": {
+      "LOCATION": { "type": "string", "title": "Localisation (ex: France)", "default": "France" },
+      "MARKET": { "type": "string", "title": "Marché (ex: Pâtes alimentaires)", "default": "Pâtes et Semoules" },
+      "PERIOD": { "type": "string", "title": "Période", "default": "2020-2025" },
+      "BASE_YEAR": { "type": "string", "title": "Année de base", "default": "2023" },
+      "PROJECTION_YEAR": { "type": "string", "title": "Année de projection", "default": "2030" },
+      "RECENT_EVENT": { "type": "string", "title": "Événement récent", "default": "Inflation des matières premières" },
+      "CURRENCY": { "type": "string", "title": "Devise", "default": "EUR" },
+      "SUBSEGMENTS": { "type": "string", "title": "Sous-segments", "default": "Pâtes sèches, Fraîches, Couscous" }
+    }
+  },
+  "nodes": [
+    {
+      "title": "Génération de l'étude (JSON)",
+      "node_type_name": "llm",
+      "name": "ask_ai",
+      "input_config": {
+        "model": "agenticflow/deepseek-v3.2",
+        "temperature": 0.2,
+        "system_message": "Tu es un expert en intelligence économique. Tu génères une étude de marché exhaustive au format JSON STRICT. Pas de texte avant ou après le JSON. Langue : Français uniquement.",
+        "human_message": "Générer l'étude secteur pour LOCATION: {{var.LOCATION}}, MARKET: {{var.MARKET}}, PERIOD: {{var.PERIOD}}, RECENT_EVENT: {{var.RECENT_EVENT}}. Utilise {{var.CURRENCY}} comme devise. Le JSON doit inclure les chapitres : Vue d'ensemble, Supply Chain, Concurrence, et Perspectives."
+      }
+    },
+    {
+      "title": "Recherche Web Complémentaire",
+      "node_type_name": "web_search",
+      "name": "web_search",
+      "input_config": {
+        "search_query": "données marché {{var.MARKET}} {{var.LOCATION}} {{var.PERIOD}} actualités {{var.RECENT_EVENT}}",
+        "top_k": 5
+      }
+    },
+    {
+      "title": "Fact-Checking et Enrichissement",
+      "node_type_name": "llm",
+      "name": "llm_enrich",
+      "input_config": {
+        "model": "agenticflow/deepseek-v3.2",
+        "temperature": 0.1,
+        "system_message": "Tu es rédacteur en chef. Tu reçois un JSON et des résultats de recherche web. Ton but est de corriger les chiffres et d'enrichir le JSON original.",
+        "human_message": "JSON original : {{ask_ai.content}}\n\nRésultats web pour correction : {{web_search.results}}\n\nRetourne le JSON complet, corrigé et validé."
+      }
+    },
+    {
+      "title": "Génération du Rapport HTML",
+      "node_type_name": "llm",
+      "name": "llm_html",
+      "input_config": {
+        "model": "agenticflow/deepseek-v3.2",
+        "temperature": 0.2,
+        "system_message": "Tu es designer UI/UX. Convertis le JSON reçu en une page HTML complète avec Tailwind CSS et Chart.js. Utilise un design premium consulting.",
+        "human_message": "Données : {{llm_enrich.content}}"
+      }
+    },
+    {
+      "title": "Export et Envoi",
+      "node_type_name": "send_email",
+      "name": "send_email",
+      "input_config": {
+        "recipient_emails": ["editionsrevel@gmail.com"],
+        "subject": "Étude de Marché : {{var.MARKET}} - {{var.LOCATION}}",
+        "body_html": "{{llm_html.content}}"
+      }
+    }
+  ]
+}

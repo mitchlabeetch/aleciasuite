@@ -1,0 +1,92 @@
+{
+  "name": "Mandat de Vente",
+  "description": "Mandat de vente exclusif pour accompagnement M&A sell-side",
+  "language": "fr",
+  "fields": [
+    {
+      "name": "client_company",
+      "label": "Société mandante",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "client_representative",
+      "label": "Représentant légal",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "client_address",
+      "label": "Adresse du mandant",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "advisor_entity",
+      "label": "Conseiller M&A",
+      "type": "text",
+      "required": true,
+      "default": "Alecia Conseil"
+    },
+    {
+      "name": "mandate_type",
+      "label": "Type de mandat",
+      "type": "text",
+      "required": true,
+      "default": "Exclusif"
+    },
+    {
+      "name": "mandate_scope",
+      "label": "Périmètre du mandat",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "target_valuation",
+      "label": "Valorisation indicative (€)",
+      "type": "text"
+    },
+    {
+      "name": "success_fee_percent",
+      "label": "Commission de succès (%)",
+      "type": "number",
+      "required": true
+    },
+    {
+      "name": "retainer_fee",
+      "label": "Honoraires forfaitaires (€)",
+      "type": "number"
+    },
+    {
+      "name": "mandate_duration_months",
+      "label": "Durée du mandat (mois)",
+      "type": "number",
+      "required": true,
+      "default": 12
+    },
+    {
+      "name": "start_date",
+      "label": "Date de début",
+      "type": "date",
+      "required": true
+    },
+    {
+      "name": "exclusivity_clause",
+      "label": "Clause d'exclusivité",
+      "type": "text",
+      "default": "Le mandant s'engage à ne pas mandater d'autre conseil pendant la durée du mandat."
+    },
+    {
+      "name": "client_signature",
+      "label": "Signature du mandant",
+      "type": "signature",
+      "required": true
+    },
+    {
+      "name": "advisor_signature",
+      "label": "Signature du conseiller",
+      "type": "signature",
+      "required": true
+    }
+  ]
+}

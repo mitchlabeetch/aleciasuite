@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>Alecia M&amp;A Intelligence Feeds</title>
+    <dateCreated>2026-02-09</dateCreated>
+    <ownerName>Alecia</ownerName>
+  </head>
+  <body>
+    <outline text="M&amp;A &amp; Finance" title="M&amp;A &amp; Finance">
+      <outline type="rss" text="Les Echos Finance &amp; Marchés" title="Les Echos Finance &amp; Marchés" xmlUrl="https://www.lesechos.fr/finance-marches/rss.xml" htmlUrl="https://www.lesechos.fr/finance-marches"/>
+      <outline type="rss" text="Capital Finance" title="Capital Finance" xmlUrl="https://www.capitalfinance.lesechos.fr/rss" htmlUrl="https://www.capitalfinance.lesechos.fr"/>
+      <outline type="rss" text="CFNEWS" title="CFNEWS" xmlUrl="https://www.cfnews.net/rss" htmlUrl="https://www.cfnews.net"/>
+      <outline type="rss" text="Fusions &amp; Acquisitions Magazine" title="Fusions &amp; Acquisitions Magazine" xmlUrl="https://fusacq.com/rss.xml" htmlUrl="https://fusacq.com"/>
+      <outline type="rss" text="Reuters Mergers &amp; Acquisitions" title="Reuters Mergers &amp; Acquisitions" xmlUrl="https://www.reuters.com/arc/outboundfeeds/v3/category/mergers-acquisitions/?outputType=xml" htmlUrl="https://www.reuters.com/markets/deals/"/>
+      <outline type="rss" text="Financial Times M&amp;A" title="Financial Times M&amp;A" xmlUrl="https://www.ft.com/mergers-acquisitions?format=rss" htmlUrl="https://www.ft.com/mergers-acquisitions"/>
+      <outline type="rss" text="Dealogic Insights" title="Dealogic Insights" xmlUrl="https://dealogic.com/feed/" htmlUrl="https://dealogic.com"/>
+      <outline type="rss" text="Pappers Blog" title="Pappers Blog" xmlUrl="https://blog.pappers.fr/feed/" htmlUrl="https://blog.pappers.fr"/>
+      <outline type="rss" text="BPI France" title="BPI France" xmlUrl="https://www.bpifrance.fr/rss" htmlUrl="https://www.bpifrance.fr"/>
+    </outline>
+    <outline text="International M&amp;A News" title="International M&amp;A News">
+      <outline type="rss" text="Bloomberg Deals" title="Bloomberg Deals" xmlUrl="https://www.bloomberg.com/feed/topics/mergers-acquisitions" htmlUrl="https://www.bloomberg.com/topics/mergers-acquisitions"/>
+      <outline type="rss" text="Wall Street Journal M&amp;A" title="Wall Street Journal M&amp;A" xmlUrl="https://feeds.wsj.com/wsj/xml/rss/3_7014.xml" htmlUrl="https://www.wsj.com/news/types/deals"/>
+      <outline type="rss" text="MergerMarket News" title="MergerMarket News" xmlUrl="https://www.mergermarket.com/feed" htmlUrl="https://www.mergermarket.com"/>
+      <outline type="rss" text="The Deal Pipeline" title="The Deal Pipeline" xmlUrl="https://www.thedeal.com/feed/" htmlUrl="https://www.thedeal.com"/>
+    </outline>
+    <outline text="French Business Intelligence" title="French Business Intelligence">
+      <outline type="rss" text="Les Echos Entreprises" title="Les Echos Entreprises" xmlUrl="https://www.lesechos.fr/industrie-services/rss.xml" htmlUrl="https://www.lesechos.fr/industrie-services"/>
+      <outline type="rss" text="La Tribune Entreprises" title="La Tribune Entreprises" xmlUrl="https://www.latribune.fr/entreprises/rss.xml" htmlUrl="https://www.latribune.fr/entreprises"/>
+      <outline type="rss" text="Option Finance" title="Option Finance" xmlUrl="https://www.optionfinance.fr/rss.xml" htmlUrl="https://www.optionfinance.fr"/>
+      <outline type="rss" text="Décideurs Magazine" title="Décideurs Magazine" xmlUrl="https://www.magazine-decideurs.com/rss" htmlUrl="https://www.magazine-decideurs.com"/>
+    </outline>
+    <outline text="Private Equity &amp; VC" title="Private Equity &amp; VC">
+      <outline type="rss" text="Private Equity International" title="Private Equity International" xmlUrl="https://www.privateequityinternational.com/feed/" htmlUrl="https://www.privateequityinternational.com"/>
+      <outline type="rss" text="France Invest Actualités" title="France Invest Actualités" xmlUrl="https://www.franceinvest.eu/feed/" htmlUrl="https://www.franceinvest.eu"/>
+      <outline type="rss" text="TechCrunch Funding" title="TechCrunch Funding" xmlUrl="https://techcrunch.com/tag/funding/feed/" htmlUrl="https://techcrunch.com/tag/funding/"/>
+    </outline>
+  </body>
+</opml>

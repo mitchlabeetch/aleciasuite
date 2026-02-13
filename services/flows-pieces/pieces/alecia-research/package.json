@@ -1,0 +1,11 @@
+{
+  "name": "@activepieces/piece-alecia-research",
+  "version": "0.1.0",
+  "description": "Company research and web search for Alecia Suite (Pappers, SearXNG, semantic search)",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "axios": "^1.6.0",
+    "pg": "^8.11.0"
+  }
+}

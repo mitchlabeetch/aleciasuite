@@ -1,0 +1,19 @@
+# infrastructure/vaultwarden/docker-compose.yml
+# ADMIN_TOKEN: Generate a strong random token with: openssl rand -base64 48
+# See .env.example for token configuration details
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: alecia-vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: https://vault.alecia.fr
+      SIGNUPS_ALLOWED: "false"
+      INVITATIONS_ALLOWED: "true"
+      ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+    volumes:
+      - vaultwarden_data:/data
+    ports:
+      - "8080:80"
+volumes:
+  vaultwarden_data:

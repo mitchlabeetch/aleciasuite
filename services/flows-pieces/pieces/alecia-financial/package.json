@@ -1,0 +1,11 @@
+{
+  "name": "@activepieces/piece-alecia-financial",
+  "version": "0.1.0",
+  "description": "Financial model export for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "exceljs": "^4.3.0",
+    "pg": "^8.11.0"
+  }
+}

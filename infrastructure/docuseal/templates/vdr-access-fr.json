@@ -1,0 +1,67 @@
+{
+  "name": "Engagement de Confidentialité - Accès Data Room",
+  "description": "Engagement de confidentialité pour accès à la data room virtuelle",
+  "language": "fr",
+  "fields": [
+    {
+      "name": "participant_name",
+      "label": "Nom du participant",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "participant_company",
+      "label": "Société du participant",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "participant_role",
+      "label": "Fonction",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "participant_email",
+      "label": "Email",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "project_codename",
+      "label": "Nom de code du projet",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "access_level",
+      "label": "Niveau d'accès",
+      "type": "text",
+      "default": "Consultation uniquement"
+    },
+    {
+      "name": "confidentiality_duration_months",
+      "label": "Durée de confidentialité (mois)",
+      "type": "number",
+      "default": 36
+    },
+    {
+      "name": "watermark_acknowledgment",
+      "label": "J'accepte le filigrane sur les documents",
+      "type": "text",
+      "default": "Oui"
+    },
+    {
+      "name": "participant_signature",
+      "label": "Signature du participant",
+      "type": "signature",
+      "required": true
+    },
+    {
+      "name": "date",
+      "label": "Date",
+      "type": "date",
+      "required": true
+    }
+  ]
+}

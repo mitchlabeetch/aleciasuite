@@ -1,0 +1,38 @@
+# macOS metadata files
+._*
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Old Convex backend (migrated to PostgreSQL)
+apps/*/convex
+services/*/convex
+
+# Build outputs
+node_modules
+.next
+dist
+build
+.turbo
+
+# Environment files
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage
+
+# Misc
+.cache

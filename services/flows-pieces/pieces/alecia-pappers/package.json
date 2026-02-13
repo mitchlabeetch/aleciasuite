@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-pappers",
+  "version": "0.1.0",
+  "description": "Pappers API integration for French company research",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "axios": "^1.6.0"
+  }
+}

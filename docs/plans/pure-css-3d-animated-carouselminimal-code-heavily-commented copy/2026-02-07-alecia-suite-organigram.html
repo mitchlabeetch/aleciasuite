@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alecia Suite — Architecture Organigram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --alecia-midnight: #061a40;
+      --alecia-corporate: #163e64;
+      --alecia-mid-blue: #4370a7;
+      --alecia-light-blue: #749ac7;
+      --alecia-pale-blue: #bfd7ea;
+      --alecia-ice-blue: #e3f2fd;
+      --alecia-red: #b80c09;
+      --alecia-titanium: #6f7a8f;
+      --alecia-cloud: #e6e8ec;
+      --alecia-off-white: #fafafc;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--alecia-off-white);
+      color: var(--alecia-midnight);
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--alecia-midnight), var(--alecia-corporate));
+      border-radius: 16px;
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .header p {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-weight: 300;
+    }
+
+    .header .badge {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.3rem 1rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .diagram-section {
+      margin-bottom: 3rem;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px -1px rgba(6, 26, 64, 0.08),
+                  0 2px 4px -1px rgba(6, 26, 64, 0.04);
+      border: 1px solid var(--alecia-cloud);
+    }
+
+    .diagram-section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--alecia-midnight);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .diagram-section h2 .num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--alecia-midnight);
+      color: white;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+
+    .diagram-section p.desc {
+      font-size: 0.9rem;
+      color: var(--alecia-titanium);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      overflow-x: auto;
+      padding: 1rem 0;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--alecia-ice-blue);
+      border-radius: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .ref-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 10px;
+      border-left: 4px solid var(--alecia-mid-blue);
+    }
+
+    .ref-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--alecia-corporate);
+      margin-bottom: 0.75rem;
+    }
+
+    .ref-section ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .ref-section li {
+      font-size: 0.85rem;
+      color: var(--alecia-midnight);
+      padding: 0.25rem 0;
+    }
+
+    .ref-section li strong {
+      color: var(--alecia-corporate);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--alecia-titanium);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: var(--alecia-mid-blue);
+      text-decoration: none;
+    }
+
+    /* Mermaid theme overrides */
+    .mermaid svg {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Alecia Suite</h1>
+    <p>Architecture Organigram — Ecosystem Blueprint v2.1</p>
+    <span class="badge">100% FOSS | Self-Hosted | OVH Cloud VPS</span>
+  </div>
+
+  <!-- ==================== DIAGRAM 1: Suite Overview ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">1</span> Suite Overview — 8 Products + Infrastructure + Supporting Services</h2>
+    <p class="desc">
+      The Alecia Suite is an ecosystem of 8 interconnected tools for M&A advisory,
+      unified by a shared PostgreSQL database, Keycloak SSO, and Minio blob storage.
+      Supporting services handle document processing, AI intelligence, security, and search.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'secondaryColor': '#bfd7ea', 'tertiaryColor': '#fafafc', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }}}%%
+graph TB
+    subgraph INFRA["Infrastructure Layer"]
+        direction LR
+        CADDY["Caddy<br/>Reverse Proxy<br/>Auto-TLS *.alecia.fr"]
+        PG["PostgreSQL 16<br/>+ pgvector<br/>Shared + Isolated Schemas"]
+        MINIO["Minio<br/>S3 Blob Storage<br/>Encrypted Buckets"]
+        KC["Keycloak<br/>SSO / OIDC"]
+        REDIS["Redis<br/>Cache + Queues"]
+        HOCUS["Hocuspocus<br/>Yjs WebSocket"]
+        COOL["Coolify<br/>Container Orchestration"]
+    end
+
+    subgraph SUITE["Alecia Suite — 8 Products"]
+        direction TB
+
+        subgraph ROW1[" "]
+            direction LR
+            A1["alecia<br/>Marketing Site<br/><b>Next.js 15</b><br/>alecia.fr"]
+            A2["alecia.fr<br/>CMS Backend<br/><b>Strapi CE</b><br/>cms.alecia.fr"]
+            A3["Business Intelligence<br/>CRM + Research<br/><b>Custom Next.js</b><br/>app.alecia.fr"]
+            A4["Numbers<br/>M&A Finance<br/><b>Custom React</b><br/>app.alecia.fr/numbers"]
+        end
+
+        subgraph ROW2[" "]
+            direction LR
+            A5["Flows<br/>Automation<br/><b>Activepieces</b><br/>flows.alecia.fr"]
+            A6["Sign<br/>E-Signature + VDR<br/><b>DocuSeal</b><br/>sign.alecia.fr"]
+            A7["Colab<br/>Collaboration<br/><b>Custom Next.js</b><br/>colab.alecia.fr"]
+            A8["Analytics<br/>Web + Business<br/><b>Plausible CE</b><br/>analytics.alecia.fr"]
+        end
+    end
+
+    subgraph SUPPORT["Supporting Services"]
+        direction LR
+        MINI["Miniflux<br/>RSS Aggregator"]
+        SEARX["SearXNG<br/>Meta Search"]
+        HAYSTACK["Haystack<br/>AI Doc Intelligence"]
+        VAULT["Vaultwarden<br/>Password Manager"]
+    end
+
+    subgraph DOCPROC["Document Processing Pipeline"]
+        direction LR
+        STIRLING["Stirling-PDF<br/>PDF Toolkit"]
+        GOTEN["Gotenberg<br/>PDF Generation"]
+        FLOWCHART["Flowchart.fun<br/>Visual Diagrams"]
+    end
+
+    CADDY --> SUITE
+    SUITE --> PG
+    SUITE --> MINIO
+    SUITE --> KC
+    A5 --> REDIS
+    A7 --> HOCUS
+    A3 --> SUPPORT
+    A5 --> SUPPORT
+    A6 --> DOCPROC
+    A3 --> DOCPROC
+    COOL -.->|manages| INFRA
+    COOL -.->|manages| SUITE
+    COOL -.->|manages| SUPPORT
+    COOL -.->|manages| DOCPROC
+
+    style INFRA fill:#163e64,stroke:#061a40,color:#fafafc
+    style SUITE fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style SUPPORT fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style DOCPROC fill:#f0f4f8,stroke:#749ac7,color:#061a40
+    style ROW1 fill:transparent,stroke:transparent
+    style ROW2 fill:transparent,stroke:transparent
+
+    style A1 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A2 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A3 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A4 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A5 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A6 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A7 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style A8 fill:#ffffff,stroke:#4370a7,color:#061a40
+
+    style CADDY fill:#061a40,stroke:#4370a7,color:#fafafc
+    style PG fill:#061a40,stroke:#4370a7,color:#fafafc
+    style MINIO fill:#061a40,stroke:#4370a7,color:#fafafc
+    style KC fill:#061a40,stroke:#4370a7,color:#fafafc
+    style REDIS fill:#061a40,stroke:#4370a7,color:#fafafc
+    style HOCUS fill:#061a40,stroke:#4370a7,color:#fafafc
+    style COOL fill:#b80c09,stroke:#8a0907,color:#fafafc
+
+    style MINI fill:#ffffff,stroke:#749ac7,color:#061a40
+    style SEARX fill:#ffffff,stroke:#749ac7,color:#061a40
+    style HAYSTACK fill:#ffffff,stroke:#749ac7,color:#061a40
+    style VAULT fill:#ffffff,stroke:#749ac7,color:#061a40
+
+    style STIRLING fill:#ffffff,stroke:#749ac7,color:#061a40
+    style GOTEN fill:#ffffff,stroke:#749ac7,color:#061a40
+    style FLOWCHART fill:#ffffff,stroke:#749ac7,color:#061a40
+    </div>
+
+    <div class="ref-section">
+      <h3>Reference Repos for Inspiration</h3>
+      <ul>
+        <li><strong>ERPNext</strong> — Full ERP architecture, project management patterns</li>
+        <li><strong>Krayin CRM</strong> — Access control lists (ACL) patterns for CRM</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 2: Data Architecture ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">2</span> Hybrid Data Architecture — Shared + Isolated Schemas</h2>
+    <p class="desc">
+      PostgreSQL hosts shared schemas for cross-tool entities (deals, contacts, companies)
+      and isolated schemas for tool-specific data. Minio handles all blob storage with encryption.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }}}%%
+erDiagram
+    SHARED_USERS {
+        uuid id PK
+        text email
+        text full_name
+        text keycloak_id
+        text role "sudo | partner | advisor | user"
+        jsonb preferences
+    }
+
+    SHARED_COMPANIES {
+        uuid id PK
+        text name
+        char9 siren "French company ID"
+        text naf_code
+        text website
+        text logo_url
+        jsonb address
+        jsonb financials "revenue, ebitda, netDebt"
+        jsonb pappers_data "Full enrichment cache"
+    }
+
+    SHARED_CONTACTS {
+        uuid id PK
+        uuid company_id FK
+        text full_name
+        text email
+        text phone
+        text role
+    }
+
+    SHARED_DEALS {
+        uuid id PK
+        text title
+        text stage "8 M&A stages"
+        numeric amount
+        int probability "0-100"
+        uuid owner_id FK
+        uuid company_id FK
+        text_arr tags
+        timestamptz expected_close
+    }
+
+    NUMBERS_VALUATIONS {
+        uuid id PK
+        uuid deal_id FK
+        text method "DCF | multiples | comps"
+        jsonb inputs
+        jsonb outputs "low, mid, high range"
+    }
+
+    NUMBERS_DD_CHECKLISTS {
+        uuid id PK
+        uuid deal_id FK
+        text name
+        jsonb categories "49 items, 7 categories"
+        int progress "0-100"
+    }
+
+    SIGN_TEMPLATES {
+        uuid id PK
+        text name "NDA | LOI | Mandate"
+        text pdf_url "Minio ref"
+        jsonb fields "Signature positions"
+    }
+
+    SIGN_SUBMISSIONS {
+        uuid id PK
+        uuid template_id FK
+        uuid deal_id FK
+        text status "pending | signed | expired"
+        jsonb signers
+        timestamptz signed_at
+    }
+
+    COLAB_DOCUMENTS {
+        uuid id PK
+        uuid deal_id FK
+        text title
+        text content "HTML"
+        text markdown
+        bytea yjs_state "CRDT state"
+    }
+
+    COLAB_BOARDS {
+        uuid id PK
+        text name
+        text visibility "private | workspace"
+    }
+
+    SHARED_USERS ||--o{ SHARED_DEALS : "owns"
+    SHARED_COMPANIES ||--o{ SHARED_CONTACTS : "has"
+    SHARED_COMPANIES ||--o{ SHARED_DEALS : "subject of"
+    SHARED_DEALS ||--o{ NUMBERS_VALUATIONS : "valued by"
+    SHARED_DEALS ||--o{ NUMBERS_DD_CHECKLISTS : "audited by"
+    SHARED_DEALS ||--o{ SIGN_SUBMISSIONS : "signed for"
+    SHARED_DEALS ||--o{ COLAB_DOCUMENTS : "linked to"
+    SIGN_TEMPLATES ||--o{ SIGN_SUBMISSIONS : "instantiates"
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 3: Inter-Service Communication ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">3</span> Inter-Service Communication Flow</h2>
+    <p class="desc">
+      Services communicate via cross-schema SQL joins (fast, same DB), REST API calls (cross-container),
+      webhooks (event-driven via Activepieces), and WebSocket (real-time collaboration via Hocuspocus).
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }}}%%
+flowchart LR
+    subgraph EXTERNAL["External Services"]
+        MS["Microsoft 365<br/>Graph API"]
+        PD["Pipedrive<br/>CRM Sync"]
+        SL["Slack<br/>Notifications"]
+        PAPPERS["Pappers API<br/>French Company Data"]
+        GROQ["Groq / OpenAI<br/>AI Inference"]
+        OPENDATA["data.gouv.fr<br/>INSEE Open Data"]
+    end
+
+    subgraph CORE["Alecia Core"]
+        direction TB
+        BI["BI / CRM"]
+        NUM["Numbers"]
+        FLOWS["Flows<br/>(Activepieces)"]
+        SIGN["Sign<br/>(DocuSeal)"]
+        COLAB["Colab"]
+        CMS["CMS<br/>(Strapi)"]
+        SITE["Marketing<br/>Site"]
+        ANALYTICS["Analytics<br/>(Plausible)"]
+    end
+
+    subgraph DATA["Shared Data Layer"]
+        PG[("PostgreSQL<br/>Shared Schema")]
+        MINIO[("Minio<br/>Blob Storage")]
+    end
+
+    subgraph DOCPIPE["Document Processing"]
+        STIRLING2["Stirling-PDF"]
+        GOTEN2["Gotenberg"]
+    end
+
+    subgraph INTEL["AI Intelligence"]
+        HAYSTACK2["Haystack<br/>Semantic Search"]
+    end
+
+    %% External connections
+    BI <-->|"OAuth + Graph API"| MS
+    BI <-->|"OAuth Sync"| PD
+    BI -->|"Webhooks"| SL
+    BI -->|"SIREN Lookup"| PAPPERS
+    BI -->|"AI Analysis"| GROQ
+    BI -->|"Stats & Data"| OPENDATA
+
+    %% Internal data flows
+    BI <-->|"SQL Join"| PG
+    NUM <-->|"SQL Join"| PG
+    SIGN <-->|"SQL Join"| PG
+    COLAB <-->|"SQL Join"| PG
+    CMS <-->|"SQL Join"| PG
+    ANALYTICS -->|"Events"| PG
+
+    SIGN -->|"Signed PDFs"| MINIO
+    CMS -->|"Media"| MINIO
+    COLAB -->|"Attachments"| MINIO
+
+    %% Inter-service flows
+    FLOWS -->|"API: Create Deal"| BI
+    FLOWS -->|"API: Create Valuation"| NUM
+    FLOWS -->|"API: Request Signature"| SIGN
+    FLOWS -->|"API: Create Document"| COLAB
+    FLOWS -->|"API: Notify"| SL
+
+    SITE -->|"REST/GraphQL"| CMS
+    SITE -->|"Tracking Script"| ANALYTICS
+
+    BI -->|"Deal Data for Valuation"| NUM
+    SIGN -->|"Signed Doc to Data Room"| BI
+
+    %% Document processing
+    BI -->|"Prepare PDFs"| STIRLING2
+    STIRLING2 -->|"Clean PDF"| GOTEN2
+    GOTEN2 -->|"Report PDF"| SIGN
+
+    %% AI intelligence
+    BI -->|"DD Document Search"| HAYSTACK2
+    HAYSTACK2 -->|"Semantic Results"| BI
+
+    style EXTERNAL fill:#f0f4f8,stroke:#4370a7,color:#061a40
+    style CORE fill:#ffffff,stroke:#061a40,color:#061a40
+    style DATA fill:#163e64,stroke:#061a40,color:#fafafc
+    style DOCPIPE fill:#f0f4f8,stroke:#749ac7,color:#061a40
+    style INTEL fill:#f0f4f8,stroke:#749ac7,color:#061a40
+
+    style MS fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style PD fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style SL fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style PAPPERS fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style GROQ fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style OPENDATA fill:#e3f2fd,stroke:#4370a7,color:#061a40
+
+    style BI fill:#ffffff,stroke:#4370a7,color:#061a40
+    style NUM fill:#ffffff,stroke:#4370a7,color:#061a40
+    style FLOWS fill:#ffffff,stroke:#b80c09,color:#061a40
+    style SIGN fill:#ffffff,stroke:#4370a7,color:#061a40
+    style COLAB fill:#ffffff,stroke:#4370a7,color:#061a40
+    style CMS fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SITE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style ANALYTICS fill:#ffffff,stroke:#4370a7,color:#061a40
+
+    style PG fill:#061a40,stroke:#4370a7,color:#fafafc
+    style MINIO fill:#061a40,stroke:#4370a7,color:#fafafc
+
+    style STIRLING2 fill:#e3f2fd,stroke:#749ac7,color:#061a40
+    style GOTEN2 fill:#e3f2fd,stroke:#749ac7,color:#061a40
+    style HAYSTACK2 fill:#e3f2fd,stroke:#749ac7,color:#061a40
+    </div>
+
+    <div class="ref-section">
+      <h3>Reference Repos for Inspiration</h3>
+      <ul>
+        <li><strong>CryptPad</strong> — Encrypted real-time collaboration patterns</li>
+        <li><strong>AFFiNE</strong> — Notion-like editor UX, block architecture</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 4: Fork Strategy ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">4</span> Fork Strategy — Build vs Fork vs Deploy</h2>
+    <p class="desc">
+      Each tool follows one of three strategies: slim fork (strip + rebrand open-source repo),
+      enhance custom (strengthen existing code), or deploy as-is (use official Docker image with CSS rebrand).
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }}}%%
+graph LR
+    subgraph FORK["SLIM FORK — Strip + Rebrand"]
+        direction TB
+        F1["Alecia Flows<br/><b>Activepieces</b><br/>MIT License<br/>TypeScript + NestJS"]
+        F2["Alecia Sign<br/><b>DocuSeal</b><br/>AGPL-3.0<br/>Ruby on Rails"]
+        F3["alecia.fr CMS<br/><b>Strapi CE</b><br/>MIT License<br/>TypeScript + Node.js"]
+    end
+
+    subgraph CUSTOM["ENHANCE CUSTOM — Strengthen Existing"]
+        direction TB
+        C1["Alecia BI<br/><b>Custom Next.js</b><br/>MIT<br/>React 19 + PostgreSQL"]
+        C2["Alecia Numbers<br/><b>Custom React</b><br/>MIT<br/>FortuneSheet + Recharts"]
+        C3["Alecia Colab<br/><b>Custom Next.js</b><br/>MIT<br/>TipTap 3 + Yjs"]
+        C4["alecia Site<br/><b>Custom Next.js</b><br/>MIT<br/>Next.js 15 + Tailwind 4"]
+    end
+
+    subgraph DEPLOY["DEPLOY AS-IS — Docker + Rebrand"]
+        direction TB
+        D1["Alecia Analytics<br/><b>Plausible CE</b><br/>AGPL-3.0 | Elixir"]
+        D2["Stirling-PDF<br/><b>PDF Toolkit</b><br/>MIT | Java"]
+        D3["Gotenberg<br/><b>PDF Generation</b><br/>MIT | Go"]
+        D4["Vaultwarden<br/><b>Password Manager</b><br/>AGPL-3.0 | Rust"]
+        D5["Flowchart.fun<br/><b>Visual Diagrams</b><br/>MIT | React"]
+    end
+
+    style FORK fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style CUSTOM fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style DEPLOY fill:#f0f4f8,stroke:#4370a7,color:#061a40
+
+    style F1 fill:#ffffff,stroke:#061a40,color:#061a40
+    style F2 fill:#ffffff,stroke:#061a40,color:#061a40
+    style F3 fill:#ffffff,stroke:#061a40,color:#061a40
+    style C1 fill:#ffffff,stroke:#163e64,color:#061a40
+    style C2 fill:#ffffff,stroke:#163e64,color:#061a40
+    style C3 fill:#ffffff,stroke:#163e64,color:#061a40
+    style C4 fill:#ffffff,stroke:#163e64,color:#061a40
+    style D1 fill:#ffffff,stroke:#749ac7,color:#061a40
+    style D2 fill:#ffffff,stroke:#749ac7,color:#061a40
+    style D3 fill:#ffffff,stroke:#749ac7,color:#061a40
+    style D4 fill:#ffffff,stroke:#749ac7,color:#061a40
+    style D5 fill:#ffffff,stroke:#749ac7,color:#061a40
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 5: Deal Lifecycle ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">5</span> M&A Deal Lifecycle — How Tools Interact Per Stage</h2>
+    <p class="desc">
+      Each stage of an M&A deal activates different Alecia tools. Activepieces (Flows) orchestrates
+      the transitions, creating resources and sending notifications automatically.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px', 'labelTextColor': '#061a40', 'stateBkg': '#e3f2fd', 'stateLabelColor': '#061a40' }}}%%
+stateDiagram-v2
+    direction LR
+
+    state "SOURCING" as S1
+    state "QUALIFICATION" as S2
+    state "INITIAL MEETING" as S3
+    state "ANALYSIS" as S4
+    state "VALUATION" as S5
+    state "DUE DILIGENCE" as S6
+    state "NEGOTIATION" as S7
+    state "CLOSING" as S8
+    state "CLOSED WON" as CW
+    state "CLOSED LOST" as CL
+
+    [*] --> S1
+
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+    S5 --> S6
+    S6 --> S7
+    S7 --> S8
+    S8 --> CW
+    S8 --> CL
+
+    S2 --> CL
+    S3 --> CL
+    S4 --> CL
+    S5 --> CL
+    S6 --> CL
+    S7 --> CL
+
+    CW --> [*]
+    CL --> [*]
+
+    note right of S1
+      BI: Lead capture, Pappers enrichment
+      Flows: Auto-enrich company data
+      RSS: Monitor sector news
+      Haystack: Semantic search on sector docs
+    end note
+
+    note right of S3
+      Colab: Meeting notes, deal memo
+      BI: Calendar event (MS Graph)
+      Numbers: Preliminary valuation
+      Flowchart.fun: Deal structure diagram
+    end note
+
+    note right of S5
+      Numbers: Full valuation model
+      Numbers: Comparable companies
+      Numbers: Fee calculator
+      Gotenberg: Generate valuation PDF report
+    end note
+
+    note right of S6
+      Numbers: DD Checklist (49 items)
+      Sign: Data room creation
+      Sign: NDA for buyers
+      Colab: DD working documents
+      Flows: Daily DD digest
+      Stirling-PDF: Prepare DD documents
+      Haystack: Search across DD corpus
+    end note
+
+    note right of S7
+      Sign: LOI generation + signature
+      Numbers: Final valuation range
+      Colab: Negotiation tracker
+      BI: Buyer matching (AI)
+    end note
+
+    note right of S8
+      Sign: SPA signature
+      Numbers: Post-deal integration plan
+      CMS: Tombstone creation
+      Analytics: Deal conversion tracked
+      Gotenberg: Final closing report
+    end note
+    </div>
+
+    <div class="ref-section">
+      <h3>Reference Repos for Inspiration</h3>
+      <ul>
+        <li><strong>Plane</strong> — Kanban/Gantt board UX patterns, timeline views, issue tracking workflows</li>
+        <li><strong>ERPNext</strong> — Project management stages, milestone tracking</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 6: Activepieces Custom Pieces ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">6</span> Alecia Flows — Custom Activepieces Pieces</h2>
+    <p class="desc">
+      Seven custom TypeScript pieces connect Activepieces to every Alecia service and external integration.
+      Each piece provides actions (do something) and triggers (react to events).
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#4370a7', 'primaryTextColor': '#ffffff', 'secondaryColor': '#e3f2fd', 'tertiaryColor': '#bfd7ea', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '12px' }}}%%
+mindmap
+  root(("Alecia Flows<br/>Custom Pieces"))
+    ("@alecia/piece-crm")
+      ["createDeal"]
+      ["updateDealStage"]
+      ["searchCompanies"]
+      ["enrichCompany (Pappers)"]
+      ["onDealCreated trigger"]
+      ["onDealStageChanged trigger"]
+    ("@alecia/piece-numbers")
+      ["createValuation"]
+      ["calculateFees (Lehman)"]
+      ["createDDChecklist"]
+      ["onDDRedFlag trigger"]
+    ("@alecia/piece-sign")
+      ["createSigningRequest"]
+      ["createFromTemplate"]
+      ["uploadToDataRoom"]
+      ["onDocumentSigned trigger"]
+    ("@alecia/piece-microsoft")
+      ["readExcelRange"]
+      ["writeExcelRange"]
+      ["createCalendarEvent"]
+      ["sendEmail (Graph)"]
+      ["listOneDriveFiles"]
+    ("@alecia/piece-research")
+      ["searchWeb (SearXNG)"]
+      ["searchPappers"]
+      ["getLatestFeeds (Miniflux)"]
+      ["enrichWithOpenData"]
+      ["semanticSearch (Haystack)"]
+    ("@alecia/piece-ai")
+      ["generateDealSummary"]
+      ["scoreDealRisk"]
+      ["generateTeaser"]
+      ["suggestValuation"]
+      ["translateDocument"]
+    ("@alecia/piece-colab")
+      ["createDocument"]
+      ["createBoardCard"]
+      ["updateCardStatus"]
+      ["notifyUser"]
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 7: Document Processing Pipeline ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">7</span> Document Processing Pipeline</h2>
+    <p class="desc">
+      M&A deals generate heavy PDF workflows: due diligence documents, valuation reports, signature packages.
+      Three specialized tools handle the pipeline: prepare, generate, and sign.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }}}%%
+flowchart LR
+    subgraph INPUT["Document Sources"]
+        CLIENT["Client Uploads<br/>(OneDrive, Email)"]
+        TEMPLATE["M&A Templates<br/>(NDA, LOI, Mandate)"]
+        GENERATED["Generated Data<br/>(Valuations, DD)"]
+    end
+
+    subgraph PREPARE["Step 1: Prepare"]
+        STIRLING3["Stirling-PDF<br/>MIT | Java<br/>━━━━━━━━━━━━<br/>Merge, split, compress<br/>OCR scanned docs<br/>Convert formats<br/>Add watermarks<br/>Remove metadata"]
+    end
+
+    subgraph GENERATE["Step 2: Generate"]
+        GOTEN3["Gotenberg<br/>MIT | Go (Chromium)<br/>━━━━━━━━━━━━<br/>HTML to PDF<br/>Valuation reports<br/>Deal summaries<br/>Teaser documents<br/>Branded letterheads"]
+    end
+
+    subgraph INTELLIGENCE["AI Analysis"]
+        HAYSTACK3["Haystack<br/>Apache 2.0 | Python<br/>━━━━━━━━━━━━<br/>Semantic search across<br/>DD document corpus<br/>Key term extraction<br/>Clause comparison<br/>Risk flag detection"]
+    end
+
+    subgraph SIGN2["Step 3: Sign & Store"]
+        DOCU["DocuSeal<br/>AGPL-3.0 | Rails<br/>━━━━━━━━━━━━<br/>E-signature capture<br/>Multi-party signing<br/>Audit trail<br/>Encrypted storage<br/>to Minio"]
+    end
+
+    subgraph OUTPUT["Output"]
+        VDR["Virtual Data Room<br/>(Encrypted, Audited)"]
+        ARCHIVE["Deal Archive<br/>(Long-term Minio)"]
+    end
+
+    CLIENT --> STIRLING3
+    TEMPLATE --> GOTEN3
+    GENERATED --> GOTEN3
+    STIRLING3 --> GOTEN3
+    STIRLING3 --> HAYSTACK3
+    HAYSTACK3 --> |"Insights"| GOTEN3
+    GOTEN3 --> DOCU
+    DOCU --> VDR
+    DOCU --> ARCHIVE
+
+    style INPUT fill:#f0f4f8,stroke:#749ac7,color:#061a40
+    style PREPARE fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style GENERATE fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style INTELLIGENCE fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style SIGN2 fill:#ffffff,stroke:#061a40,color:#061a40
+    style OUTPUT fill:#f0f4f8,stroke:#749ac7,color:#061a40
+
+    style CLIENT fill:#ffffff,stroke:#749ac7,color:#061a40
+    style TEMPLATE fill:#ffffff,stroke:#749ac7,color:#061a40
+    style GENERATED fill:#ffffff,stroke:#749ac7,color:#061a40
+    style STIRLING3 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style GOTEN3 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style HAYSTACK3 fill:#ffffff,stroke:#4370a7,color:#061a40
+    style DOCU fill:#ffffff,stroke:#061a40,color:#061a40
+    style VDR fill:#ffffff,stroke:#163e64,color:#061a40
+    style ARCHIVE fill:#ffffff,stroke:#163e64,color:#061a40
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 8: Migration Timeline ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">8</span> Migration Timeline — 4 Phases, 20 Weeks</h2>
+    <p class="desc">
+      Phased migration from Vercel + Convex + Clerk to self-hosted OVH VPS with PostgreSQL,
+      Keycloak, and containerized services managed by Coolify.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'fontFamily': 'Inter, system-ui', 'fontSize': '12px' }, 'gantt': { 'barHeight': 24, 'fontSize': 12, 'sectionFontSize': 13, 'barGap': 5, 'topPadding': 30, 'sectionFontColor': '#061a40', 'numberSectionStyles': 4, 'taskBkgColor': '#4370a7', 'taskTextColor': '#ffffff', 'taskBorderColor': '#163e64', 'activeTaskBkgColor': '#749ac7', 'activeTaskBorderColor': '#4370a7', 'doneTaskBkgColor': '#bfd7ea', 'doneTaskBorderColor': '#4370a7', 'doneTaskTextColor': '#061a40', 'gridColor': '#e6e8ec', 'todayLineColor': '#b80c09', 'sectionBkgColor': '#e3f2fd', 'sectionBkgColor2': '#f0f4f8', 'altSectionBkgColor': '#f0f4f8', 'taskTextOutsideColor': '#061a40' }}}%%
+gantt
+    title Alecia Suite Migration Roadmap
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+
+    section Phase 0 — Infrastructure
+    OVH VPS Provisioning          :p0a, 2026-03-01, 3d
+    Coolify + Caddy Setup         :p0b, after p0a, 4d
+    PostgreSQL 16 + pgvector      :p0c, after p0a, 3d
+    Minio + Redis                 :p0d, after p0c, 2d
+    Keycloak Configuration        :p0e, after p0d, 5d
+    Deploy Vaultwarden            :p0f, after p0d, 2d
+
+    section Phase 1 — Quick Wins
+    Deploy Plausible (CSS rebrand):p1a, after p0e, 3d
+    Deploy Miniflux + SearXNG     :p1b, after p0e, 3d
+    Deploy Stirling-PDF + Gotenberg:p1g, after p0e, 2d
+    Deploy Flowchart.fun          :p1h, after p0e, 2d
+    Fork Activepieces (strip+brand):p1c, after p0e, 10d
+    Build piece-crm + piece-ai    :p1d, after p1c, 7d
+    Fork DocuSeal (strip+brand)   :p1e, after p0e, 8d
+    Create NDA/LOI templates      :p1f, after p1e, 5d
+
+    section Phase 2 — Core Migration
+    Fork Strapi CE (content types) :p2a, after p1d, 8d
+    Deploy Haystack (AI doc search):p2g, after p1d, 5d
+    Migrate CRM data (Convex to PG):p2b, after p2a, 7d
+    Migrate Numbers data            :p2c, after p2b, 5d
+    Update marketing site (Strapi API):p2d, after p2a, 7d
+    Replace Clerk with Keycloak     :p2e, after p2b, 10d
+    Build remaining pieces          :p2f, after p1d, 14d
+
+    section Phase 3 — Colab + Polish
+    Deploy Hocuspocus               :p3a, after p2e, 3d
+    Rewrite Colab sync layer        :p3b, after p3a, 10d
+    UX improvements (Notion-like)   :p3c, after p3b, 10d
+    Migrate Colab data              :p3d, after p3b, 5d
+    Security audit                  :p3e, after p3c, 5d
+    Monitoring + Backups            :p3f, after p3e, 5d
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 9: Tech Stack Summary ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">9</span> Technology Stack Map</h2>
+    <p class="desc">
+      Every technology used across the Alecia Suite, organized by layer.
+      All components are FOSS (OSI-approved licenses).
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'fontFamily': 'Inter, system-ui', 'fontSize': '12px' }}}%%
+block-beta
+    columns 6
+
+    block:FRONTEND["Frontend"]:6
+        columns 6
+        REACT["React 19"]
+        NEXTJS["Next.js 15/16"]
+        TIPTAP["TipTap 3"]
+        TAILWIND["Tailwind 4"]
+        SHADCN["shadcn/ui"]
+        FLOWCHARTF["Flowchart.fun"]
+    end
+
+    block:BACKEND["Backend"]:6
+        columns 6
+        NESTJS["NestJS"]
+        RAILS["Rails 7"]
+        STRAPI["Strapi 5"]
+        PHOENIX["Phoenix"]
+        NODEJS["Node.js 20"]
+        JAVA["Java (Stirling)"]
+    end
+
+    block:DATA["Data Layer"]:6
+        columns 6
+        POSTGRES["PostgreSQL 16"]
+        PGVEC["pgvector"]
+        CLICKH["ClickHouse"]
+        REDIS2["Redis"]
+        MINIOS["Minio S3"]
+        MEILI["Meilisearch"]
+    end
+
+    block:REALTIME["Real-time"]:6
+        columns 6
+        YJS["Yjs CRDT"]
+        HOCUSP["Hocuspocus"]
+        WEBSOCKET["WebSocket"]
+        SSE["Server Events"]
+        WEBHOOK["Webhooks"]
+        GORPC["Go RPC"]
+    end
+
+    block:AI["AI & Research"]:6
+        columns 6
+        GROQAI["Groq LLaMA 3"]
+        OPENAI["OpenAI Embed"]
+        HAYSTACKTECH["Haystack"]
+        SEARXAI["SearXNG"]
+        MINIFL["Miniflux"]
+        PAPP["Pappers API"]
+    end
+
+    block:DOCTOOLS["Document Tools"]:6
+        columns 6
+        GOTENBERG["Gotenberg"]
+        STIRLINGTECH["Stirling-PDF"]
+        PDFLIB["pdf-lib"]
+        FORTUNE["FortuneSheet"]
+        XLSX["xlsx"]
+        PAPAPARSE["PapaParse"]
+    end
+
+    block:INFRA2["Infrastructure"]:6
+        columns 6
+        DOCKER["Docker"]
+        COOLIFY2["Coolify"]
+        CADDY2["Caddy"]
+        KEYCLOAK2["Keycloak"]
+        VAULTW["Vaultwarden"]
+        OVH["OVH VPS"]
+    end
+
+    style FRONTEND fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style BACKEND fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style DATA fill:#4370a7,stroke:#163e64,color:#ffffff
+    style REALTIME fill:#749ac7,stroke:#4370a7,color:#ffffff
+    style AI fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style DOCTOOLS fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style INFRA2 fill:#163e64,stroke:#061a40,color:#fafafc
+    </div>
+  </div>
+
+  <!-- ==================== DIAGRAM 10: Reference Repos ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">10</span> Reference Repos — Study & Inspiration Map</h2>
+    <p class="desc">
+      Open-source repositories studied for UX patterns, architecture inspiration, and potential features.
+      These are not forks — they serve as references for building a better Alecia Suite.
+    </p>
+    <div class="mermaid">
+%%{init: {'theme': 'default', 'themeVariables': { 'primaryColor': '#4370a7', 'primaryTextColor': '#ffffff', 'secondaryColor': '#e3f2fd', 'tertiaryColor': '#bfd7ea', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '12px' }}}%%
+mindmap
+  root(("Reference Repos<br/>Study Map"))
+    ("Kanban & Gantt UX")
+      ["Plane (Apache 2.0)<br/>Board views, timeline,<br/>sprint planning UI"]
+      ["Focalboard (AGPL-3.0)<br/>Multi-view boards,<br/>calendar + gallery"]
+      ["Planka (AGPL-3.0)<br/>Clean Kanban,<br/>minimalist UX"]
+    ("Notion-like Editors")
+      ["AFFiNE (MIT)<br/>Block editor, whiteboard,<br/>knowledge base"]
+      ["CryptPad (AGPL-3.0)<br/>Encrypted collab,<br/>real-time editing"]
+    ("ERP & CRM Patterns")
+      ["ERPNext (GPL-3.0)<br/>Full ERP architecture,<br/>project management"]
+      ["Krayin CRM (MIT)<br/>ACL patterns,<br/>lead management"]
+    ("Document & PDF")
+      ["Stirling-PDF (MIT)<br/>PDF toolkit,<br/>merge, split, OCR"]
+      ["Gotenberg (MIT)<br/>HTML-to-PDF,<br/>Chromium-powered"]
+      ["DocuSeal (AGPL-3.0)<br/>E-signature,<br/>template system"]
+    ("AI & Search")
+      ["Haystack (Apache 2.0)<br/>NLP pipelines,<br/>semantic search"]
+      ["Meilisearch (MIT)<br/>Typo-tolerant,<br/>instant search"]
+    ("Security & Infrastructure")
+      ["Vaultwarden (AGPL-3.0)<br/>Password vault,<br/>credential sharing"]
+      ["Coolify (AGPL-3.0)<br/>Heroku alternative,<br/>self-hosted PaaS"]
+    </div>
+  </div>
+
+  <!-- ==================== Legend ==================== -->
+  <div class="diagram-section">
+    <h2><span class="num">L</span> Legend</h2>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #061a40;"></div>
+        <span><strong>Infrastructure</strong> — Self-hosted on OVH VPS</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #4370a7;"></div>
+        <span><strong>Slim Fork</strong> — Stripped + rebranded open-source</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #749ac7;"></div>
+        <span><strong>Custom Code</strong> — Existing Alecia codebase</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #bfd7ea;"></div>
+        <span><strong>Deploy As-Is</strong> — Docker + CSS rebrand only</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #b80c09;"></div>
+        <span><strong>Orchestrator</strong> — Coolify manages all containers</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #e3f2fd;"></div>
+        <span><strong>External</strong> — Third-party APIs (MS Graph, Pappers, AI)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #163e64;"></div>
+        <span><strong>Data Layer</strong> — PostgreSQL + Minio + Redis</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #f0f4f8; border: 1px solid #c8ccd5;"></div>
+        <span><strong>Supporting Services</strong> — PDF, search, AI, security tools</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background: #fafafc; border: 1px solid #c8ccd5;"></div>
+        <span><strong>100% FOSS</strong> — All OSI-approved licenses</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>Alecia Suite Architecture Organigram v2.1 — Generated February 7, 2026</p>
+    <p>10 diagrams covering: suite overview, data architecture, communication flows, fork strategy, deal lifecycle, custom pieces, document processing pipeline, migration timeline, tech stack, and reference repos.</p>
+  </div>
+
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#e3f2fd',
+        primaryTextColor: '#061a40',
+        primaryBorderColor: '#4370a7',
+        lineColor: '#4370a7',
+        secondaryColor: '#bfd7ea',
+        secondaryTextColor: '#061a40',
+        tertiaryColor: '#f0f4f8',
+        tertiaryTextColor: '#061a40',
+        fontFamily: 'Inter, system-ui, sans-serif',
+        fontSize: '13px',
+        noteBkgColor: '#f0f4f8',
+        noteTextColor: '#061a40',
+        noteBorderColor: '#4370a7',
+      },
+      flowchart: {
+        htmlLabels: true,
+        curve: 'basis',
+        padding: 15,
+      },
+      gantt: {
+        barHeight: 24,
+        fontSize: 12,
+        sectionFontSize: 13,
+        barGap: 5,
+        topPadding: 30,
+        sectionFontColor: '#061a40',
+        numberSectionStyles: 4,
+        taskBkgColor: '#4370a7',
+        taskTextColor: '#ffffff',
+        taskBorderColor: '#163e64',
+        activeTaskBkgColor: '#749ac7',
+        activeTaskBorderColor: '#4370a7',
+        doneTaskBkgColor: '#bfd7ea',
+        doneTaskBorderColor: '#4370a7',
+        doneTaskTextColor: '#061a40',
+        gridColor: '#e6e8ec',
+        todayLineColor: '#b80c09',
+        sectionBkgColor: '#e3f2fd',
+        sectionBkgColor2: '#f0f4f8',
+        taskTextOutsideColor: '#061a40',
+      },
+      er: {
+        fontSize: 12,
+      },
+      mindmap: {
+        padding: 16,
+      },
+      stateDiagram: {
+        labelColor: '#061a40',
+      },
+    });
+  </script>
+
+</body>
+</html>

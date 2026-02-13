@@ -1,0 +1,43 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="chartGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.0" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+
+  <!-- Ascending chart line pattern -->
+  <path d="
+    M 100 1100
+    L 200 1050
+    L 300 1000
+    L 400 980
+    L 500 920
+    L 600 850
+    L 700 750
+    L 800 600
+    L 900 400
+    L 1000 250
+    L 1100 150
+    L 1200 100
+    L 1200 1200
+    L 100 1200
+    Z
+  " fill="url(#chartGrad)" opacity="0.5"/>
+
+  <!-- Secondary ascending line -->
+  <path d="
+    M 0 1150
+    L 150 1100
+    L 300 1070
+    L 450 1020
+    L 600 950
+    L 750 860
+    L 900 720
+    L 1050 550
+    L 1200 350
+    L 1200 1200
+    L 0 1200
+    Z
+  " fill="url(#chartGrad)" opacity="0.3"/>
+</svg>

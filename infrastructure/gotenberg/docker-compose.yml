@@ -1,0 +1,12 @@
+# infrastructure/gotenberg/docker-compose.yml
+services:
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: alecia-gotenberg
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--api-timeout=120s"
+      - "--chromium-auto-start"
+    ports:
+      - "3000:3000"

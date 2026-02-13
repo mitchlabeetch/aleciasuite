@@ -1,0 +1,76 @@
+{
+  "name": "Due Diligence Automation",
+  "description": "Automated due diligence workflow triggered when deal reaches DD stage",
+  "version": 1,
+  "trigger": {
+    "type": "PIECE_TRIGGER",
+    "settings": {
+      "pieceName": "alecia-pipeline",
+      "triggerName": "on-deal-stage-changed",
+      "input": {
+        "targetStage": "due_diligence"
+      }
+    }
+  },
+  "actions": [
+    {
+      "name": "create_data_room",
+      "displayName": "Create Virtual Data Room",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-vdr",
+        "actionName": "create-data-room",
+        "input": {
+          "docusealUrl": "https://sign.alecia.fr",
+          "apiKey": "{{connections.docuseal.api_key}}",
+          "name": "DD - {{trigger.output.title}}",
+          "dealId": "{{trigger.output.dealId}}",
+          "description": "Data room for due diligence - {{trigger.output.title}}",
+          "allowedUsers": "{{trigger.output.assignedTo}}"
+        }
+      }
+    },
+    {
+      "name": "generate_dd_checklist",
+      "displayName": "Generate DD Checklist",
+      "type": "CODE",
+      "settings": {
+        "code": "// Generate due diligence checklist based on deal type\nconst dealType = trigger.output.dealType;\nconst checklist = {\n  financial: ['Audited financials (3 years)', 'Tax returns', 'Working capital analysis'],\n  legal: ['Corporate documents', 'Material contracts', 'Litigation status'],\n  operational: ['Org chart', 'Key personnel', 'IT systems'],\n  commercial: ['Customer list', 'Supplier agreements', 'Market analysis']\n};\n\nreturn { checklist, dealType };"
+      }
+    },
+    {
+      "name": "notify_team",
+      "displayName": "Notify Team - DD Started",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-notifications",
+        "actionName": "send-email-notification",
+        "input": {
+          "accessToken": "{{connections.microsoft.access_token}}",
+          "to": "{{trigger.output.assignedTo}}",
+          "subject": "Due Diligence commencée - {{trigger.output.title}}",
+          "body": "<h2>Phase de Due Diligence</h2><p>Le deal <strong>{{trigger.output.title}}</strong> est passé en phase de due diligence.</p><p><strong>Data Room créée:</strong> <a href='{{steps.create_data_room.output.url}}'>Accéder</a></p><p>Merci de commencer la collecte des documents.</p>",
+          "priority": "high"
+        }
+      }
+    },
+    {
+      "name": "schedule_dd_kickoff",
+      "displayName": "Schedule DD Kickoff Meeting",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-calendar",
+        "actionName": "schedule-meeting",
+        "input": {
+          "accessToken": "{{connections.microsoft.access_token}}",
+          "subject": "Due Diligence Kickoff - {{trigger.output.title}}",
+          "attendees": "{{trigger.output.assignedTo}}",
+          "startTime": "{{DATE_ADD(NOW, 1, 'days')}}",
+          "duration": 90,
+          "location": "Microsoft Teams",
+          "body": "<p>Réunion de lancement de la due diligence</p><p>Data Room: {{steps.create_data_room.output.url}}</p>"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "name": "New Deal Intake",
+  "description": "Automated workflow for processing new M&A deal opportunities",
+  "version": 1,
+  "trigger": {
+    "type": "WEBHOOK",
+    "settings": {
+      "description": "Trigger when new deal submitted via form or API"
+    }
+  },
+  "actions": [
+    {
+      "name": "create_deal",
+      "displayName": "Create Deal in Pipeline",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-pipeline",
+        "actionName": "create-deal",
+        "input": {
+          "title": "{{trigger.body.dealTitle}}",
+          "dealType": "{{trigger.body.dealType}}",
+          "stage": "intake",
+          "targetValue": "{{trigger.body.targetValue}}",
+          "targetCompanyId": "{{trigger.body.targetCompanyId}}",
+          "assignedTo": "{{trigger.body.assignedTo}}",
+          "probability": 50,
+          "metadata": {
+            "source": "{{trigger.body.source}}",
+            "intake_date": "{{NOW}}",
+            "contact_person": "{{trigger.body.contactPerson}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_company_info",
+      "displayName": "Research Target Company (Pappers)",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-pappers",
+        "actionName": "search-company",
+        "input": {
+          "apiKey": "{{connections.pappers.api_key}}",
+          "query": "{{trigger.body.companyName}}",
+          "limit": 5
+        }
+      }
+    },
+    {
+      "name": "send_notification",
+      "displayName": "Notify Team Members",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-notifications",
+        "actionName": "create-in-app-notification",
+        "input": {
+          "userId": "{{trigger.body.assignedTo[0]}}",
+          "title": "Nouvelle opportunité: {{trigger.body.dealTitle}}",
+          "message": "Un nouveau deal a été créé et vous a été assigné. Valeur estimée: {{trigger.body.targetValue}} EUR",
+          "type": "deal_update",
+          "actionUrl": "/admin/deals/{{steps.create_deal.output.deal.id}}",
+          "metadata": {
+            "dealId": "{{steps.create_deal.output.deal.id}}",
+            "dealTitle": "{{trigger.body.dealTitle}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "send_email",
+      "displayName": "Send Email Notification",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-notifications",
+        "actionName": "send-email-notification",
+        "input": {
+          "accessToken": "{{connections.microsoft.access_token}}",
+          "to": ["{{trigger.body.assignedToEmail}}"],
+          "subject": "Nouvelle opportunité M&A: {{trigger.body.dealTitle}}",
+          "body": "<h2>Nouveau Deal Assigné</h2><p>Deal: <strong>{{trigger.body.dealTitle}}</strong></p><p>Type: {{trigger.body.dealType}}</p><p>Valeur estimée: {{trigger.body.targetValue}} EUR</p><p><a href='https://app.alecia.fr/admin/deals/{{steps.create_deal.output.deal.id}}'>Voir le deal</a></p>",
+          "priority": "normal"
+        }
+      }
+    },
+    {
+      "name": "schedule_kickoff",
+      "displayName": "Schedule Kickoff Meeting",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-calendar",
+        "actionName": "schedule-meeting",
+        "input": {
+          "accessToken": "{{connections.microsoft.access_token}}",
+          "subject": "Kickoff - {{trigger.body.dealTitle}}",
+          "attendees": "{{trigger.body.assignedTo}}",
+          "startTime": "{{DATE_ADD(NOW, 2, 'days')}}",
+          "duration": 60,
+          "location": "Microsoft Teams",
+          "body": "<p>Réunion de démarrage pour le deal: {{trigger.body.dealTitle}}</p><p>Ordre du jour:</p><ul><li>Présentation du deal</li><li>Stratégie d'approche</li><li>Répartition des tâches</li></ul>"
+        }
+      }
+    }
+  ]
+}

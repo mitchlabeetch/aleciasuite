@@ -1,0 +1,29 @@
+{
+	"$schema": "https://vercel.com/schema.json",
+	"buildCommand": "cd ../.. && pnpm turbo run build --filter=colab",
+	"installCommand": "cd ../.. && pnpm install",
+	"outputDirectory": ".next",
+	"framework": "nextjs",
+	"regions": ["cdg1"],
+	"rewrites": [
+		{
+			"source": "/embed",
+			"destination": "/?embed=true"
+		}
+	],
+	"headers": [
+		{
+			"source": "/(.*)",
+			"headers": [
+				{
+					"key": "X-Frame-Options",
+					"value": "ALLOW-FROM https://alecia.fr https://alecia.markets https://panel.alecia.markets"
+				},
+				{
+					"key": "Content-Security-Policy",
+					"value": "frame-ancestors 'self' https://alecia.fr https://*.alecia.fr https://alecia.markets https://*.alecia.markets"
+				}
+			]
+		}
+	]
+}

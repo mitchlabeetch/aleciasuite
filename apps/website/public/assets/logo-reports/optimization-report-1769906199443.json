@@ -1,0 +1,1191 @@
+{
+	"processedAt": "2026-02-01T00:36:39.438Z",
+	"total": 118,
+	"summary": {
+		"successful": 49,
+		"needsReview": 69,
+		"failed": 0
+	},
+	"results": [
+		{
+			"filename": "5_cadres_fonds_investisseurs_2-p-500.png",
+			"outputFilename": "5_cadres_fonds_investisseurs_2-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 500
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "5_cadres_fonds_investisseurs_2.png",
+			"outputFilename": "5_cadres_fonds_investisseurs_2.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 551,
+				"height": 551
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "a_plus_finance_image14.png",
+			"outputFilename": "a_plus_finance_image14.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 70,
+				"height": 51
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "africinvest_image48.png",
+			"outputFilename": "africinvest_image48.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 62,
+				"height": 30
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "apicap_image26.png",
+			"outputFilename": "apicap_image26.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 65,
+				"height": 31
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "ardian_image17.png",
+			"outputFilename": "ardian_image17.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 87,
+				"height": 48
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_117_66140ffb82fa9ba3e6ed4d88_image 2-p-500.webp",
+			"outputFilename": "asset_117_66140ffb82fa9ba3e6ed4d88_image 2-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 174
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "asset_118_66140ffb82fa9ba3e6ed4d88_image 2-p-800.webp",
+			"outputFilename": "asset_118_66140ffb82fa9ba3e6ed4d88_image 2-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 278
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "asset_119_66140ffb82fa9ba3e6ed4d88_image 2-p-1080.webp",
+			"outputFilename": "asset_119_66140ffb82fa9ba3e6ed4d88_image 2-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 376
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_120_66140ffb82fa9ba3e6ed4d88_image 2-p-1600.webp",
+			"outputFilename": "asset_120_66140ffb82fa9ba3e6ed4d88_image 2-p-1600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1600,
+				"height": 557
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_121_66140ffb82fa9ba3e6ed4d88_image 2-p-2000.webp",
+			"outputFilename": "asset_121_66140ffb82fa9ba3e6ed4d88_image 2-p-2000.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2000,
+				"height": 696
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_122_66140ffb82fa9ba3e6ed4d88_image 2-p-2600.webp",
+			"outputFilename": "asset_122_66140ffb82fa9ba3e6ed4d88_image 2-p-2600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2600,
+				"height": 905
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_1_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1.webp",
+			"outputFilename": "asset_1_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2880,
+				"height": 1012
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_79_6707e9de456829cac2163029_image81.png",
+			"outputFilename": "asset_79_6707e9de456829cac2163029_image81.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 92,
+				"height": 21
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_80_6707df48bbb9e542c548551b_image57.png",
+			"outputFilename": "asset_80_6707df48bbb9e542c548551b_image57.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 99,
+				"height": 26
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_81_6707dc1df3244183fe7115e3_image50.png",
+			"outputFilename": "asset_81_6707dc1df3244183fe7115e3_image50.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 364,
+				"height": 98
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_82_6707d86c68a116b153dbe25c_image43.png",
+			"outputFilename": "asset_82_6707d86c68a116b153dbe25c_image43.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 63,
+				"height": 20
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_83_6707d836a84d87af61c129b1_image42.png",
+			"outputFilename": "asset_83_6707d836a84d87af61c129b1_image42.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 79,
+				"height": 44
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_84_6707d0f19d3cd87e73b33964_image30.png",
+			"outputFilename": "asset_84_6707d0f19d3cd87e73b33964_image30.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 80,
+				"height": 52
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_85_6707d0d4e10f98f8b7196c7e_image29.png",
+			"outputFilename": "asset_85_6707d0d4e10f98f8b7196c7e_image29.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 101,
+				"height": 28
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "asset_87_66140ffb82fa9ba3e6ed4d88_image 2.webp",
+			"outputFilename": "asset_87_66140ffb82fa9ba3e6ed4d88_image 2.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2880,
+				"height": 1002
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_89_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-500.webp",
+			"outputFilename": "asset_89_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 176
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "asset_90_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-800.webp",
+			"outputFilename": "asset_90_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 281
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "asset_91_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1080.webp",
+			"outputFilename": "asset_91_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 380
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_92_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1600.webp",
+			"outputFilename": "asset_92_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1600,
+				"height": 562
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "asset_93_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-2000.webp",
+			"outputFilename": "asset_93_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-2000.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2000,
+				"height": 703
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "banque_populaire_et_caisse_d_epargne_image80.png",
+			"outputFilename": "banque_populaire_et_caisse_d_epargne_image80.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 124,
+				"height": 52
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "bolden_bolden-p-500.webp",
+			"outputFilename": "bolden_bolden-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 158
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "bolden_bolden.webp",
+			"outputFilename": "bolden_bolden.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 600,
+				"height": 190
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "bpi_france_et_un_pool_bancaire_image54.png",
+			"outputFilename": "bpi_france_et_un_pool_bancaire_image54.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 97,
+				"height": 80
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "capelli_image46.png",
+			"outputFilename": "capelli_image46.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 208,
+				"height": 212
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "cc_c_image11.png",
+			"outputFilename": "cc_c_image11.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 85,
+				"height": 36
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "cei_image69.png",
+			"outputFilename": "cei_image69.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 58,
+				"height": 38
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "come_to_paris_image44.png",
+			"outputFilename": "come_to_paris_image44.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 98,
+				"height": 98
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "confidentiel_entreprise.png",
+			"outputFilename": "confidentiel_entreprise.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1280,
+				"height": 720
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "confidentiel_investisseurs.png",
+			"outputFilename": "confidentiel_investisseurs.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1280,
+				"height": 720
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "corse_gsm_socodi_image49.png",
+			"outputFilename": "corse_gsm_socodi_image49.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 235,
+				"height": 194
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-1080.jpg",
+			"outputFilename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 608
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-500.jpg",
+			"outputFilename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 281
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-800.jpg",
+			"outputFilename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 450
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135.jpg",
+			"outputFilename": "cr_dit_agricole_credit-agricole-logo-1987-present-3803300135.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1920,
+				"height": 1080
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "cr_dit_mutuel_crédit_mutuel_equity.png",
+			"outputFilename": "cr_dit_mutuel_crédit_mutuel_equity.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 88,
+				"height": 27
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "delta_drone_image21.png",
+			"outputFilename": "delta_drone_image21.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 86,
+				"height": 31
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "dogs_security_dogs_security_logo.jpg",
+			"outputFilename": "dogs_security_dogs_security_logo.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 200,
+				"height": 200
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "dougen_prim_capture_d'écran_2025-12-23_145039.png",
+			"outputFilename": "dougen_prim_capture_d'écran_2025-12-23_145039.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 188,
+				"height": 113
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "editions_365_image3.png",
+			"outputFilename": "editions_365_image3.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 130,
+				"height": 54
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "entrepreneur_invest_ei_logo.webp",
+			"outputFilename": "entrepreneur_invest_ei_logo.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 272,
+				"height": 300
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "ergon_capital_image35.png",
+			"outputFilename": "ergon_capital_image35.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 103,
+				"height": 104
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "eu_business_school_image70.png",
+			"outputFilename": "eu_business_school_image70.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 80,
+				"height": 19
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "eurasia_groupe_image45.png",
+			"outputFilename": "eurasia_groupe_image45.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 192,
+				"height": 101
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "extendam_image24.png",
+			"outputFilename": "extendam_image24.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 175,
+				"height": 45
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "filiassur_image15.png",
+			"outputFilename": "filiassur_image15.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 81,
+				"height": 81
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "finaxy_image60.png",
+			"outputFilename": "finaxy_image60.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 86,
+				"height": 42
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "five_arrows_image8.png",
+			"outputFilename": "five_arrows_image8.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 125,
+				"height": 36
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "fleurus_image4.png",
+			"outputFilename": "fleurus_image4.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 95,
+				"height": 95
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "french_food_company_generis_capital_partners_finorpa_image28.png",
+			"outputFilename": "french_food_company_generis_capital_partners_finorpa_image28.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 128,
+				"height": 81
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "gault_fr_mont_image61.png",
+			"outputFilename": "gault_fr_mont_image61.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 81,
+				"height": 37
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "generis_capital_partners_bpi_france_bnp_paribas_image57.png",
+			"outputFilename": "generis_capital_partners_bpi_france_bnp_paribas_image57.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 99,
+				"height": 22
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "groupe_guillin_image62.png",
+			"outputFilename": "groupe_guillin_image62.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 90,
+				"height": 25
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "haudecoeur_image34.png",
+			"outputFilename": "haudecoeur_image34.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 108,
+				"height": 38
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "hmr_logo_hmr-p-1080.jpg",
+			"outputFilename": "hmr_logo_hmr-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 1080
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "hmr_logo_hmr-p-1600.jpg",
+			"outputFilename": "hmr_logo_hmr-p-1600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1600,
+				"height": 1600
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "hmr_logo_hmr-p-500.jpg",
+			"outputFilename": "hmr_logo_hmr-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 500
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "hmr_logo_hmr-p-800.jpg",
+			"outputFilename": "hmr_logo_hmr-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 800
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "hmr_logo_hmr.jpg",
+			"outputFilename": "hmr_logo_hmr.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1920,
+				"height": 1920
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "holly_s_diner_image74.png",
+			"outputFilename": "holly_s_diner_image74.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 125,
+				"height": 71
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "isp_system_isp_system.png",
+			"outputFilename": "isp_system_isp_system.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 62,
+				"height": 59
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "jardin_molinari_image65.png",
+			"outputFilename": "jardin_molinari_image65.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 73,
+				"height": 66
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "kanop_image75.png",
+			"outputFilename": "kanop_image75.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 73,
+				"height": 69
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "keller_williams_keller-williams-realty-logo-p-1080.png",
+			"outputFilename": "keller_williams_keller-williams-realty-logo-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 608
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "keller_williams_keller-williams-realty-logo-p-500.png",
+			"outputFilename": "keller_williams_keller-williams-realty-logo-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 281
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "keller_williams_keller-williams-realty-logo-p-800.png",
+			"outputFilename": "keller_williams_keller-williams-realty-logo-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 450
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "keller_williams_keller-williams-realty-logo.png",
+			"outputFilename": "keller_williams_keller-williams-realty-logo.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 3840,
+				"height": 2160
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "kfc_image13.png",
+			"outputFilename": "kfc_image13.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 80,
+				"height": 45
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "kujten_image37.png",
+			"outputFilename": "kujten_image37.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 134,
+				"height": 70
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "la_ba_architectes_laba_archi.png",
+			"outputFilename": "la_ba_architectes_laba_archi.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 412,
+				"height": 429
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "le_wagon_image47.png",
+			"outputFilename": "le_wagon_image47.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 98,
+				"height": 26
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "leclerc_franchis_logo-leclerc-227321883.jpg",
+			"outputFilename": "leclerc_franchis_logo-leclerc-227321883.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 300,
+				"height": 243
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "les_ateliers_peyrache_image25.png",
+			"outputFilename": "les_ateliers_peyrache_image25.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 73,
+				"height": 38
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "link4life_image53.png",
+			"outputFilename": "link4life_image53.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 95,
+				"height": 55
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "lovial_image71.png",
+			"outputFilename": "lovial_image71.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 88,
+				"height": 43
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "maison_bracq_image77.png",
+			"outputFilename": "maison_bracq_image77.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 71,
+				"height": 69
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "mediawan_image12.png",
+			"outputFilename": "mediawan_image12.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 92,
+				"height": 14
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "metagram_image76.png",
+			"outputFilename": "metagram_image76.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 69,
+				"height": 19
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "mia_solutions_rh_image18.png",
+			"outputFilename": "mia_solutions_rh_image18.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 59,
+				"height": 58
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "next_stage_image9.png",
+			"outputFilename": "next_stage_image9.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 110,
+				"height": 26
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "omnes_education_image68.png",
+			"outputFilename": "omnes_education_image68.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 47,
+				"height": 45
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "opteven_image16.png",
+			"outputFilename": "opteven_image16.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 147,
+				"height": 82
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "patchwork_image23.png",
+			"outputFilename": "patchwork_image23.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 105,
+				"height": 106
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "patie_michel_image66.png",
+			"outputFilename": "patie_michel_image66.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 73,
+				"height": 58
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "perseus_image67.png",
+			"outputFilename": "perseus_image67.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 99,
+				"height": 99
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "pixiel_group_image20.png",
+			"outputFilename": "pixiel_group_image20.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 97,
+				"height": 98
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-1080.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-1080.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1080,
+				"height": 254
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-1600.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-1600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 1600,
+				"height": 377
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-2000.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-2000.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2000,
+				"height": 471
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-2600.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-2600.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 2600,
+				"height": 612
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-3200.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-3200.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 3200,
+				"height": 753
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-500.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-500.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 500,
+				"height": 117
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "realit_s_logo_realite-1-p-800.jpg",
+			"outputFilename": "realit_s_logo_realite-1-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 188
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "realit_s_logo_realite-1.jpg",
+			"outputFilename": "realit_s_logo_realite-1.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 5763,
+				"height": 1356
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "redpill_image40.png",
+			"outputFilename": "redpill_image40.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 86,
+				"height": 39
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "river_bank_riverbank-avis-p-500.png",
+			"outputFilename": "river_bank_riverbank-avis-p-500.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 500,
+				"height": 66
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "river_bank_riverbank-avis-p-800.png",
+			"outputFilename": "river_bank_riverbank-avis-p-800.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 800,
+				"height": 106
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "river_bank_riverbank-avis.png",
+			"outputFilename": "river_bank_riverbank-avis.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 1121,
+				"height": 149
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "safe_group_logo_safe_group-p-500.jpg",
+			"outputFilename": "safe_group_logo_safe_group-p-500.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 500,
+				"height": 500
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "safe_group_logo_safe_group-p-800.jpg",
+			"outputFilename": "safe_group_logo_safe_group-p-800.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 800,
+				"height": 800
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "safe_group_logo_safe_group.jpg",
+			"outputFilename": "safe_group_logo_safe_group.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 850,
+				"height": 850
+			},
+			"quality": "high"
+		},
+		{
+			"filename": "sia_partners_image64.png",
+			"outputFilename": "sia_partners_image64.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 50,
+				"height": 48
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "signes_signes_2.png",
+			"outputFilename": "signes_signes_2.svg",
+			"status": "success",
+			"originalSize": {
+				"width": 335,
+				"height": 253
+			},
+			"quality": "medium"
+		},
+		{
+			"filename": "sol_o_services_image10.png",
+			"outputFilename": "sol_o_services_image10.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 83,
+				"height": 83
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "sophie_lebreuilly_image27.png",
+			"outputFilename": "sophie_lebreuilly_image27.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 116,
+				"height": 66
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "staci_image36.png",
+			"outputFilename": "staci_image36.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 64,
+				"height": 64
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "temelio_image39.png",
+			"outputFilename": "temelio_image39.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 290,
+				"height": 86
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "transports_lerosey_logo_lerosey.png",
+			"outputFilename": "transports_lerosey_logo_lerosey.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 480,
+				"height": 132
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "uside_image63.png",
+			"outputFilename": "uside_image63.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 61,
+				"height": 60
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "wyz_group_image55.png",
+			"outputFilename": "wyz_group_image55.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 47,
+				"height": 23
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "xrl_consulting_image79.png",
+			"outputFilename": "xrl_consulting_image79.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 111,
+				"height": 23
+			},
+			"quality": "low"
+		},
+		{
+			"filename": "y2a_experts_image22.png",
+			"outputFilename": "y2a_experts_image22.svg",
+			"status": "needs_review",
+			"originalSize": {
+				"width": 80,
+				"height": 36
+			},
+			"quality": "low"
+		}
+	]
+}

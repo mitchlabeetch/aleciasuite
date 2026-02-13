@@ -1,0 +1,127 @@
+# infrastructure/docker-compose.dev.yml
+# Local development stack — lightweight version for dev machines
+# Run: docker compose -f infrastructure/docker-compose.dev.yml up -d
+#
+# Provides: PostgreSQL (with pgvector), Redis, Minio, Hocuspocus, Haystack
+# Does NOT include: Caddy, monitoring, Plausible, SearXNG, etc.
+
+services:
+  # ── PostgreSQL 16 + pgvector ────────────────────────────────────────
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: alecia-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: alecia
+      POSTGRES_USER: alecia
+      POSTGRES_PASSWORD: dev-password-change-me
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+      - ./postgres/init/00-extensions.sql:/docker-entrypoint-initdb.d/00-extensions.sql
+      - ./postgres/init/01-schemas.sql:/docker-entrypoint-initdb.d/01-schemas.sql
+      - ./postgres/migrations/V001__shared_tables.sql:/docker-entrypoint-initdb.d/10-V001.sql
+      - ./postgres/migrations/V002__bi_tables.sql:/docker-entrypoint-initdb.d/11-V002.sql
+      - ./postgres/migrations/V003__numbers_tables.sql:/docker-entrypoint-initdb.d/12-V003.sql
+      - ./postgres/migrations/V004__colab_tables.sql:/docker-entrypoint-initdb.d/13-V004.sql
+      - ./postgres/migrations/V005__sign_tables.sql:/docker-entrypoint-initdb.d/14-V005.sql
+      - ./postgres/migrations/V006__betterauth_tables.sql:/docker-entrypoint-initdb.d/15-V006.sql
+      - ./postgres/migrations/V007__team_preferences_presence.sql:/docker-entrypoint-initdb.d/16-V007.sql
+      - ./postgres/migrations/V008__business_tables.sql:/docker-entrypoint-initdb.d/17-V008.sql
+      - ./postgres/migrations/V009__content_tables.sql:/docker-entrypoint-initdb.d/18-V009.sql
+      - ./postgres/migrations/V010__calendar_analytics_tables.sql:/docker-entrypoint-initdb.d/19-V010.sql
+      - ./postgres/migrations/V011__cms_visual_editor_tables.sql:/docker-entrypoint-initdb.d/20-V011.sql
+      - ./postgres/migrations/V012__bi_pipeline_approvals.sql:/docker-entrypoint-initdb.d/21-V012.sql
+      - ./postgres/migrations/V013__colab_extensions.sql:/docker-entrypoint-initdb.d/22-V013.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U alecia"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis 7 ─────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: alecia-redis
+    restart: unless-stopped
+    command: redis-server --requirepass dev-redis-password
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "dev-redis-password", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ── Minio (S3-compatible blob storage) ──────────────────────────────
+  minio:
+    image: minio/minio:latest
+    container_name: alecia-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: alecia-dev
+      MINIO_ROOT_PASSWORD: dev-minio-password
+    volumes:
+      - minio_dev_data:/data
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Console
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Minio bucket init ───────────────────────────────────────────────
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+        mc alias set local http://minio:9000 alecia-dev dev-minio-password;
+        mc mb --ignore-existing local/alecia-documents;
+        mc mb --ignore-existing local/alecia-signatures;
+        mc mb --ignore-existing local/alecia-avatars;
+        mc mb --ignore-existing local/alecia-cms;
+        echo 'Buckets created.';
+      "
+
+  # ── Hocuspocus (WebSocket for Yjs real-time collaboration) ──────────
+  hocuspocus:
+    build:
+      context: ../services/hocuspocus
+      dockerfile: Dockerfile
+    container_name: alecia-hocuspocus
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://alecia:dev-password-change-me@postgres:5432/alecia
+      PORT: "1234"
+    ports:
+      - "1234:1234"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # ── Haystack (Semantic document search) ─────────────────────────────
+  haystack:
+    build:
+      context: ./haystack
+      dockerfile: Dockerfile
+    container_name: alecia-haystack
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://alecia:dev-password-change-me@postgres:5432/alecia
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-sk-placeholder}
+    ports:
+      - "8090:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_dev_data:
+  minio_dev_data:

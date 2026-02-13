@@ -1,0 +1,98 @@
+# infrastructure/caddy/Caddyfile
+# Production configuration for Alecia Suite
+# Automatic HTTPS via Let's Encrypt HTTP-01 challenge
+# Domain: alecia.markets
+
+{
+    email admin@alecia.markets
+}
+
+# Main marketing website
+alecia.markets {
+    reverse_proxy next-marketing:3000
+}
+
+www.alecia.markets {
+    redir https://alecia.markets{uri} 302
+}
+
+# Collaboration app
+colab.alecia.markets {
+    reverse_proxy next-colab:3001
+}
+
+# CMS (Strapi)
+cms.alecia.markets {
+    reverse_proxy strapi:1337
+}
+
+# Flows (Activepieces) - API ONLY - UI in /admin/flows
+flows.alecia.markets {
+    # Block public frontend access
+    @frontend path / /flows /flows/* /projects /projects/*
+    respond @frontend "Alecia Flows API - Access via alecia.markets/admin" 403
+    
+    # Allow API endpoints only
+    reverse_proxy activepieces-app:80
+}
+
+# Digital Signature (DocuSeal) - API ONLY
+sign.alecia.markets {
+    # API endpoints only - no public UI
+    @api path /api/* /webhooks/*
+    reverse_proxy @api docuseal:3000
+    
+    # Block public access
+    respond "Alecia Sign API - Access via alecia.markets/admin" 403
+}
+
+# Infrastructure services - API ONLY
+analytics.alecia.markets {
+    # API only - dashboard in /admin
+    @api path /api/*
+    reverse_proxy @api plausible:8000
+    respond "Alecia Analytics - Access via alecia.markets/admin" 403
+}
+
+vault.alecia.markets {
+    # API only
+    @api path /api/*
+    reverse_proxy @api vaultwarden:80
+    respond "Alecia Vault - Access via alecia.markets/admin" 403
+}
+
+feeds.alecia.markets {
+    # API only
+    @api path /v1/* /fever/*
+    reverse_proxy @api miniflux:8080
+    respond "Alecia Feeds - Access via alecia.markets/admin" 403
+}
+
+search.alecia.markets {
+    # API only
+    @api path /search
+    reverse_proxy @api searxng:8080
+    respond "Alecia Search - Access via alecia.markets/admin" 403
+}
+
+storage.alecia.markets {
+    reverse_proxy minio:9001
+}
+
+s3.alecia.markets {
+    reverse_proxy minio:9000
+}
+
+docs.alecia.markets {
+    # API only
+    reverse_proxy stirling-pdf:8080
+}
+
+pdf.alecia.markets {
+    # API only
+    reverse_proxy gotenberg:3000
+}
+
+ws.alecia.markets {
+    reverse_proxy hocuspocus:1234
+}

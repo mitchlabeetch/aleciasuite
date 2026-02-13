@@ -1,0 +1,42 @@
+services:
+  next-marketing:
+    environment:
+      NEXTAUTH_URL: https://alecia.markets
+      BETTER_AUTH_URL: https://alecia.markets
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY}
+
+  next-colab:
+    environment:
+      NEXTAUTH_URL: https://colab.alecia.markets
+      BETTER_AUTH_URL: https://alecia.markets
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY}
+
+  plausible:
+    environment:
+      BASE_URL: https://analytics.alecia.markets
+
+  miniflux:
+    environment:
+      BASE_URL: https://feeds.alecia.markets
+      ADMIN_USERNAME: ${MINIFLUX_ADMIN_USERNAME}
+      ADMIN_PASSWORD: ${MINIFLUX_ADMIN_PASSWORD}
+
+  searxng:
+    environment:
+      SEARXNG_BASE_URL: https://search.alecia.markets
+
+  docuseal:
+    environment:
+      HOST: https://sign.alecia.markets
+      SECRET_KEY_BASE: ${DOCUSEAL_SECRET_KEY_BASE}
+
+  vaultwarden:
+    environment:
+      DOMAIN: https://vault.alecia.markets
+      ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+
+  activepieces-app:
+    environment:
+      AP_FRONTEND_URL: https://flows.alecia.markets

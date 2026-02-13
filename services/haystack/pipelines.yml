@@ -1,0 +1,68 @@
+# Haystack AI Document Intelligence — Alecia Suite
+# Pipeline configuration for semantic search over deal documents
+
+# This service uses Apache Haystack to:
+# 1. Ingest documents from Minio (PDFs, DOCX, etc.)
+# 2. Extract text (OCR via Stirling-PDF for scanned docs)
+# 3. Chunk and embed text (OpenAI ada-002, 1536 dims)
+# 4. Store embeddings in PostgreSQL pgvector (alecia_bi.embeddings table)
+# 5. Serve semantic search queries via REST API
+
+components:
+  # ── Document Store ──────────────────────────
+  document_store:
+    type: PgvectorDocumentStore
+    params:
+      connection_string: "${DATABASE_URL}"
+      schema_name: alecia_bi
+      table_name: embeddings
+      embedding_dimension: 1536
+      vector_function: cosine_similarity
+      recreate_table: false
+
+  # ── Embedder ────────────────────────────────
+  embedder:
+    type: OpenAITextEmbedder
+    params:
+      model: text-embedding-ada-002
+      api_key: "${OPENAI_API_KEY}"
+
+  # ── Document Embedder (for indexing) ────────
+  doc_embedder:
+    type: OpenAIDocumentEmbedder
+    params:
+      model: text-embedding-ada-002
+      api_key: "${OPENAI_API_KEY}"
+
+  # ── File Converter ──────────────────────────
+  converter:
+    type: PyPDFToDocument
+    params: {}
+
+  # ── Text Splitter ───────────────────────────
+  splitter:
+    type: DocumentSplitter
+    params:
+      split_by: sentence
+      split_length: 5
+      split_overlap: 1
+
+  # ── Retriever ───────────────────────────────
+  retriever:
+    type: PgvectorEmbeddingRetriever
+    params:
+      document_store: document_store
+      top_k: 10
+
+pipelines:
+  # ── Indexing Pipeline ───────────────────────
+  indexing:
+    - converter
+    - splitter
+    - doc_embedder
+    - document_store
+
+  # ── Query Pipeline ─────────────────────────
+  query:
+    - embedder
+    - retriever

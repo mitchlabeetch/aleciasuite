@@ -1,0 +1,16 @@
+# infrastructure/marketing/docker-compose.yml
+# Alecia Marketing Site — Next.js containerized
+services:
+  next-marketing:
+    build:
+      context: ../..
+      dockerfile: apps/website/Dockerfile
+    container_name: alecia-marketing
+    restart: unless-stopped
+    environment:
+      STRAPI_URL: http://alecia-strapi:1337
+      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN}
+      NEXT_PUBLIC_SITE_URL: https://alecia.fr
+      REVALIDATION_SECRET: ${REVALIDATION_SECRET}
+    ports:
+      - "3000:3000"

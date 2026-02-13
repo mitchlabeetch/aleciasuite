@@ -1,0 +1,17 @@
+services:
+  haystack:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alecia-haystack
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "8090:8000"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

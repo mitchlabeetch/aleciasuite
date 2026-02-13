@@ -1,0 +1,1521 @@
+<!DOCTYPE html><html lang="fr"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Étude de Marché : Fourniture et Fabrication de Pâtes et Semoules en France (2020-2025)</title>
+    <script src="https://cdn.tailwindcss.com/3.4.0"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --pasta-gold: #F4D03F;
+            --pasta-brown: #8D6E63;
+            --pasta-green: #4CAF50;
+            --pasta-warm: #FF9800;
+            --pasta-neutral: #E8E2D4;
+            --sage-green: #9caf88;
+            --terracotta: #c67b5c;
+            --cream: #f7f3e9;
+            --charcoal: #333333;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
+
+        .serif-display {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+            border-right: 2px solid var(--pasta-neutral);
+            z-index: 100;
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 60vh;
+        }
+
+        .bento-card {
+            background: linear-gradient(135deg, var(--cream) 0%, #ffffff 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--pasta-neutral);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        .citation-link {
+            color: var(--pasta-brown);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid var(--pasta-brown);
+            transition: all 0.3s ease;
+        }
+
+        .citation-link:hover {
+            background-color: var(--pasta-neutral);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        .section-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--sage-green), var(--terracotta), var(--pasta-gold));
+            margin: 3rem 0;
+            border-radius: 2px;
+        }
+
+        .pull-quote {
+            border-left: 4px solid var(--terracotta);
+            padding-left: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--pasta-brown);
+        }
+
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Stack bento cards vertically */
+            .hero-grid .grid {
+                grid-template-columns: 1fr !important;
+            }
+            /* Adjust padding for small screens */
+            .px-8 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            .p-8 {
+                padding: 1rem !important;
+            }
+            /* Adjust hero title font size */
+            .hero-grid h1 {
+                font-size: 2.25rem;
+                line-height: 1.2;
+            }
+            .hero-grid p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+  <base target="_blank">
+</head>
+
+  <body class="bg-gray-50">
+    <!-- Toggle button for mobile TOC -->
+    <button id="toc-toggle" class="fixed top-4 left-4 z-50 bg-white p-2 rounded-full shadow-lg md:hidden">
+      <i class="fas fa-bars text-gray-700"></i>
+    </button>
+
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+      <button id="toc-close" class="absolute top-4 right-4 z-50 bg-white p-2 rounded-full shadow-lg md:hidden">
+        <i class="fas fa-times text-gray-700"></i>
+      </button>
+      <div class="mb-8">
+        <h2 class="serif-display text-xl font-bold text-gray-800 mb-4">Sommaire</h2>
+        <div class="w-16 h-1 bg-gradient-to-r from-amber-400 to-orange-600 mb-6"></div>
+      </div>
+
+      <ul class="space-y-3 text-sm">
+        <li>
+          <a href="#executive-summary" class="citation-link">Résumé Exécutif</a>
+        </li>
+        <li>
+          <a href="#market-overview" class="citation-link">1. Vue d&#39;Ensemble du Marché</a>
+          <ul class="ml-4 mt-2 space-y-2 text-xs">
+            <li>
+              <a href="#market-size" class="citation-link">1.1 Taille et Dynamique</a>
+            </li>
+            <li>
+              <a href="#segmentation" class="citation-link">1.2 Segmentation</a>
+            </li>
+            <li>
+              <a href="#consumption-trends" class="citation-link">1.3 Tendances de Consommation</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#supply-chain" class="citation-link">2. Chaîne d&#39;Approvisionnement</a>
+          <ul class="ml-4 mt-2 space-y-2 text-xs">
+            <li>
+              <a href="#raw-materials" class="citation-link">2.1 Matières Premières</a>
+            </li>
+            <li>
+              <a href="#production" class="citation-link">2.2 Transformation</a>
+            </li>
+            <li>
+              <a href="#distribution" class="citation-link">2.3 Distribution</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#competitive-landscape" class="citation-link">3. Paysage Concurrentiel</a>
+        </li>
+        <li>
+          <a href="#manufacturing" class="citation-link">4. Analyse de la Fabrication</a>
+        </li>
+        <li>
+          <a href="#international" class="citation-link">5. Commerce International</a>
+        </li>
+        <li>
+          <a href="#outlook" class="citation-link">6. Perspectives 2025-2030</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="bg-gradient-to-br from-cream via-white to-gray-50 p-8">
+        <div class="max-w-7xl mx-auto">
+          <div class="hero-grid">
+            <div class="space-y-6">
+              <div class="space-y-4">
+                <div class="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                  Étude de Marché Exclusive
+                </div>
+                <h1 class="serif-display text-5xl font-bold text-gray-900 leading-tight">
+                  <span class="block">Le Marché Français</span>
+                  <span class="block italic text-4xl text-gray-700">des Pâtes et Semoules</span>
+                </h1>
+                <p class="text-xl text-gray-600 font-light">
+                  Analyse stratégique 2020-2025 : tendances, concurrents et perspectives
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+                <div class="bento-card">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i class="fas fa-chart-line text-2xl text-green-600"></i>
+                    <h3 class="font-semibold">Marché de 1,4 Md€</h3>
+                  </div>
+                  <p class="text-sm text-gray-600">Croissance modérée tirée par la premiumisation</p>
+                </div>
+
+                <div class="bento-card">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i class="fas fa-crown text-2xl text-amber-600"></i>
+                    <h3 class="font-semibold">Panzani domine &gt;50%</h3>
+                  </div>
+                  <p class="text-sm text-gray-600">Structure oligopolistique avec Barilla et Lustucru</p>
+                </div>
+
+                <div class="bento-card">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i class="fas fa-seedling text-2xl text-sage-green"></i>
+                    <h3 class="font-semibold">Pâtes fraîches +5,5% CAGR</h3>
+                  </div>
+                  <p class="text-sm text-gray-600">Principal moteur de croissance du marché</p>
+                </div>
+
+                <div class="bento-card">
+                  <div class="flex items-center space-x-3 mb-2">
+                    <i class="fas fa-globe-europe text-2xl text-terracotta"></i>
+                    <h3 class="font-semibold">Leader européen du couscous</h3>
+                  </div>
+                  <p class="text-sm text-gray-600">Mais dépendance aux importations de blé dur</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="relative">
+              <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片7.png" alt="Artisanal pasta production process" class="rounded-2xl shadow-2xl w-full h-80 object-cover" size="medium" aspect="wide" style="photo" query="artisanal pasta production" referrerpolicy="no-referrer" data-modified="1"/>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-2xl"></div>
+              <div class="absolute bottom-4 left-4 text-white">
+                <p class="text-sm font-medium">Production artisanale française</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary" class="py-16 px-8 bg-white">
+        <div class="max-w-4xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-8">Résumé Exécutif</h2>
+
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-6">
+              Le marché français des pâtes et semoules se positionne comme un secteur mature mais dynamique, valorisé à <strong>1,4-1,5 milliard d&#39;euros en 2025</strong>. Cette étude révèle une structure oligopolistique dominée par <strong>Panzani qui détient plus de 50% des parts de marché</strong>, suivie par Ebro Foods/Lustucru et Barilla.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+              <div class="bg-gradient-to-br from-sage-green/10 to-white p-6 rounded-xl border border-sage-green/20">
+                <h3 class="font-bold text-sage-green mb-3">Points Forts</h3>
+                <ul class="space-y-2 text-sm">
+                  <li>• Croissance des pâtes fraîches à <strong>5,5% CAGR</strong></li>
+                  <li>• Position de leader européen sur le couscous</li>
+                  <li>• Fidélité marque élevée (26% de fidèles)</li>
+                  <li>• Consommation élevée : 8,6-9,1 kg/habitant/an</li>
+                </ul>
+              </div>
+
+              <div class="bg-gradient-to-br from-terracotta/10 to-white p-6 rounded-xl border border-terracotta/20">
+                <h3 class="font-bold text-terracotta mb-3">Défis Stratégiques</h3>
+                <ul class="space-y-2 text-sm">
+                  <li>• Volatilité des prix du blé dur (+110% en 2022)</li>
+                  <li>• Pression des marques de distributeur (30-35%)</li>
+                  <li>• Dépendance aux importations italiennes (64%)</li>
+                  <li>• Transition vers des modèles durables</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="text-gray-700">
+              L&#39;inflation sans précédent de 2022-2023, avec une hausse de <strong>43% du prix au détail du kilo de pâtes</strong>, a profondément remodelé les comportements d&#39;achat. Les marques de distributeur ont gagné du terrain, tandis que le segment premium a montré une résilience notable malgré le recul du bio (-9,8% en 2023).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Market Overview -->
+      <section id="market-overview" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">1. Vue d&#39;Ensemble du Marché</h2>
+
+          <!-- Market Size and Dynamics -->
+          <div id="market-size" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">1.1 Taille et Dynamique du Marché</h3>
+
+            <div class="pull-quote">
+              &#34;Le marché français des pâtes et couscous a atteint 1,5 milliard d&#39;euros en 2023, consolidant la position de la France comme l&#39;un des principaux marchés européens.&#34;
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-bold text-lg mb-6">Évolution de la valeur marchande (2020-2025)</h4>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                  <span class="font-medium">2020 (Effet COVID-19)</span>
+                  <span class="text-2xl font-bold text-green-600">~1,28 Md€</span>
+                </div>
+                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                  <span class="font-medium">2023 (Pic inflationniste)</span>
+                  <span class="text-2xl font-bold text-red-600">~1,50 Md€</span>
+                </div>
+                <div class="flex justify-between items-center py-3">
+                  <span class="font-medium">2025 (Projection)</span>
+                  <span class="text-2xl font-bold text-blue-600">~1,4-1,55 Md€</span>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Source : <a href="https://www.xerfi.com/presentationetude/le-marche-des-pates-et-du-couscous_iaa04" class="citation-link">Institut Xerfi, 2024</a> |
+                <a href="https://www.insee.fr/fr/statistiques/7767728" class="citation-link">INSEE 1073Z, 2024</a>
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-bold text-lg mb-4">Volumes de Production 2024</h4>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span>Pâtes alimentaires</span>
+                    <span class="font-bold text-xl">238 000 tonnes</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Couscous</span>
+                    <span class="font-bold text-xl">71 400 tonnes</span>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                  Source : <a href="https://www.xerfi.com/presentationetude/le-marche-des-pates-et-du-couscous_iaa04" class="citation-link">Institut Xerfi, 2024</a>
+                </p>
+              </div>
+
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-bold text-lg mb-4">Consommation par Habitant</h4>
+                <div class="text-center">
+                  <div class="text-4xl font-bold text-sage-green mb-2">8,6-9,1 kg</div>
+                  <div class="text-sm text-gray-600">de pâtes par an</div>
+                </div>
+                <div class="mt-4 text-center">
+                  <div class="text-2xl font-bold text-terracotta">70%</div>
+                  <div class="text-sm text-gray-600">mangent des pâtes 1x/semaine</div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                  Source : <a href="https://actualites-agricoles.lacooperationagricole.coop/images/files/2021/AA-2021-11-26/des%20chiffres%20et%20des%20ce%CC%81re%CC%81ales.pdf" class="citation-link">SIFPA, 2020</a> |
+                  <a href="https://yougov.com/fr-fr/articles/31847-les-francais-grands-consommateurs-de-pates" class="citation-link">YouGov, 2023</a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Segmentation -->
+          <div id="segmentation" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">1.2 Segmentation du Marché</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-bold text-lg mb-6">Structure du marché par segments</h4>
+              <div class="space-y-6">
+                <div class="border-l-4 border-amber-400 pl-4">
+                  <h5 class="font-bold text-amber-700">Pâtes sèches (~80% du marché)</h5>
+                  <p class="text-sm text-gray-600">Segment mature avec croissance faible (0,1-2% CAGR). Dominance des formats longs (65%) avec spaghetti en tête (23% des préférences).</p>
+                </div>
+
+                <div class="border-l-4 border-green-500 pl-4">
+                  <h5 class="font-bold text-green-700">Pâtes fraîches (~12-15%)</h5>
+                  <p class="text-sm text-gray-600">Moteur de croissance à +5,5% CAGR. Pâtes farcies représentent 50% du chiffre d&#39;affaires du segment.</p>
+                </div>
+
+                <div class="border-l-4 border-blue-500 pl-4">
+                  <h5 class="font-bold text-blue-700">Semoule/Couscous (~6-8%)</h5>
+                  <p class="text-sm text-gray-600">Marché stable avec France leader européen. Ventes GMS à 263,9 M€ sur 2024-2025.</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-6">
+                Source : <a href="https://www.openpr.com/news/4191675/france-pasta-market-share-size-forecast-2025-2032-market" class="citation-link">Market Analysis 2024</a> |
+                <a href="https://madeinfr.fr/etudes-de-marche/agroalimentaire-alimentation/le-marche-de-la-semoule-et-du-couscous-en-france/" class="citation-link">Made in Fr, 2025</a>
+              </p>
+            </div>
+
+            <div class="pull-quote">
+              &#34;Le segment des pâtes fraîches constitue le principal moteur de croissance, avec une progression de 14,4% en valeur et 4,8% en volume en 2023.&#34;
+            </div>
+          </div>
+
+          <!-- Consumption Trends -->
+          <div id="consumption-trends" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">1.3 Tendances de Consommation</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-2">70%</div>
+                <div class="text-sm text-gray-600">des Français consomment des pâtes au moins une fois par semaine</div>
+              </div>
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-green-600 mb-2">36%</div>
+                <div class="text-sm text-gray-600">en consomment plus d&#39;une fois par semaine</div>
+              </div>
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-amber-600 mb-2">26%</div>
+                <div class="text-sm text-gray-600">ont une marque fétiche et y sont fidèles</div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="font-bold text-lg mb-6">Évolution vers le premium et l&#39;artisanal</h4>
+              <div class="prose max-w-none">
+                <p class="text-gray-700 mb-4">
+                  La période 2020-2025 marque une accélération de la montée en gamme, avec une progression du segment premium à <strong>+11,7% en 2023</strong>. Les consommateurs recherchent qualité, authenticité et engagement responsable.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  <div>
+                    <h5 class="font-semibold mb-2">Attributs premium clés :</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Blés durs riches en protéines</li>
+                      <li>• Farines anciennes (Senatore Cappelli)</li>
+                      <li>• Tréfilage au bronze</li>
+                      <li>• Œufs de ferme</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold mb-2">Prix premium observés :</h5>
+                    <ul class="text-sm space-y-1">
+                      <li>• Barilla Al Bronzo : <strong>&gt;5€/kg</strong></li>
+                      <li>• Marques italiennes premium : <strong>4x supérieur</strong></li>
+                      <li>• Bio : recul de 9,8% en 2023</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-6">
+                Source : <a href="https://www.businesscoot.com/en/study/the-pasta-market-france" class="citation-link">BusinessCoot, 2023</a> |
+                <a href="https://www.kantar.com/fr/inspirations/consommateurs-acheteurs-et-distributeurs/2025-les-pates-montent-en-gamme" class="citation-link">Kantar, 2025</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Supply Chain Analysis -->
+      <section id="supply-chain" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">2. Analyse de la Chaîne d&#39;Approvisionnement</h2>
+
+          <!-- Raw Materials -->
+          <div id="raw-materials" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">2.1 Matières Premières</h3>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              <div class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-8 shadow-lg">
+                <h4 class="font-bold text-lg mb-4 text-amber-800">Production Nationale de Blé</h4>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center">
+                    <span>Blé tendre (2025/26)</span>
+                    <span class="font-bold text-2xl text-green-600">33,9 Mt</span>
+                  </div>
+                  <div class="text-sm text-gray-600">+32,9% vs 2024</div>
+
+                  <div class="flex justify-between items-center mt-4">
+                    <span>Blé dur (2023/24)</span>
+                    <span class="font-bold text-2xl text-blue-600">1,3 Mt</span>
+                  </div>
+                  <div class="text-sm text-gray-600">+3,5% malgré -7% des surfaces</div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                  Source : <a href="https://millermagazine.com/blog/eu-grain-production-to-see-moderate-growth-in-2025-5991" class="citation-link">Miller Magazine, 2024</a> |
+                  <a href="https://www.sudouest.fr/economie/agriculture/recolte-de-ble-des-previsions-optimistes-avec-32-6-millions-de-tonnes-attendues-en-2025-25268519.php" class="citation-link">Sud Ouest, 2025</a>
+                </p>
+              </div>
+
+              <div class="bg-gradient-to-br from-red-50 to-white rounded-xl p-8 shadow-lg">
+                <h4 class="font-bold text-lg mb-4 text-red-800">Dépendance Importations</h4>
+                <div class="space-y-4">
+                  <div class="text-center">
+                    <div class="text-4xl font-bold text-red-600 mb-2">64%</div>
+                    <div class="text-sm text-gray-600">des pâtes sèches sont importées</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-orange-600 mb-2">379 941</div>
+                    <div class="text-sm text-gray-600">tonnes importées en 2020</div>
+                  </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                  Source : <a href="https://actualites-agricoles.lacooperationagricole.coop/images/files/2021/AA-2021-11-26/des%20chiffres%20et%20des%20ce%CC%81re%CC%81ales.pdf" class="citation-link">SIFPA, 2020</a>
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="font-bold text-lg mb-6">Volatilité prix blé dur (2020-2023)</h4>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                  <span class="font-medium">2020-2021</span>
+                  <span class="text-green-600 font-bold">220-250 €/t → 280-320 €/t</span>
+                  <span class="text-green-600">+25%</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg">
+                  <span class="font-medium">Mi-2022 (Crise ukrainienne)</span>
+                  <span class="text-red-600 font-bold text-xl">519 €/t</span>
+                  <span class="text-red-600 font-bold">+110%</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                  <span class="font-medium">2023-2024</span>
+                  <span class="text-blue-600 font-bold">320-380 €/t → 280-320 €/t</span>
+                  <span class="text-blue-600">-15%</span>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Source : <a href="https://www.ibisworld.com/france/industry/pasta-production/200410/" class="citation-link">IBISWorld, 2024</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Production -->
+          <div id="production" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">2.2 Transformation et Production</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-blue-600 mb-2">5</div>
+                <div class="text-sm text-gray-600">usines de semoulerie en France</div>
+              </div>
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-green-600 mb-2">440 000</div>
+                <div class="text-sm text-gray-600">tonnes de semoule produites</div>
+              </div>
+              <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="text-3xl font-bold text-amber-600 mb-2">186</div>
+                <div class="text-sm text-gray-600">salariés dans la semoulerie</div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="font-bold text-lg mb-6">Technologies de fabrication</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h5 class="font-semibold mb-3 text-amber-700">Pâtes sèches</h5>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Hydratation : 29-31% d&#39;eau</li>
+                    <li>• Pression d&#39;extrusion : jusqu&#39;à 115 bars</li>
+                    <li>• Séchage : 37-40°C sur 12-24h</li>
+                    <li>• Humidité finale : 10-11%</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold mb-3 text-green-700">Pâtes fraîches</h5>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Conservation de l&#39;humidité</li>
+                    <li>• Atmosphère modifiée</li>
+                    <li>• Chaîne du froid 0-4°C</li>
+                    <li>• DLC courte : 2-4 semaines</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-6">
+                Source : <a href="https://www.interbio-occitanie.com/fabriquer-des-pates-dans-une-ferme-en-agriculture-biologique/" class="citation-link">Interbio Occitanie, 2023</a> |
+                <a href="https://www.sphericalinsights.com/fr/reports/france-chilled-fresh-pasta-market" class="citation-link">Spherical Insights, 2024</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Distribution -->
+          <div id="distribution" class="mb-16">
+            <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">2.3 Distribution et Logistique</h3>
+
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-bold text-lg mb-6 text-blue-800">Canaux de distribution dominants</h4>
+              <div class="text-center mb-6">
+                <div class="text-6xl font-bold text-blue-600 mb-2">61,02%</div>
+                <div class="text-lg text-gray-600">Grande Distribution</div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white p-4 rounded-lg">
+                  <h5 class="font-semibold mb-2">Pression concurrentielle</h5>
+                  <p class="text-sm text-gray-600">Marques de distributeur atteignent 30-35% du marché</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg">
+                  <h5 class="font-semibold mb-2">E-commerce</h5>
+                  <p class="text-sm text-gray-600">Croissance mais reste minoritaire vs canaux physiques</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Source : <a href="https://www.openpr.com/news/4191675/france-pasta-market-share-size-forecast-2025-2032-market" class="citation-link">OpenPR, 2024</a>
+              </p>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h4 class="font-bold text-lg mb-6">Défis logistiques spécifiques aux pâtes fraîches</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-snowflake text-2xl text-blue-600"></i>
+                  </div>
+                  <h5 class="font-semibold mb-2">Chaîne du froid</h5>
+                  <p class="text-sm text-gray-600">0-4°C ininterrompue</p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-clock text-2xl text-red-600"></i>
+                  </div>
+                  <h5 class="font-semibold mb-2">Durée limitée</h5>
+                  <p class="text-sm text-gray-600">2-4 semaines de DLC</p>
+                </div>
+                <div class="text-center">
+                  <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-map-marker-alt text-2xl text-green-600"></i>
+                  </div>
+                  <h5 class="font-semibold mb-2">Proximité</h5>
+                  <p class="text-sm text-gray-600">Production proche consommation</p>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-6">
+                Source : <a href="https://www.sphericalinsights.com/fr/reports/france-chilled-fresh-pasta-market" class="citation-link">Spherical Insights, 2024</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Competitive Landscape -->
+      <section id="competitive-landscape" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">3. Paysage Concurrentiel</h2>
+
+          <div class="mb-16">
+            <div class="pull-quote">
+              &#34;L&#39;industrie des pâtes et couscous est très concentrée, avec un leader historique, Panzani, qui cumule plus de 50% du chiffre d&#39;affaires.&#34;
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Market Share Visualization -->
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6">Structure de concentration</h3>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-amber-50 rounded-lg">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-4 h-4 bg-amber-500 rounded-full"></div>
+                    <span class="font-medium">Panzani</span>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-2xl font-bold">50%+</div>
+                    <div class="text-sm text-gray-600">Leader indiscutable</div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-4 h-4 bg-blue-500 rounded-full"></div>
+                    <span class="font-medium">Ebro Foods/Lustucru</span>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-xl font-bold">15-20%</div>
+                    <div class="text-sm text-gray-600">Spécialiste frais</div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-4 h-4 bg-red-500 rounded-full"></div>
+                    <span class="font-medium">Barilla</span>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-xl font-bold">10-15%</div>
+                    <div class="text-sm text-gray-600">Premium italien</div>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-4 h-4 bg-gray-500 rounded-full"></div>
+                    <span class="font-medium">Autres + MDD</span>
+                  </div>
+                  <div class="text-right">
+                    <div class="text-xl font-bold">15-25%</div>
+                    <div class="text-sm text-gray-600">Marché fragmenté</div>
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Source : <a href="https://www.xerfi.com/presentationetude/le-marche-des-pates-et-du-couscous_iaa04" class="citation-link">Institut Xerfi, 2024</a>
+              </p>
+            </div>
+
+            <!-- CR4 Concentration -->
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6">Indice de concentration CR4</h3>
+              <div class="text-center mb-6">
+                <div class="text-5xl font-bold text-purple-600 mb-2">75-80%</div>
+                <div class="text-lg text-gray-600">Part cumulée des 4 premiers acteurs</div>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold mb-2">Caractéristiques oligopolistiques :</h4>
+                <ul class="text-sm space-y-1">
+                  <li>• Barrières à l&#39;entrée élevées</li>
+                  <li>• Investissements industriels lourds</li>
+                  <li>• Notoriété des marques historiques</li>
+                  <li>• Pouvoir de négociation fort</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Major Players -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <!-- Panzani -->
+            <div class="bg-gradient-to-br from-amber-50 to-white rounded-xl p-6 shadow-lg border border-amber-200">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center">
+                  <i class="fas fa-crown text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg">Panzani</h3>
+                  <div class="text-sm text-gray-600">Leader historique</div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-sm">CA 2024</span>
+                  <span class="font-bold">571 M€</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Volumes 2022</span>
+                  <span class="font-bold">396 000 t</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Sites production</span>
+                  <span class="font-bold">7</span>
+                </div>
+              </div>
+              <div class="mt-4 p-3 bg-amber-100 rounded-lg">
+                <div class="text-xs font-semibold text-amber-800">Stratégie clé</div>
+                <div class="text-sm">100% blé français responsable</div>
+              </div>
+              <p class="text-xs text-gray-500 mt-3">
+                Source : <a href="https://www.groupe-panzani.fr/en/who-are-we/key-figures" class="citation-link">Groupe Panzani, 2024</a>
+              </p>
+            </div>
+
+            <!-- Ebro Foods -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-xl p-6 shadow-lg border border-blue-200">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                  <i class="fas fa-snowflake text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg">Ebro Foods</h3>
+                  <div class="text-sm text-gray-600">Spécialiste frais</div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="bg-blue-100 p-3 rounded-lg">
+                  <div class="text-xs font-semibold text-blue-800">Marque phare</div>
+                  <div class="text-sm">Lustucru Frais</div>
+                </div>
+                <div class="bg-blue-100 p-3 rounded-lg">
+                  <div class="text-xs font-semibold text-blue-800">Sites industriels</div>
+                  <div class="text-sm">Lorette et Communay</div>
+                </div>
+              </div>
+              <div class="mt-4 text-xs text-gray-500">
+                <span class="font-semibold">Note :</span> Tentative d&#39;acquisition de Panzani bloquée par l&#39;Autorité de la concurrence en 2021
+              </div>
+              <p class="text-xs text-gray-500 mt-3">
+                Source : <a href="https://industrie.usinenouvelle.com/classement/soussecteur-30" class="citation-link">Usine Nouvelle, 2024</a>
+              </p>
+            </div>
+
+            <!-- Barilla -->
+            <div class="bg-gradient-to-br from-red-50 to-white rounded-xl p-6 shadow-lg border border-red-200">
+              <div class="flex items-center space-x-3 mb-4">
+                <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+                  <i class="fas fa-globe text-white text-xl"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-lg">Barilla</h3>
+                  <div class="text-sm text-gray-600">Leader mondial</div>
+                </div>
+              </div>
+              <div class="space-y-3">
+                <div class="flex justify-between">
+                  <span class="text-sm">Investissement 2025</span>
+                  <span class="font-bold">33 M€</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Sites en France</span>
+                  <span class="font-bold">5</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-sm">Croissance 2024</span>
+                  <span class="font-bold text-green-600">+4,9%</span>
+                </div>
+              </div>
+              <div class="mt-4 p-3 bg-red-100 rounded-lg">
+                <div class="text-xs font-semibold text-red-800">Stratégie</div>
+                <div class="text-sm">Production locale via Harrys France</div>
+              </div>
+              <p class="text-xs text-gray-500 mt-3">
+                Source : <a href="https://www.nordfranceinvest.com/news/e2-million-to-upgrade-its-onnaing-plant/" class="citation-link">Nord France Invest, 2025</a> |
+                <a href="https://www.usinenouvelle.com/article/au-sortir-d-une-belle-annee-barilla-aborde-2025-en-misant-sur-l-innovation.N2229589" class="citation-link">Usine Nouvelle, 2024</a>
+              </p>
+            </div>
+          </div>
+
+          <!-- Entry of Panzani in Fresh Pasta -->
+          <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            <h3 class="font-bold text-lg mb-6">Bouleversement concurrentiel : entrée de Panzani sur le frais (2024)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                <h4 class="font-semibold mb-4">Le déploiement stratégique</h4>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center">
+                      <span class="text-amber-600 font-bold">1</span>
+                    </div>
+                    <span>Lancement mars 2024 avec 12 références complètes</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                      <span class="text-blue-600 font-bold">2</span>
+                    </div>
+                    <span>Prix positionnés entre 2,10 et 3 euros</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <span class="text-green-600 font-bold">3</span>
+                    </div>
+                    <span>Campagne marketing massive : 32 semaines TV</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                      <span class="text-purple-600 font-bold">4</span>
+                    </div>
+                    <span>Objectif 25% de part de marché à l&#39;horizon 2028</span>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片8.png" alt="Industrial production line for fresh pasta" class="rounded-lg shadow-lg w-full h-48 object-cover" size="medium" aspect="wide" style="photo" query="fresh pasta production line" referrerpolicy="no-referrer" data-modified="1"/>
+              </div>
+            </div>
+            <p class="text-sm text-gray-600 mt-6">
+              Source : <a href="https://www.e-marketing.fr/Thematique/marques-1296/strategie-marque-2250/Breves/Panzani-se-lance-sur-le-marche-des-pates-fraiches-400665.htm" class="citation-link">E-Marketing, 2024</a> |
+              <a href="https://www.bfmtv.com/economie/consommation/pourquoi-panzani-se-lance-en-force-sur-le-marche-des-pates-fraiches_AN-202402080336.html" class="citation-link">BFM TV, 2024</a>
+            </p>
+          </div>
+
+          <!-- Competitive Dynamics by Segment -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h4 class="font-bold text-lg mb-4 text-amber-700">Pâtes sèches</h4>
+              <div class="space-y-3">
+                <div class="text-sm">
+                  <span class="font-semibold">Duel :</span> Panzani vs Barilla
+                  <br/><span class="text-gray-600">&gt;70% des parts sur les longues</span>
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Pression :</span> MDD à 30-35%
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Stratégie :</span> Différenciation premium
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h4 class="font-bold text-lg mb-4 text-green-700">Pâtes fraîches</h4>
+              <div class="space-y-3">
+                <div class="text-sm">
+                  <span class="font-semibold">Historique :</span> Lustucru vs Rana
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Nouveau :</span> Panzani entre en 2024
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Dynamique :</span> Concurrence accrue
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-lg">
+              <h4 class="font-bold text-lg mb-4 text-blue-700">Semoule/Couscous</h4>
+              <div class="space-y-3">
+                <div class="text-sm">
+                  <span class="font-semibold">Leader :</span> France 1er producteur européen
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Production :</span> 71 400 tonnes en 2024
+                </div>
+                <div class="text-sm">
+                  <span class="font-semibold">Marché :</span> GMS à 263,9 M€ 2024-25
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Manufacturing Analysis -->
+      <section id="manufacturing" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">4. Analyse de la Fabrication et de l&#39;Industrie</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Industrial Structure -->
+            <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6">Structure industrielle française</h3>
+              <div class="space-y-6">
+                <div class="text-center">
+                  <div class="text-4xl font-bold text-gray-700 mb-2">309</div>
+                  <div class="text-lg text-gray-600">entreprises en 2021</div>
+                  <div class="text-sm text-gray-500">vs 282 en 2020 (+9,6%)</div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="text-center p-3 bg-white rounded-lg">
+                    <div class="text-2xl font-bold text-blue-600">
+                      &lt; 10</div>
+                        <div class="text-xs">Grands groupes</div>
+                        <div class="text-xs text-gray-500">~70% production</div>
+                    </div>
+                    <div class="text-center p-3 bg-white rounded-lg">
+                      <div class="text-2xl font-bold text-green-600">~30</div>
+                      <div class="text-xs">PME</div>
+                      <div class="text-xs text-gray-500">~20% production</div>
+                    </div>
+                    <div class="text-center p-3 bg-white rounded-lg">
+                      <div class="text-2xl font-bold text-amber-600">~270</div>
+                      <div class="text-xs">Artisans</div>
+                      <div class="text-xs text-gray-500">~10% production</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">
+                  Source : <a href="https://www.insee.fr/fr/statistiques/7767728?sommaire=7763898" class="citation-link">INSEE, 2024</a>
+                </p>
+              </div>
+
+              <!-- Production Volumes -->
+              <div class="bg-white rounded-xl p-8 shadow-lg">
+                <h3 class="font-bold text-lg mb-6">Évolution production (2020-2024)</h3>
+                <div class="space-y-4">
+                  <div class="flex justify-between items-center p-4 bg-red-50 rounded-lg">
+                    <div>
+                      <div class="font-semibold">Pâtes sèches</div>
+                      <div class="text-sm text-gray-600">258 101 t (2020) → 238 000 t (2024)</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-red-600 font-bold">-8%</div>
+                      <div class="text-xs text-gray-500">Normalisation post-COVID</div>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-between items-center p-4 bg-orange-50 rounded-lg">
+                    <div>
+                      <div class="font-semibold">Couscous</div>
+                      <div class="text-sm text-gray-600">86 705 t (2020) → 71 400 t (2024)</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-orange-600 font-bold">-18%</div>
+                      <div class="text-xs text-gray-500">Concurrence importations</div>
+                    </div>
+                  </div>
+
+                  <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg">
+                    <div>
+                      <div class="font-semibold">Semoule exportée</div>
+                      <div class="text-sm text-gray-600">55 000 tonnes (2023)</div>
+                      <div class="text-xs text-gray-500">3e exportateur européen</div>
+                    </div>
+                    <div class="text-right">
+                      <div class="text-green-600 font-bold">+15%</div>
+                      <div class="text-xs text-gray-500">Blé dur trituré</div>
+                    </div>
+                  </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-4">
+                  Source : <a href="https://actualites-agricoles.lacooperationagricole.coop/images/files/2021/AA-2021-11-26/des%20chiffres%20et%20des%20ce%CC%81re%CC%81ales.pdf" class="citation-link">SIFPA, 2020</a> |
+                  <a href="https://www.xerfi.com/presentationetude/le-marche-des-pates-et-du-couscous_iaa04" class="citation-link">Xerfi, 2024</a>
+                </p>
+              </div>
+            </div>
+
+            <!-- Investments &amp; Innovation -->
+            <div class="mb-16">
+              <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">Investissements et Innovations Industrielles</h3>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                  <h4 class="font-bold text-lg mb-6">Axes d&#39;investissement stratégique</h4>
+                  <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                      <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-leaf text-green-600"></i>
+                      </div>
+                      <div>
+                        <div class="font-semibold">Efficacité énergétique</div>
+                        <div class="text-sm text-gray-600">Optimisation séchage, récupération chaleur</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                      <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-blue-600"></i>
+                      </div>
+                      <div>
+                        <div class="font-semibold">Automatisation</div>
+                        <div class="text-sm text-gray-600">Vision artificielle, contrôle qualité en ligne</div>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3">
+                      <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-lightbulb text-purple-600"></i>
+                      </div>
+                      <div>
+                        <div class="font-semibold">Innovation produit</div>
+                        <div class="text-sm text-gray-600">Pâtes légumes, sans gluten, bio</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                  <h4 class="font-bold text-lg mb-6">Investissements notables</h4>
+                  <div class="space-y-4">
+                    <div class="bg-red-50 p-4 rounded-lg">
+                      <div class="font-semibold text-red-800">Barilla</div>
+                      <div class="text-xl font-bold">33 M€</div>
+                      <div class="text-sm text-gray-600">en 2025 + 12 M€/an réguliers</div>
+                    </div>
+
+                    <div class="bg-amber-50 p-4 rounded-lg">
+                      <div class="font-semibold text-amber-800">Panzani</div>
+                      <div class="text-xl font-bold">5 M€</div>
+                      <div class="text-sm text-gray-600">programme blé français</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sustainability -->
+            <div class="bg-gradient-to-br from-green-50 to-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6 text-green-800">Enjeux de durabilité et réglementation</h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-semibold mb-4">Conformité Green Deal</h4>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Stratégie &#34;Farm to Fork&#34;</li>
+                    <li>• Réduction pesticides</li>
+                    <li>• Promotion agriculture bio</li>
+                    <li>• Éco-conception emballages</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold mb-4">Objectif neutralité carbone</h4>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Circuit court blé français</li>
+                    <li>• Énergies renouvelables</li>
+                    <li>• Valorisation sous-produits</li>
+                    <li>• Traçabilité empreinte carbone</li>
+                  </ul>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-6">
+                Source : <a href="https://www.challenges.fr/entreprise/commerce/comment-panzani-peaufine-sa-recette-locale-pour-rester-n-1-des-pates-en-france_829360" class="citation-link">Challenges, 2024</a>
+              </p>
+            </div>
+          </div>
+      </section>
+
+      <!-- International Trade -->
+      <section id="international" class="py-16 px-8 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">5. Commerce International et Positionnement de la France</h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Trade Balance -->
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6">Balance commerciale</h3>
+              <div class="space-y-6">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-green-800 mb-2">Exportations</h4>
+                  <div class="space-y-2">
+                    <div class="flex justify-between">
+                      <span>Semoule (2023)</span>
+                      <span class="font-bold">55 000 t</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Couscous (2020)</span>
+                      <span class="font-bold">22 102 t (26%)</span>
+                    </div>
+                  </div>
+                  <div class="text-xs text-gray-600 mt-2">
+                    3e exportateur européen
+                  </div>
+                </div>
+
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <h4 class="font-semibold text-red-800 mb-2">Importations</h4>
+                  <div class="space-y-2">
+                    <div class="flex justify-between">
+                      <span>Pâtes sèches (2020)</span>
+                      <span class="font-bold">379 941 t</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Part consommation</span>
+                      <span class="font-bold">64%</span>
+                    </div>
+                  </div>
+                  <div class="text-xs text-gray-600 mt-2">
+                    Dépendance structurelle Italie
+                  </div>
+                </div>
+              </div>
+              <p class="text-sm text-gray-600 mt-4">
+                Source : <a href="https://actualites-agricoles.lacooperationagricole.coop/images/files/2021/AA-2021-11-26/des%20chiffres%20et%20des%20ce%CC%81re%CC%81ales.pdf" class="citation-link">SIFPA, 2020</a> |
+                <a href="https://www.intercereales.com/la-filiere-ble-dur-semoule-pates-et-couscous-en-chiffres" class="citation-link">Intercéréales, 2023</a>
+              </p>
+            </div>
+
+            <!-- Competitive Position -->
+            <div class="bg-white rounded-xl p-8 shadow-lg">
+              <h3 class="font-bold text-lg mb-6">Positionnement compétitif</h3>
+              <div class="space-y-6">
+                <div>
+                  <h4 class="font-semibold text-green-700 mb-3">Avantages comparatifs</h4>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Leader européen couscous</li>
+                    <li>• Production blé dur qualité</li>
+                    <li>• Proximité marchés européens</li>
+                    <li>• Réputation gastronomique</li>
+                    <li>• Stratégie différenciation origine</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-red-700 mb-3">Handicaps structurels</h4>
+                  <ul class="space-y-2 text-sm">
+                    <li>• Échelle production &lt; Italie</li>
+                    <li>• Coûts production élevés</li>
+                    <li>• Réputation italienne dominante</li>
+                    <li>• Dépendance importations blé dur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Strategic Differentiation -->
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <h3 class="font-bold text-lg mb-6">Stratégies de différenciation sur marchés extérieurs</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i class="fas fa-award text-2xl text-blue-600"></i>
+                </div>
+                <h4 class="font-semibold mb-2">Qualité &amp; authenticité</h4>
+                <p class="text-sm text-gray-600">Procédés traditionnels, ingrédients nobles, origines protégées</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i class="fas fa-lightbulb text-2xl text-green-600"></i>
+                </div>
+                <h4 class="font-semibold mb-2">Innovation produit</h4>
+                <p class="text-sm text-gray-600">Gammes adaptées, formats spécifiques, saveurs régionales</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i class="fas fa-leaf text-2xl text-purple-600"></i>
+                </div>
+                <h4 class="font-semibold mb-2">Durabilité</h4>
+                <p class="text-sm text-gray-600">Certification carbone, emballages éco-conçus, filières éthiques</p>
+              </div>
+
+              <div class="text-center">
+                <div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <i class="fas fa-globe-europe text-2xl text-amber-600"></i>
+                </div>
+                <h4 class="font-semibold mb-2">Proximité culturelle</h4>
+                <p class="text-sm text-gray-600">Liens historiques, communautés françaises à l&#39;étranger</p>
+              </div>
+            </div>
+
+            <div class="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
+              <h4 class="font-semibold mb-3">Produits d&#39;exportation prioritaires</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <div class="font-medium text-green-700">Couscous &amp; Semoule</div>
+                  <div class="text-sm text-gray-600">Marchés européens (cuisine maghrébine) et africains</div>
+                </div>
+                <div>
+                  <div class="font-medium text-blue-700">Pâtes premium</div>
+                  <div class="text-sm text-gray-600">Marchés asiatiques en développement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Outlook -->
+      <section id="outlook" class="py-16 px-8 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <div class="section-divider"></div>
+          <h2 class="serif-display text-3xl font-bold text-gray-900 mb-12">6. Perspectives et Scénarios (2025-2030)</h2>
+
+          <!-- Growth Scenarios -->
+      <div class="mb-16">
+        <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">Projections de Marché 2025-2030</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <div class="bg-gradient-to-br from-gray-100 to-white rounded-xl p-6 shadow-lg border border-gray-200">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-gray-600 mb-2">Pâtes sèches</div>
+              <div class="text-3xl font-bold text-gray-700 mb-2">+0,5-1,5%</div>
+              <div class="text-sm text-gray-600">CAGR 2025-2030</div>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">
+              Stagnation modérée, pression MDD continue
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-green-100 to-white rounded-xl p-6 shadow-lg border border-green-200">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-green-600 mb-2">Pâtes fraîches</div>
+              <div class="text-3xl font-bold text-green-700 mb-2">+3-5%</div>
+              <div class="text-sm text-gray-600">CAGR 2025-2030</div>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">
+              Croissance soutenue, innovation continue
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-blue-100 to-white rounded-xl p-6 shadow-lg border border-blue-200">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-blue-600 mb-2">Couscous</div>
+              <div class="text-3xl font-bold text-blue-700 mb-2">+1-2%</div>
+              <div class="text-sm text-gray-600">CAGR 2025-2030</div>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">
+              Stabilité, opportunités export
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-purple-100 to-white rounded-xl p-6 shadow-lg border border-purple-200">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-purple-600 mb-2">Premium/Bio</div>
+              <div class="text-3xl font-bold text-purple-700 mb-2">+4-6%</div>
+              <div class="text-sm text-gray-600">CAGR 2025-2030</div>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">
+              Reprise progressive, retour pouvoir d&#39;achat
+            </div>
+          </div>
+        </div>
+
+        <div class="pull-quote">
+          &#34;Croissance modérée attendue, tirée par le segment frais (+3-5% CAGR) et la premiumisation, tandis que les pâtes sèches devraient stagner.&#34;
+        </div>
+      </div>
+
+      <!-- Key Success Factors -->
+      <div class="mb-16">
+        <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">Facteurs Clés de Succès 2025-2030</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-seedling text-2xl text-green-600"></i>
+              </div>
+              <h4 class="font-bold text-lg">Maîtrise blé dur français</h4>
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>• Sélection variétale</li>
+              <li>• Accompagnement agriculteurs</li>
+              <li>• Contrats long terme</li>
+              <li>• Primes qualité</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-lightbulb text-2xl text-blue-600"></i>
+              </div>
+              <h4 class="font-bold text-lg">Innovation &amp; premiumisation</h4>
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>• Produits fonctionnels</li>
+              <li>• Formats innovants</li>
+              <li>• Expériences gustatives</li>
+              <li>• Agilité développement</li>
+            </ul>
+          </div>
+
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-network-wired text-2xl text-purple-600"></i>
+              </div>
+              <h4 class="font-bold text-lg">Agilité supply chain</h4>
+            </div>
+            <ul class="space-y-2 text-sm">
+              <li>• Gestion volatilité prix</li>
+              <li>• Sécurisation approvisionnements</li>
+              <li>• Flexibilité production</li>
+              <li>• Digitalisation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Risks &amp; Opportunities -->
+      <div class="mb-16">
+        <h3 class="serif-display text-2xl font-semibold text-gray-800 mb-8">Risques et Opportunités Stratégiques</h3>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="bg-gradient-to-br from-red-50 to-white rounded-xl p-8 shadow-lg border border-red-200">
+            <h4 class="font-bold text-lg mb-6 text-red-800">Risques principaux</h4>
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-globe text-red-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Risques géopolitiques</div>
+                  <div class="text-sm text-gray-600">Volatilité cours, tensions internationales, aléas climatiques</div>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-chart-line text-orange-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Concurrence intense</div>
+                  <div class="text-sm text-gray-600">Pression MDD, entrée nouveaux acteurs, consolidation</div>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-dollar-sign text-yellow-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Pouvoir d&#39;achat</div>
+                  <div class="text-sm text-gray-600">Sensibilité prix, impact inflation, polarisation marché</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-br from-green-50 to-white rounded-xl p-8 shadow-lg border border-green-200">
+            <h4 class="font-bold text-lg mb-6 text-green-800">Opportunités stratégiques</h4>
+            <div class="space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-handshake text-green-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Consolidation industrielle</div>
+                  <div class="text-sm text-gray-600">Opérations fusion-acquisition, création champions européens</div>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-globe-americas text-blue-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Développement export</div>
+                  <div class="text-sm text-gray-600">Couscous Europe/Afrique, pâtes premium Asie</div>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <i class="fas fa-leaf text-purple-600"></i>
+                </div>
+                <div>
+                  <div class="font-semibold">Innovation durable</div>
+                  <div class="text-sm text-gray-600">Produits fonctionnels, packaging éco, filières responsables</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Insights -->
+      <div class="bg-gradient-to-br from-sage-green/10 to-terracotta/10 rounded-xl p-8 shadow-lg">
+        <h3 class="serif-display text-2xl font-bold text-gray-900 mb-6">Perspectives Stratégiques</h3>
+        <div class="prose prose-lg max-w-none text-gray-700">
+          <p class="text-lg mb-4">
+            Le marché français des pâtes et semoules entre 2025 et 2030 se caractérisera par une <strong>croissance modérée mais contrastée</strong>, tirée par l&#39;innovation et la premiumisation, face à des défis structurels persistants.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div>
+              <h4 class="font-bold text-sage-green mb-3">Tendances structurantes</h4>
+              <ul class="space-y-1 text-sm">
+                <li>• Migration vers pâtes fraîches (CAGR +3-5%)</li>
+                <li>• Polarisation marché (premium vs. bas prix)</li>
+                <li>• Renforcement durabilité et traçabilité</li>
+                <li>• Digitalisation supply chain</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-terracotta mb-3">Défis critiques</h4>
+              <ul class="space-y-1 text-sm">
+                <li>• Gestion volatilité matières premières</li>
+                <li>• Résilience face à concurrence MDD</li>
+                <li>• Sécurisation approvisionnement blé dur</li>
+                <li>• Adaptation transition écologique</li>
+              </ul>
+            </div>
+          </div>
+
+          <p class="mt-6 text-gray-600">
+            Les acteurs qui réussiront seront ceux qui sauront concilier <strong>innovation produit</strong>, <strong>maîtrise de la chaîne de valeur</strong>, et <strong>engagement durable</strong>, tout en capitalisant sur les avantages comparatifs français en matière de qualité et d&#39;authenticité.
+          </p>
+        </div>
+      </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="py-8 px-8 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+          <div class="section-divider bg-gradient-to-r from-white to-gray-400 mb-6"></div>
+          <div class="text-sm text-gray-400">
+            <p>Étude de marché réalisée en 2025 - Toutes les données sources sont citées et cliquables</p>
+            <p class="mt-2">Document interne - Ne pas diffuser à l&#39;extérieur de l&#39;organisation</p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+        // Toggle TOC on mobile
+        const tocToggle = document.getElementById('toc-toggle');
+        const tocClose = document.getElementById('toc-close');
+        const toc = document.getElementById('toc');
+
+        tocToggle.addEventListener('click', () => {
+            toc.classList.add('open');
+        });
+
+        tocClose.addEventListener('click', () => {
+            toc.classList.remove('open');
+        });
+
+        // Close TOC when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024 && toc.classList.contains('open') &&
+                !toc.contains(e.target) && e.target !== tocToggle) {
+                toc.classList.remove('open');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+
+                    // Close mobile TOC after clicking
+                    if (window.innerWidth <= 1024) {
+                        document.querySelector('.toc-fixed').classList.remove('open');
+                    }
+                }
+            });
+        });
+    </script>
+
+
+</body></html>

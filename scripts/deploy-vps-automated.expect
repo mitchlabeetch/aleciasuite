@@ -1,0 +1,125 @@
+#!/usr/bin/expect -f
+# Automated deployment to Alecia VPS
+# This script automates SSH password entry for deployment steps
+
+set timeout 300
+set vps_host "51.255.194.94"
+set vps_user "ubuntu"
+set vps_pass "0akNPw8LUX6RN8pC"
+
+proc run_ssh_command {host user pass command} {
+    spawn ssh -o StrictHostKeyChecking=no $user@$host
+    expect "password:"
+    send "$pass\r"
+    expect "$ "
+    send "$command\r"
+    expect "$ "
+    send "exit\r"
+    expect eof
+}
+
+puts "=========================================="
+puts "Alecia Suite - Automated VPS Deployment"
+puts "=========================================="
+puts "Target: $vps_user@$vps_host"
+puts ""
+
+# Step 1: Install Docker
+puts "\nStep 1/4: Installing Docker and Docker Compose..."
+spawn ssh -o StrictHostKeyChecking=no $vps_user@$vps_host
+expect "password:"
+send "$vps_pass\r"
+expect "$ "
+
+send "curl -fsSL https://get.docker.com -o /tmp/get-docker.sh\r"
+expect "$ "
+
+send "sudo sh /tmp/get-docker.sh\r"
+expect {
+    "password for ubuntu:" {
+        send "$vps_pass\r"
+        exp_continue
+    }
+    "$ " {}
+    timeout {
+        puts "Docker installation timed out"
+        exit 1
+    }
+}
+
+send "sudo usermod -aG docker ubuntu\r"
+expect "$ "
+
+send "docker --version\r"
+expect "$ "
+
+send "exit\r"
+expect eof
+
+puts "✓ Docker installed"
+
+# Step 2: Install Coolify
+puts "\nStep 2/4: Installing Coolify..."
+spawn ssh -o StrictHostKeyChecking=no $vps_user@$vps_host
+expect "password:"
+send "$vps_pass\r"
+expect "$ "
+
+send "curl -fsSL https://cdn.coollabs.io/coolify/install.sh | bash\r"
+expect {
+    "password for ubuntu:" {
+        send "$vps_pass\r"
+        exp_continue
+    }
+    "$ " {}
+    timeout {
+        puts "Coolify installation timed out"
+        exit 1
+    }
+}
+
+send "exit\r"
+expect eof
+
+puts "✓ Coolify installed"
+
+# Step 3: Configure firewall
+puts "\nStep 3/4: Configuring firewall..."
+spawn ssh -o StrictHostKeyChecking=no $vps_user@$vps_host
+expect "password:"
+send "$vps_pass\r"
+expect "$ "
+
+send "sudo apt-get install -y ufw\r"
+expect {
+    "password for ubuntu:" {
+        send "$vps_pass\r"
+        exp_continue
+    }
+    "$ " {}
+}
+
+send "sudo ufw allow ssh && sudo ufw allow 80/tcp && sudo ufw allow 443/tcp && sudo ufw allow 8000/tcp\r"
+expect "$ "
+
+send "sudo ufw --force enable\r"
+expect "$ "
+
+send "sudo ufw status\r"
+expect "$ "
+
+send "exit\r"
+expect eof
+
+puts "✓ Firewall configured"
+
+puts "\n=========================================="
+puts "Deployment Phase 1 Complete!"
+puts "=========================================="
+puts ""
+puts "Next steps:"
+puts "  1. Upload docker-compose and configs (use scripts/upload-configs.sh)"
+puts "  2. Configure DNS: *.alecia.fr → 51.255.194.94"
+puts "  3. Access Coolify: http://51.255.194.94:8000"
+puts "  4. Start services via Coolify or docker compose"
+puts ""

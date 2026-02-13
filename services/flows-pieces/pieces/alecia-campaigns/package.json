@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-campaigns",
+  "version": "0.1.0",
+  "description": "Email campaign automation for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "@microsoft/microsoft-graph-client": "^3.0.0"
+  }
+}

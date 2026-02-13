@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-crm",
+  "version": "0.1.0",
+  "description": "M&A CRM operations for Alecia Suite (deals, companies, contacts)",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "pg": "^8.11.0"
+  }
+}

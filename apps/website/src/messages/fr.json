@@ -1,0 +1,803 @@
+{
+	"Common": {
+		"headquarters": "Siège social",
+		"directContact": "Contact direct",
+		"implantations": "Nos Implantations",
+		"firstName": "Prénom",
+		"lastName": "Nom",
+		"email": "Email",
+		"phone": "Téléphone",
+		"send": "Envoyer",
+		"required": "obligatoire"
+	},
+	"Accessibility": {
+		"skipToContent": "Aller au contenu principal",
+		"openMenu": "Ouvrir le menu",
+		"closeMenu": "Fermer le menu",
+		"loading": "Chargement en cours",
+		"newWindow": "S'ouvre dans une nouvelle fenêtre"
+	},
+	"HomePage": {
+		"title": "Bienvenue chez alecia",
+		"subtitle": "Cabinet de Conseil M&A dédié aux entrepreneurs et dirigeants de PME-ETI"
+	},
+	"Transactions": {
+		"carouselTitle": "Transactions accompagnées",
+		"carouselSubtitle": "Découvrez nos opérations récentes et la diversité de nos expertises sectorielles.",
+		"viewAll": "Voir toutes les transactions"
+	},
+	"Testimonials": {
+		"title": "Ils nous font confiance",
+		"subtitle": "Les retours de nos clients témoignent de notre engagement et de notre expertise.",
+		"testimonial1": {
+			"quote": "L'accompagnement d'alecia a été déterminant pour la réussite de notre cession. Leur approche professionnelle et humaine nous a permis d'obtenir les meilleures conditions.",
+			"author": "Philippe Moreau",
+			"role": "Dirigeant-fondateur",
+			"company": "Groupe industriel"
+		},
+		"testimonial2": {
+			"quote": "Une équipe réactive et engagée qui a su comprendre nos enjeux stratégiques. Le processus d'acquisition s'est déroulé dans les délais avec une grande transparence.",
+			"author": "Marie Dubois",
+			"role": "Directrice Générale",
+			"company": "Société de services B2B"
+		},
+		"testimonial3": {
+			"quote": "alecia a structuré notre levée de fonds avec une grande rigueur. Leur réseau d'investisseurs et leur expertise financière ont fait la différence.",
+			"author": "Thomas Laurent",
+			"role": "CEO",
+			"company": "Tech startup"
+		}
+	},
+	"Navbar": {
+		"home": "Accueil",
+		"expertises": "Expertises",
+		"about": "À propos",
+		"operations": "Opérations",
+		"team": "Équipe",
+		"careers": "Nous rejoindre",
+		"news": "Actualités",
+		"clientArea": "Espace Data Room",
+		"contact": "Nous contacter",
+		"submenu": {
+			"cession": "Cession & transmission",
+			"levee": "Levée de fonds & financement",
+			"acquisition": "Acquisition"
+		},
+		"theme": {
+			"switchToLight": "Passer en mode clair",
+			"switchToDark": "Passer en mode sombre",
+			"lightMode": "Mode clair",
+			"darkMode": "Mode sombre"
+		}
+	},
+	"CareersPage": {
+		"title": "Nous rejoindre | alecia",
+		"subtitle": "Notre force réside dans nos talents et notre façon d'opérer.",
+		"manifestoTitle": "Notre Vision",
+		"manifestoHeading": "L'excellence comme standard, l'humain comme priorité.",
+		"manifestoText": "Nous accordons une importance capitale à l'attraction, au développement et à la rétention des collaborateurs les plus compatibles avec notre état d'esprit et nos ambitions. Nous rejoindre signifie adhérer pleinement à une équipe qui valorise l'excellence, le respect et l'amélioration continue et travailler dans un environnement stimulant et bienveillant.",
+		"valuesTitle": "Nos Valeurs",
+		"values": {
+			"excellence": "Excellence",
+			"excellenceDesc": "Une exigence de chaque instant pour délivrer le meilleur conseil.",
+			"integrity": "Honnêteté",
+			"integrityDesc": "L'intégrité et la transparence guident chacune de nos actions.",
+			"entrepreneurship": "Humilité",
+			"entrepreneurshipDesc": "Nous restons au service du projet et de la réussite de nos clients.",
+			"collective": "Engagement",
+			"collectiveDesc": "Une détermination totale pour transformer vos projets en succès."
+		},
+		"jobsTitle": "Nos offres",
+		"noJobs": "Aucune offre pour le moment.",
+		"apply": "Postuler",
+		"location": "Lieu",
+		"contract": "Contrat"
+	},
+	"FAQPage": {
+		"title": "FAQ | alecia",
+		"subtitle": "Réponses aux questions fréquentes sur la cession, l'acquisition et nos services.",
+		"heading": "Questions Fréquentes",
+		"categories": {
+			"all": "Tout",
+			"cession": "Cession",
+			"acquisition": "Acquisition",
+			"honoraires": "Honoraires",
+			"concept": "Le nom"
+		},
+		"questions": {
+			"q1": {
+				"question": "Quels sont les services offerts par alecia ?",
+				"answer": "alecia est un cabinet de conseil M&A offrant une gamme de services spécialisés : cession, acquisition, fusion, financement et levée de fonds. Nous accompagnons nos clients de la réflexion stratégique jusqu'à la finalisation, en pilotant l'ensemble de l'opération et en sélectionnant les contreparties pertinentes."
+			},
+			"q2": {
+				"question": "Comment alecia se différencie d'autres conseils financiers ?",
+				"answer": "Nous adoptons une approche entrepreneuriale avec une équipe intégrée (avocats, experts-comptables). Nous garantissons l'implication de deux associés expérimentés sur chaque mission et nos honoraires de succès sont basés sur la valeur réelle pour maintenir un alignement total des intérêts."
+			},
+			"q3": {
+				"question": "Êtes-vous spécialiste d'un secteur en particulier ?",
+				"answer": "Nous sommes multi-secteurs de par notre expérience étendue : agroalimentaire, distribution, B2B/B2C, industrie, BTP, immobilier, santé, technos et impact environnemental/social."
+			},
+			"q4": {
+				"question": "Comment sont calculés vos honoraires ?",
+				"answer": "Notre rémunération inclut des honoraires initiaux (coûts d'engagement stratégique) et des success-fees (pourcentage sur le montant réel). Ce modèle garantit l'alignement de nos intérêts avec les vôtres sur le long terme."
+			},
+			"q5": {
+				"question": "Que signifie alecia ?",
+				"answer": "alecia tire son origine du concept 'Aletheia', qui incarne la vérité et la réalité. Ce nom guide notre approche basée sur l'honnêteté, la rigueur, l'intégrité, l'excellence et la loyauté."
+			}
+		}
+	},
+	"TeamPage": {
+		"title": "Notre équipe",
+		"subtitle": "La variété de nos parcours et de nos expertises fait la richesse d'alecia. Honnêteté, excellence et humilité guident notre approche.",
+		"hiringTitle": "Nous recrutons",
+		"hiringText": "Rejoignez une équipe dynamique et participez à des opérations passionnantes.",
+		"hiringLink": "Voir nos offres d'emploi →",
+		"noMembers": "Notre équipe sera bientôt disponible.",
+		"backToTeam": "Retour à l'équipe",
+		"memberNotFound": "Membre non trouvé",
+		"formation": "Formation",
+		"office": "Bureau",
+		"biography": "Biographie",
+		"viewLinkedIn": "Voir le profil LinkedIn"
+	},
+	"HeroVideo": {
+		"banqueAffaires": "BANQUE D'AFFAIRES",
+		"title": "Vos ambitions méritent un partenaire engagé",
+		"subtitle": "Dirigeant de PME ou ETI, valorisation entre 500 k€ et 50 m€ ? Nous vous accompagnons en cession, transmission, acquisition et levée de fonds.",
+		"expertisesTitle": "Nos Expertises",
+		"cessionTitle": "Cession & Transmission",
+		"cessionDesc": "La cession de votre entreprise est un moment décisif, qui requiert une préparation et une exécution irréprochables.",
+		"leveeTitle": "Levée de fonds & Financement",
+		"leveeDesc": "Que ce soit pour financer votre croissance ou restructurer votre capital, alecia vous offre un conseil expert.",
+		"acquisitionTitle": "Acquisition",
+		"acquisitionDesc": "L'acquisition d'une entreprise est un levier stratégique majeur pour accélérer la croissance de votre société.",
+		"learnMore": "En savoir plus",
+		"sellCta": "Vous envisagez une cession",
+		"investCta": "Vous recherchez des opportunités",
+		"partenaire": "VOTRE PARTENAIRE DE PROXIMITÉ",
+		"interventionRange": "Nous intervenons sur des sociétés valorisées entre",
+		"rangeValue": "5 et 50 millions d'euros"
+	},
+	"KPIBand": {
+		"valuations": "Valorisation moyenne conseillée",
+		"operations": "Opérations réalisées",
+		"sectors": "Secteurs d'activité",
+		"offices": "Bureaux en France"
+	},
+	"Services": {
+		"title": "Nos Expertises",
+		"subtitle": "Une approche sur-mesure pour chaque étape de la vie de votre entreprise.",
+		"cards": {
+			"cession": {
+				"title": "Cession",
+				"description": "Accompagnement complet pour la transmission de votre entreprise, de la valorisation au closing."
+			},
+			"levee": {
+				"title": "Levée de fonds",
+				"description": "Structuration et recherche de financements pour accélérer votre croissance."
+			},
+			"acquisition": {
+				"title": "Acquisition",
+				"description": "Identification de cibles et pilotage de vos opérations de croissance externe."
+			}
+		},
+		"learnMore": "En savoir plus"
+	},
+	"OperationsPage": {
+		"title": "Opérations",
+		"subtitle": "Découvrez un extrait des opérations accompagnées par nos associés et directeurs",
+		"filters": {
+			"sectors": "Secteurs",
+			"type": "Type",
+			"regions": "Régions"
+		},
+		"empty": "Aucune opération ne correspond à vos critères.",
+		"reset": "Réinitialiser les filtres",
+		"count": "{count, plural, =0 {Aucune opération affichée} one {# opération affichée} other {# opérations affichées}}",
+		"disclaimer": "* : opérations menées par nos associés dans le cadre de leurs expériences antérieures"
+	},
+	"DealFlipCard": {
+		"hint": "Cliquez pour retourner ↻",
+		"backLabel": "Opération",
+		"soldTo": "Cession à {name}",
+		"typeOp": "Opération de {type}",
+		"learnMore": "En savoir plus",
+		"connective": {
+			"Acquisition": "par",
+			"Cession": "à",
+			"Levée de fonds": "auprès de"
+		}
+	},
+	"DealPage": {
+		"backToOperations": "Retour aux opérations",
+		"year": "Année",
+		"sector": "Secteur",
+		"type": "Type",
+		"region": "Région",
+		"acquirer": "Acquéreur",
+		"notFound": "Deal non trouvé",
+		"operationOf": "Opération de"
+	},
+	"ArticlePage": {
+		"backToNews": "Retour aux actualités",
+		"notFound": "Article non trouvé"
+	},
+	"NewsPage": {
+		"title": "Actualités",
+		"subtitle": "Retrouvez les dernières opérations, analyses de marché et actualités du cabinet Alecia Partners.",
+		"readMore": "Lire la suite"
+	},
+	"CederPage": {
+		"title": "Céder votre entreprise | alecia",
+		"description": "Initiez votre projet de cession en toute confidentialité avec nos équipes.",
+		"heading": "Céder votre entreprise",
+		"subtitle": "Une démarche structurée pour valoriser votre patrimoine professionnel. Remplissez ce formulaire pour être contacté par un associé spécialisé."
+	},
+	"AcquerirPage": {
+		"title": "Croissance Externe & Acquisition | alecia",
+		"description": "Définissez vos critères d'acquisition et accédez à notre deal flow qualifié.",
+		"heading": "Stratégie d'Acquisition",
+		"subtitle": "Vous cherchez à accélérer votre croissance ? Partagez vos critères de recherche pour identifier les cibles pertinentes."
+	},
+	"SecteursPage": {
+		"title": "Secteurs d'expertise | alecia",
+		"description": "Découvrez les secteurs d'activité maîtrisés par les équipes d'alecia. Une expertise pointue pour accompagner vos opérations stratégiques.",
+		"heading": "Nos Secteurs d'Expertise",
+		"subtitle": "Une connaissance approfondie des écosystèmes pour maximiser la valeur de vos opérations.",
+		"ctaHeading": "Une approche sur-mesure",
+		"ctaText": "Au-delà des secteurs, nous comprenons les dynamiques de marché et les modèles économiques spécifiques à chaque industrie."
+	},
+	"EstimationPage": {
+		"title": "Estimer la valeur de votre entreprise | alecia",
+		"description": "Obtenez une première fourchette de valorisation basée sur les multiples de transaction actuels.",
+		"label": "Outil d'estimation",
+		"heading": "Combien vaut votre entreprise ?",
+		"subtitle": "Une estimation préliminaire en 4 étapes simples, basée sur notre base de données de transactions sectorielles."
+	},
+	"ConnexionPage": {
+		"title": "Espace Client | alecia",
+		"description": "Accès sécurisé à la Data Room Viapazon pour nos clients."
+	},
+	"AdminPage": {
+		"title": "Panel Administration | alecia",
+		"description": "Gestion interne et pilotage des dossiers M&A."
+	},
+	"NotFound": {
+		"title": "Page non trouvée",
+		"description": "Cette page ne fait pas partie du deal.",
+		"back": "Retour à l'accueil"
+	},
+	"ContactSection": {
+		"title": "Proximité & Engagement",
+		"description": "Plus qu'un simple prestataire, Alecia se positionne comme un partenaire de confiance à vos côtés. Notre approche sur-mesure combine expertise technique et intelligence émotionnelle pour sécuriser vos transactions.",
+		"officesTitle": "Nos bureaux",
+		"paris": "Paris (Siège)",
+		"aix": "Aix-en-Provence",
+		"nice": "Nice",
+		"lorient": "Lorient",
+		"annecy": "Annecy",
+		"cta": "Nous contacter",
+		"mapLabel": "5 Implantations en France"
+	},
+	"InteractiveMap": {
+		"title": "Notre présence nationale",
+		"subtitle": "5 bureaux stratégiquement implantés pour accompagner les entrepreneurs de toutes les régions françaises"
+	},
+	"ExpertisesPage": {
+		"title": "Nos Expertises",
+		"description": "alecia accompagne les PME, ETI et entreprises en forte croissance en anticipant leurs besoins et en leur offrant des solutions sur-mesure.",
+		"heading": "L'Excellence Opérationnelle",
+		"subtitle": "Une approche sur-mesure pour chaque étape de la vie de votre entreprise.",
+		"learnMore": "En savoir plus",
+		"sections": {
+			"cession": {
+				"title": "Cession & Transmission",
+				"description": "alecia vous accompagne pour sécuriser l'opération, défendre vos intérêts et maximiser la valeur de votre entreprise. Notre processus repose sur trois piliers : la Préparation (étude de valeur et stratégie), l'Identification d’acheteurs potentiels (ciblage discret via notre réseau extensif), et la Négociation jusqu'au closing pour protéger vos intérêts.",
+				"alt": "Cession d'entreprise"
+			},
+			"acquisition": {
+				"title": "Acquisition & Croissance Externe",
+				"description": "Nous vous guidons à travers ce processus complexe avec une méthodologie éprouvée. Nous intervenons sur l'Analyse et évaluation (compatibilité stratégique), la Négociation et structuration (optimisation des conditions), et l'Intégration post-acquisition pour garantir les synergies attendues.",
+				"alt": "Croissance externe"
+			},
+			"levee": {
+				"title": "Levée de fonds & Financement",
+				"description": "Innovation dans les stratégies de financement (capital, dette, hybride). Nous animons un vaste réseau d'investisseurs et d'institutions pour répondre à vos enjeux de croissance, de restructuration ou de réalisation de patrimoine, tout en négociant des conditions de gouvernance favorables.",
+				"alt": "Ingénierie financière"
+			}
+		}
+	},
+	"Footer": {
+		"servicesTitle": "Services",
+		"companyTitle": "Notre Structure",
+		"officesTitle": "Partout en France",
+		"services": {
+			"cession": "Cession & transmission",
+			"levee": "Levée de fonds",
+			"acquisition": "Acquisition"
+		},
+		"company": {
+			"about": "À propos",
+			"team": "Notre équipe",
+			"operations": "Nos opérations",
+			"news": "Actualités",
+			"careers": "Carrières",
+			"privateAccess": "Accès privé"
+		},
+		"regions": {
+			"idf": "Île-de-France (Paris)",
+			"se": "Sud Est (Nice)",
+			"ara": "Auvergne Rhône-Alpes",
+			"go": "Grand Ouest (Lorient)"
+		},
+		"cities": {
+			"paris": "Paris",
+			"aix": "Aix-en-Provence",
+			"nice": "Nice",
+			"annecy": "Annecy",
+			"lorient": "Lorient"
+		},
+		"description": "Conseil en fusion-acquisition pour PME et ETI. Valorisation 5 m€ - 50 m€.",
+		"rights": "Tous droits réservés.",
+		"legal": "Mentions légales",
+		"privacy": "Politique de confidentialité"
+	},
+	"Metadata": {
+		"title": "alecia | Conseil M&A pour PME & ETI",
+		"description": "Conseil en fusion-acquisition (Cession, Acquisition, Levée de fonds) pour entreprises valorisées de 5 à 50 m€. Une approche d'excellence, honnête et engagée."
+	},
+	"CookieBanner": {
+		"title": "Respect de votre vie privée",
+		"description": "Nous utilisons des cookies pour améliorer votre expérience, réaliser des statistiques d'audience et vous proposer des contenus adaptés. En cliquant sur \"Tout accepter\", vous acceptez le dépôt de cookies tiers.",
+		"privacyLink": "Voir notre politique de confidentialité",
+		"essential": "Essentiels seulement",
+		"refuse": "Refuser",
+		"accept": "Tout accepter"
+	},
+	"LegalPage": {
+		"title": "Mentions Légales",
+		"lastUpdate": "En vigueur au 17/06/2024",
+		"intro": "Conformément aux dispositions des Articles 6-III et 19 de la Loi n°2004-575 du 21 juin 2004 pour la Confiance dans l’économie numérique, dite L.C.E.N., il est porté à la connaissance des utilisateurs et visiteurs du site alecia les présentes mentions légales.",
+		"sections": [
+			{
+				"title": "1. Éditeur du site",
+				"content": "Le site alecia est édité par la société ALECIA PARTNERS, au capital de 10 000 euros, immatriculée au Registre du Commerce et des Sociétés de PARIS sous le numéro 842 581 657, dont le siège social est situé au 12 avenue George V, 75008 Paris."
+			},
+			{
+				"title": "2. Directeur de la publication",
+				"content": "Le Directeur de la publication est Christophe Berthon."
+			},
+			{
+				"title": "3. Hébergement",
+				"content": "Le site est hébergé par la société GANDI, située au 63-65 boulevard Masséna, 75013 Paris, France."
+			}
+		]
+	},
+	"PrivacyPage": {
+		"title": "Politique de Confidentialité",
+		"intro": "alecia s’engage à ce que la collecte et le traitement de vos données soient conformes au RGPD et à la loi Informatique et Libertés. Dernière mise-à-jour : 17/06/2024.",
+		"sections": [
+			{
+				"title": "1. Responsable du traitement",
+				"content": "ALECIA PARTNERS, au capital de 10 000 euros, est responsable du traitement des données collectées sur le site."
+			},
+			{
+				"title": "2. Collecte des données",
+				"content": "Nous collectons les données via nos formulaires de contact pour répondre à vos demandes (Cession, Acquisition, Contact). Ces données incluent : nom, email, téléphone, et informations professionnelles liées à l'opération."
+			},
+			{
+				"title": "3. Vos droits",
+				"content": "Vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Contactez dpo@alecia.com."
+			}
+		]
+	},
+	"ContactPage": {
+		"title": "Contact | alecia",
+		"description": "Contactez nos associés pour discuter de vos projets de cession, acquisition ou levée de fonds.",
+		"heading": "Parlons de vos projets",
+		"subtitle": "Une équipe d'experts à votre écoute pour vous accompagner dans vos réflexions stratégiques.",
+		"form": {
+			"title": "Envoyez-nous un message",
+			"firstName": "Prénom",
+			"lastName": "Nom",
+			"email": "Email",
+			"company": "Entreprise",
+			"companyPlaceholder": "Nom de votre société",
+			"phone": "Téléphone",
+			"message": "Comment pouvons-nous vous aider ?",
+			"submit": "Envoyer le message",
+			"success": "Message envoyé avec succès !",
+			"error": "Une erreur est survenue lors de l'envoi."
+		}
+	},
+	"Wizards": {
+		"common": {
+			"next": "Continuer",
+			"previous": "Précédent",
+			"submit": "Envoyer la demande",
+			"confidentiality": "Vos données sont strictement confidentielles et traitées avec le plus haut degré de discrétion.",
+			"required": "* : Champs obligatoires"
+		},
+		"valuation": {
+			"title": "Estimation de valorisation",
+			"subtitle": "Obtenez une première estimation de la valeur de votre entreprise",
+			"revenueLabel": "Chiffre d'affaires annuel",
+			"revenuePlaceholder": "1000",
+			"revenueHelp": "En milliers d'euros",
+			"ebeLabel": "EBE (Excédent Brut d'Exploitation)",
+			"ebePlaceholder": "150",
+			"ebeHelp": "L'EBE correspond au résultat avant amortissements, provisions et charges financières",
+			"sectorLabel": "Secteur d'activité",
+			"sectorPlaceholder": "Sélectionnez votre secteur",
+			"companyLabel": "Nom de l'entreprise",
+			"companyPlaceholder": "Ma Société",
+			"companyOptional": "(optionnel)",
+			"emailLabel": "Email pour recevoir l'estimation détaillée",
+			"emailPlaceholder": "dirigeant@monentreprise.com",
+			"calculateButton": "Calculer la valorisation",
+			"calculating": "Calcul de votre estimation en cours...",
+			"resultTitle": "Fourchette de valorisation estimée",
+			"resultMedian": "Valorisation médiane",
+			"detailsRevenue": "Chiffre d'affaires",
+			"detailsEbe": "EBE",
+			"detailsSector": "Secteur",
+			"detailsMultiple": "Multiple sectoriel",
+			"disclaimerTitle": "Estimation indicative uniquement",
+			"disclaimerText": "Cette estimation ne constitue en aucun cas une offre ou un engagement de valorisation. La valeur réelle dépend de nombreux facteurs qui nécessitent une analyse approfondie.",
+			"newEstimationButton": "Nouvelle estimation",
+			"receiveEmailButton": "Être recontacté",
+			"sendingButton": "Envoi...",
+			"successTitle": "Demande reçue !",
+			"successDesc": "Un de nos associés vous recontactera sous 48h pour discuter de votre projet.",
+			"errorRequired": "Veuillez remplir tous les champs obligatoires",
+			"errorEmail": "Veuillez saisir un email valide",
+			"errorSubmit": "Erreur lors de l'envoi",
+			"notProfitable": "Je ne suis pas rentable",
+			"ebeHint": "L'EBE correspond au résultat avant amortissements, provisions et charges financières"
+		},
+		"sell": {
+			"title": "Projet de Cession",
+			"stepLabel": "Étape",
+			"step1Title": "Informations sur l'entreprise",
+			"step1Desc": "Présentez-nous votre société",
+			"step2Title": "Votre projet",
+			"step2Desc": "Motivations et calendrier de cession",
+			"step3Title": "Vos coordonnées",
+			"step3Desc": "Pour vous recontacter en toute confidentialité",
+			"companyName": "Nom de l'entreprise",
+			"companyNamePlaceholder": "Société ABC",
+			"sector": "Secteur d'activité",
+			"sectorPlaceholder": "Sélectionnez votre secteur",
+			"region": "Région",
+			"regionPlaceholder": "Sélectionnez votre région",
+			"revenue": "Chiffre d'affaires",
+			"revenuePlaceholder": "2000",
+			"ebe": "EBE (Excédent Brut d'Exploitation)",
+			"ebePlaceholder": "300",
+			"employees": "Nombre de salariés",
+			"employeesPlaceholder": "25",
+			"motivations": "Motivations de cession",
+			"motivationRetirement": "Retraite",
+			"motivationNewProject": "Nouveau projet",
+			"motivationCapital": "Besoin de capitaux",
+			"motivationGrowth": "Accélérer la croissance",
+			"motivationHealth": "Raisons de santé",
+			"motivationOther": "Autres raisons",
+			"timeline": "Calendrier souhaité",
+			"timelinePlaceholder": "Sélectionnez votre calendrier",
+			"timeline6months": "Dans les 6 mois",
+			"timeline1year": "Dans l'année",
+			"timeline2years": "D'ici 2 ans",
+			"timelineExploring": "Je m'informe",
+			"hasAdvisor": "Êtes-vous déjà accompagné ?",
+			"advisorPlaceholder": "Situation actuelle",
+			"advisorNo": "Non, pas encore",
+			"advisorLawyer": "Oui, par un avocat",
+			"advisorAccountant": "Oui, par un expert-comptable",
+			"advisorBank": "Oui, par ma banque",
+			"firstName": "Prénom",
+			"firstNamePlaceholder": "Jean",
+			"lastName": "Nom",
+			"lastNamePlaceholder": "Dupont",
+			"email": "Adresse email",
+			"emailPlaceholder": "jean.dupont@entreprise.fr",
+			"phone": "Téléphone",
+			"phonePlaceholder": "06 12 34 56 78",
+			"role": "Fonction",
+			"rolePlaceholder": "Dirigeant",
+			"message": "Message complémentaire",
+			"messagePlaceholder": "Informations additionnelles sur votre projet...",
+			"previousButton": "Précédent",
+			"nextButton": "Suivant",
+			"submitButton": "Être recontacté",
+			"submittingButton": "Envoi en cours...",
+			"successTitle": "Demande reçue",
+			"successDesc": "Merci de votre confiance. Un de nos associés étudiera votre dossier et vous contactera sous 48h.",
+			"errorSubmit": "Erreur lors de l'envoi"
+		},
+		"buy": {
+			"title": "Projet d'Acquisition",
+			"stepLabel": "Étape",
+			"step1Title": "Profil acquéreur",
+			"step1Desc": "Présentez votre structure d'investissement",
+			"step2Title": "Critères de recherche",
+			"step2Desc": "Définissez vos cibles d'acquisition",
+			"step3Title": "Vos coordonnées",
+			"step3Desc": "Pour recevoir nos opportunités qualifiées",
+			"buyerType": "Type d'acquéreur",
+			"buyerTypeStrategic": "Acquéreur stratégique",
+			"buyerTypeStrategicDesc": "Entreprise souhaitant acquérir pour développer son activité",
+			"buyerTypePE": "Fonds d'investissement",
+			"buyerTypePEDesc": "Private equity, capital développement, capital transmission",
+			"buyerTypeFamilyOffice": "Family office",
+			"buyerTypeFamilyOfficeDesc": "Structure d'investissement familiale",
+			"buyerTypeIndividual": "Investisseur individuel",
+			"buyerTypeIndividualDesc": "Personne physique investissant à titre personnel",
+			"buyerTypeMBI": "MBI/MBO",
+			"buyerTypeMBIDesc": "Management buy-in ou buy-out",
+			"companyName": "Nom de la structure",
+			"companyNamePlaceholder": "Société d'Investissement",
+			"investmentCapacity": "Capacité d'investissement",
+			"investmentCapacityPlaceholder": "Sélectionnez votre budget",
+			"capacity500kto2m": "500 k€ à 2 m€",
+			"capacity2to10m": "2 m€ à 10 m€",
+			"capacity10to30m": "10 m€ à 30 m€",
+			"capacity30plus": "Plus de 30 m€",
+			"targetSectors": "Secteurs cibles",
+			"sectorsSelectedCount": "{count, plural, =0 {aucun secteur sélectionné} =1 {1 secteur sélectionné} other {# secteurs sélectionnés}}",
+			"targetRegions": "Régions cibles (optionnel)",
+			"revenueRangeTarget": "Fourchette de CA de la cible",
+			"revenueRange": "Fourchette de chiffre d'affaires",
+			"ebeMin": "EBE minimum recherché",
+			"ebeValues": {
+				"0": "0 €",
+				"500": "500 k€",
+				"1000": "1 m€",
+				"2000": "2 m€",
+				"3000": "3 m€",
+				"4000": "4 m€",
+				"5000": "5 m€+"
+			},
+			"firstName": "Prénom",
+			"firstNamePlaceholder": "Jean",
+			"lastName": "Nom",
+			"lastNamePlaceholder": "Dupont",
+			"email": "Adresse email",
+			"emailPlaceholder": "jean.dupont@fonds.fr",
+			"phone": "Téléphone",
+			"phonePlaceholder": "06 12 34 56 78",
+			"role": "Fonction",
+			"rolePlaceholder": "Directeur d'investissement",
+			"message": "Informations complémentaires",
+			"messagePlaceholder": "Précisions sur votre thèse d'investissement...",
+			"previousButton": "Précédent",
+			"nextButton": "Suivant",
+			"submitButton": "Être recontacté",
+			"submittingButton": "Envoi en cours...",
+			"successTitle": "Critères enregistrés",
+			"successDesc": "Vos critères d'acquisition ont été transmis à notre équipe. Vous serez contacté dès qu'une opportunité correspondante se présente.",
+			"errorSubmit": "Erreur lors de l'envoi"
+		}
+	},
+	"mobileCta": {
+		"call": "Appeler",
+		"email": "Email",
+		"whatsapp": "WhatsApp"
+	},
+	"ExitIntent": {
+		"headline": "Avant de partir...",
+		"subtext": "Recevez notre guide gratuit",
+		"guideTitle": "10 erreurs à éviter lors de la vente de votre entreprise",
+		"guideDescription": "Un guide pratique rédigé par nos experts M&A pour maximiser la valeur de votre transaction",
+		"emailLabel": "Votre adresse email",
+		"emailPlaceholder": "dirigeant@entreprise.fr",
+		"submitButton": "Recevoir le guide gratuit",
+		"submitting": "Envoi en cours...",
+		"privacyNotice": "Vos données sont traitées de manière confidentielle. Aucun spam.",
+		"successTitle": "Merci !",
+		"successDescription": "Vous recevrez notre guide sous 24h par email.",
+		"invalidEmail": "Veuillez saisir une adresse email valide",
+		"successMessage": "Demande envoyée avec succès",
+		"errorMessage": "Une erreur est survenue. Veuillez réessayer.",
+		"guideRequest": "Demande de guide : 10 erreurs à éviter lors de la vente"
+	},
+	"AboutPage": {
+		"hero": {
+			"title": "Pourquoi choisir alecia ?",
+			"subtitle": "Un partenaire de confiance pour vos opérations stratégiques, guidé par l'excellence, l'indépendance et un alignement total avec vos intérêts."
+		},
+		"mission": {
+			"title": "Notre Mission & Nos Valeurs",
+			"description": "alecia accompagne les entrepreneurs et dirigeants de PME-ETI dans leurs opérations de fusion-acquisition avec une approche fondée sur l'intégrité, l'excellence et un engagement sans faille envers vos objectifs.",
+			"values": {
+				"honesty": {
+					"title": "Honnêteté",
+					"description": "L'intégrité et la transparence guident chacune de nos actions et recommandations."
+				},
+				"excellence": {
+					"title": "Excellence",
+					"description": "Une exigence de chaque instant pour délivrer le meilleur conseil et les meilleurs résultats."
+				},
+				"humility": {
+					"title": "Humilité",
+					"description": "Nous restons au service du projet et de la réussite de nos clients, sans ego."
+				},
+				"engagement": {
+					"title": "Engagement",
+					"description": "Une détermination totale pour transformer vos projets en succès concrets et durables."
+				}
+			}
+		},
+		"methodology": {
+			"title": "Notre Approche Unique",
+			"subtitle": "Ce qui distingue alecia des autres conseils en M&A",
+			"differentiators": {
+				"seniorAttention": {
+					"title": "2 Associés dédiés par mission",
+					"description": "Contrairement aux grandes banques d'affaires, chaque dossier bénéficie de l'attention directe et permanente de deux associés expérimentés.",
+					"points": [
+						"Pas de junior pilotant votre dossier",
+						"Expertise et expérience à chaque étape",
+						"Disponibilité et réactivité maximales",
+						"Relation de confiance sur le long terme"
+					]
+				},
+				"alignedFees": {
+					"title": "Honoraires alignés sur la valeur réelle",
+					"description": "Nos success fees sont basés sur la valeur effective de la transaction, garantissant un alignement parfait de nos intérêts avec les vôtres.",
+					"points": [
+						"Rémunération au succès majoritaire",
+						"Pas d'incitation à brader votre entreprise",
+						"Transparence totale sur notre rémunération",
+						"Focus sur la maximisation de valeur"
+					]
+				},
+				"integratedTeam": {
+					"title": "Équipe intégrée pluridisciplinaire",
+					"description": "Notre équipe réunit avocats, experts-comptables et banquiers d'affaires pour une approche globale et coordonnée.",
+					"points": [
+						"Expertise juridique, fiscale et financière",
+						"Coordination optimale entre tous les métiers",
+						"Gain de temps et d'efficacité",
+						"Vision 360° de votre opération"
+					]
+				}
+			}
+		},
+		"credentials": {
+			"title": "L'Expérience au Service de Vos Ambitions",
+			"subtitle": "Des résultats concrets qui témoignent de notre expertise",
+			"stats": {
+				"valuations": "Valorisations conseillées",
+				"operations": "Opérations réalisées",
+				"sectors": "Secteurs d'activité",
+				"offices": "Bureaux en France"
+			},
+			"cta": "Découvrir notre équipe"
+		},
+		"process": {
+			"title": "Notre Méthodologie",
+			"subtitle": "Un processus éprouvé en 4 étapes pour sécuriser et maximiser la valeur de vos opérations",
+			"steps": {
+				"step1": {
+					"label": "Étape 1",
+					"title": "Diagnostic & Stratégie",
+					"description": "Analyse approfondie de votre situation, définition des objectifs et élaboration d'une stratégie sur-mesure adaptée à vos enjeux."
+				},
+				"step2": {
+					"label": "Étape 2",
+					"title": "Préparation & Valorisation",
+					"description": "Optimisation des éléments valorisants, préparation documentaire aux standards les plus exigeants et valorisation réaliste et défendable."
+				},
+				"step3": {
+					"label": "Étape 3",
+					"title": "Identification & Approche",
+					"description": "Ciblage précis des contreparties pertinentes, approche discrète et professionnelle, gestion du processus de sélection."
+				},
+				"step4": {
+					"label": "Étape 4",
+					"title": "Négociation & Closing",
+					"description": "Négociation ferme des conditions, coordination des due diligences, sécurisation juridique et accompagnement jusqu'à la signature finale."
+				}
+			}
+		},
+		"successStories": {
+			"title": "Ils Nous Ont Fait Confiance",
+			"subtitle": "Découvrez un extrait des opérations que nous avons accompagnées avec succès pour nos clients.",
+			"cta": "Voir toutes nos opérations"
+		},
+		"cta": {
+			"title": "Prêt à démarrer votre projet ?",
+			"subtitle": "Nos associés sont à votre écoute pour échanger en toute confidentialité sur vos enjeux stratégiques.",
+			"primaryButton": "Prendre contact",
+			"secondaryButton": "Découvrir nos expertises"
+		}
+	},
+	"Admin": {
+		"common": {
+			"save": "Enregistrer",
+			"cancel": "Annuler",
+			"delete": "Supprimer",
+			"edit": "Modifier",
+			"add": "Ajouter",
+			"search": "Rechercher",
+			"filter": "Filtrer",
+			"loading": "Chargement...",
+			"noResults": "Aucun résultat",
+			"back": "Retour"
+		},
+		"dashboard": {
+			"title": "Tableau de bord",
+			"welcome": "Bienvenue dans votre interface de gestion centralisée",
+			"dealsInProgress": "Deals en cours",
+			"contacts": "Contacts",
+			"tasksToday": "Tâches prioritaires",
+			"pipelineValue": "Valeur Pipeline",
+			"recentActivity": "Activité Récente",
+			"upcomingEvents": "Prochains Événements"
+		},
+		"deals": {
+			"title": "Pipeline M&A",
+			"subtitle": "Gérez vos dossiers de fusion-acquisition",
+			"newDeal": "Nouveau Deal",
+			"stages": {
+				"lead": "Leads",
+				"nda": "NDA Signé",
+				"loi": "LOI",
+				"dd": "Due Diligence",
+				"closing": "Closing"
+			}
+		},
+		"crm": {
+			"title": "CRM",
+			"subtitle": "Gestion des sociétés et contacts",
+			"companies": "Sociétés",
+			"contacts": "Contacts",
+			"activeBuyers": "Acquéreurs actifs",
+			"potentialSellers": "Cédants potentiels"
+		},
+		"documents": {
+			"title": "Documents",
+			"subtitle": "Gestion documentaire et Data Room",
+			"import": "Importer",
+			"folders": "Dossiers",
+			"recentFiles": "Fichiers récents"
+		},
+		"settings": {
+			"title": "Paramètres",
+			"subtitle": "Configuration de votre espace de travail",
+			"profile": "Profil",
+			"appearance": "Apparence",
+			"notifications": "Notifications",
+			"security": "Sécurité",
+			"data": "Données",
+			"language": "Langue"
+		},
+		"colab": {
+			"title": "Alecia Colab",
+			"subtitle": "Espace collaboratif",
+			"openExternal": "Ouvrir dans un nouvel onglet",
+			"reload": "Recharger",
+			"loadError": "Impossible de charger Colab"
+		},
+		"sidebar": {
+			"dashboard": "Dashboard",
+			"pipeline": "Pipeline",
+			"companies": "Sociétés",
+			"contacts": "Contacts",
+			"colab": "Alecia Colab",
+			"documents": "Documents",
+			"forum": "Forum",
+			"signatures": "Signatures",
+			"research": "Recherche",
+			"trackRecord": "Track Record",
+			"blog": "Blog",
+			"team": "Équipe",
+			"careers": "Carrières",
+			"gallery": "Galerie",
+			"reporting": "Reporting",
+			"settings": "Paramètres"
+		}
+	}
+}

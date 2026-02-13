@@ -1,0 +1,11 @@
+{
+  "name": "@activepieces/piece-alecia-notifications",
+  "version": "0.1.0",
+  "description": "Multi-channel notification system for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "@microsoft/microsoft-graph-client": "^3.0.0",
+    "pg": "^8.11.0"
+  }
+}

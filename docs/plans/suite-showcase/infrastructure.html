@@ -1,0 +1,1029 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infrastructure Alecia Suite — Documentation Technique</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --alecia-midnight: #061a40;
+        --alecia-corporate: #163e64;
+        --alecia-mid-blue: #4370a7;
+        --alecia-light-blue: #749ac7;
+        --alecia-pale-blue: #bfd7ea;
+        --alecia-ice-blue: #e3f2fd;
+        --alecia-red: #b80c09;
+        --alecia-titanium: #6f7a8f;
+        --alecia-cloud: #e6e8ec;
+        --alecia-off-white: #fafafc;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--alecia-off-white);
+        color: var(--alecia-midnight);
+        padding: 2rem;
+        line-height: 1.6;
+      }
+
+      /* Back button */
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--alecia-mid-blue);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        background: white;
+        border: 1px solid var(--alecia-cloud);
+        transition: all 0.3s ease;
+        margin-bottom: 2rem;
+      }
+
+      .back-link:hover {
+        background: var(--alecia-ice-blue);
+        border-color: var(--alecia-mid-blue);
+        transform: translateX(-4px);
+      }
+
+      .back-link svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--alecia-midnight),
+          var(--alecia-corporate)
+        );
+        border-radius: 16px;
+        color: white;
+        box-shadow: 0 8px 32px rgba(6, 26, 64, 0.2);
+      }
+
+      .header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+      }
+
+      .header p {
+        font-size: 1rem;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      .header .badge {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.4rem 1.2rem;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        backdrop-filter: blur(10px);
+      }
+
+      .diagram-section {
+        margin-bottom: 3rem;
+        background: white;
+        border-radius: 16px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 20px rgba(6, 26, 64, 0.08);
+        border: 1px solid var(--alecia-cloud);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .diagram-section:hover {
+        box-shadow: 0 8px 30px rgba(6, 26, 64, 0.12);
+      }
+
+      .diagram-section h2 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--alecia-midnight);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .diagram-section h2 .num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        height: 32px;
+        background: var(--alecia-midnight);
+        color: white;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .diagram-section p.desc {
+        font-size: 1rem;
+        color: var(--alecia-titanium);
+        margin-bottom: 2rem;
+        line-height: 1.7;
+        max-width: 900px;
+      }
+
+      .mermaid {
+        display: flex;
+        justify-content: center;
+        overflow-x: auto;
+        overflow-y: visible;
+        padding: 1.5rem;
+        background: var(--alecia-ice-blue);
+        border-radius: 12px;
+        margin: 0 -0.5rem;
+      }
+
+      .mermaid svg {
+        max-width: 100%;
+        min-width: 100%;
+      }
+
+      /* Dynamic node sizing for all diagram types */
+      .mermaid svg .nodeLabel {
+        font-size: 14px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        font-weight: 500 !important;
+        line-height: 1.4 !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        padding: 14px 18px !important;
+        min-width: 180px !important;
+        max-width: 320px !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 60px !important;
+      }
+
+      .mermaid svg .edgeLabel {
+        font-size: 12px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        background-color: white !important;
+        padding: 6px 10px !important;
+        border-radius: 6px !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        max-width: 180px !important;
+        line-height: 1.4 !important;
+        font-weight: 500 !important;
+      }
+
+      .mermaid svg .noteLabel {
+        font-size: 12px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+        padding: 10px 14px !important;
+        max-width: 320px !important;
+        line-height: 1.5 !important;
+        font-weight: 500 !important;
+      }
+
+      .mermaid svg .note {
+        fill: #f0f4f8 !important;
+        stroke: #4370a7 !important;
+        rx: 10 !important;
+        ry: 10 !important;
+        padding: 10px !important;
+      }
+
+      .mermaid svg rect {
+        rx: 12 !important;
+        ry: 12 !important;
+      }
+
+      .mermaid svg .cluster rect {
+        rx: 16 !important;
+        ry: 16 !important;
+      }
+
+      .mermaid svg .cluster-label text {
+        font-size: 14px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        font-weight: 600 !important;
+        fill: #061a40 !important;
+      }
+
+      .mermaid svg .state-label text {
+        font-size: 13px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        font-weight: 600 !important;
+        fill: #061a40 !important;
+      }
+
+      .mermaid svg .mindmap-node {
+        font-size: 14px !important;
+        padding: 14px 18px !important;
+      }
+
+      .mermaid svg foreignObject {
+        overflow: visible !important;
+      }
+
+      .mermaid svg foreignObject div {
+        overflow: visible !important;
+        white-space: normal !important;
+        word-wrap: break-word !important;
+      }
+
+      .mermaid svg .relationshipLabel {
+        font-size: 11px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+        background-color: white !important;
+        padding: 4px 8px !important;
+      }
+
+      .mermaid svg .cardinality {
+        font-size: 10px !important;
+        font-family: "Inter", system-ui, sans-serif !important;
+      }
+
+      .legend {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: var(--alecia-ice-blue);
+        border-radius: 12px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 0.9rem;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+      }
+
+      .legend-item:hover {
+        background: rgba(255, 255, 255, 0.5);
+      }
+
+      .legend-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 6px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .footer {
+        text-align: center;
+        padding: 2.5rem;
+        color: var(--alecia-titanium);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--alecia-cloud);
+        margin-top: 2rem;
+      }
+
+      .footer p {
+        margin-bottom: 0.5rem;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 1rem;
+        }
+
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .diagram-section {
+          padding: 1.5rem;
+        }
+
+        .diagram-section h2 {
+          font-size: 1.25rem;
+        }
+
+        .mermaid svg .nodeLabel {
+          font-size: 13px !important;
+          min-width: 140px !important;
+          max-width: 240px !important;
+          padding: 10px 14px !important;
+        }
+      }
+
+      .diagram-8 .mermaid {
+        padding: 0.75rem;
+      }
+
+      .diagram-8 .mermaid svg {
+        min-width: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back-link">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Retour à la présentation
+    </a>
+
+    <div class="header">
+      <h1>Infrastructure Alecia Suite</h1>
+      <p>Architecture fonctionnelle — Documentation technique</p>
+      <span class="badge">Sécurisé | Hébergé en France | RGPD-Conforme</span>
+    </div>
+
+    <!-- ==================== DIAGRAM 1: Suite Overview ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">1</span> Vue d'ensemble de la Suite Alecia</h2>
+      <p class="desc">
+        La Suite Alecia réunit huit outils professionnels conçus pour
+        accompagner l'ensemble du cycle de vie d'une opération de
+        fusion-acquisition. Chaque module partage une base de données unique,
+        garantissant une cohérence totale des informations et une fluidité
+        optimale entre les différentes phases du deal.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'secondaryColor': '#bfd7ea', 'tertiaryColor': '#fafafc', 'fontFamily': 'Inter, system-ui', 'fontSize': '14px' }, 'flowchart': { 'wrap': true, 'padding': 25, 'nodeSpacing': 60, 'rankSpacing': 80 }, 'graph': { 'padding': 25, 'nodesep': 60, 'ranksep': 80 }}}%%
+graph TB
+    subgraph RELATION["Relation Client"]
+        BI["Alecia BI<br />Prospection et suivi des opportunités<br />app.alecia.fr"]
+        SITE["alecia.fr<br />Vitrine et contenu<br />Référencement SEO<br />alecia.fr"]
+    end
+
+    subgraph FINANCE["Finance & Valorisation"]
+        NUMBERS["Alecia Numbers<br />Modèles financiers<br />Due diligence<br />app.alecia.fr/numbers"]
+    end
+
+    subgraph JURIDIQUE["Juridique & Signature"]
+        SIGN["Alecia Sign<br />Signature électronique<br />Data room sécurisée<br />sign.alecia.fr"]
+    end
+
+    subgraph COLLABORATION["Collaboration & Pilotage"]
+        COLAB["Alecia Colab<br />Rédaction collaborative<br />Gestion de projet<br />colab.alecia.fr"]
+        FLOWS["Alecia Flows<br />Automatisation<br />Orchestration<br />flows.alecia.fr"]
+    end
+
+    subgraph ANALYSE["Analyse & Pilotage"]
+        ANALYTICS["Alecia Analytics<br />Tableaux de bord<br />Suivi de performance<br />analytics.alecia.fr"]
+        CMS["Alecia CMS<br />Gestion de contenu<br />Base documentaire<br />cms.alecia.fr"]
+    end
+
+    BI --> NUMBERS
+    NUMBERS --> SIGN
+    BI --> SIGN
+    BI --> COLAB
+    FLOWS --> BI
+    FLOWS --> NUMBERS
+    FLOWS --> SIGN
+    FLOWS --> COLAB
+    SITE --> CMS
+    ANALYTICS -.-> BI
+    ANALYTICS -.-> SITE
+
+    style RELATION fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style FINANCE fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style JURIDIQUE fill:#f0f4f8,stroke:#4370a7,color:#061a40
+    style COLLABORATION fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style ANALYSE fill:#bfd7ea,stroke:#4370a7,color:#061a40
+
+    style BI fill:#ffffff,stroke:#4370a7,color:#061a40
+    style NUMBERS fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SIGN fill:#ffffff,stroke:#4370a7,color:#061a40
+    style COLAB fill:#ffffff,stroke:#4370a7,color:#061a40
+    style FLOWS fill:#ffffff,stroke:#b80c09,color:#061a40
+    style ANALYTICS fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SITE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style CMS fill:#ffffff,stroke:#4370a7,color:#061a40
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 2: M&A Journey ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">2</span> Parcours d'une opération M&A</h2>
+      <p class="desc">
+        De la prospection initiale jusqu'à la finalisation de l'opération, la
+        Suite Alecia accompagne chaque étape du processus. Les outils s'activent
+        au bon moment, guidant l'équipe vers le succès de la transaction.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px', 'labelTextColor': '#061a40', 'stateBkg': '#e3f2fd', 'stateLabelColor': '#061a40', 'noteBkgColor': '#f0f4f8', 'noteTextColor': '#061a40', 'noteBorderColor': '#4370a7' }}}%%
+stateDiagram-v2
+    direction LR
+
+    state "SOURCING" as S1
+    state "QUALIFICATION" as S2
+    state "PREMIERS ÉCHANGES" as S3
+    state "ANALYSE" as S4
+    state "VALORISATION" as S5
+    state "DUE DILIGENCE" as S6
+    state "NÉGOCIATION" as S7
+    state "CLOSING" as S8
+    state "OPÉRATION FINALISÉE" as CW
+    state "OPÉRATION ABANDONNÉE" as CL
+
+    [*] --> S1
+
+    S1 --> S2
+    S2 --> S3
+    S3 --> S4
+    S4 --> S5
+    S5 --> S6
+    S6 --> S7
+    S7 --> S8
+    S8 --> CW
+    S8 --> CL
+
+    S2 --> CL
+    S3 --> CL
+    S4 --> CL
+    S5 --> CL
+    S6 --> CL
+    S7 --> CL
+
+    CW --> [*]
+    CL --> [*]
+
+    note right of S1
+      <b>Alecia BI</b> : Identification et qualification
+      <b>Alecia Flows</b> : Enrichissement automatique
+      Veille sectorielle et analyse concurrentielle
+    end note
+
+    note right of S3
+      <b>Alecia Colab</b> : Comptes-rendus d'entretien
+      <b>Alecia BI</b> : Planification des rendez-vous
+      <b>Alecia Numbers</b> : Première estimation
+    end note
+
+    note right of S5
+      <b>Alecia Numbers</b> : Modèle de valorisation complet
+      Analyse par multiples et comparables
+      Rapport de valorisation PDF
+    end note
+
+    note right of S6
+      <b>Alecia Numbers</b> : Grille de due diligence (49 points)
+      <b>Alecia Sign</b> : Mise en place de la data room
+      <b>Alecia Sign</b> : Accord de confidentialité
+      <b>Alecia Colab</b> : Documents de travail
+      <b>Alecia Flows</b> : Synthèses quotidiennes
+    end note
+
+    note right of S7
+      <b>Alecia Sign</b> : Lettre d'intention et signature
+      <b>Alecia Numbers</b> : Fourchette de valorisation finale
+      <b>Alecia Colab</b> : Suivi des négociations
+      <b>Alecia BI</b> : Matching acquéreurs potentiels
+    end note
+
+    note right of S8
+      <b>Alecia Sign</b> : Signature du contrat final
+      <b>Alecia Numbers</b> : Plan d'intégration post-acquisition
+      <b>Alecia Analytics</b> : Suivi de la performance
+    end note
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 3: Data Architecture ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">3</span> Architecture des données</h2>
+      <p class="desc">
+        Toutes les informations circulent dans une base unique et sécurisée.
+        Dossiers, entreprises, contacts, documents et valorisations sont
+        interconnectés, éliminant les silos et garantissant une vision à 360° de
+        chaque opération.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '12px' }}}%%
+erDiagram
+    UTILISATEURS {
+        uuid id PK
+        text email
+        text nom_complet
+        text role "associé | conseiller | utilisateur"
+        jsonb preferences
+    }
+
+    ENTREPRISES {
+        uuid id PK
+        text raison_sociale
+        char9 siren "Numéro d'identification"
+        text code_naf
+        text site_web
+        text url_logo
+        jsonb coordonnees
+        jsonb donnees_financieres "CA, EBITDA, dette nette"
+    }
+
+    CONTACTS {
+        uuid id PK
+        uuid entreprise_id FK
+        text nom_complet
+        text email
+        text telephone
+        text fonction
+    }
+
+    DOSSIERS {
+        uuid id PK
+        text titre
+        text etape "8 étapes M&A"
+        numeric montant
+        int probabilite "0-100"
+        uuid responsable_id FK
+        uuid entreprise_id FK
+        text_arr mots_cles
+        timestamptz cloture_prevue
+    }
+
+    VALORISATIONS {
+        uuid id PK
+        uuid dossier_id FK
+        text methode "DCF | multiples | comparables"
+        jsonb parametres_entree
+        jsonb resultats "fourchette basse, médiane, haute"
+    }
+
+    GRILLES_DD {
+        uuid id PK
+        uuid dossier_id FK
+        text nom
+        jsonb categories "49 points, 7 catégories"
+        int progression "0-100"
+    }
+
+    MODELES_SIGNATURE {
+        uuid id PK
+        text nom "NDA | LOI | Mandat"
+        text url_document
+        jsonb champs_signature
+    }
+
+    DEMANDES_SIGNATURE {
+        uuid id PK
+        uuid modele_id FK
+        uuid dossier_id FK
+        text statut "en attente | signé | expiré"
+        jsonb signataires
+        timestamptz date_signature
+    }
+
+    DOCUMENTS_COLLABORATIFS {
+        uuid id PK
+        uuid dossier_id FK
+        text titre
+        text contenu_html
+        text contenu_markdown
+        bytea etat_synchronisation
+    }
+
+    TABLEAUX {
+        uuid id PK
+        text nom
+        text visibilite "privé | équipe"
+    }
+
+    UTILISATEURS ||--o{ DOSSIERS : "responsable"
+    ENTREPRISES ||--o{ CONTACTS : "emploie"
+    ENTREPRISES ||--o{ DOSSIERS : "fait l'objet de"
+    DOSSIERS ||--o{ VALORISATIONS : "valorisé par"
+    DOSSIERS ||--o{ GRILLES_DD : "audité par"
+    DOSSIERS ||--o{ DEMANDES_SIGNATURE : "signé pour"
+    DOSSIERS ||--o{ DOCUMENTS_COLLABORATIFS : "lié à"
+    MODELES_SIGNATURE ||--o{ DEMANDES_SIGNATURE : "instancie"
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 4: Information Flow ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">4</span> Flux d'information entre les outils</h2>
+      <p class="desc">
+        Les données circulent naturellement d'un outil à l'autre, sans ressaisie
+        manuelle. Un dossier créé dans Alecia BI peut générer automatiquement
+        une valorisation dans Numbers, produire un accord de confidentialité
+        dans Sign, et alimenter un mémo dans Colab.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '14px' }, 'flowchart': { 'wrap': true, 'padding': 25, 'nodeSpacing': 50, 'rankSpacing': 70 }, 'graph': { 'padding': 25, 'nodesep': 50, 'ranksep': 70 }}}%%
+flowchart TB
+    START["Nouveau dossier M&A<br />créé dans Alecia BI"]
+    ENRICH["Enrichissement automatique<br />des données entreprise"]
+    VALUATION["Génération de la<br />valorisation préliminaire<br />(Alecia Numbers)"]
+    NDA["Création et envoi<br />de l'accord de confidentialité<br />(Alecia Sign)"]
+    MEMO["Rédaction collaborative<br />du mémo de présentation<br />(Alecia Colab)"]
+    DD["Ouverture de la grille<br />de due diligence<br />(Alecia Numbers)"]
+    DATAROOM["Mise en place de la<br />data room sécurisée<br />(Alecia Sign)"]
+    TRACK["Suivi de la performance<br />et des indicateurs<br />(Alecia Analytics)"]
+
+    START --> ENRICH
+    ENRICH --> VALUATION
+    ENRICH --> NDA
+    ENRICH --> MEMO
+    VALUATION --> DD
+    NDA --> DATAROOM
+    MEMO --> DD
+    DD --> TRACK
+    DATAROOM --> TRACK
+
+    style START fill:#4370a7,stroke:#163e64,color:#fafafc
+    style ENRICH fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style VALUATION fill:#ffffff,stroke:#4370a7,color:#061a40
+    style NDA fill:#ffffff,stroke:#4370a7,color:#061a40
+    style MEMO fill:#ffffff,stroke:#4370a7,color:#061a40
+    style DD fill:#ffffff,stroke:#4370a7,color:#061a40
+    style DATAROOM fill:#ffffff,stroke:#4370a7,color:#061a40
+    style TRACK fill:#bfd7ea,stroke:#4370a7,color:#061a40
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 5: Features per Module ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">5</span> Fonctionnalités par module</h2>
+      <p class="desc">
+        Chaque outil Alecia dispose de fonctionnalités métier spécifiques,
+        conçues pour répondre aux besoins précis des professionnels du M&A.
+        Cette cartographie présente les capacités clés de chaque module.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'secondaryColor': '#ffffff', 'tertiaryColor': '#bfd7ea', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }, 'mindmap': { 'padding': 20 }}}%%
+mindmap
+  root((Suite Alecia - 8 Modules))
+    Alecia BI
+      Gestion des opportunites
+      Enrichissement entreprise automatique
+      Scoring et qualification des leads
+      Recherche sectorielle avancee
+      Synchronisation calendrier
+    Alecia Numbers
+      Valorisation par multiples
+      Due diligence (49 points)
+      Modele financier 3 etats
+      Analyse de comparables sectoriels
+      Calcul d'honoraires (grille Lehman)
+      Rapports de valorisation PDF
+    Alecia Sign
+      Signature electronique multisignataire
+      Modeles juridiques (NDA, LOI, mandats)
+      Data room securisee
+      Piste d'audit complete
+      Archivage chiffre
+    Alecia Colab
+      Editeur de texte collaboratif temps reel
+      Tableaux Kanban de suivi de deals
+      Gestion de projets et jalons
+      Prise de notes structurees
+      Partage selectif par role
+    Alecia Flows
+      Automatisation des taches repetitives
+      Orchestration entre les modules
+      Alertes et notifications intelligentes
+      Synchronisation externe (email, calendrier)
+      Workflows personnalisables
+    Alecia Analytics
+      Tableaux de bord personnalises
+      Suivi de performance des deals
+      Indicateurs cles de conversion
+      Analyse du pipeline
+      Rapports d'activite
+    alecia.fr
+      Vitrine institutionnelle
+      Presentation des services
+      Tombstones (operations realisees)
+      Blog et actualites sectorielles
+      Referencement SEO optimise
+    Alecia CMS
+      Gestion centralisee du contenu
+      Bibliotheque de medias
+      Taxonomie metier personnalisee
+      Versioning et historique
+      Publication multicanal
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 6: Document Management ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">6</span> Gestion documentaire</h2>
+      <p class="desc">
+        Les documents juridiques et financiers suivent un cycle de vie maîtrisé
+        : de leur création à leur archivage sécurisé, en passant par la
+        signature électronique et le stockage en data room. Chaque étape
+        garantit traçabilité et conformité.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '14px' }, 'flowchart': { 'wrap': true, 'padding': 25, 'nodeSpacing': 45, 'rankSpacing': 60 }, 'graph': { 'padding': 25, 'nodesep': 45, 'ranksep': 60 }}}%%
+flowchart LR
+    subgraph CREATION["Création"]
+        UPLOAD["Import de documents<br />sources"]
+        TEMPLATE["Sélection d'un<br />modèle juridique"]
+        GENERATE["Génération automatique<br />à partir des données"]
+    end
+
+    subgraph PREPARATION["Préparation"]
+        MERGE["Fusion et assemblage<br />de documents"]
+        REVIEW["Révision et annotation<br />collaborative"]
+        FORMAT["Conversion et mise<br />en forme"]
+    end
+
+    subgraph SIGNATURE["Signature"]
+        FIELDS["Positionnement des<br />champs de signature"]
+        SEND["Envoi aux signataires<br />avec notifications"]
+        ESIGN["Signature électronique<br />qualifiée"]
+    end
+
+    subgraph STORAGE["Stockage"]
+        DATAROOM["Ajout à la data room<br />du dossier"]
+        ENCRYPT["Chiffrement et<br />contrôle d'accès"]
+        ARCHIVE["Archivage à long<br />terme sécurisé"]
+    end
+
+    UPLOAD --> MERGE
+    TEMPLATE --> FIELDS
+    GENERATE --> REVIEW
+    MERGE --> REVIEW
+    REVIEW --> FORMAT
+    FORMAT --> FIELDS
+    FIELDS --> SEND
+    SEND --> ESIGN
+    ESIGN --> DATAROOM
+    DATAROOM --> ENCRYPT
+    ENCRYPT --> ARCHIVE
+
+    style CREATION fill:#e3f2fd,stroke:#4370a7,color:#061a40
+    style PREPARATION fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style SIGNATURE fill:#f0f4f8,stroke:#4370a7,color:#061a40
+    style STORAGE fill:#163e64,stroke:#061a40,color:#fafafc
+
+    style UPLOAD fill:#ffffff,stroke:#4370a7,color:#061a40
+    style TEMPLATE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style GENERATE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style MERGE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style REVIEW fill:#ffffff,stroke:#4370a7,color:#061a40
+    style FORMAT fill:#ffffff,stroke:#4370a7,color:#061a40
+    style FIELDS fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SEND fill:#ffffff,stroke:#4370a7,color:#061a40
+    style ESIGN fill:#ffffff,stroke:#4370a7,color:#061a40
+    style DATAROOM fill:#061a40,stroke:#4370a7,color:#fafafc
+    style ENCRYPT fill:#061a40,stroke:#4370a7,color:#fafafc
+    style ARCHIVE fill:#061a40,stroke:#4370a7,color:#fafafc
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 7: AI Intelligence ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">7</span> Intelligence artificielle</h2>
+      <p class="desc">
+        L'IA accompagne les conseillers à chaque étape du deal : synthèses
+        automatiques de documents, scoring de risque, génération de teasers
+        commerciaux, assistance à la valorisation, traduction juridique,
+        recherche sémantique dans les corpus documentaires et matching
+        intelligent entre acquéreurs potentiels et cibles.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '13px' }, 'mindmap': { 'padding': 25 }}}%%
+mindmap
+  root((Intelligence\nArtificielle\nAlecia))
+    Analyse Documentaire
+      Resumes automatiques de documents longs
+      Extraction de clauses cles dans les contrats
+      Detection de red flags en due diligence
+      Recherche semantique dans la data room
+    Aide a la Decision
+      Scoring de risque par dossier
+      Analyse de coherence des donnees financieres
+      Identification de tendances sectorielles
+      Benchmarking automatique
+    Generation de Contenu
+      Teasers commerciaux personnalises
+      Memos de presentation structures
+      Rapports de valorisation formates
+      Syntheses de reunions
+    Valorisation Assistee
+      Suggestion de multiples sectoriels pertinents
+      Calcul de fourchettes de valorisation
+      Analyse de comparables automatique
+      Ajustements de valorisation contextuels
+    Services Linguistiques
+      Traduction juridique francais-anglais
+      Traduction de documents financiers
+      Harmonisation terminologique
+    Matching Intelligent
+      Identification d'acquereurs potentiels par secteur
+      Scoring de compatibilite strategique
+      Analyse de synergies potentielles
+      </pre>
+    </div>
+
+    <!-- ==================== DIAGRAM 8: Security & Compliance ==================== -->
+    <div class="diagram-section diagram-8">
+      <h2><span class="num">8</span> Sécurité et conformité</h2>
+      <p class="desc">
+        La Suite Alecia intègre les plus hauts standards de sécurité :
+        authentification unique (SSO), chiffrement de bout en bout, traçabilité
+        complète des actions, contrôle d'accès granulaire et conformité RGPD.
+        L'hébergement en France garantit la souveraineté des données.
+      </p>
+      <pre class="mermaid">
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#e3f2fd', 'primaryTextColor': '#061a40', 'primaryBorderColor': '#4370a7', 'lineColor': '#4370a7', 'fontFamily': 'Inter, system-ui', 'fontSize': '10px' }, 'flowchart': { 'wrap': true, 'padding': 12, 'nodeSpacing': 32, 'rankSpacing': 50 }, 'graph': { 'padding': 12, 'nodesep': 32, 'ranksep': 50 }}}%%
+graph TB
+    subgraph AUTH["Authentification"]
+        SSO["Connexion unique (SSO)<br />pour tous les outils"]
+        MFA["Authentification multifacteur<br />obligatoire"]
+        SESSION["Gestion avancee<br />des sessions"]
+    end
+
+    subgraph ENCRYPT["Chiffrement"]
+        TRANSIT["Chiffrement en transit<br />TLS 1.3"]
+        REST["Chiffrement au repos<br />AES-256"]
+        E2E["Chiffrement de bout en bout<br />documents sensibles"]
+    end
+
+    subgraph TRACE["Tracabilite"]
+        AUDIT["Piste d'audit complete<br />de toutes les actions"]
+        LOGS["Journalisation centralisee<br />et horodatee"]
+        VERSION["Versioning automatique<br />des documents"]
+    end
+
+    subgraph ACCESS["Controle d'acces"]
+        RBAC["Gestion des roles<br />et permissions"]
+        SHARING["Partage selectif<br />par dossier"]
+        EXPIRE["Acces temporaires<br />a duree limitee"]
+    end
+
+    subgraph RGPD["Conformite RGPD"]
+        CONSENT["Gestion du consentement"]
+        PORTABILITY["Portabilite des donnees"]
+        DELETION["Droit a l'effacement"]
+        SOVEREIGNTY["Hebergement France<br />Souverainete garantie"]
+    end
+
+    AUTH --> ENCRYPT
+    ENCRYPT --> TRACE
+    TRACE --> ACCESS
+    ACCESS --> RGPD
+
+    style AUTH fill:#4370a7,stroke:#163e64,color:#fafafc
+    style ENCRYPT fill:#163e64,stroke:#061a40,color:#fafafc
+    style TRACE fill:#749ac7,stroke:#4370a7,color:#fafafc
+    style ACCESS fill:#bfd7ea,stroke:#4370a7,color:#061a40
+    style RGPD fill:#e3f2fd,stroke:#4370a7,color:#061a40
+
+    style SSO fill:#ffffff,stroke:#4370a7,color:#061a40
+    style MFA fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SESSION fill:#ffffff,stroke:#4370a7,color:#061a40
+    style TRANSIT fill:#061a40,stroke:#4370a7,color:#fafafc
+    style REST fill:#061a40,stroke:#4370a7,color:#fafafc
+    style E2E fill:#061a40,stroke:#4370a7,color:#fafafc
+    style AUDIT fill:#ffffff,stroke:#4370a7,color:#061a40
+    style LOGS fill:#ffffff,stroke:#4370a7,color:#061a40
+    style VERSION fill:#ffffff,stroke:#4370a7,color:#061a40
+    style RBAC fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SHARING fill:#ffffff,stroke:#4370a7,color:#061a40
+    style EXPIRE fill:#ffffff,stroke:#4370a7,color:#061a40
+    style CONSENT fill:#ffffff,stroke:#4370a7,color:#061a40
+    style PORTABILITY fill:#ffffff,stroke:#4370a7,color:#061a40
+    style DELETION fill:#ffffff,stroke:#4370a7,color:#061a40
+    style SOVEREIGNTY fill:#ffffff,stroke:#b80c09,color:#061a40
+      </pre>
+    </div>
+
+    <!-- ==================== Legend ==================== -->
+    <div class="diagram-section">
+      <h2><span class="num">L</span> Légende</h2>
+      <div class="legend">
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #061a40"></div>
+          <span
+            ><strong>Sécurité renforcée</strong> — Chiffrement et contrôle
+            d'accès</span
+          >
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #4370a7"></div>
+          <span><strong>Modules métier</strong> — Outils spécialisés M&A</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #749ac7"></div>
+          <span
+            ><strong>Collaboration</strong> — Travail d'équipe en temps
+            réel</span
+          >
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #bfd7ea"></div>
+          <span><strong>Analyse</strong> — Tableaux de bord et rapports</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #b80c09"></div>
+          <span
+            ><strong>Automatisation</strong> — Workflows et orchestration</span
+          >
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background: #e3f2fd"></div>
+          <span><strong>Données</strong> — Base unique partagée</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-dot"
+            style="background: #f0f4f8; border: 1px solid #c8ccd5"
+          ></div>
+          <span><strong>RGPD</strong> — Conformité réglementaire garantie</span>
+        </div>
+        <div class="legend-item">
+          <div
+            class="legend-dot"
+            style="background: #fafafc; border: 1px solid #c8ccd5"
+          ></div>
+          <span
+            ><strong>Hébergement France</strong> — Souveraineté des
+            données</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>
+        <strong>Alecia Suite</strong> — Infrastructure Technique v1.0 — Février
+        2026
+      </p>
+      <p>
+        8 modules intégrés pour accompagner l'ensemble du cycle M&A, de la
+        prospection au closing.
+      </p>
+    </div>
+
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "base",
+        themeVariables: {
+          primaryColor: "#e3f2fd",
+          primaryTextColor: "#061a40",
+          primaryBorderColor: "#4370a7",
+          lineColor: "#4370a7",
+          secondaryColor: "#bfd7ea",
+          secondaryTextColor: "#061a40",
+          tertiaryColor: "#f0f4f8",
+          tertiaryTextColor: "#061a40",
+          fontFamily: "Inter, system-ui, sans-serif",
+          fontSize: "14px",
+          noteBkgColor: "#f0f4f8",
+          noteTextColor: "#061a40",
+          noteBorderColor: "#4370a7",
+        },
+        flowchart: {
+          htmlLabels: true,
+          curve: "basis",
+          padding: 25,
+          useMaxWidth: true,
+        },
+        graph: {
+          padding: 25,
+          nodesep: 60,
+          ranksep: 80,
+        },
+        er: {
+          fontSize: 12,
+        },
+        mindmap: {
+          padding: 25,
+        },
+        stateDiagram: {
+          labelColor: "#061a40",
+        },
+      });
+    </script>
+  </body>
+</html>

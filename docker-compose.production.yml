@@ -1,0 +1,449 @@
+# docker-compose.production.yml
+# Production deployment configuration for Alecia Suite on OVH VPS
+#
+# This file should be deployed to /opt/alecia/ on the VPS
+# Requires .env file with secrets
+#
+# Usage:
+#   docker compose -f docker-compose.production.yml up -d
+#   docker compose -f docker-compose.production.yml logs -f
+#   docker compose -f docker-compose.production.yml ps
+
+version: "3.8"
+
+services:
+    # ============================================
+    # INFRASTRUCTURE SERVICES
+    # ============================================
+
+    postgres:
+        image: postgres:16-alpine
+        container_name: alecia-postgres
+        restart: unless-stopped
+        environment:
+            POSTGRES_DB: alecia
+            POSTGRES_USER: alecia
+            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            POSTGRES_MULTIPLE_DATABASES: strapi,activepieces,keycloak
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - ./infrastructure/postgres/init:/docker-entrypoint-initdb.d
+        ports:
+            - "127.0.0.1:5432:5432"
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U alecia"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    redis:
+        image: redis:7-alpine
+        container_name: alecia-redis
+        restart: unless-stopped
+        command: redis-server --requirepass ${REDIS_PASSWORD}
+        volumes:
+            - redis_data:/data
+        ports:
+            - "127.0.0.1:6379:6379"
+        healthcheck:
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    minio:
+        image: minio/minio:latest
+        container_name: alecia-minio
+        restart: unless-stopped
+        command: server /data --console-address ":9001"
+        environment:
+            MINIO_ROOT_USER: ${MINIO_ROOT_USER:-alecia}
+            MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+        volumes:
+            - minio_data:/data
+        ports:
+            - "127.0.0.1:9000:9000"
+            - "127.0.0.1:9001:9001"
+        healthcheck:
+            test:
+                ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    # ============================================
+    # CORE APPLICATIONS
+    # ============================================
+
+    next-marketing:
+        image: alecia/website:latest
+        pull_policy: never
+        container_name: alecia-website
+        restart: unless-stopped
+        environment:
+            NODE_ENV: production
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+            REDIS_URL: redis://:${REDIS_PASSWORD}@alecia-redis:6379
+            NEXTAUTH_URL: https://alecia.markets
+            NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+            BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+            BETTER_AUTH_URL: https://alecia.markets
+        depends_on:
+            postgres:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:3000:3000"
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "wget",
+                    "--no-verbose",
+                    "--tries=1",
+                    "--spider",
+                    "http://localhost:3000/api/health",
+                ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    next-colab:
+        image: alecia/colab:latest
+        pull_policy: never
+        container_name: alecia-colab
+        restart: unless-stopped
+        environment:
+            NODE_ENV: production
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+            REDIS_URL: redis://:${REDIS_PASSWORD}@alecia-redis:6379
+            HOCUSPOCUS_URL: ws://alecia-hocuspocus:1234
+            NEXTAUTH_URL: https://colab.alecia.markets
+            NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+            BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+            BETTER_AUTH_URL: https://alecia.markets
+        depends_on:
+            postgres:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            hocuspocus:
+                condition: service_started
+        ports:
+            - "127.0.0.1:3001:3001"
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "wget",
+                    "--no-verbose",
+                    "--tries=1",
+                    "--spider",
+                    "http://localhost:3001/api/health",
+                ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    hocuspocus:
+        image: alecia/hocuspocus:latest
+        container_name: alecia-hocuspocus
+        restart: unless-stopped
+        environment:
+            PORT: 1234
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+            REDIS_URL: redis://:${REDIS_PASSWORD}@alecia-redis:6379
+        depends_on:
+            postgres:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:1234:1234"
+
+    # ============================================
+    # BACKEND SERVICES
+    # ============================================
+
+    strapi:
+        image: alecia/cms:latest
+        pull_policy: never
+        container_name: alecia-cms
+        restart: unless-stopped
+        environment:
+            NODE_ENV: production
+            DATABASE_CLIENT: postgres
+            DATABASE_HOST: postgres
+            DATABASE_PORT: 5432
+            DATABASE_NAME: strapi
+            DATABASE_USERNAME: alecia
+            DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+            JWT_SECRET: ${STRAPI_JWT_SECRET}
+            ADMIN_JWT_SECRET: ${STRAPI_ADMIN_JWT_SECRET}
+            APP_KEYS: ${STRAPI_APP_KEYS}
+            API_TOKEN_SALT: ${STRAPI_API_TOKEN_SALT}
+            # S3 Upload (Minio)
+            AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-alecia}
+            AWS_ACCESS_SECRET: ${MINIO_ROOT_PASSWORD}
+            AWS_REGION: us-east-1
+            AWS_BUCKET: strapi-uploads
+            AWS_ENDPOINT: http://alecia-minio:9000
+        depends_on:
+            postgres:
+                condition: service_healthy
+            minio:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:1337:1337"
+        volumes:
+            - strapi_data:/app/public/uploads
+            - ./infrastructure/branding:/app/branding:ro # Brand assets for admin panel
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "wget",
+                    "--no-verbose",
+                    "--tries=1",
+                    "--spider",
+                    "http://localhost:1337/_health",
+                ]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+
+    activepieces-app:
+        image: alecia/flows:latest
+        pull_policy: never
+        container_name: alecia-flows
+        restart: unless-stopped
+        environment:
+            AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
+            AP_ENVIRONMENT: prod
+            AP_FRONTEND_URL: https://flows.alecia.markets
+            AP_WEBHOOK_TIMEOUT_SECONDS: 30
+            AP_TRIGGER_DEFAULT_POLL_INTERVAL: 5
+            AP_POSTGRES_DATABASE: activepieces
+            AP_POSTGRES_HOST: alecia-postgres
+            AP_POSTGRES_PORT: 5432
+            AP_POSTGRES_USERNAME: alecia
+            AP_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+            AP_POSTGRES_USE_SSL: "false"
+            AP_REDIS_HOST: redis
+            AP_REDIS_PORT: 6379
+            AP_REDIS_PASSWORD: ${REDIS_PASSWORD}
+            AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
+            AP_JWT_SECRET: ${AP_JWT_SECRET}
+            AP_EXECUTION_MODE: UNSANDBOXED
+            AP_FLOW_WORKER_CONCURRENCY: 10
+            AP_TELEMETRY_ENABLED: "false"
+        depends_on:
+            postgres:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:8080:80"
+        volumes:
+            - activepieces_data:/app/.activepieces
+            - ./services/flows-pieces:/app/packages/pieces/community:ro # Custom pieces
+            - ./services/flows/branding:/app/branding:ro # Brand assets
+
+    # ============================================
+    # SUPPORTING SERVICES
+    # ============================================
+
+    plausible:
+        image: plausible/analytics:latest
+        container_name: alecia-analytics
+        restart: unless-stopped
+        environment:
+            BASE_URL: https://analytics.alecia.markets
+            SECRET_KEY_BASE: ${PLAUSIBLE_SECRET_KEY_BASE}
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/plausible
+            CLICKHOUSE_DATABASE_URL: http://alecia-clickhouse:8123/plausible
+        depends_on:
+            postgres:
+                condition: service_healthy
+            clickhouse:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:8000:8000"
+
+    clickhouse:
+        image: clickhouse/clickhouse-server:latest
+        container_name: alecia-clickhouse
+        restart: unless-stopped
+        environment:
+            CLICKHOUSE_DB: plausible
+            CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+        volumes:
+            - clickhouse_data:/var/lib/clickhouse
+        healthcheck:
+            test: ["CMD", "clickhouse-client", "--query", "SELECT 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+    miniflux:
+        image: miniflux/miniflux:latest
+        container_name: alecia-feeds
+        restart: unless-stopped
+        environment:
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/miniflux?sslmode=disable
+            RUN_MIGRATIONS: "1"
+            CREATE_ADMIN: "1"
+            ADMIN_USERNAME: ${MINIFLUX_ADMIN_USERNAME:-admin}
+            ADMIN_PASSWORD: ${MINIFLUX_ADMIN_PASSWORD}
+            BASE_URL: https://feeds.alecia.markets
+        depends_on:
+            postgres:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:8082:8080"
+
+    searxng:
+        image: searxng/searxng:latest
+        container_name: alecia-search
+        restart: unless-stopped
+        environment:
+            SEARXNG_BASE_URL: https://search.alecia.markets
+        ports:
+            - "127.0.0.1:8888:8080"
+        volumes:
+            - ./infrastructure/searxng/settings.yml:/etc/searxng/settings.yml:ro
+
+    docuseal:
+        image: docuseal/docuseal:latest
+        container_name: alecia-sign
+        restart: unless-stopped
+        environment:
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/docuseal
+            SECRET_KEY_BASE: ${DOCUSEAL_SECRET_KEY_BASE}
+            HOST: https://sign.alecia.markets
+            # Branding
+            BRAND_NAME: "Alecia Sign"
+            FROM_EMAIL: "noreply@alecia.markets"
+            SUPPORT_EMAIL: "support@alecia.markets"
+            # S3 Storage (Minio)
+            AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER:-alecia}
+            AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+            AWS_ENDPOINT: http://alecia-minio:9000
+            AWS_BUCKET: alecia-sign
+            AWS_REGION: us-east-1
+            AWS_FORCE_PATH_STYLE: "true"
+        depends_on:
+            postgres:
+                condition: service_healthy
+            minio:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:3002:3000"
+        volumes:
+            - docuseal_data:/data
+            - ./services/sign/public:/public:ro # Custom branding assets
+            - ./services/sign/config/initializers:/config/initializers:ro # BetterAuth SSO
+
+    vaultwarden:
+        image: vaultwarden/server:latest
+        container_name: alecia-vault
+        restart: unless-stopped
+        environment:
+            DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/vaultwarden
+            DOMAIN: https://vault.alecia.markets
+            SIGNUPS_ALLOWED: "false"
+            INVITATIONS_ALLOWED: "true"
+            ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN}
+        depends_on:
+            postgres:
+                condition: service_healthy
+        ports:
+            - "127.0.0.1:8083:80"
+        volumes:
+            - vaultwarden_data:/data
+
+    stirling-pdf:
+        image: frooodle/s-pdf:latest
+        container_name: alecia-docs
+        restart: unless-stopped
+        environment:
+            DOCKER_ENABLE_SECURITY: "true"
+            SECURITY_ENABLE_LOGIN: "true"
+            INITIAL_USERNAME: ${STIRLING_USERNAME:-admin}
+            INITIAL_PASSWORD: ${STIRLING_PASSWORD}
+        ports:
+            - "127.0.0.1:8084:8080"
+        volumes:
+            - stirling_data:/usr/share/tessdata
+
+    gotenberg:
+        image: gotenberg/gotenberg:latest
+        container_name: alecia-pdf
+        restart: unless-stopped
+        ports:
+            - "127.0.0.1:3003:3000"
+
+    # ============================================
+    # REVERSE PROXY (Caddy)
+    # ============================================
+
+    caddy:
+        image: alecia/caddy:latest
+        pull_policy: never
+        container_name: alecia-caddy
+        restart: unless-stopped
+        environment:
+            OVH_ENDPOINT: ${OVH_ENDPOINT}
+            OVH_APPLICATION_KEY: ${OVH_APPLICATION_KEY}
+            OVH_APPLICATION_SECRET: ${OVH_APPLICATION_SECRET}
+            OVH_CONSUMER_KEY: ${OVH_CONSUMER_KEY}
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - caddy_data:/data
+            - caddy_config:/config
+        depends_on:
+            - next-marketing
+            - next-colab
+            - strapi
+            - activepieces-app
+            - plausible
+            - miniflux
+            - searxng
+            - docuseal
+            - vaultwarden
+            - stirling-pdf
+            - gotenberg
+            - minio
+            - hocuspocus
+
+volumes:
+    postgres_data:
+        driver: local
+    redis_data:
+        driver: local
+    minio_data:
+        driver: local
+    strapi_data:
+        driver: local
+    activepieces_data:
+        driver: local
+    clickhouse_data:
+        driver: local
+    docuseal_data:
+        driver: local
+    vaultwarden_data:
+        driver: local
+    stirling_data:
+        driver: local
+    caddy_data:
+        driver: local
+    caddy_config:
+        driver: local
+
+networks:
+    default:
+        name: alecia-network
+        driver: bridge

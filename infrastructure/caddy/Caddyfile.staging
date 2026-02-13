@@ -1,0 +1,75 @@
+# Alecia Suite — Caddy Reverse Proxy Configuration (STAGING - alecia.markets)
+# This file routes traffic for *.alecia.markets to the appropriate Docker services
+
+{
+    # Global options
+    email mitch@alecia.markets
+    
+    # Enable automatic HTTPS
+    acme_ca https://acme-v02.api.letsencrypt.org/directory
+}
+
+# Main marketing site
+alecia.markets {
+    reverse_proxy alecia-website:3000
+}
+
+# App (BI + CRM + AI)
+app.alecia.markets {
+    reverse_proxy alecia-website:3000
+}
+
+# Collaboration platform
+colab.alecia.markets {
+    reverse_proxy alecia-colab:3001
+}
+
+# CMS admin
+cms.alecia.markets {
+    reverse_proxy alecia-cms:1337
+}
+
+# Automation workflows
+flows.alecia.markets {
+    reverse_proxy alecia-flows:3000
+}
+
+# E-signature + VDR
+sign.alecia.markets {
+    reverse_proxy alecia-sign:3002
+}
+
+# Web analytics
+analytics.alecia.markets {
+    reverse_proxy alecia-analytics:8000
+}
+
+# RSS feeds aggregator
+feeds.alecia.markets {
+    reverse_proxy alecia-feeds:8080
+}
+
+# Password manager
+vault.alecia.markets {
+    reverse_proxy alecia-vault:80
+}
+
+# Search engine
+search.alecia.markets {
+    reverse_proxy alecia-search:8080
+}
+
+# PDF tools
+pdf.alecia.markets {
+    reverse_proxy alecia-pdf-tools:8080
+}
+
+# Minio S3 console
+s3.alecia.markets {
+    reverse_proxy alecia-minio:9001
+}
+
+# Storage/blob access (API)
+storage.alecia.markets {
+    reverse_proxy alecia-minio:9000
+}

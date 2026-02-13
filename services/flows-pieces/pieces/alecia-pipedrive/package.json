@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-pipedrive",
+  "version": "0.1.0",
+  "description": "Pipedrive CRM integration for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "axios": "^1.6.0"
+  }
+}

@@ -1,0 +1,102 @@
+/**
+ * Alecia Design System - Shared Tokens
+ *
+ * Official brand palette synchronized with the Website.
+ * Import this in globals.css to ensure visual consistency.
+ *
+ * @see Batch 10: UI/UX Refinement - Task 10.1
+ */
+
+:root {
+	/* ==========================================================================
+     ALECIA BRAND PALETTE - Official Colors
+     ========================================================================== */
+
+	/* PRIMARY BLUES */
+	--alecia-midnight: #061a40; /* Primary brand color */
+	--alecia-corporate: #163e64; /* Secondary blue */
+	--alecia-mid-blue: #4370a7; /* Accent blue */
+	--alecia-light-blue: #749ac7; /* Hover states */
+	--alecia-sky: #bfd7ea; /* Highlights */
+	--alecia-cloud: #e3f2fd; /* Backgrounds */
+	--alecia-ice: #f0f8ff; /* Subtle tints */
+
+	/* ACCENT */
+	--alecia-red: #b80c09; /* Destructive/alerts */
+	--alecia-taupe: #afabab; /* Neutral accents */
+
+	/* NEUTRALS */
+	--alecia-grey-dark: #6f7a8f; /* Muted text */
+	--alecia-grey-chrome: #c8ccd5; /* Borders */
+	--alecia-grey-light: #e6e8ec; /* Subtle backgrounds */
+	--alecia-white: #fafafc; /* Primary background */
+
+	/* ==========================================================================
+     SEMANTIC MAPPINGS - shadcn/ui compatible
+     ========================================================================== */
+
+	/* Surfaces */
+	--background: 240 25% 99%; /* --alecia-white */
+	--foreground: 219 83% 14%; /* --alecia-midnight */
+	--card: 0 0% 100%;
+	--card-foreground: 219 83% 14%;
+	--popover: 0 0% 100%;
+	--popover-foreground: 219 83% 14%;
+
+	/* Interactive */
+	--primary: 219 83% 14%; /* --alecia-midnight */
+	--primary-foreground: 0 0% 100%;
+	--secondary: 220 14% 91%; /* --alecia-grey-light */
+	--secondary-foreground: 219 83% 14%;
+	--accent: 213 43% 46%; /* --alecia-mid-blue */
+	--accent-foreground: 0 0% 100%;
+	--destructive: 1 91% 38%; /* --alecia-red */
+	--destructive-foreground: 0 0% 100%;
+
+	/* UI */
+	--muted: 220 14% 91%; /* --alecia-grey-light */
+	--muted-foreground: 219 13% 50%; /* --alecia-grey-dark */
+	--border: 222 13% 81%; /* --alecia-grey-chrome */
+	--input: 222 13% 81%;
+	--ring: 213 43% 46%; /* --alecia-mid-blue */
+
+	/* Component */
+	--radius: 0.5rem;
+
+	/* ==========================================================================
+     CHART COLORS - For dashboard visualization
+     ========================================================================== */
+	--chart-1: 213 43% 46%; /* Mid blue */
+	--chart-2: 209 64% 24%; /* Corporate blue */
+	--chart-3: 1 91% 38%; /* Red */
+	--chart-4: 219 83% 14%; /* Midnight */
+	--chart-5: 207 51% 83%; /* Pale blue */
+}
+
+/* Dark Mode Theme */
+.dark {
+	/* Surfaces */
+	--background: 219 83% 10%; /* Deep midnight */
+	--foreground: 210 40% 98%;
+	--card: 219 83% 12%;
+	--card-foreground: 210 40% 98%;
+	--popover: 219 83% 12%;
+	--popover-foreground: 210 40% 98%;
+
+	/* Interactive */
+	--primary: 213 43% 46%; /* Mid blue becomes primary */
+	--primary-foreground: 0 0% 100%;
+	--secondary: 219 83% 16%;
+	--secondary-foreground: 210 40% 98%;
+	--accent: 209 64% 24%; /* Corporate blue */
+	--accent-foreground: 210 40% 98%;
+	--destructive: 0 62.8% 50%;
+	--destructive-foreground: 0 0% 100%;
+
+	/* UI */
+	--muted: 219 83% 14%;
+	--muted-foreground: 215 20% 65%;
+	--border: 219 83% 18%;
+	--input: 219 83% 18%;
+	--ring: 213 43% 46%;
+}

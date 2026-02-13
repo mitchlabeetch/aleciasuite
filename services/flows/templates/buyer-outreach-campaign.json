@@ -1,0 +1,63 @@
+{
+  "name": "Buyer Outreach Campaign",
+  "description": "Automated buyer outreach for sell-side mandates",
+  "version": 1,
+  "trigger": {
+    "type": "WEBHOOK",
+    "settings": {
+      "description": "Manual trigger with buyer list"
+    }
+  },
+  "actions": [
+    {
+      "name": "get_deal_info",
+      "displayName": "Fetch Deal Information",
+      "type": "CODE",
+      "settings": {
+        "code": "// Fetch deal from database (simplified)\nconst { Pool } = require('pg');\nconst pool = new Pool({\n  connectionString: process.env.DATABASE_URL\n});\n\nconst result = await pool.query(\n  'SELECT * FROM shared.deals WHERE id = $1',\n  [trigger.body.dealId]\n);\n\nawait pool.end();\n\nreturn result.rows[0];"
+      }
+    },
+    {
+      "name": "generate_teaser",
+      "displayName": "Generate Investment Teaser",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-docgen",
+        "actionName": "generate-loi",
+        "input": {
+          "dealId": "{{trigger.body.dealId}}",
+          "buyerName": "Acquéreur Potentiel",
+          "sellerName": "{{steps.get_deal_info.output.seller_name}}",
+          "targetCompany": "{{steps.get_deal_info.output.title}}",
+          "proposedValue": "{{steps.get_deal_info.output.target_value}}",
+          "exclusivityDays": 45,
+          "dueDate": "{{DATE_ADD(NOW, 14, 'days')}}"
+        }
+      }
+    },
+    {
+      "name": "send_buyer_emails",
+      "displayName": "Send Personalized Emails to Buyers",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-campaigns",
+        "actionName": "send-buyer-outreach",
+        "input": {
+          "accessToken": "{{connections.microsoft.access_token}}",
+          "buyers": "{{trigger.body.buyers}}",
+          "templateSubject": "Opportunité d'acquisition confidentielle - {{company}}",
+          "templateBody": "<p>Bonjour {{name}},</p><p>Nous représentons actuellement un client dans le secteur {{dealTitle}} qui souhaite céder ses activités.</p><p><strong>Caractéristiques principales:</strong></p><ul><li>Secteur: {{trigger.body.sector}}</li><li>Chiffre d'affaires: Confidentiel (disponible sous NDA)</li><li>Localisation: {{trigger.body.location}}</li></ul><p>Merci de nous confirmer votre intérêt pour recevoir le teaser confidentiel.</p><p>Cordialement,<br>L'équipe Alecia</p>",
+          "dealTitle": "{{steps.get_deal_info.output.title}}"
+        }
+      }
+    },
+    {
+      "name": "log_campaign",
+      "displayName": "Log Campaign Activity",
+      "type": "CODE",
+      "settings": {
+        "code": "// Log campaign to database\nconst { Pool } = require('pg');\nconst pool = new Pool({ connectionString: process.env.DATABASE_URL });\n\nawait pool.query(\n  `INSERT INTO alecia_bi.deal_activities \n   (deal_id, activity_type, description, metadata, created_at)\n   VALUES ($1, $2, $3, $4, NOW())`,\n  [\n    trigger.body.dealId,\n    'buyer_outreach',\n    `Buyer outreach campaign sent to ${steps.send_buyer_emails.output.totalSent} buyers`,\n    {\n      campaignId: `campaign_${Date.now()}`,\n      totalSent: steps.send_buyer_emails.output.totalSent,\n      totalFailed: steps.send_buyer_emails.output.totalFailed\n    }\n  ]\n);\n\nawait pool.end();\nreturn { success: true };"
+      }
+    }
+  ]
+}

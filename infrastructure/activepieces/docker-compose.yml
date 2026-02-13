@@ -1,0 +1,29 @@
+# infrastructure/activepieces/docker-compose.yml
+# Alecia Flows — Activepieces fork for M&A workflow automation
+services:
+  activepieces-app:
+    image: alecia/alecia-flows:latest  # Built from fork
+    container_name: alecia-flows
+    restart: unless-stopped
+    environment:
+      AP_ENGINE_EXECUTABLE_PATH: dist/packages/engine/main.js
+      AP_ENVIRONMENT: prod
+      AP_FRONTEND_URL: https://flows.alecia.fr
+      AP_WEBHOOK_TIMEOUT_SECONDS: 30
+      AP_TRIGGER_DEFAULT_POLL_INTERVAL: 5
+      AP_POSTGRES_DATABASE: alecia
+      AP_POSTGRES_HOST: alecia-postgres
+      AP_POSTGRES_PORT: 5432
+      AP_POSTGRES_USERNAME: alecia
+      AP_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      AP_POSTGRES_USE_SSL: "false"
+      AP_REDIS_HOST: alecia-redis
+      AP_REDIS_PORT: 6379
+      AP_REDIS_PASSWORD: ${REDIS_PASSWORD}
+      AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
+      AP_JWT_SECRET: ${AP_JWT_SECRET}
+      AP_EXECUTION_MODE: UNSANDBOXED
+      AP_FLOW_WORKER_CONCURRENCY: 10
+      AP_TELEMETRY_ENABLED: "false"
+    ports:
+      - "8080:80"

@@ -1,0 +1,6 @@
+# Patch pour ajouter les variables manquantes au docker-compose
+# Ajouter ces lignes dans la section "environment:" du service "next-marketing"
+
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+      TOKEN_ENCRYPTION_KEY: ${TOKEN_ENCRYPTION_KEY}

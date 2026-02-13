@@ -1,0 +1,26 @@
+# infrastructure/flowchart/docker-compose.yml
+# Flowchart.fun — Text-to-flowchart for deal structure diagrams
+#
+# STATUS: Using external hosted service (20% readiness)
+# URL: https://flowchart.fun (free tier available)
+#
+# RATIONALE:
+# - No official Docker image available
+# - Source build requires Next.js compilation + dependencies
+# - External service is well-maintained, free for basic use
+# - Self-hosting adds complexity for minimal benefit
+#
+# ALTERNATIVE: If self-hosting becomes critical later:
+# 1. Clone https://github.com/tone-row/flowchart-fun
+# 2. Build static export: npm run build && npm run export
+# 3. Serve via Caddy from /app/out directory
+# 4. Update Caddyfile: diagrams.alecia.fr { root * /path/to/out; file_server }
+#
+# For now, team members should use: https://flowchart.fun
+# Bookmark this URL or add as PWA for quick access
+
+# services:
+#   flowchart:
+#     # Service disabled - using external hosted version
+#     # See comments above for self-hosting instructions if needed
+

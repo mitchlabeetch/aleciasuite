@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-pipeline",
+  "version": "0.1.0",
+  "description": "Deal Pipeline management for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "pg": "^8.11.0"
+  }
+}

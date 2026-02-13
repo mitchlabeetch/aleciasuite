@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Alecia Logo - Placeholder -->
+  <!-- Professional "A" mark + wordmark -->
+
+  <!-- Icon: Stylized "A" -->
+  <path d="M 20 45 L 30 15 L 40 45 L 35 45 L 30 27 L 25 45 Z" fill="#1e40af" stroke="#1e40af" stroke-width="1.5" stroke-linejoin="round"/>
+  <line x1="25" y1="37" x2="35" y2="37" stroke="#1e40af" stroke-width="2"/>
+
+  <!-- Wordmark: ALECIA -->
+  <text x="55" y="38" font-family="sans-serif" font-size="24" font-weight="600" fill="#1e293b">
+    ALECIA
+  </text>
+</svg>

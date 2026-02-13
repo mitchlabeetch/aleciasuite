@@ -1,0 +1,13 @@
+# infrastructure/monitoring/docker-compose.yml
+# Uptime Kuma — Self-hosted uptime monitoring for all Alecia subdomains
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: alecia-uptime
+    restart: unless-stopped
+    volumes:
+      - uptime_data:/app/data
+    ports:
+      - "3001:3001"
+volumes:
+  uptime_data:

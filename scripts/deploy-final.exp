@@ -1,0 +1,195 @@
+#!/usr/bin/expect -f
+# Script de déploiement final avec toutes les corrections
+# Utilise expect pour gérer l'authentification SSH
+
+set timeout 7200
+set VPS "ubuntu@51.255.194.94"
+set LOCAL_DIR "/Users/utilisateur/Desktop/alepanel"
+
+send_user "============================================================\n"
+send_user "ALECIA SUITE - DÉPLOIEMENT FINAL CORRIGÉ\n"
+send_user "============================================================\n\n"
+send_user "Mot de passe SSH pour ubuntu@51.255.194.94: "
+expect_user -re "(.*)\n"
+set PASSWORD $expect_out(1,string)
+
+send_user "\n✅ Lancement du déploiement complet...\n\n"
+
+# Étape 1: Créer l'archive
+send_user "📦 Étape 1/5 : Création de l'archive du code...\n"
+
+cd $LOCAL_DIR
+
+spawn tar -czf /tmp/alepanel-deploy.tar.gz \
+  --exclude=node_modules \
+  --exclude=.next \
+  --exclude=dist \
+  --exclude=build \
+  --exclude=.git \
+  --exclude=.env.local \
+  --exclude=infrastructure/repos \
+  --exclude=.turbo \
+  --exclude=scripts/migration/data/convex-export \
+  .
+
+expect eof
+wait
+
+set ARCHIVE_SIZE [exec du -h /tmp/alepanel-deploy.tar.gz | cut -f1]
+send_user "✅ Archive créée (taille: $ARCHIVE_SIZE)\n\n"
+
+# Étape 2: Upload
+send_user "📤 Étape 2/5 : Upload vers le VPS...\n"
+
+spawn scp -o StrictHostKeyChecking=no /tmp/alepanel-deploy.tar.gz $VPS:~/
+
+expect {
+  "password:" {
+    send "$PASSWORD\r"
+    exp_continue
+  }
+  "100%" {
+    send_user "\n✅ Upload terminé\n\n"
+  }
+  timeout {
+    send_user "❌ Timeout lors de l'upload\n"
+    exit 1
+  }
+  eof
+}
+
+wait
+exec rm /tmp/alepanel-deploy.tar.gz
+
+# Étape 3: Extraction
+send_user "📂 Étape 3/5 : Extraction sur le VPS...\n"
+
+spawn ssh -o StrictHostKeyChecking=no $VPS
+
+expect {
+  "password:" {
+    send "$PASSWORD\r"
+  }
+}
+
+expect "ubuntu@*"
+
+send "rm -rf ~/alecia/alepanel-backup && if \[ -d ~/alecia/alepanel \]; then mv ~/alecia/alepanel ~/alecia/alepanel-backup; fi && mkdir -p ~/alecia/alepanel\r"
+expect "ubuntu@*"
+
+send "cd ~/alecia/alepanel && tar -xzf ~/alepanel-deploy.tar.gz && rm ~/alepanel-deploy.tar.gz\r"
+expect "ubuntu@*"
+
+send_user "✅ Code extrait\n\n"
+
+# Étape 4: Génération du .env
+send_user "🔐 Étape 4/5 : Génération des secrets de production...\n"
+
+send "cd ~/alecia/alepanel\r"
+expect "ubuntu@*"
+
+send "cat > .env << 'EOF'\r"
+sleep 0.5
+
+# Générer les secrets sur le VPS
+send "# Alecia Suite - Production Environment Variables\r"
+send "# Generated on $(date)\r"
+send "\r"
+send "# PostgreSQL\r"
+send "POSTGRES_PASSWORD=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Redis\r"
+send "REDIS_PASSWORD=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Minio\r"
+send "MINIO_ROOT_USER=alecia-admin\r"
+send "MINIO_ROOT_PASSWORD=$(openssl rand -hex 32)\r"
+send "\r"
+send "# BetterAuth\r"
+send "BETTER_AUTH_SECRET=$(openssl rand -hex 32)\r"
+send "BETTER_AUTH_URL=https://alecia.markets\r"
+send "TOKEN_ENCRYPTION_KEY=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Strapi\r"
+send "STRAPI_JWT_SECRET=$(openssl rand -hex 32)\r"
+send "STRAPI_ADMIN_JWT_SECRET=$(openssl rand -hex 32)\r"
+send "STRAPI_APP_KEYS=$(openssl rand -hex 32)\r"
+send "STRAPI_API_TOKEN_SALT=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Activepieces\r"
+send "AP_ENCRYPTION_KEY=$(openssl rand -hex 32)\r"
+send "AP_JWT_SECRET=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Plausible\r"
+send "PLAUSIBLE_SECRET_KEY_BASE=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Miniflux\r"
+send "MINIFLUX_ADMIN_PASSWORD=$(openssl rand -hex 16)\r"
+send "\r"
+send "# DocuSeal\r"
+send "DOCUSEAL_SECRET_KEY_BASE=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Vaultwarden\r"
+send "VAULTWARDEN_ADMIN_TOKEN=$(openssl rand -hex 32)\r"
+send "\r"
+send "# Stirling PDF\r"
+send "STIRLING_PASSWORD=$(openssl rand -hex 16)\r"
+send "\r"
+send "# OVH DNS (optional)\r"
+send "OVH_ENDPOINT=ovh-eu\r"
+send "OVH_APPLICATION_KEY=\r"
+send "OVH_APPLICATION_SECRET=\r"
+send "OVH_CONSUMER_KEY=\r"
+send "EOF\r"
+
+expect "ubuntu@*"
+
+send_user "✅ Fichier .env généré avec secrets cryptographiques\n\n"
+
+# Étape 5: Déploiement
+send_user "🚀 Étape 5/5 : Déploiement de la stack complète...\n\n"
+
+send "docker compose --env-file .env -f docker-compose.production.yml up -d\r"
+expect {
+  "Started" {
+    send_user "."
+    exp_continue
+  }
+  "ubuntu@*" {
+    send_user "\n"
+  }
+  timeout {
+    send_user "\n⚠️ Timeout, mais conteneurs probablement démarrés\n"
+  }
+}
+
+send "sleep 15\r"
+expect "ubuntu@*"
+
+send_user "\n============================================================\n"
+send_user "STATUT DES SERVICES\n"
+send_user "============================================================\n"
+
+send "docker ps --format 'table {{.Names}}\\t{{.Status}}' | grep -E '(NAMES|alecia)'\r"
+expect "ubuntu@*"
+
+send_user "\n============================================================\n"
+
+send "docker images | grep alecia\r"
+expect "ubuntu@*"
+
+send "exit\r"
+expect eof
+
+send_user "\n============================================================\n"
+send_user "✅ DÉPLOIEMENT TERMINÉ\n"
+send_user "============================================================\n\n"
+send_user "Services disponibles:\n"
+send_user "  - https://alecia.markets\n"
+send_user "  - https://colab.alecia.markets\n"
+send_user "  - https://cms.alecia.markets\n"
+send_user "  - https://flows.alecia.markets\n"
+send_user "  - https://sign.alecia.markets\n\n"
+send_user "IMPORTANT: Les secrets ont été générés automatiquement.\n"
+send_user "Pour récupérer les mots de passe admin:\n"
+send_user "  ssh ubuntu@51.255.194.94 'cat ~/alecia/alepanel/.env'\n\n"

@@ -1,0 +1,11 @@
+{
+  "name": "@activepieces/piece-alecia-storage",
+  "version": "0.1.0",
+  "description": "Minio S3 storage integration for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "@aws-sdk/client-s3": "^3.400.0",
+    "@aws-sdk/s3-request-presigner": "^3.400.0"
+  }
+}

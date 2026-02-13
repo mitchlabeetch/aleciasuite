@@ -1,0 +1,14 @@
+{
+  "name": "@alepanel/ai",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@alepanel/db": "workspace:*",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}

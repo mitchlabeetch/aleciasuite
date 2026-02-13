@@ -1,0 +1,196 @@
+{
+  "realm": "alecia",
+  "displayName": "Alecia Suite",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "defaultSignatureAlgorithm": "RS256",
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionIdleTimeout": 2592000,
+  "accessCodeLifespan": 60,
+  "accessCodeLifespanUserAction": 300,
+  "roles": {
+    "realm": [
+      {
+        "name": "sudo",
+        "description": "Full system access — manages all services, users, and configuration"
+      },
+      {
+        "name": "partner",
+        "description": "Senior advisor — manages deals, accesses all BI features, approves actions"
+      },
+      {
+        "name": "advisor",
+        "description": "Deal team member — works on assigned deals, creates documents"
+      },
+      {
+        "name": "user",
+        "description": "Basic access — view-only on most resources, limited collaboration"
+      }
+    ]
+  },
+  "defaultRoles": ["user"],
+  "clients": [
+    {
+      "clientId": "alecia-bi",
+      "name": "Alecia Business Intelligence",
+      "description": "CRM + AI dashboard (app.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://app.alecia.fr/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "https://app.alecia.fr",
+        "http://localhost:3000"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email", "roles"]
+    },
+    {
+      "clientId": "alecia-marketing",
+      "name": "Alecia Marketing Site",
+      "description": "Public marketing site (alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://alecia.fr/*",
+        "http://localhost:3000/*"
+      ],
+      "webOrigins": [
+        "https://alecia.fr",
+        "http://localhost:3000"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email"]
+    },
+    {
+      "clientId": "alecia-colab",
+      "name": "Alecia Collaboration",
+      "description": "TipTap + Kanban workspace (colab.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://colab.alecia.fr/*",
+        "http://localhost:3001/*"
+      ],
+      "webOrigins": [
+        "https://colab.alecia.fr",
+        "http://localhost:3001"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email", "roles"]
+    },
+    {
+      "clientId": "alecia-flows",
+      "name": "Alecia Flows",
+      "description": "Activepieces automation (flows.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "redirectUris": [
+        "https://flows.alecia.fr/*"
+      ],
+      "webOrigins": [
+        "https://flows.alecia.fr"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email"]
+    },
+    {
+      "clientId": "alecia-sign",
+      "name": "Alecia Sign",
+      "description": "DocuSeal e-signature (sign.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://sign.alecia.fr/*"
+      ],
+      "webOrigins": [
+        "https://sign.alecia.fr"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email"]
+    },
+    {
+      "clientId": "alecia-miniflux",
+      "name": "Alecia Feeds",
+      "description": "Miniflux RSS (feeds.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://feeds.alecia.fr/*"
+      ],
+      "webOrigins": [
+        "https://feeds.alecia.fr"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email"]
+    },
+    {
+      "clientId": "alecia-strapi",
+      "name": "Alecia CMS",
+      "description": "Strapi admin (cms.alecia.fr)",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "https://cms.alecia.fr/*"
+      ],
+      "webOrigins": [
+        "https://cms.alecia.fr"
+      ],
+      "defaultClientScopes": ["openid", "profile", "email"]
+    }
+  ],
+  "smtpServer": {
+    "host": "",
+    "port": "",
+    "from": "auth@alecia.fr",
+    "fromDisplayName": "Alecia Suite",
+    "ssl": false,
+    "starttls": true
+  },
+  "loginTheme": "alecia",
+  "accountTheme": "keycloak.v2",
+  "adminTheme": "keycloak.v2",
+  "emailTheme": "keycloak",
+  "internationalizationEnabled": true,
+  "supportedLocales": ["fr", "en"],
+  "defaultLocale": "fr"
+}

@@ -1,0 +1,182 @@
+#!/usr/bin/expect -f
+# Script de déploiement interactif avec gestion du mot de passe SSH
+
+set VPS_HOST "51.255.194.94"
+set VPS_USER "ubuntu"
+set timeout 1800
+
+# Demander le mot de passe
+send_user "Mot de passe SSH pour ubuntu@51.255.194.94: "
+expect_user -re "(.*)\n"
+set PASSWORD $expect_out(1,string)
+
+send_user "\n============================================================\n"
+send_user "ALECIA SUITE - DÉPLOIEMENT VERS VPS\n"
+send_user "============================================================\n\n"
+
+# Étape 1: Synchronisation du code
+send_user "📦 Étape 1/4 : Synchronisation du code vers le VPS...\n\n"
+
+spawn rsync -avz --delete \
+  --exclude node_modules \
+  --exclude .next \
+  --exclude dist \
+  --exclude build \
+  --exclude .git \
+  --exclude .env.local \
+  --exclude infrastructure/repos \
+  --exclude .turbo \
+  --exclude scripts/migration/data/convex-export \
+  /Users/utilisateur/Desktop/alepanel/ \
+  ubuntu@51.255.194.94:~/alecia/alepanel/
+
+expect {
+  "password:" {
+    send "$PASSWORD\r"
+    exp_continue
+  }
+  "Are you sure" {
+    send "yes\r"
+    exp_continue
+  }
+  eof
+}
+
+wait
+if {[lindex $expect_out(buffer) 0] != 0} {
+  send_user "❌ Erreur lors de la synchronisation\n"
+  exit 1
+}
+
+send_user "✅ Code synchronisé\n\n"
+
+# Étape 2: Build des images
+send_user "🔨 Étape 2/4 : Build des images Docker personnalisées...\n\n"
+
+spawn ssh -o StrictHostKeyChecking=no ubuntu@51.255.194.94
+
+expect {
+  "password:" {
+    send "$PASSWORD\r"
+  }
+}
+
+expect "ubuntu@*"
+
+send "cd ~/alecia/alepanel\r"
+expect "ubuntu@*"
+
+send "echo '[1/5] Building Website (Next.js 15)...'\r"
+expect "ubuntu@*"
+send "docker build -f apps/website/Dockerfile -t alecia/website:latest .\r"
+expect {
+  "Successfully built" {
+    send_user "✅ Website built\n"
+  }
+  "ERROR" {
+    send_user "❌ Error building website\n"
+    exit 1
+  }
+  timeout {
+    send_user "⏱️ Timeout building website\n"
+    exit 1
+  }
+}
+expect "ubuntu@*"
+
+send "echo '[2/5] Building Colab (Next.js 16)...'\r"
+expect "ubuntu@*"
+send "docker build -f apps/colab/Dockerfile -t alecia/colab:latest .\r"
+expect {
+  "Successfully built" {
+    send_user "✅ Colab built\n"
+  }
+  "ERROR" {
+    send_user "❌ Error building colab\n"
+    exit 1
+  }
+  timeout {
+    send_user "⏱️ Timeout building colab\n"
+    exit 1
+  }
+}
+expect "ubuntu@*"
+
+send "echo '[3/5] Building Hocuspocus (WebSocket)...'\r"
+expect "ubuntu@*"
+send "docker build -f services/hocuspocus/Dockerfile -t alecia/hocuspocus:latest services/hocuspocus/\r"
+expect {
+  "Successfully built" {
+    send_user "✅ Hocuspocus built\n"
+  }
+  "ERROR" {
+    send_user "❌ Error building hocuspocus\n"
+    exit 1
+  }
+  timeout {
+    send_user "⏱️ Timeout building hocuspocus\n"
+    exit 1
+  }
+}
+expect "ubuntu@*"
+
+send "echo '[4/5] Building CMS (Strapi CE)...'\r"
+expect "ubuntu@*"
+send "docker build -f services/cms/Dockerfile -t alecia/cms:latest services/cms/\r"
+expect {
+  "Successfully built" {
+    send_user "✅ CMS built\n"
+  }
+  "ERROR" {
+    send_user "❌ Error building cms\n"
+    exit 1
+  }
+  timeout {
+    send_user "⏱️ Timeout building cms\n"
+    exit 1
+  }
+}
+expect "ubuntu@*"
+
+send "echo '[5/5] Building Flows (Activepieces)...'\r"
+expect "ubuntu@*"
+send "docker build -f services/flows/Dockerfile -t alecia/flows:latest services/flows/\r"
+expect {
+  "Successfully built" {
+    send_user "✅ Flows built\n"
+  }
+  "ERROR" {
+    send_user "❌ Error building flows\n"
+    exit 1
+  }
+  timeout {
+    send_user "⏱️ Timeout building flows\n"
+    exit 1
+  }
+}
+expect "ubuntu@*"
+
+send "docker images | grep alecia\r"
+expect "ubuntu@*"
+
+# Étape 3: Déploiement
+send_user "\n🚀 Étape 3/4 : Déploiement de la stack complète...\n\n"
+
+send "docker compose --env-file .env -f docker-compose.production.yml down\r"
+expect "ubuntu@*"
+
+send "docker compose --env-file .env -f docker-compose.production.yml up -d\r"
+expect "ubuntu@*"
+
+send "sleep 10\r"
+expect "ubuntu@*"
+
+send "docker compose --env-file .env -f docker-compose.production.yml ps\r"
+expect "ubuntu@*"
+
+send "exit\r"
+expect eof
+
+send_user "\n============================================================\n"
+send_user "✅ DÉPLOIEMENT TERMINÉ\n"
+send_user "============================================================\n\n"

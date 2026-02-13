@@ -1,0 +1,16 @@
+# infrastructure/stirling-pdf/docker-compose.yml
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    container_name: alecia-stirling-pdf
+    restart: unless-stopped
+    environment:
+      DOCKER_ENABLE_SECURITY: "false"
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: "true"
+      LANGS: "fr_FR,en_GB"
+    volumes:
+      - stirling_data:/usr/share/tessdata
+    ports:
+      - "8080:8080"
+volumes:
+  stirling_data:

@@ -1,0 +1,30 @@
+# infrastructure/docuseal/docker-compose.yml
+# Alecia Sign — DocuSeal (AGPL-3.0) for M&A e-signatures
+# Using official image with config overlay instead of forking
+services:
+  docuseal:
+    image: docuseal/docuseal:latest
+    container_name: alecia-sign
+    restart: unless-stopped
+    environment:
+      # Database
+      DATABASE_URL: postgres://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+      SECRET_KEY_BASE: ${DOCUSEAL_SECRET_KEY}
+      RAILS_ENV: production
+
+      # Branding
+      FORCE_SSL: "true"
+      HOST: sign.alecia.fr
+      COMPANY_NAME: Alecia
+
+      # Storage (Minio S3-compatible)
+      STORAGE_SERVICE: s3
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+      AWS_ENDPOINT: https://s3.alecia.fr
+      AWS_BUCKET: alecia-signatures
+      AWS_FORCE_PATH_STYLE: "true"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./templates:/app/templates:ro

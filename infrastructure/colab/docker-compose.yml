@@ -1,0 +1,24 @@
+# infrastructure/colab/docker-compose.yml
+# Alecia Colab — Next.js collaboration app
+services:
+  next-colab:
+    build:
+      context: ../..
+      dockerfile: apps/colab/Dockerfile
+    container_name: alecia-colab
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgres://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
+      NEXT_PUBLIC_HOCUSPOCUS_URL: wss://ws.alecia.fr
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: https://colab.alecia.fr
+      MICROSOFT_CLIENT_ID: ${MICROSOFT_CLIENT_ID}
+      MICROSOFT_CLIENT_SECRET: ${MICROSOFT_CLIENT_SECRET}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      MINIO_ENDPOINT: http://alecia-minio:9000
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET: alecia-documents
+    ports:
+      - "3001:3001"

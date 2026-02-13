@@ -1,0 +1,12 @@
+/* infrastructure/keycloak/themes/alecia/login/resources/css/alecia.css */
+/* Alecia Suite — Keycloak Login Theme */
+
+:root {
+    --pf-v5-global--primary-color--100: #061a40;
+    --pf-v5-global--primary-color--200: #163e64;
+    --pf-v5-global--link--Color: #4370a7;
+}
+
+.login-pf body {
+    background: linear-gradient(135deg, #061a40, #163e64);
+}

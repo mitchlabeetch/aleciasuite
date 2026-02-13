@@ -1,0 +1,373 @@
+# Build outputs
+.next
+.turbo
+dist
+out
+
+# Dependencies
+node_modules
+
+# Local environment
+.env
+.env.local
+.env.*.local
+*.env
+.env.*
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache
+*.tsbuildinfo
+
+# Archive
+_ARCHIVE_LEGACY
+backup
+
+# Convex
+.convex
+
+# Migration data (exported from Convex — may contain sensitive data)
+scripts/migration/data/
+
+# Infrastructure secrets
+infrastructure/plausible/plausible-conf.env
+
+# FOSS repos (cloned via scripts/setup-foss-repos.sh — large, not tracked)
+infrastructure/repos/
+
+# Misc
+scrp/
+alecia-app/AUDIT_REPORT.md
+alecia-app/DASHBOARD.md
+env.local
+legacy_documentation/pages/index.md
+legacy_documentation/raw_text/Actualités _ Alecia.txt
+legacy_documentation/raw_text/alecia conseille SAFE GROUPE dans le cadre de l’acquisition de Dogs Security _ Alecia.txt
+legacy_documentation/raw_text/alecia conseille Transports Lerosey dans le cadre de l’acquisition de Dougen Prim _ Alecia.txt
+legacy_documentation/raw_text/Alecia.txt
+legacy_documentation/raw_text/Contact _ Alecia.txt
+legacy_documentation/raw_text/Expertises _ Alecia.txt
+legacy_documentation/raw_text/Mentions légales _ Alecia.txt
+legacy_documentation/raw_text/Nous rejoindre _ Alecia.txt
+legacy_documentation/raw_text/Opérations _ alecia.txt
+legacy_documentation/raw_text/Politique de confidentialité _ Alecia.txt
+old/Actualités _ Alecia.pdf
+old/alecia conseille SAFE GROUPE dans le cadre de l’acquisition de Dogs Security _ Alecia.pdf
+old/alecia conseille Transports Lerosey dans le cadre de l’acquisition de Dougen Prim _ Alecia.pdf
+old/Alecia.pdf
+old/Contact _ Alecia.pdf
+old/Download (1).png
+old/Download (2).png
+old/Download (3).png
+old/Download (4).png
+old/Download (5).png
+old/Download (6).png
+old/Download (7).png
+old/Download (8).png
+old/Download (9).png
+old/Download (10).png
+old/Download (11).png
+old/Download.png
+old/Expertises _ Alecia.pdf
+old/Mentions légales _ Alecia.pdf
+old/Nous rejoindre _ Alecia.pdf
+old/Opérations _ alecia.pdf
+old/Politique de confidentialité _ Alecia.pdf
+legacy_documentation/pages/expertises.md
+legacy_documentation/assets/operations/5_cadres_fonds_investisseurs_2-p-500.png
+legacy_documentation/assets/operations/5_cadres_fonds_investisseurs_2.png
+legacy_documentation/assets/operations/a_plus_finance_image14.png
+legacy_documentation/assets/operations/africinvest_image48.png
+legacy_documentation/assets/operations/apicap_image26.png
+legacy_documentation/assets/operations/ardian_image17.png
+legacy_documentation/assets/operations/asset_1_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1.webp
+legacy_documentation/assets/operations/asset_2_661511271aafe94dda5b64e9_reset-black.svg
+legacy_documentation/assets/operations/asset_79_6707e9de456829cac2163029_image81.png
+legacy_documentation/assets/operations/asset_80_6707df48bbb9e542c548551b_image57.png
+legacy_documentation/assets/operations/asset_81_6707dc1df3244183fe7115e3_image50.png
+legacy_documentation/assets/operations/asset_82_6707d86c68a116b153dbe25c_image43.png
+legacy_documentation/assets/operations/asset_83_6707d836a84d87af61c129b1_image42.png
+legacy_documentation/assets/operations/asset_84_6707d0f19d3cd87e73b33964_image30.png
+legacy_documentation/assets/operations/asset_85_6707d0d4e10f98f8b7196c7e_image29.png
+legacy_documentation/assets/operations/asset_86_66150b1a804b96eacb44510a_logo.svg
+legacy_documentation/assets/operations/asset_87_66140ffb82fa9ba3e6ed4d88_image 2.webp
+legacy_documentation/assets/operations/asset_89_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-500.webp
+legacy_documentation/assets/operations/asset_90_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-800.webp
+legacy_documentation/assets/operations/asset_91_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1080.webp
+legacy_documentation/assets/operations/asset_92_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-1600.webp
+legacy_documentation/assets/operations/asset_93_6613cb928b69652f4a9c432d_john-towner-hf4ap1-ef40-unsplash 1-p-2000.webp
+legacy_documentation/assets/operations/asset_117_66140ffb82fa9ba3e6ed4d88_image 2-p-500.webp
+legacy_documentation/assets/operations/asset_118_66140ffb82fa9ba3e6ed4d88_image 2-p-800.webp
+legacy_documentation/assets/operations/asset_119_66140ffb82fa9ba3e6ed4d88_image 2-p-1080.webp
+legacy_documentation/assets/operations/asset_120_66140ffb82fa9ba3e6ed4d88_image 2-p-1600.webp
+legacy_documentation/assets/operations/asset_121_66140ffb82fa9ba3e6ed4d88_image 2-p-2000.webp
+legacy_documentation/assets/operations/asset_122_66140ffb82fa9ba3e6ed4d88_image 2-p-2600.webp
+legacy_documentation/assets/operations/asset_123_default.svg
+legacy_documentation/assets/operations/asset_124_default.svg
+legacy_documentation/assets/operations/asset_125_default.svg
+legacy_documentation/assets/operations/asset_126_default.svg
+legacy_documentation/assets/operations/asset_127_default.svg
+legacy_documentation/assets/operations/asset_128_6615032723bd8b12daa255dd_arrow 09.svg
+legacy_documentation/assets/operations/banque_populaire_et_caisse_d_epargne_image80.png
+legacy_documentation/assets/operations/bolden_bolden-p-500.webp
+legacy_documentation/assets/operations/bolden_bolden.webp
+legacy_documentation/assets/operations/bpi_france_et_un_pool_bancaire_image54.png
+legacy_documentation/assets/operations/capelli_image46.png
+legacy_documentation/assets/operations/cc_c_image11.png
+legacy_documentation/assets/operations/cei_image69.png
+legacy_documentation/assets/operations/come_to_paris_image44.png
+legacy_documentation/assets/operations/confidentiel_entreprise.png
+legacy_documentation/assets/operations/confidentiel_investisseurs.png
+legacy_documentation/assets/operations/corse_gsm_socodi_image49.png
+legacy_documentation/assets/operations/cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-500.jpg
+legacy_documentation/assets/operations/cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-800.jpg
+legacy_documentation/assets/operations/cr_dit_agricole_credit-agricole-logo-1987-present-3803300135-p-1080.jpg
+legacy_documentation/assets/operations/cr_dit_agricole_credit-agricole-logo-1987-present-3803300135.jpg
+legacy_documentation/assets/operations/cr_dit_mutuel_crédit_mutuel_equity.png
+legacy_documentation/assets/operations/delta_drone_image21.png
+legacy_documentation/assets/operations/dogs_security_dogs_security_logo.jpg
+legacy_documentation/assets/operations/dougen_prim_capture_d'écran_2025-12-23_145039.png
+legacy_documentation/assets/operations/editions_365_image3.png
+legacy_documentation/assets/operations/entrepreneur_invest_ei_logo.webp
+legacy_documentation/assets/operations/ergon_capital_image35.png
+legacy_documentation/assets/operations/eu_business_school_image70.png
+legacy_documentation/assets/operations/eurasia_groupe_image45.png
+legacy_documentation/assets/operations/extendam_image24.png
+legacy_documentation/assets/operations/filiassur_image15.png
+legacy_documentation/assets/operations/finaxy_image60.png
+legacy_documentation/assets/operations/five_arrows_image8.png
+legacy_documentation/assets/operations/fleurus_image4.png
+legacy_documentation/assets/operations/french_food_company_generis_capital_partners_finorpa_image28.png
+legacy_documentation/assets/operations/gault_fr_mont_image61.png
+legacy_documentation/assets/operations/generis_capital_partners_bpi_france_bnp_paribas_image57.png
+legacy_documentation/assets/operations/groupe_guillin_image62.png
+legacy_documentation/assets/operations/haudecoeur_image34.png
+legacy_documentation/assets/operations/hmr_logo_hmr-p-500.jpg
+legacy_documentation/assets/operations/hmr_logo_hmr-p-800.jpg
+legacy_documentation/assets/operations/hmr_logo_hmr-p-1080.jpg
+legacy_documentation/assets/operations/hmr_logo_hmr-p-1600.jpg
+legacy_documentation/assets/operations/hmr_logo_hmr.jpg
+legacy_documentation/assets/operations/holly_s_diner_image74.png
+legacy_documentation/assets/operations/isp_system_isp_system.png
+legacy_documentation/assets/operations/jardin_molinari_image65.png
+legacy_documentation/assets/operations/kanop_image75.png
+legacy_documentation/assets/operations/keller_williams_keller-williams-realty-logo-p-500.png
+legacy_documentation/assets/operations/keller_williams_keller-williams-realty-logo-p-800.png
+legacy_documentation/assets/operations/keller_williams_keller-williams-realty-logo-p-1080.png
+legacy_documentation/assets/operations/keller_williams_keller-williams-realty-logo.png
+legacy_documentation/assets/operations/kfc_image13.png
+legacy_documentation/assets/operations/kujten_image37.png
+legacy_documentation/assets/operations/la_ba_architectes_laba_archi.png
+legacy_documentation/assets/operations/le_wagon_image47.png
+legacy_documentation/assets/operations/leclerc_franchis_logo-leclerc-227321883.jpg
+legacy_documentation/assets/operations/les_ateliers_peyrache_image25.png
+legacy_documentation/assets/operations/link4life_image53.png
+legacy_documentation/assets/operations/lovial_image71.png
+legacy_documentation/assets/operations/maison_bracq_image77.png
+legacy_documentation/assets/operations/mediawan_image12.png
+legacy_documentation/assets/operations/metagram_image76.png
+legacy_documentation/assets/operations/mia_solutions_rh_image18.png
+legacy_documentation/assets/operations/next_stage_image9.png
+legacy_documentation/assets/operations/omnes_education_image68.png
+legacy_documentation/assets/operations/opteven_image16.png
+legacy_documentation/assets/operations/patchwork_image23.png
+legacy_documentation/assets/operations/patie_michel_image66.png
+legacy_documentation/assets/operations/perseus_image67.png
+legacy_documentation/assets/operations/pixiel_group_image20.png
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-500.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-800.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-1080.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-1600.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-2000.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-2600.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1-p-3200.jpg
+legacy_documentation/assets/operations/realit_s_logo_realite-1.jpg
+legacy_documentation/assets/operations/redpill_image40.png
+legacy_documentation/assets/operations/river_bank_riverbank-avis-p-500.png
+legacy_documentation/assets/operations/river_bank_riverbank-avis-p-800.png
+legacy_documentation/assets/operations/river_bank_riverbank-avis.png
+legacy_documentation/assets/operations/safe_group_logo_safe_group-p-500.jpg
+legacy_documentation/assets/operations/safe_group_logo_safe_group-p-800.jpg
+legacy_documentation/assets/operations/safe_group_logo_safe_group.jpg
+legacy_documentation/assets/operations/sia_partners_image64.png
+legacy_documentation/assets/operations/signes_signes_2.png
+legacy_documentation/assets/operations/sol_o_services_image10.png
+legacy_documentation/assets/operations/sophie_lebreuilly_image27.png
+legacy_documentation/assets/operations/staci_image36.png
+legacy_documentation/assets/operations/temelio_image39.png
+legacy_documentation/assets/operations/transports_lerosey_frame.svg
+legacy_documentation/assets/operations/transports_lerosey_logo_lerosey.png
+legacy_documentation/assets/operations/uside_image63.png
+legacy_documentation/assets/operations/wyz_group_image55.png
+legacy_documentation/assets/operations/xrl_consulting_image79.png
+legacy_documentation/assets/operations/y2a_experts_image22.png
+legacy_documentation/data/news_data.md
+legacy_documentation/data/operations_data.md
+legacy_documentation/data/team_data.md
+legacy_documentation/pages/contact.md
+legacy_documentation/pages/join.md
+legacy_documentation/pages/news.md
+legacy_documentation/pages/operations.md
+legacy_documentation/pages/team.md
+old/Bildschirmfoto 2026-01-19 um 14.18.29.png
+old/Bildschirmfoto 2026-01-19 um 14.18.37.png
+old/Bildschirmfoto 2026-01-19 um 14.18.41.png
+old/Bildschirmfoto 2026-01-19 um 14.18.46.png
+old/Bildschirmfoto 2026-01-19 um 14.18.49.png
+old/Bildschirmfoto 2026-01-19 um 14.18.53.png
+old/Bildschirmfoto 2026-01-19 um 14.18.59.png
+old/Bildschirmfoto 2026-01-19 um 14.19.02.png
+old/Opérations _ alecia/Opérations _ alecia.zip
+old/Opérations _ alecia/Opérations _ alecia/imgi_1_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_2_661511271aafe94dda5b64e9_reset-black.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_3_694a9dc4a8a9d2b402d2d3ec_Logo_LEROSEY.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_4_66150a8fbb665ae1ed1a9cce_Frame.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_5_694a9e2c03aeb4c29346e237_Capture d'écran 2025-12-23 145039.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_6_68e5407b28280392c18fb1bc_Logo Safe Group.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_7_68e5404c843fa601a8515eb8_dogs_security_logo.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_8_6707e9923eca4b785e906d3c_Image79.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_9_6707e9cc15c1eb0cc2c50d2a_Image80.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_10_670d2fed7542b2290b11bf6d_Signes 2.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_11_670d2ef3d540e323cbc63c2e_LaBA Archi.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_12_6708db93cd8fee807c3a5105_Entreprise.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_13_6708db5c4aff1e94f073e38a_Investisseurs.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_14_6707e83e3d152542306fd435_Image77.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_15_670d04b2d35e9cf04b8d9d62_Investisseurs 2.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_16_6707e7aeaa4af0a54dca0f16_Image75.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_17_670d2e9e5a7974da00816f17_Image76.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_18_68e7cdcd8150767d3b0689bd_Logo HMR.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_19_68e7ce7cc131175fe5b35cf9_logo-Leclerc-227321883.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_20_6707e5da69ed0899147ef054_Image74.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_21_67096d8fe22e4b6eb7fc1bd9_Keller-Williams-Realty-Logo.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_22_68e625369bd10629faabee6c_EI logo.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_23_6707e4f1339be6c1ec37cee7_Image71.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_24_670d2e09d540e323cbc5490d_Image68.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_25_670d2e6cfc14a207c78e67d9_Image70.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_26_670d2e437e3fa23733256f58_Image69.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_27_68e7cdd9ea49a6d234017e9c_Credit-Agricole-Logo-1987-present-3803300135.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_28_6707e358d116651593036dc1_Image66.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_29_6707e37821e588a26feefa52_Image67.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_30_6707e2a5f83f9bd2b0b0ab03_Image65.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_31_6707e209176c3d2e3a3a81b6_Image63.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_32_670d2dd9ea7c39947fe0a089_Image64.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_33_670d2d68f5a0962fc9559bce_Image61.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_34_670d2da4322841aae2a9ed1e_Image62.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_35_6707e0f75a4873339755a8f8_Image60.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_36_6707b88cf72904bbcbdeeaaa_Image17.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_37_670d34486ff934204c3e7c95_logo_realite-1.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_38_6707da12806489f4cc1e689b_riverbank-avis.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_39_670d2c8ec4c24b52b6a8f57c_Image55.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_40_670d2d02b071c9edaccc5348_Image57.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_41_6707dd5b25c55f00797fb4ee_Image53.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_42_6707dd69930670436504bb51_Image54.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_43_6707d96a7bf835f88c65f97b_Bolden.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_44_670d2c575ab1d6cefa8effa3_Image49.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_45_6707db020f65abd346be6741_Image47.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_46_6707db11de91dd9813b520f5_Image48.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_47_6707da6e0f65abd346bdcb90_Image46.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_48_6707d9f1c622cffcae07588f_Image45.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_49_6707d91a9991e0375b3ca196_Image44.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_50_6707d771ba43e7474f5a164c_Image39.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_51_670d2bec754831feeec00002_Image40.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_52_6707d6e1ac373b989901a4be_Image37.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_53_6707d5fc0231933e1e0433d0_Image36.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_54_6707d57c1e7b3b8f6677c73a_Image34.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_55_6707d594ac373b98990070cc_Image35.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_56_6707c0d22bed939d4cff0c9d_Image27.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_57_6707c0f15f24396b0d8efe26_Image28.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_58_670d2836d619cbdc37013182_Image25.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_59_670d2acb9fb4a706eaeb2c6c_Image26.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_60_6707bd53cd8d7913f44296da_Image23.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_61_6707bd6429e65fc410f13d2a_Image24.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_62_670d2806195a01e93fb0719b_Image22.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_63_6707bb2e2bed939d4cfa574a_Image20.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_64_6707bb3b24a81c3ab8d76dfd_Image21.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_65_6707baa4803213997ebbc437_Image18.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_66_6707b87f0d2ef5aaa0099e47_Image16.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_67_6707b7ccfed2bd65189299cd_Image15.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_68_6707b4f3e1d3c51556d6f8fa_Image8.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_69_6707b7399991e0375b1bfff1_Image13.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_70_6707b74f6e1ffec59f27b217_Image14.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_71_6707b573195519594efc6a67_Image11.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_72_6707b58de10f98f8b7005c79_Image12.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_73_6707b38c1c28f88fc7807769_Image3.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_74_6707b3c3aa68b3471c5e8942_Image4.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_75_6707afd9ca1818ca1f5a0bda_ISP System.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_76_6707b0022425cf5cf1a957f8_Crédit Mutuel Equity.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_77_6707b4aa39960330e3bc8b4e_Image10.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_78_6707b4d18bef81a09ffbf503_Image9.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_79_6707e9de456829cac2163029_Image81.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_80_6707df48bbb9e542c548551b_Image57.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_81_6707dc1df3244183fe7115e3_Image50.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_82_6707d86c68a116b153dbe25c_Image43.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_83_6707d836a84d87af61c129b1_Image42.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_84_6707d0f19d3cd87e73b33964_Image30.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_85_6707d0d4e10f98f8b7196c7e_Image29.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_86_66150b1a804b96eacb44510a_Logo.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_87_66140ffb82fa9ba3e6ed4d88_image 2.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_89_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1-p-500.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_90_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1-p-800.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_91_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1-p-1080.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_92_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1-p-1600.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_93_6613cb928b69652f4a9c432d_john-towner-Hf4Ap1-ef40-unsplash 1-p-2000.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_94_68e5407b28280392c18fb1bc_Logo Safe Group-p-500.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_95_68e5407b28280392c18fb1bc_Logo Safe Group-p-800.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_96_670d04b2d35e9cf04b8d9d62_Investisseurs 2-p-500.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_97_68e7cdcd8150767d3b0689bd_Logo HMR-p-500.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_98_68e7cdcd8150767d3b0689bd_Logo HMR-p-800.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_99_68e7cdcd8150767d3b0689bd_Logo HMR-p-1080.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_100_68e7cdcd8150767d3b0689bd_Logo HMR-p-1600.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_101_67096d8fe22e4b6eb7fc1bd9_Keller-Williams-Realty-Logo-p-500.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_102_67096d8fe22e4b6eb7fc1bd9_Keller-Williams-Realty-Logo-p-800.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_103_67096d8fe22e4b6eb7fc1bd9_Keller-Williams-Realty-Logo-p-1080.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_104_68e7cdd9ea49a6d234017e9c_Credit-Agricole-Logo-1987-present-3803300135-p-500.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_105_68e7cdd9ea49a6d234017e9c_Credit-Agricole-Logo-1987-present-3803300135-p-800.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_106_68e7cdd9ea49a6d234017e9c_Credit-Agricole-Logo-1987-present-3803300135-p-1080.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_107_670d34486ff934204c3e7c95_logo_realite-1-p-500.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_108_670d34486ff934204c3e7c95_logo_realite-1-p-800.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_109_670d34486ff934204c3e7c95_logo_realite-1-p-1080.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_110_670d34486ff934204c3e7c95_logo_realite-1-p-1600.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_111_670d34486ff934204c3e7c95_logo_realite-1-p-2000.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_112_670d34486ff934204c3e7c95_logo_realite-1-p-2600.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_113_670d34486ff934204c3e7c95_logo_realite-1-p-3200.jpg
+old/Opérations _ alecia/Opérations _ alecia/imgi_114_6707da12806489f4cc1e689b_riverbank-avis-p-500.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_115_6707da12806489f4cc1e689b_riverbank-avis-p-800.png
+old/Opérations _ alecia/Opérations _ alecia/imgi_116_6707d96a7bf835f88c65f97b_Bolden-p-500.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_117_66140ffb82fa9ba3e6ed4d88_image 2-p-500.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_118_66140ffb82fa9ba3e6ed4d88_image 2-p-800.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_119_66140ffb82fa9ba3e6ed4d88_image 2-p-1080.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_120_66140ffb82fa9ba3e6ed4d88_image 2-p-1600.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_121_66140ffb82fa9ba3e6ed4d88_image 2-p-2000.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_122_66140ffb82fa9ba3e6ed4d88_image 2-p-2600.webp
+old/Opérations _ alecia/Opérations _ alecia/imgi_123_default.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_124_default.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_125_default.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_126_default.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_127_default.svg
+old/Opérations _ alecia/Opérations _ alecia/imgi_128_6615032723bd8b12daa255dd_Arrow 09.svg
+old/Opérations _ alecia/Opérations _ alecia/Opérations _ alecia.html
+# Backups and temporary files
+backups/
+blog-post-backup/
+team-member-backup/
+*.backup
+*.backup-*
+docker-compose.*.backup
+tmp/
+temp/
+alecia-data/
+.vercel
+.env.local

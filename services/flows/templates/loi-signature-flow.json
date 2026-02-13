@@ -1,0 +1,101 @@
+{
+  "name": "LOI Signature Flow",
+  "description": "Automated LOI generation and signature workflow",
+  "version": 1,
+  "trigger": {
+    "type": "PIECE_TRIGGER",
+    "settings": {
+      "pieceName": "alecia-pipeline",
+      "triggerName": "on-deal-stage-changed",
+      "input": {
+        "targetStage": "negotiation"
+      }
+    }
+  },
+  "actions": [
+    {
+      "name": "generate_loi",
+      "displayName": "Generate LOI Document",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-docgen",
+        "actionName": "generate-loi",
+        "input": {
+          "dealId": "{{trigger.output.dealId}}",
+          "buyerName": "{{trigger.output.metadata.buyer_name}}",
+          "sellerName": "{{trigger.output.metadata.seller_name}}",
+          "targetCompany": "{{trigger.output.title}}",
+          "proposedValue": "{{trigger.output.targetValue}}",
+          "exclusivityDays": 60,
+          "dueDate": "{{DATE_ADD(NOW, 7, 'days')}}",
+          "gotenbergUrl": "http://gotenberg:3000"
+        }
+      }
+    },
+    {
+      "name": "upload_to_storage",
+      "displayName": "Upload LOI to Minio",
+      "type": "CODE",
+      "settings": {
+        "code": "// Upload PDF to Minio S3\nconst { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');\n\nconst s3Client = new S3Client({\n  endpoint: 'http://minio:9000',\n  region: 'us-east-1',\n  credentials: {\n    accessKeyId: process.env.MINIO_ROOT_USER,\n    secretAccessKey: process.env.MINIO_ROOT_PASSWORD,\n  },\n  forcePathStyle: true,\n});\n\nconst pdfBuffer = Buffer.from(steps.generate_loi.output.pdfBase64, 'base64');\n\nconst command = new PutObjectCommand({\n  Bucket: 'alecia-deals',\n  Key: `loi/${steps.generate_loi.output.filename}`,\n  Body: pdfBuffer,\n  ContentType: 'application/pdf',\n});\n\nawait s3Client.send(command);\n\nreturn {\n  url: `https://storage.alecia.fr/alecia-deals/loi/${steps.generate_loi.output.filename}`,\n  filename: steps.generate_loi.output.filename\n};"
+      }
+    },
+    {
+      "name": "send_signature_request",
+      "displayName": "Send for Signature (DocuSeal)",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-esign",
+        "actionName": "send-signature-request",
+        "input": {
+          "docusealUrl": "https://sign.alecia.fr",
+          "apiKey": "{{connections.docuseal.api_key}}",
+          "documentUrl": "{{steps.upload_to_storage.output.url}}",
+          "signers": [\n            {\n              "email": "{{trigger.output.metadata.buyer_email}}",\n              "name": "{{trigger.output.metadata.buyer_name}}",\n              "role": "Buyer"\n            },\n            {\n              "email": "{{trigger.output.metadata.seller_email}}",\n              "name": "{{trigger.output.metadata.seller_name}}",\n              "role": "Seller"\n            }\n          ],
+          "subject": "Signature LOI - {{trigger.output.title}}",
+          "message": "Veuillez signer la lettre d'intention ci-jointe.",
+          "expiresAt": "{{DATE_ADD(NOW, 14, 'days')}}"
+        }
+      }
+    },
+    {
+      "name": "notify_team",
+      "displayName": "Notify Team - LOI Sent",
+      "type": "PIECE",
+      "settings": {
+        "pieceName": "alecia-notifications",
+        "actionName": "create-in-app-notification",
+        "input": {
+          "userId": "{{trigger.output.assignedTo[0]}}",
+          "title": "LOI envoyée pour signature",
+          "message": "La lettre d'intention pour {{trigger.output.title}} a été envoyée aux parties pour signature.",
+          "type": "deal_update",
+          "actionUrl": "{{steps.send_signature_request.output.viewUrl}}",
+          "metadata": {
+            "dealId": "{{trigger.output.dealId}}",
+            "submissionId": "{{steps.send_signature_request.output.submissionId}}"
+          }
+        }
+      }
+    },
+    {
+      "name": "schedule_followup",
+      "displayName": "Schedule Follow-up Reminder",
+      "type": "DELAY",
+      "settings": {
+        "delay": {
+          "value": 3,
+          "unit": "days"
+        }
+      }
+    },
+    {
+      "name": "check_signature_status",
+      "displayName": "Check Signature Status",
+      "type": "CODE",
+      "settings": {
+        "code": "// Check if LOI has been signed\n// This would typically poll DocuSeal API\nreturn { status: 'pending', message: 'Follow up with parties if not signed' };"
+      }
+    }
+  ]
+}

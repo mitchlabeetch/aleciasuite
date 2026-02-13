@@ -1,0 +1,89 @@
+// Marketing Tiles CRUD Mutations
+// Admin functions for managing ambiance gallery
+
+import { mutation, query } from "./_generated/server";
+import { v } from "convex/values";
+
+// ============================================
+// QUERIES (Admin)
+// ============================================
+
+export const list = query({
+  args: {},
+  handler: async (ctx) => {
+    const tiles = await ctx.db.query("marketing_tiles").collect();
+    return tiles.sort((a, b) => a.displayOrder - b.displayOrder);
+  },
+});
+
+export const getById = query({
+  args: { id: v.id("marketing_tiles") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
+  },
+});
+
+// ============================================
+// MUTATIONS
+// ============================================
+
+export const create = mutation({
+  args: {
+    title: v.string(),
+    description: v.optional(v.string()),
+    soundUrl: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+    styleConfig: v.optional(v.record(v.string(), v.union(v.string(), v.number(), v.boolean()))),
+  },
+  handler: async (ctx, args) => {
+    const tiles = await ctx.db.query("marketing_tiles").collect();
+    const maxOrder = tiles.length > 0
+      ? Math.max(...tiles.map(t => t.displayOrder))
+      : -1;
+
+    return await ctx.db.insert("marketing_tiles", {
+      ...args,
+      displayOrder: maxOrder + 1,
+    });
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("marketing_tiles"),
+    title: v.optional(v.string()),
+    description: v.optional(v.string()),
+    soundUrl: v.optional(v.string()),
+    imageUrl: v.optional(v.string()),
+    displayOrder: v.optional(v.number()),
+    styleConfig: v.optional(v.record(v.string(), v.union(v.string(), v.number(), v.boolean()))),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...updates } = args;
+    
+    const cleanUpdates = Object.fromEntries(
+      Object.entries(updates).filter(([, v]) => v !== undefined)
+    );
+    
+    await ctx.db.patch(id, cleanUpdates);
+    return id;
+  },
+});
+
+export const remove = mutation({
+  args: { id: v.id("marketing_tiles") },
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.id);
+  },
+});
+
+export const reorder = mutation({
+  args: {
+    orderedIds: v.array(v.id("marketing_tiles")),
+  },
+  handler: async (ctx, args) => {
+    for (let i = 0; i < args.orderedIds.length; i++) {
+      await ctx.db.patch(args.orderedIds[i], { displayOrder: i });
+    }
+  },
+});

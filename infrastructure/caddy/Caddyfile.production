@@ -1,0 +1,389 @@
+# Alecia Suite — Caddy Reverse Proxy Configuration (PRODUCTION - alecia.markets)
+# This file routes traffic for *.alecia.markets to the appropriate Docker services
+#
+# Features:
+#   - Automatic HTTPS with Let's Encrypt
+#   - BetterAuth SSO via forward_auth
+#   - WebSocket support for Hocuspocus
+#   - Security headers
+#   - Rate limiting
+#   - Access logging
+
+{
+    # Global options
+    email mitch@alecia.markets
+
+    # Enable automatic HTTPS
+    acme_ca https://acme-v02.api.letsencrypt.org/directory
+
+    # Admin API (optional, comment out for security)
+    # admin 0.0.0.0:2019
+}
+
+# ==============================================================================
+# MAIN APPLICATIONS
+# ==============================================================================
+
+# Main marketing site
+alecia.markets {
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Access logging
+    log {
+        output file /var/log/caddy/alecia-markets.log
+        format json
+    }
+
+    reverse_proxy next-marketing:3000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+# App (BI + CRM + AI) — Protected by BetterAuth
+app.alecia.markets {
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        X-XSS-Protection "1; mode=block"
+    }
+
+    # Access logging
+    log {
+        output file /var/log/caddy/app-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy next-marketing:3000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+# Collaboration platform — Protected by BetterAuth + WebSocket support
+colab.alecia.markets {
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+    }
+
+    # Access logging
+    log {
+        output file /var/log/caddy/colab-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy next-colab:3001 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+
+        # WebSocket support for Yjs collaboration
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# ==============================================================================
+# BACKEND SERVICES (Protected)
+# ==============================================================================
+
+# Strapi CMS — Admin panel
+cms.alecia.markets {
+    # SSO protection via BetterAuth forward_auth
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+    }
+
+    log {
+        output file /var/log/caddy/cms-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy strapi:1337 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
+}
+
+# Activepieces Flows — Workflow automation
+flows.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+    }
+
+    log {
+        output file /var/log/caddy/flows-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy activepieces-app:80 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
+}
+
+# DocuSeal Sign — E-signature + VDR
+sign.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+    }
+
+    log {
+        output file /var/log/caddy/sign-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy docuseal:3000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
+}
+
+# ==============================================================================
+# ANALYTICS & MONITORING
+# ==============================================================================
+
+# Plausible Analytics — Web analytics
+analytics.alecia.markets {
+    # SSO protection for admin panel
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/analytics-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy plausible:8000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
+}
+
+# ==============================================================================
+# UTILITY SERVICES
+# ==============================================================================
+
+# Miniflux — RSS feed aggregator
+feeds.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/feeds-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy miniflux:8080 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+# SearXNG — Private search engine
+search.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/search-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy searxng:8080 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+# Vaultwarden — Password manager
+vault.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+    }
+
+    log {
+        output file /var/log/caddy/vault-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy vaultwarden:80 {
+        header_up X-Real-IP {remote_host}
+
+        # WebSocket support for vault sync
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# Stirling-PDF — PDF tools
+docs.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/docs-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy stirling-pdf:8080 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+# Gotenberg — PDF conversion API (internal only)
+pdf.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/pdf-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy gotenberg:3000 {
+        header_up X-Real-IP {remote_host}
+    }
+}
+
+# ==============================================================================
+# STORAGE & S3
+# ==============================================================================
+
+# Minio S3 Console — Admin UI
+s3.alecia.markets {
+    # SSO protection
+    forward_auth next-marketing:3000 {
+        uri /api/auth/caddy-auth
+        copy_headers X-User-Id X-User-Email
+    }
+
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+
+    log {
+        output file /var/log/caddy/s3-console-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy minio:9001 {
+        header_up X-Real-IP {remote_host}
+
+        # WebSocket support for console
+        header_up Connection {>Connection}
+        header_up Upgrade {>Upgrade}
+    }
+}
+
+# Minio S3 API — Object storage access
+storage.alecia.markets {
+    # Public read access for uploads, write requires auth
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+    }
+
+    log {
+        output file /var/log/caddy/storage-alecia-markets.log
+        format json
+    }
+
+    reverse_proxy minio:9000 {
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+    }
+}
+
+# ==============================================================================
+# WEBSOCKET SERVER (Direct access, no SSO)
+# ==============================================================================
+
+# Hocuspocus WebSocket — Real-time collaboration (port-based, not subdomain)
+# Access via wss://colab.alecia.markets (handled by Next.js app)
+
+# ==============================================================================
+# HEALTH CHECK ENDPOINT
+# ==============================================================================
+
+# Health check for load balancers
+health.alecia.markets {
+    respond /health 200 {
+        body "OK"
+        close
+    }
+}

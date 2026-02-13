@@ -1,0 +1,11 @@
+/* infrastructure/plausible/custom.css */
+/* Alecia Analytics — CSS Rebrand */
+/* Injected via EXTRA_CSS env or reverse proxy header injection */
+
+:root {
+    --primary: #061a40;
+    --primary-dark: #163e64;
+    --accent: #4370a7;
+}
+
+.plausible-logo, footer a[href*="plausible"] { display: none; }

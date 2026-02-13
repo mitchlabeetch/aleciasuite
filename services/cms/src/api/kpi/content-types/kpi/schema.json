@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "kpis",
+  "info": {
+    "singularName": "kpi",
+    "pluralName": "kpis",
+    "displayName": "KPI",
+    "description": "Marketing KPIs for the homepage and marketing pages"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "description": "Unique identifier (e.g., valuations, operations, sectors, offices)"
+    },
+    "label": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "label_fr": {
+      "type": "string",
+      "description": "French label"
+    },
+    "label_en": {
+      "type": "string",
+      "description": "English label"
+    },
+    "value": {
+      "type": "integer",
+      "required": true,
+      "description": "The numeric value to display"
+    },
+    "suffix": {
+      "type": "string",
+      "description": "Text after value (e.g., m€+, +)"
+    },
+    "prefix": {
+      "type": "string",
+      "description": "Text before value (e.g., €)"
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "description": "Lucide icon name (e.g., TrendingUp, Briefcase, Building2, MapPin)"
+    },
+    "display_order": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "is_visible": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    }
+  }
+}

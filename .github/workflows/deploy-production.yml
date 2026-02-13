@@ -1,0 +1,242 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      deploy_website:
+        description: 'Deploy Website'
+        required: true
+        default: true
+        type: boolean
+      deploy_colab:
+        description: 'Deploy Colab'
+        required: true
+        default: true
+        type: boolean
+      deploy_convex:
+        description: 'Deploy Convex'
+        required: true
+        default: true
+        type: boolean
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  NODE_VERSION: '20'
+  PNPM_VERSION: '10'
+
+jobs:
+  # ============================================
+  # PRE-DEPLOY CHECKS
+  # ============================================
+  pre-deploy:
+    name: Pre-Deploy Checks
+    runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.check.outputs.should_deploy }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for deployable changes
+        id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_deploy=true" >> $GITHUB_OUTPUT
+          else
+            # Check if there are changes in relevant directories
+            CHANGED=$(git diff --name-only HEAD~1 HEAD)
+            if echo "$CHANGED" | grep -qE '^(apps/|packages/|convex/)'; then
+              echo "should_deploy=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_deploy=false" >> $GITHUB_OUTPUT
+              echo "No deployable changes detected"
+            fi
+          fi
+
+  # ============================================
+  # DEPLOY CONVEX
+  # ============================================
+  deploy-convex:
+    name: Deploy Convex Functions
+    needs: pre-deploy
+    if: |
+      needs.pre-deploy.outputs.should_deploy == 'true' &&
+      (github.event_name == 'push' || github.event.inputs.deploy_convex == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Convex Tests
+        run: cd convex && npx vitest run
+
+      - name: Deploy to Convex
+        run: npx convex deploy --yes
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+
+      - name: Notify Success
+        if: success()
+        run: echo "✅ Convex deployed successfully"
+
+  # ============================================
+  # DEPLOY WEBSITE
+  # ============================================
+  deploy-website:
+    name: Deploy Website to Production
+    needs: [pre-deploy, deploy-convex]
+    if: |
+      always() &&
+      needs.pre-deploy.outputs.should_deploy == 'true' &&
+      (needs.deploy-convex.result == 'success' || needs.deploy-convex.result == 'skipped') &&
+      (github.event_name == 'push' || github.event.inputs.deploy_website == 'true')
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://panel.alecia.markets
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/website
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+
+      - name: Build Project
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/website
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+          NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+
+      - name: Deploy to Production
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/website
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
+
+  # ============================================
+  # DEPLOY COLAB
+  # ============================================
+  deploy-colab:
+    name: Deploy Colab to Production
+    needs: [pre-deploy, deploy-convex]
+    if: |
+      always() &&
+      needs.pre-deploy.outputs.should_deploy == 'true' &&
+      (needs.deploy-convex.result == 'success' || needs.deploy-convex.result == 'skipped') &&
+      (github.event_name == 'push' || github.event.inputs.deploy_colab == 'true')
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://colab.alecia.markets
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install Vercel CLI
+        run: pnpm add -g vercel@latest
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/colab
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_COLAB }}
+
+      - name: Build Project
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/colab
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_COLAB }}
+          NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+
+      - name: Deploy to Production
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: apps/colab
+        env:
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_COLAB }}
+
+  # ============================================
+  # POST-DEPLOY VERIFICATION
+  # ============================================
+  verify-deployment:
+    name: Verify Deployment
+    needs: [deploy-website, deploy-colab]
+    if: always() && (needs.deploy-website.result == 'success' || needs.deploy-colab.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Health Check - Website
+        if: needs.deploy-website.result == 'success'
+        run: |
+          sleep 30  # Wait for deployment to propagate
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://panel.alecia.markets/api/health)
+          if [ "$response" != "200" ]; then
+            echo "❌ Website health check failed with status $response"
+            exit 1
+          fi
+          echo "✅ Website is healthy"
+
+      - name: Health Check - Colab
+        if: needs.deploy-colab.result == 'success'
+        run: |
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://colab.alecia.markets)
+          if [ "$response" != "200" ] && [ "$response" != "302" ]; then
+            echo "❌ Colab health check failed with status $response"
+            exit 1
+          fi
+          echo "✅ Colab is healthy"
+
+      - name: Notify Deployment Complete
+        run: |
+          echo "🎉 Production deployment complete!"
+          echo "Website: https://panel.alecia.markets"
+          echo "Colab: https://colab.alecia.markets"

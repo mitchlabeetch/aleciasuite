@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "global_configs",
+  "info": {
+    "singularName": "global-config",
+    "pluralName": "global-configs",
+    "displayName": "Global Config",
+    "description": "Site-wide key-value settings"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "key": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "value": {
+      "type": "json",
+      "required": true,
+      "description": "Configuration value (any JSON data)"
+    },
+    "description": {
+      "type": "text",
+      "description": "Human-readable description of this setting"
+    }
+  }
+}

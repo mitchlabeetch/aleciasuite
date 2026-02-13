@@ -1,0 +1,75 @@
+{
+  "name": "Lettre d'Intention (LOI)",
+  "description": "Lettre d'intention non-engageante pour acquisition",
+  "language": "fr",
+  "fields": [
+    {
+      "name": "buyer_name",
+      "label": "Nom de l'acquéreur",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "buyer_representative",
+      "label": "Représentant de l'acquéreur",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "target_company",
+      "label": "Société cible",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "seller_name",
+      "label": "Nom du cédant",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "proposed_price",
+      "label": "Prix proposé (€)",
+      "type": "text",
+      "required": true
+    },
+    {
+      "name": "price_structure",
+      "label": "Structure du prix (cash, earn-out, etc.)",
+      "type": "text"
+    },
+    {
+      "name": "exclusivity_days",
+      "label": "Période d'exclusivité (jours)",
+      "type": "number",
+      "default": 90
+    },
+    {
+      "name": "conditions_precedent",
+      "label": "Conditions suspensives",
+      "type": "text"
+    },
+    {
+      "name": "due_diligence_scope",
+      "label": "Périmètre de due diligence",
+      "type": "text"
+    },
+    {
+      "name": "target_closing_date",
+      "label": "Date de closing visée",
+      "type": "date"
+    },
+    {
+      "name": "buyer_signature",
+      "label": "Signature acquéreur",
+      "type": "signature",
+      "required": true
+    },
+    {
+      "name": "seller_signature",
+      "label": "Signature cédant",
+      "type": "signature",
+      "required": true
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "@activepieces/piece-alecia-ai",
+  "version": "0.1.0",
+  "description": "AI-powered M&A analysis via Groq LLaMA for Alecia Suite",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@activepieces/pieces-framework": "^0.3.0",
+    "pg": "^8.11.0"
+  }
+}

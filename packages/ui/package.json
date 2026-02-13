@@ -1,0 +1,49 @@
+{
+	"name": "@alepanel/ui",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		},
+		"./sidebar": {
+			"types": "./dist/sidebar/index.d.ts",
+			"import": "./dist/sidebar/index.js"
+		}
+	},
+	"files": ["dist"],
+	"scripts": {
+		"dev": "tsup --watch",
+		"build": "tsup",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome lint ./src"
+	},
+	"peerDependencies": {
+		"react": ">=18",
+		"react-dom": ">=18"
+	},
+	"dependencies": {
+		"@radix-ui/react-collapsible": "^1.0.3",
+		"@radix-ui/react-slot": "^1.1.1",
+		"@radix-ui/react-tooltip": "^1.2.8",
+		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.0",
+		"lucide-react": "^0.562.0",
+		"tailwind-merge": "^2.2.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^20",
+		"@types/react": "^19.2.9",
+		"@types/react-dom": "^19.2.3",
+		"@types/uuid": "^11.0.0",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.3"
+	}
+}

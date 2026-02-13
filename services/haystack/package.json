@@ -1,0 +1,10 @@
+{
+  "name": "@alecia/haystack",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Haystack AI document intelligence configuration for semantic search",
+  "scripts": {
+    "start": "python -m haystack_service",
+    "index": "python -m haystack_service.index"
+  }
+}
