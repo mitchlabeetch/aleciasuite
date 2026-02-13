@@ -170,6 +170,12 @@ body {
   transition: all 0.2s;
   text-decoration: none;
   display: inline-block;
+  background: #f3f4f6;
+  color: var(--text);
+}
+
+.btn:hover {
+  background: #e5e7eb;
 }
 
 .btn-sm {
@@ -202,15 +208,6 @@ body {
 
 .btn-danger:hover {
   background: #dc2626;
-}
-
-.btn {
-  background: #f3f4f6;
-  color: var(--text);
-}
-
-.btn:hover {
-  background: #e5e7eb;
 }
 
 /* Alert */

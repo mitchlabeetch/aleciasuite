@@ -4,10 +4,14 @@ const Docker = require('dockerode');
 const WebSocket = require('ws');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { exec } = require('child_process');
+const { promisify } = require('util');
 
 const app = express();
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 const PORT = process.env.PORT || 3100;
+const DOCKER_COMPOSE_FILE = process.env.DOCKER_COMPOSE_FILE || '/app/docker-compose.production.yml';
+const execPromise = promisify(exec);
 
 // Configuration Handlebars
 app.engine('hbs', engine({ 
@@ -73,11 +77,7 @@ app.get('/', async (req, res) => {
 // API: Démarrer tous les services
 app.post('/api/start-all', async (req, res) => {
   try {
-    const { exec } = require('child_process');
-    const { promisify } = require('util');
-    const execPromise = promisify(exec);
-    
-    await execPromise('docker-compose -f /app/docker-compose.production.yml up -d');
+    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} up -d`);
     
     res.json({ success: true, message: 'Tous les services sont en cours de démarrage' });
   } catch (error) {
@@ -88,11 +88,7 @@ app.post('/api/start-all', async (req, res) => {
 // API: Arrêter tous les services
 app.post('/api/stop-all', async (req, res) => {
   try {
-    const { exec } = require('child_process');
-    const { promisify } = require('util');
-    const execPromise = promisify(exec);
-    
-    await execPromise('docker-compose -f /app/docker-compose.production.yml down');
+    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} down`);
     
     res.json({ success: true, message: 'Tous les services sont arrêtés' });
   } catch (error) {
@@ -173,15 +169,11 @@ app.get('/api/service/:name/logs', async (req, res) => {
 // API: Mettre à jour depuis GitHub
 app.post('/api/update', async (req, res) => {
   try {
-    const { exec } = require('child_process');
-    const { promisify } = require('util');
-    const execPromise = promisify(exec);
-    
     // Pull latest changes
     await execPromise('cd /app && git pull origin main');
     
     // Rebuild and restart services
-    await execPromise('docker-compose -f /app/docker-compose.production.yml up -d --build');
+    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} up -d --build`);
     
     res.json({ success: true, message: 'Mise à jour effectuée avec succès' });
   } catch (error) {
@@ -220,7 +212,7 @@ wss.on('connection', (ws, request) => {
     );
     
     if (!container) {
-      ws.send(JSON.stringify({ error: 'Service non trouvé' }));
+      ws.send('❌ Service non trouvé\n');
       ws.close();
       return;
     }
