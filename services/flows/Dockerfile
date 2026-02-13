@@ -1,18 +1,18 @@
 # services/flows/Dockerfile
 # Alecia Flows (Activepieces CE) - Custom branded build with custom pieces
-# Build context must be set to services/ (not services/flows/)
+# Build context must be set to repo root (.)
 
 FROM activepieces/activepieces:latest
 
 # Copy custom M&A workflow pieces
-COPY flows-pieces/pieces /app/packages/pieces/community
+COPY services/flows-pieces/pieces /app/packages/pieces/community
 
 # Copy SSO middleware and setup script
-COPY flows/scripts/better-auth-middleware.js /app/better-auth-middleware.js
-COPY flows/scripts/setup-sso.sh /docker-entrypoint-init.d/
+COPY services/flows/scripts/better-auth-middleware.js /app/better-auth-middleware.js
+COPY services/flows/scripts/setup-sso.sh /docker-entrypoint-init.d/
 
 # Copy branding assets (if available)
-COPY flows/branding /app/branding
+COPY services/flows/branding /app/branding
 
 # Set environment
 ENV AP_ENVIRONMENT=production

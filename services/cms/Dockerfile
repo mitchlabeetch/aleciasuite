@@ -7,12 +7,12 @@ WORKDIR /app
 
 # Dependencies
 FROM base AS deps
-COPY package*.json ./
+COPY services/cms/package*.json ./
 RUN npm install
 
 # Build Strapi admin panel
 FROM deps AS builder
-COPY . .
+COPY services/cms/ ./
 ENV NODE_ENV=production
 RUN npm run build
 
