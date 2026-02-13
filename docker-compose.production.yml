@@ -390,6 +390,9 @@ services:
 
     caddy:
         image: alecia/caddy:latest
+        build:
+            context: .
+            dockerfile: infrastructure/caddy/Dockerfile
         pull_policy: never
         container_name: alecia-caddy
         restart: unless-stopped
@@ -402,6 +405,7 @@ services:
             - "80:80"
             - "443:443"
         volumes:
+            - ./infrastructure/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
             - caddy_data:/data
             - caddy_config:/config
         depends_on:

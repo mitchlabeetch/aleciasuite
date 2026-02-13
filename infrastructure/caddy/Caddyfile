@@ -1,98 +1,74 @@
-# infrastructure/caddy/Caddyfile
-# Production configuration for Alecia Suite
-# Automatic HTTPS via Let's Encrypt HTTP-01 challenge
-# Domain: alecia.markets
-
 {
-    email admin@alecia.markets
+    email noreply@alecia.markets
+    acme_dns ovh {
+        endpoint {$OVH_ENDPOINT}
+        application_key {$OVH_APPLICATION_KEY}
+        application_secret {$OVH_APPLICATION_SECRET}
+        consumer_key {$OVH_CONSUMER_KEY}
+    }
 }
 
-# Main marketing website
+# Main marketing site
 alecia.markets {
-    reverse_proxy next-marketing:3000
+    reverse_proxy alecia-website:3000
 }
 
-www.alecia.markets {
-    redir https://alecia.markets{uri} 302
-}
-
-# Collaboration app
+# Collaboration tool
 colab.alecia.markets {
-    reverse_proxy next-colab:3001
+    reverse_proxy alecia-colab:3001
+}
+
+# WebSocket for real-time collaboration
+ws.alecia.markets {
+    reverse_proxy alecia-hocuspocus:1234
 }
 
 # CMS (Strapi)
 cms.alecia.markets {
-    reverse_proxy strapi:1337
+    reverse_proxy alecia-cms:1337
 }
 
-# Flows (Activepieces) - API ONLY - UI in /admin/flows
+# Workflow automation (Activepieces)
 flows.alecia.markets {
-    # Block public frontend access
-    @frontend path / /flows /flows/* /projects /projects/*
-    respond @frontend "Alecia Flows API - Access via alecia.markets/admin" 403
-    
-    # Allow API endpoints only
-    reverse_proxy activepieces-app:80
+    reverse_proxy alecia-flows:80
 }
 
-# Digital Signature (DocuSeal) - API ONLY
-sign.alecia.markets {
-    # API endpoints only - no public UI
-    @api path /api/* /webhooks/*
-    reverse_proxy @api docuseal:3000
-    
-    # Block public access
-    respond "Alecia Sign API - Access via alecia.markets/admin" 403
-}
-
-# Infrastructure services - API ONLY
+# Analytics (Plausible)
 analytics.alecia.markets {
-    # API only - dashboard in /admin
-    @api path /api/*
-    reverse_proxy @api plausible:8000
-    respond "Alecia Analytics - Access via alecia.markets/admin" 403
+    reverse_proxy alecia-analytics:8000
 }
 
-vault.alecia.markets {
-    # API only
-    @api path /api/*
-    reverse_proxy @api vaultwarden:80
-    respond "Alecia Vault - Access via alecia.markets/admin" 403
+# E-signature (DocuSeal)
+sign.alecia.markets {
+    reverse_proxy alecia-sign:3000
 }
 
+# RSS feeds (Miniflux)
 feeds.alecia.markets {
-    # API only
-    @api path /v1/* /fever/*
-    reverse_proxy @api miniflux:8080
-    respond "Alecia Feeds - Access via alecia.markets/admin" 403
+    reverse_proxy alecia-feeds:8080
 }
 
+# Search (SearXNG)
 search.alecia.markets {
-    # API only
-    @api path /search
-    reverse_proxy @api searxng:8080
-    respond "Alecia Search - Access via alecia.markets/admin" 403
+    reverse_proxy alecia-search:8080
 }
 
-storage.alecia.markets {
-    reverse_proxy minio:9001
+# Password manager (Vaultwarden)
+vault.alecia.markets {
+    reverse_proxy alecia-vault:80
 }
 
-s3.alecia.markets {
-    reverse_proxy minio:9000
-}
-
+# PDF tools (Stirling-PDF)
 docs.alecia.markets {
-    # API only
-    reverse_proxy stirling-pdf:8080
+    reverse_proxy alecia-docs:8080
 }
 
-pdf.alecia.markets {
-    # API only
-    reverse_proxy gotenberg:3000
+# Minio S3 Console
+s3.alecia.markets {
+    reverse_proxy alecia-minio:9001
 }
 
-ws.alecia.markets {
-    reverse_proxy hocuspocus:1234
+# Minio S3 API
+storage.alecia.markets {
+    reverse_proxy alecia-minio:9000
 }
