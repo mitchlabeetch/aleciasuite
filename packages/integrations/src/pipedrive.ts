@@ -12,14 +12,14 @@
 //
 // Register your app: https://developers.pipedrive.com/docs/api/v1
 
-import { 
-  ApiClient, 
-  Configuration, 
-  DealsApi, 
-  PersonsApi, 
-  OrganizationsApi,
-  OAuth2Configuration 
-} from "pipedrive";
+import * as pipedrive from "pipedrive";
+
+// Re-export types for convenience
+export type DealsApi = pipedrive.v1.DealsApi;
+export type PersonsApi = pipedrive.v1.PersonsApi;
+export type OrganizationsApi = pipedrive.v1.OrganizationsApi;
+export type Configuration = pipedrive.v1.Configuration;
+export type OAuth2Configuration = pipedrive.v1.OAuth2Configuration;
 
 // ============================================
 // TYPES
@@ -85,18 +85,12 @@ export async function exchangeCodeForTokens(
   code: string,
   redirectUri: string
 ): Promise<{ access_token: string; refresh_token: string; expires_in: number }> {
-  const config = new OAuth2Configuration({
-    clientId: process.env.PIPEDRIVE_CLIENT_ID!,
-    clientSecret: process.env.PIPEDRIVE_CLIENT_SECRET!,
-    redirectUri: redirectUri,
-  });
-
   const response = await fetch("https://oauth.pipedrive.com/oauth/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       Authorization: `Basic ${Buffer.from(
-        `${config.clientId}:${config.clientSecret}`
+        `${process.env.PIPEDRIVE_CLIENT_ID}:${process.env.PIPEDRIVE_CLIENT_SECRET}`
       ).toString("base64")}`,
     },
     body: new URLSearchParams({
@@ -146,23 +140,18 @@ export async function refreshAccessToken(
  * Create a Pipedrive API client with OAuth2 authentication
  * 
  * @param accessToken - The OAuth2 access token
- * @param onTokenUpdate - Optional callback when token is refreshed
  * @returns Typed API client instances for deals, persons, and organizations
  */
-export function createPipedriveClient(
-  accessToken: string,
-  onTokenUpdate?: (newToken: string) => Promise<void>
-): PipedriveClient {
-  const apiClient = new ApiClient();
-  
-  // Configure OAuth2 authentication
-  const config = apiClient.authentications.oauth2 as Configuration;
-  config.accessToken = accessToken;
+export function createPipedriveClient(accessToken: string): PipedriveClient {
+  // Create configuration with OAuth2 access token
+  const config = new pipedrive.v1.Configuration({
+    accessToken,
+  });
 
-  // Create API instances
-  const deals = new DealsApi(apiClient);
-  const persons = new PersonsApi(apiClient);
-  const organizations = new OrganizationsApi(apiClient);
+  // Create API instances with the configured client
+  const deals = new pipedrive.v1.DealsApi(config);
+  const persons = new pipedrive.v1.PersonsApi(config);
+  const organizations = new pipedrive.v1.OrganizationsApi(config);
 
   return {
     deals,

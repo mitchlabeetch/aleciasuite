@@ -2,11 +2,7 @@
 // Sync Alecia deal to Pipedrive using OAuth2
 
 import { createAction, Property } from '@activepieces/pieces-framework';
-import { 
-  ApiClient, 
-  Configuration, 
-  DealsApi 
-} from 'pipedrive';
+import * as pipedrive from 'pipedrive';
 
 export const syncDealToPipedrive = createAction({
   name: 'sync-deal-to-pipedrive',
@@ -53,11 +49,11 @@ export const syncDealToPipedrive = createAction({
   },
   async run(context) {
     // Configure Pipedrive SDK client with OAuth2
-    const apiClient = new ApiClient();
-    const config = apiClient.authentications.oauth2 as Configuration;
-    config.accessToken = context.propsValue.accessToken;
+    const config = new pipedrive.v1.Configuration({
+      accessToken: context.propsValue.accessToken,
+    });
 
-    const dealsApi = new DealsApi(apiClient);
+    const dealsApi = new pipedrive.v1.DealsApi(config);
 
     const dealData: any = {
       title: context.propsValue.dealTitle,

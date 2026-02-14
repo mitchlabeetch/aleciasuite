@@ -18,7 +18,7 @@ import {
   type PipedriveDeal, 
   type PipedrivePerson, 
   type PipedriveOrganization 
-} from "@alepanel/integrations/pipedrive";
+} from "@alepanel/integrations";
 
 // ============================================
 // TOKEN HELPERS
