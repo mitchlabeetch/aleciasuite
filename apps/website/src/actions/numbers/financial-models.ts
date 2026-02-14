@@ -162,7 +162,7 @@ export async function getFinancialModel(id: string) {
  * Get financial models for a specific deal
  */
 export async function getDealFinancialModels(dealId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const models = await db.query.financialModels.findMany({
     where: eq(numbers.financialModels.dealId, dealId),

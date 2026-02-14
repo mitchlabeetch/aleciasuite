@@ -50,10 +50,10 @@ export async function getAnalyticsSummary(
 			log.info("Analytics served from database cache");
 			// Update memory cache
 			memoryCache = {
-				data: cachedData as AnalyticsSummary,
+				data: cachedData as unknown as AnalyticsSummary,
 				expiresAt: now + CACHE_TTL_MS,
 			};
-			return cachedData as AnalyticsSummary;
+			return cachedData as unknown as AnalyticsSummary;
 		}
 	} catch (error) {
 		log.warn("Failed to check database cache:", error);
@@ -84,7 +84,7 @@ async function updateDatabaseCache(
 	cacheKey: string,
 	data: AnalyticsSummary,
 ): Promise<void> {
-	await setCache(cacheKey, data, CACHE_TTL_MS);
+	await setCache(cacheKey, data as unknown as Record<string, unknown>, CACHE_TTL_MS);
 }
 
 /**

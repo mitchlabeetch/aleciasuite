@@ -165,7 +165,7 @@ function BuyerCriteriaForm({
 	onSuccess,
 	onCancel,
 }: {
-	contactId: string;
+	_contactId: string;
 	existingCriteria?: {
 		sectors: string[];
 		minRevenue?: number;
@@ -746,7 +746,7 @@ export default function MatchmakerPage() {
 									</div>
 								) : (
 									<BuyerCriteriaForm
-										contactId={selectedContactForAdd}
+										_contactId={selectedContactForAdd}
 										onSuccess={() => {
 											setIsAddingBuyer(false);
 											setSelectedContactForAdd(null);
@@ -961,7 +961,7 @@ export default function MatchmakerPage() {
 					</DialogHeader>
 					{editingBuyer && (
 						<BuyerCriteriaForm
-							contactId={editingBuyer}
+							_contactId={editingBuyer}
 							existingCriteria={
 								buyers?.find((b: Buyer) => b._id === editingBuyer)?.criteria
 							}

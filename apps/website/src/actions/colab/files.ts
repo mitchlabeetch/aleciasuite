@@ -19,7 +19,7 @@ import { revalidatePath } from "next/cache";
 // TODO: Implement Minio client for signed URL generation
 // This is a placeholder that shows the structure needed
 export async function generateUploadUrl() {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   // TODO: Generate a signed Minio upload URL
   // Example with minio client:
