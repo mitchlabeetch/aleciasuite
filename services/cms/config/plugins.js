@@ -1,7 +1,7 @@
-// services/cms/config/plugins.ts
+// services/cms/config/plugins.js
 // Strapi CE — Minio S3 upload provider configuration
 
-export default ({ env }: { env: (key: string, fallback?: any) => any }) => ({
+module.exports = ({ env }) => ({
   upload: {
     config: {
       provider: "aws-s3",

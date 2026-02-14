@@ -1,7 +1,7 @@
-// services/cms/config/admin.ts
+// services/cms/config/admin.js
 // Alecia CMS admin panel configuration
 
-export default ({ env }) => ({
+module.exports = ({ env }) => ({
   auth: {
     secret: env('ADMIN_JWT_SECRET'),
   },
