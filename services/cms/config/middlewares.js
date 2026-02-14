@@ -1,7 +1,7 @@
-// services/cms/config/middlewares.ts
+// services/cms/config/middlewares.js
 // Strapi middleware configuration with BetterAuth SSO
 
-export default [
+module.exports = [
   "strapi::logger",
   "strapi::errors",
   "strapi::security",
