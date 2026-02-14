@@ -43,6 +43,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useSession } from "@alepanel/auth/client";
 import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { integrations } from "@/actions";
+import { DEFAULT_LOCALE } from "@/lib/constants";
 
 export default function IntegrationsPage() {
 	const { data: authSession, isPending: userLoading } = useSession();
@@ -52,7 +53,7 @@ export default function IntegrationsPage() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || 'fr';
+	const locale = params?.locale || DEFAULT_LOCALE;
 
 	// Microsoft Sync
 	const {

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { LogOut, Mail, User, Shield } from "lucide-react";
+import { DEFAULT_LOCALE } from "@/lib/constants";
 
 /**
  * Account Page - User Profile Management
@@ -17,7 +18,7 @@ export default function AccountPage() {
 	const { data: session, isPending } = useSession();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || 'fr';
+	const locale = params?.locale || DEFAULT_LOCALE;
 
 	if (isPending) {
 		return (

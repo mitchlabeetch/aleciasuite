@@ -17,6 +17,7 @@ import {
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter, useParams } from "next/navigation";
+import { DEFAULT_LOCALE } from "@/lib/constants";
 
 /**
  * Settings Page
@@ -27,7 +28,7 @@ export default function SettingsPage() {
 	const { toast } = useToast();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || 'fr';
+	const locale = params?.locale || DEFAULT_LOCALE;
 
 	return (
 		<div className="p-6 space-y-6">

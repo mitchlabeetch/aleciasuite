@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
+import { DEFAULT_LOCALE } from "@/lib/constants";
 
 /**
  * Deals Pipeline Page - Redirects to Colab
@@ -12,7 +13,7 @@ import { useRouter, useParams } from "next/navigation";
 export default function DealsPage() {
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || 'fr';
+	const locale = params?.locale || DEFAULT_LOCALE;
 
 	useEffect(() => {
 		// Redirect to Colab pipeline page
