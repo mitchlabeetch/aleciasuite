@@ -11,7 +11,7 @@ export const createDataRoom = createAction({
   props: {
     docusealUrl: Property.ShortText({
       displayName: 'DocuSeal URL',
-      defaultValue: 'https://sign.alecia.fr',
+      defaultValue: 'https://sign.alecia.markets',
       required: false,
     }),
     apiKey: Property.ShortText({

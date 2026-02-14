@@ -12,7 +12,7 @@ export const aleciaColab = createPiece({
     required: true,
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-colab-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-colab-piece.svg",
   authors: ["alecia"],
   actions: [createDocument, createBoardCard, updateCardStatus, notifyUser],
   triggers: [],

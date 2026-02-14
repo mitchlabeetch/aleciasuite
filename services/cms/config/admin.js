@@ -21,8 +21,8 @@ module.exports = ({ env }) => ({
   url: env('PUBLIC_ADMIN_URL', '/admin'),
   serveAdminPanel: env.bool('SERVE_ADMIN', true),
   forgotPassword: {
-    from: 'noreply@alecia.fr',
-    replyTo: 'support@alecia.fr',
+    from: 'noreply@alecia.markets',
+    replyTo: 'support@alecia.markets',
   },
   // Custom logo and favicon
   logo: {

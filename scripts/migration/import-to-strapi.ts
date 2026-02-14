@@ -1,7 +1,7 @@
 // scripts/migration/import-to-strapi.ts
 // Imports CMS content from exported JSON files into Strapi REST API
 
-const STRAPI_URL = process.env.STRAPI_URL || "https://cms.alecia.fr";
+const STRAPI_URL = process.env.STRAPI_URL || "https://cms.alecia.markets";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
 async function importCollection(collectionName: string, data: any[]) {

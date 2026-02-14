@@ -16,7 +16,7 @@ export const aleciaCrm = createPiece({
     required: true,
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-crm-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-crm-piece.svg",
   authors: ["alecia"],
   actions: [createDeal, updateDealStage, searchCompanies, enrichCompany],
   triggers: [onDealCreated, onDealStageChanged],

@@ -33,8 +33,6 @@ export default function middleware(request: NextRequest) {
 		"https://alecia.markets",
 		"https://panel.alecia.markets",
 		"https://colab.alecia.markets",
-		"https://alecia.fr",
-		"https://colab.alecia.fr",
 	];
 
 	const response = NextResponse.next();

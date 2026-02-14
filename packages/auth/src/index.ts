@@ -13,43 +13,49 @@ export const auth = betterAuth({
     // shared.user, shared.session, shared.account, shared.verification
   }),
 
-  // Cross-subdomain cookie for *.alecia.fr SSO
+  // Cross-subdomain cookie for *.alecia.markets SSO
   advanced: {
     cookiePrefix: "alecia",
     crossSubDomainCookies: {
       enabled: true,
-      domain: process.env.NODE_ENV === "production" ? ".alecia.fr" : undefined,
+      domain: process.env.NODE_ENV === "production" 
+        ? (process.env.AUTH_COOKIE_DOMAIN || ".alecia.markets") 
+        : undefined,
     },
   },
 
   // OAuth providers — no custom API needed, use platform OAuth directly
   socialProviders: {
-    microsoft: {
-      clientId: process.env.MICROSOFT_CLIENT_ID!,
-      clientSecret: process.env.MICROSOFT_CLIENT_SECRET!,
-      tenantId: process.env.MICROSOFT_TENANT_ID || "common",
-      // Read+Write scopes for full Graph integration
-      scope: [
-        "openid",
-        "profile",
-        "email",
-        "Mail.ReadWrite",
-        "Calendars.ReadWrite",
-        "Files.ReadWrite",
-        "User.Read",
-      ],
-    },
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      scope: [
-        "openid",
-        "profile",
-        "email",
-        "https://www.googleapis.com/auth/calendar",
-        "https://www.googleapis.com/auth/gmail.readonly",
-      ],
-    },
+    ...(process.env.MICROSOFT_CLIENT_ID && process.env.MICROSOFT_CLIENT_SECRET ? {
+      microsoft: {
+        clientId: process.env.MICROSOFT_CLIENT_ID,
+        clientSecret: process.env.MICROSOFT_CLIENT_SECRET,
+        tenantId: process.env.MICROSOFT_TENANT_ID || "common",
+        // Read+Write scopes for full Graph integration
+        scope: [
+          "openid",
+          "profile",
+          "email",
+          "Mail.ReadWrite",
+          "Calendars.ReadWrite",
+          "Files.ReadWrite",
+          "User.Read",
+        ],
+      },
+    } : {}),
+    ...(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET ? {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        scope: [
+          "openid",
+          "profile",
+          "email",
+          "https://www.googleapis.com/auth/calendar",
+          "https://www.googleapis.com/auth/gmail.readonly",
+        ],
+      },
+    } : {}),
   },
 
   // Email + password as fallback login

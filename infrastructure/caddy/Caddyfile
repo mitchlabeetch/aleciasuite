@@ -19,46 +19,109 @@ ws.alecia.markets {
 
 # CMS (Strapi)
 cms.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-cms:1337
 }
 
 # Workflow automation (Activepieces)
 flows.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-flows:80
 }
 
 # Analytics (Plausible)
 analytics.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-analytics:8000
 }
 
 # E-signature (DocuSeal)
 sign.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-sign:3000
 }
 
 # RSS feeds (Miniflux)
 feeds.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-feeds:8080
 }
 
 # Search (SearXNG)
 search.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-search:8080
 }
 
 # Password manager (Vaultwarden)
 vault.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-vault:80
 }
 
 # PDF tools (Stirling-PDF)
 docs.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-docs:8080
 }
 
 # Minio S3 Console
 s3.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-minio:9001
 }
 
@@ -69,10 +132,12 @@ storage.alecia.markets {
 
 # Dashboard d'administration
 serveradministration.alecia.markets {
+    forward_auth alecia-website:3000 {
+        uri /api/auth/verify-session
+        header_up X-Forwarded-Host {host}
+        header_up X-Forwarded-Method {method}
+        header_up X-Forwarded-Uri {uri}
+        copy_headers X-Alecia-User-Id X-Alecia-User-Email X-Alecia-User-Name X-Alecia-User-Role
+    }
     reverse_proxy alecia-dashboard:3100
-    
-    # Protection basique (optionnel)
-    # basicauth /* {
-    #     admin $2a$14$hashed_password
-    # }
 }

@@ -38,12 +38,12 @@ const nextConfig = {
 					{
 						key: "X-Frame-Options",
 						value:
-							"ALLOW-FROM https://alecia.fr https://alecia.markets https://panel.alecia.markets",
+							"ALLOW-FROM https://alecia.markets https://panel.alecia.markets",
 					},
 					{
 						key: "Content-Security-Policy",
 						value:
-							"frame-ancestors 'self' https://alecia.fr https://*.alecia.fr https://alecia.markets https://*.alecia.markets",
+							"frame-ancestors 'self' https://alecia.markets https://*.alecia.markets",
 					},
 					{
 						key: "Access-Control-Allow-Origin",
