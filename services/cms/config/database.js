@@ -1,5 +1,5 @@
 // services/cms/config/database.js
-// Strapi CE — PostgreSQL connection with alecia_cms schema
+// Strapi CE — PostgreSQL connection
 
 module.exports = ({ env }) => ({
   connection: {
