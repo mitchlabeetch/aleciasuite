@@ -50,6 +50,24 @@ const ALECIA_SERVICES = [
   { id: 'caddy', name: 'Reverse Proxy', icon: '🔐', url: null }
 ];
 
+// Allowed service names for validation
+const ALLOWED_SERVICES = ALECIA_SERVICES.map(s => s.id);
+
+function validateServiceName(serviceName) {
+  if (!ALLOWED_SERVICES.includes(serviceName)) {
+    throw new Error('Service non autorisé');
+  }
+}
+
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    version: '1.0.0'
+  });
+});
+
 // Routes
 app.get('/', async (req, res) => {
   try {
@@ -85,7 +103,7 @@ app.get('/', async (req, res) => {
 // API: Démarrer tous les services
 app.post('/api/start-all', apiLimiter, async (req, res) => {
   try {
-    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} up -d`);
+    await execPromise(`docker compose -f ${DOCKER_COMPOSE_FILE} up -d`);
     
     res.json({ success: true, message: 'Tous les services sont en cours de démarrage' });
   } catch (error) {
@@ -96,7 +114,7 @@ app.post('/api/start-all', apiLimiter, async (req, res) => {
 // API: Arrêter tous les services
 app.post('/api/stop-all', apiLimiter, async (req, res) => {
   try {
-    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} down`);
+    await execPromise(`docker compose -f ${DOCKER_COMPOSE_FILE} down`);
     
     res.json({ success: true, message: 'Tous les services sont arrêtés' });
   } catch (error) {
@@ -108,6 +126,7 @@ app.post('/api/stop-all', apiLimiter, async (req, res) => {
 app.post('/api/service/:name/restart', async (req, res) => {
   try {
     const serviceName = req.params.name;
+    validateServiceName(serviceName);
     const containers = await docker.listContainers({ all: true });
     const container = containers.find(c => 
       c.Names.some(name => name.includes(serviceName))
@@ -130,6 +149,7 @@ app.post('/api/service/:name/restart', async (req, res) => {
 app.post('/api/service/:name/stop', async (req, res) => {
   try {
     const serviceName = req.params.name;
+    validateServiceName(serviceName);
     const containers = await docker.listContainers();
     const container = containers.find(c => 
       c.Names.some(name => name.includes(serviceName))
@@ -177,15 +197,25 @@ app.get('/api/service/:name/logs', async (req, res) => {
 // API: Mettre à jour depuis GitHub
 app.post('/api/update', apiLimiter, async (req, res) => {
   try {
-    // Pull latest changes
-    await execPromise('cd /app && git pull origin main');
+    // Pull latest changes with better error handling
+    const { stdout, stderr } = await execPromise('cd /app && git pull origin main 2>&1');
+    
+    if (stderr && (stderr.includes('error') || stderr.includes('fatal'))) {
+      return res.status(500).json({ 
+        success: false, 
+        error: `Erreur Git: ${stderr}` 
+      });
+    }
     
     // Rebuild and restart services
-    await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} up -d --build`);
+    await execPromise(`docker compose -f ${DOCKER_COMPOSE_FILE} up -d --build`);
     
     res.json({ success: true, message: 'Mise à jour effectuée avec succès' });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({ 
+      success: false, 
+      error: `Échec de la mise à jour: ${error.message}` 
+    });
   }
 });
 

@@ -12,16 +12,33 @@
 <script>
   const serviceName = '{{service.id}}';
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const ws = new WebSocket(`${protocol}//${window.location.host}?service=${serviceName}`);
-  
   const logsOutput = document.getElementById('logs-output');
+  let ws;
+  let reconnectAttempts = 0;
+  const maxReconnects = 3;
   
-  ws.onmessage = (event) => {
-    logsOutput.textContent += event.data;
-    logsOutput.scrollTop = logsOutput.scrollHeight;
-  };
+  function connectWebSocket() {
+    ws = new WebSocket(`${protocol}//${window.location.host}?service=${serviceName}`);
+    
+    ws.onmessage = (event) => {
+      logsOutput.textContent += event.data;
+      logsOutput.scrollTop = logsOutput.scrollHeight;
+    };
+    
+    ws.onerror = (error) => {
+      logsOutput.textContent += '\n❌ Erreur de connexion WebSocket\n';
+    };
+    
+    ws.onclose = () => {
+      if (reconnectAttempts < maxReconnects) {
+        reconnectAttempts++;
+        logsOutput.textContent += `\n🔄 Reconnexion (tentative ${reconnectAttempts}/${maxReconnects})...\n`;
+        setTimeout(connectWebSocket, 2000);
+      } else {
+        logsOutput.textContent += '\n❌ Impossible de se reconnecter. Rechargez la page.\n';
+      }
+    };
+  }
   
-  ws.onerror = (error) => {
-    logsOutput.textContent += '\n❌ Erreur de connexion WebSocket\n';
-  };
+  connectWebSocket();
 </script>

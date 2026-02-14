@@ -79,6 +79,24 @@ Le tableau de bord est accessible à : **https://serveradministration.alecia.mar
 4. **Gérer un service** : Utilisez les boutons sur chaque carte de service
 5. **Voir les logs** : Cliquez sur "📋 Logs" pour voir les logs en temps réel
 
+### Sécurité du Dashboard
+
+Par défaut, le dashboard est accessible publiquement. Pour production, considérez :
+
+1. **Activer l'authentification basique dans Caddy**:
+   Décommentez les lignes dans `infrastructure/caddy/Caddyfile`:
+   ```caddyfile
+   serveradministration.alecia.markets {
+       basicauth /* {
+           admin JDJhJDE0JHhoYXNoZWRfcGFzc3dvcmQ  # généré avec caddy hash-password
+       }
+       reverse_proxy alecia-dashboard:3100
+   }
+   ```
+
+2. **Restreindre l'accès par IP** (optionnel):
+   Ajoutez des règles de pare-feu UFW pour n'autoriser que certaines IPs.
+
 ## Troubleshooting
 
 View logs:
