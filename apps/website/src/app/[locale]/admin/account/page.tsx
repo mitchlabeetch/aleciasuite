@@ -18,7 +18,7 @@ export default function AccountPage() {
 	const { data: session, isPending } = useSession();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || DEFAULT_LOCALE;
+	const locale = Array.isArray(params?.locale) ? params.locale[0] : (params?.locale || DEFAULT_LOCALE);
 
 	if (isPending) {
 		return (

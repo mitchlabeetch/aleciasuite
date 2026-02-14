@@ -15,7 +15,7 @@ import { DEFAULT_LOCALE } from "@/lib/constants";
 export default function AdminSignInPage() {
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || DEFAULT_LOCALE;
+	const locale = Array.isArray(params?.locale) ? params.locale[0] : (params?.locale || DEFAULT_LOCALE);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");

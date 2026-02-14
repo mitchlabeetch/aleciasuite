@@ -53,7 +53,7 @@ export default function IntegrationsPage() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || DEFAULT_LOCALE;
+	const locale = Array.isArray(params?.locale) ? params.locale[0] : (params?.locale || DEFAULT_LOCALE);
 
 	// Microsoft Sync
 	const {

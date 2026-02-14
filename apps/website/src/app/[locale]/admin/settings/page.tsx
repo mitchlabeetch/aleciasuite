@@ -28,7 +28,7 @@ export default function SettingsPage() {
 	const { toast } = useToast();
 	const router = useRouter();
 	const params = useParams();
-	const locale = params?.locale || DEFAULT_LOCALE;
+	const locale = Array.isArray(params?.locale) ? params.locale[0] : (params?.locale || DEFAULT_LOCALE);
 
 	return (
 		<div className="p-6 space-y-6">
