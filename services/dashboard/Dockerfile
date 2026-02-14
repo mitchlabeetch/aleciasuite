@@ -22,9 +22,9 @@ COPY views/ ./views/
 COPY public/ ./public/
 
 # Non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S dashboard -u 1001 -G nodejs && \
-    chown -R dashboard:nodejs /app
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 dashboard
+RUN chown -R dashboard:nodejs /app
 
 USER dashboard
 
