@@ -1453,71 +1453,42 @@ In Clerk Dashboard → JWT Templates:
 
 ---
 
-## Task 4.2: Configure Pipedrive OAuth in Clerk
+## Task 4.2: Configure Pipedrive OAuth with BetterAuth
 
 **Priority:** 🟡 High
 **Estimated Time:** 4 hours
+**Status:** ✅ COMPLETED - Using BetterAuth direct OAuth flow
 
-### Step 1: Create Pipedrive OAuth App
+### Implementation Summary
 
-1. Go to [Pipedrive Marketplace](https://marketplace.pipedrive.com/app)
-2. Create new app → OAuth app
-3. Configure:
-   - Redirect URI: `https://clerk.alecia.markets/v1/oauth_callback`
-   - Scopes: `deals:read`, `persons:read`, `organizations:read`
+Pipedrive OAuth is now implemented using **BetterAuth** with direct OAuth2 flow and the official Pipedrive SDK:
 
-### Step 2: Configure Clerk Custom OAuth
+1. **OAuth Flow**: Direct integration without third-party auth provider
+   - Authorization URL: `https://oauth.pipedrive.com/oauth/authorize`
+   - Token URL: `https://oauth.pipedrive.com/oauth/token`
+   - Tokens stored in `shared.account` table with automatic refresh
 
-Since Pipedrive isn't a built-in Clerk provider, use Custom OAuth:
+2. **SDK Integration**: Using official `pipedrive` npm package
+   - Factory function: `createPipedriveClient(accessToken)`
+   - Typed APIs: DealsApi, PersonsApi, OrganizationsApi
+   - Automatic token refresh via `onTokenUpdate` callback
 
-**Clerk Dashboard → Social Connections → Add Custom Provider**
+3. **Server Actions**: `apps/website/src/actions/integrations/pipedrive-sync.ts`
+   - `syncFromPipedrive()` - Full deal sync with pagination
+   - `syncContactsFromPipedrive()` - Contact sync
+   - `syncCompaniesFromPipedrive()` - Organization sync
+   - All functions return: `{ success, synced, created, updated, errors }`
 
-```
-Name: Pipedrive
-Client ID: [from Pipedrive]
-Client Secret: [from Pipedrive]
-Authorization URL: https://oauth.pipedrive.com/oauth/authorize
-Token URL: https://oauth.pipedrive.com/oauth/token
-Scopes: deals:read persons:read organizations:read
-User Info URL: https://api.pipedrive.com/v1/users/me
-```
+4. **Client Hook**: `apps/website/src/hooks/use-pipedrive-sync.ts`
+   - Uses BetterAuth session (`useSession()` from `@alepanel/auth/client`)
+   - Server action calls instead of direct API requests
+   - No Convex references - pure database sync
 
-### Step 3: Create Pipedrive Sync Hook
-
-**File:** `apps/website/src/hooks/use-pipedrive-sync.ts`
-
-```typescript
-import { useAuth } from "@clerk/nextjs";
-import { useState, useCallback } from "react";
-
-interface PipedriveDeal {
-  id: number;
-  title: string;
-  value: number;
-  currency: string;
-  status: "open" | "won" | "lost";
-  stage_id: number;
-  person_id: number;
-  org_id: number;
-}
-
-interface PipedriveContact {
-  id: number;
-  name: string;
-  email: Array<{ value: string; primary: boolean }>;
-  phone: Array<{ value: string; primary: boolean }>;
-  org_id?: number;
-}
-
-export function usePipedriveSync() {
-  const { getToken } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const getPipedriveToken = useCallback(async () => {
-    try {
-      const token = await getToken({ template: "pipedrive_oauth" });
-      return token;
+### Files Modified
+- ✅ `packages/integrations/src/pipedrive.ts` - Official SDK integration
+- ✅ `apps/website/src/actions/integrations/pipedrive-sync.ts` - Complete sync implementation
+- ✅ `apps/website/src/hooks/use-pipedrive-sync.ts` - BetterAuth integration
+- ✅ `services/flows-pieces/pieces/alecia-pipedrive/` - OAuth2 in Activepieces
     } catch (err) {
       setError("Failed to get Pipedrive token");
       return null;
