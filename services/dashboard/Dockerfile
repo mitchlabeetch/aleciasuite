@@ -1,19 +1,39 @@
+# Lean Node.js 20 base
 FROM node:20-alpine
 
+# System dependencies
+RUN apk add --no-cache \
+    docker-cli \
+    git \
+    curl
+
+# App directory
 WORKDIR /app
 
+# Copy package files
+COPY package*.json ./
+
 # Install dependencies
-COPY package.json ./
 RUN npm install --production
 
-# Copy application files
+# Copy application code
 COPY server.js ./
-COPY public ./public
-COPY views ./views
+COPY views/ ./views/
+COPY public/ ./public/
 
+# Non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 dashboard
+RUN chown -R dashboard:nodejs /app
+
+USER dashboard
+
+# Expose port
 EXPOSE 3100
 
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3100/health', (r) => { process.exit(r.statusCode === 200 ? 0 : 1); });"
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
+    CMD curl -f http://localhost:3100/health || exit 1
 
+# Start server
 CMD ["node", "server.js"]
