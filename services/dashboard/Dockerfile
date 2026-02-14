@@ -23,7 +23,7 @@ COPY public/ ./public/
 
 # Non-root user
 RUN addgroup -g 1001 -S nodejs && \
-    adduser -S dashboard -u 1001 && \
+    adduser -S dashboard -u 1001 -G nodejs && \
     chown -R dashboard:nodejs /app
 
 USER dashboard
@@ -32,7 +32,7 @@ USER dashboard
 EXPOSE 3100
 
 # Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=20s --retries=3 \
     CMD curl -f http://localhost:3100/health || exit 1
 
 # Start server
