@@ -16,6 +16,11 @@ import {
 } from "@alepanel/ui";
 import { DEFAULT_LOCALE } from "@/lib/constants";
 
+// Type guard for user with role
+interface UserWithRole {
+	role?: "sudo" | "partner" | "advisor" | "user";
+}
+
 /**
  * Admin Layout Client Component
  *
@@ -53,6 +58,9 @@ export default function AdminLayoutClient({
 		return null;
 	}
 
+	// Extract user role with type safety
+	const userRole = (session.user as UserWithRole)?.role || "sudo";
+
 	return (
 		<SidebarProvider>
 			<div className="min-h-screen bg-white dark:bg-[#09090b] flex">
@@ -62,7 +70,7 @@ export default function AdminLayoutClient({
 					appContext="panel"
 					currentPath={pathname || ""}
 					locale="fr"
-					userRole={(session?.user as any)?.role || "sudo"}
+					userRole={userRole}
 				/>
 
 				{/* Main content area */}

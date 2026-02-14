@@ -138,7 +138,7 @@ export async function refreshAccessToken(
 
 /**
  * Create a Pipedrive API client with OAuth2 authentication
- * 
+ *
  * @param accessToken - The OAuth2 access token
  * @returns Typed API client instances for deals, persons, and organizations
  */
