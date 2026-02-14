@@ -57,6 +57,45 @@ All services should show "Up (healthy)".
 - https://vault.alecia.markets - Vaultwarden
 - https://docs.alecia.markets - Stirling-PDF
 - https://s3.alecia.markets - Minio console
+- https://serveradministration.alecia.markets - Dashboard d'administration
+
+## 📊 Dashboard d'Administration
+
+Le tableau de bord est accessible à : **https://serveradministration.alecia.markets**
+
+### Fonctionnalités
+
+- ✅ Vue d'ensemble de tous les services
+- 🔄 Démarrer/arrêter les services
+- 📋 Consulter les logs en temps réel
+- 🔄 Mettre à jour depuis GitHub
+- 🇫🇷 Interface 100% en français
+
+### Utilisation
+
+1. **Démarrer tous les services** : Bouton "▶️ Démarrer Tout"
+2. **Arrêter tous les services** : Bouton "⏹️ Arrêter Tout"
+3. **Mettre à jour** : Bouton "🔄 Mettre à Jour"
+4. **Gérer un service** : Utilisez les boutons sur chaque carte de service
+5. **Voir les logs** : Cliquez sur "📋 Logs" pour voir les logs en temps réel
+
+### Sécurité du Dashboard
+
+Par défaut, le dashboard est accessible publiquement. Pour production, considérez :
+
+1. **Activer l'authentification basique dans Caddy**:
+   Décommentez les lignes dans `infrastructure/caddy/Caddyfile`:
+   ```caddyfile
+   serveradministration.alecia.markets {
+       basicauth /* {
+           admin JDJhJDE0JHhoYXNoZWRfcGFzc3dvcmQ  # généré avec caddy hash-password
+       }
+       reverse_proxy alecia-dashboard:3100
+   }
+   ```
+
+2. **Restreindre l'accès par IP** (optionnel):
+   Ajoutez des règles de pare-feu UFW pour n'autoriser que certaines IPs.
 
 ## Troubleshooting
 

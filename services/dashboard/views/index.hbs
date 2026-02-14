@@ -1,0 +1,55 @@
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h2>État des Services</h2>
+    <div class="actions">
+      <button onclick="startAll()" class="btn btn-success">▶️ Démarrer Tout</button>
+      <button onclick="stopAll()" class="btn btn-danger">⏹️ Arrêter Tout</button>
+      <button onclick="updateFromGitHub()" class="btn btn-primary">🔄 Mettre à Jour</button>
+    </div>
+  </header>
+  
+  {{#if error}}
+  <div class="alert alert-error">
+    {{error}}
+  </div>
+  {{/if}}
+  
+  <div class="services-grid">
+    {{#each services}}
+    <div class="service-card {{#if (eq status 'running')}}status-running{{else}}status-stopped{{/if}}">
+      <div class="service-header">
+        <span class="service-icon">{{icon}}</span>
+        <h3>{{name}}</h3>
+      </div>
+      
+      <div class="service-body">
+        <div class="status-badge {{status}}">
+          {{#if (eq status 'running')}}
+          ✅ En ligne
+          {{else if (eq status 'exited')}}
+          ⚠️ Arrêté
+          {{else}}
+          ❌ Absent
+          {{/if}}
+        </div>
+        
+        <p class="uptime">{{uptime}}</p>
+        
+        {{#if url}}
+        <a href="{{url}}" target="_blank" class="service-link">🔗 Accéder</a>
+        {{/if}}
+      </div>
+      
+      <div class="service-actions">
+        {{#if containerId}}
+        <button onclick="restartService('{{id}}')" class="btn btn-sm">🔄 Redémarrer</button>
+        <button onclick="stopService('{{id}}')" class="btn btn-sm">⏹️ Arrêter</button>
+        <a href="/logs/{{id}}" class="btn btn-sm">📋 Logs</a>
+        {{/if}}
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<div id="notification" class="notification hidden"></div>

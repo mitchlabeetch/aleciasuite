@@ -400,6 +400,27 @@ services:
             - "127.0.0.1:3003:3000"
 
     # ============================================
+    # DASHBOARD (Administration UI)
+    # ============================================
+
+    alecia-dashboard:
+        build:
+            context: ./services/dashboard
+            dockerfile: Dockerfile
+        container_name: alecia-dashboard
+        restart: unless-stopped
+        ports:
+            - "3100:3100"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - .:/app:ro
+        environment:
+            - NODE_ENV=production
+            - PORT=3100
+        networks:
+            - default
+
+    # ============================================
     # REVERSE PROXY (Caddy)
     # ============================================
 
@@ -437,6 +458,7 @@ services:
             - gotenberg
             - minio
             - hocuspocus
+            - alecia-dashboard
 
 volumes:
     postgres_data:
