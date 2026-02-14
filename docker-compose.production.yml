@@ -182,7 +182,6 @@ services:
         restart: unless-stopped
         environment:
             NODE_ENV: production
-            DATABASE_CLIENT: postgres
             DATABASE_HOST: alecia-postgres
             DATABASE_PORT: 5432
             DATABASE_NAME: strapi
@@ -410,10 +409,11 @@ services:
             - "3100:3100"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock:ro
-            - .:/app:ro
+            - ./docker-compose.production.yml:/app/docker-compose.production.yml:ro
         environment:
             - NODE_ENV=production
             - PORT=3100
+            - DOCKER_COMPOSE_FILE=/app/docker-compose.production.yml
         networks:
             - default
 

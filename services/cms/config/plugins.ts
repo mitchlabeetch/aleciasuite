@@ -8,14 +8,14 @@ export default ({ env }: { env: (key: string, fallback?: any) => any }) => ({
       providerOptions: {
         s3Options: {
           credentials: {
-            accessKeyId: env("MINIO_ACCESS_KEY"),
-            secretAccessKey: env("MINIO_SECRET_KEY"),
+            accessKeyId: env("AWS_ACCESS_KEY_ID"),
+            secretAccessKey: env("AWS_ACCESS_SECRET"),
           },
           region: "us-east-1",
-          endpoint: env("MINIO_ENDPOINT", "https://s3.alecia.fr"),
+          endpoint: env("AWS_ENDPOINT", "http://alecia-minio:9000"),
           forcePathStyle: true,
           params: {
-            Bucket: env("MINIO_BUCKET", "alecia-media"),
+            Bucket: env("AWS_BUCKET", "strapi-uploads"),
           },
         },
       },

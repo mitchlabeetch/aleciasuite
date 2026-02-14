@@ -9,12 +9,6 @@ export default [
   "strapi::poweredBy",
   "strapi::query",
   "strapi::body",
-  // BetterAuth SSO middleware — auto-provisions users from Caddy headers
-  // Must come before strapi::session to set auth context
-  {
-    name: "global::better-auth-sso",
-    config: {},
-  },
   "strapi::session",
   "strapi::favicon",
   "strapi::public",
