@@ -34,6 +34,47 @@ const MODELS = {
 };
 
 // ============================================
+// PAPPERS API TYPES
+// ============================================
+
+interface PappersFinanceItem {
+  annee?: number;
+  chiffre_affaires?: number;
+  resultat?: number;
+}
+
+interface PappersDirigeant {
+  nom?: string;
+  prenom?: string;
+  fonction?: string;
+}
+
+interface PappersCompany {
+  nom_entreprise?: string;
+  siren?: string;
+  siret_siege?: string;
+  code_naf?: string;
+  libelle_code_naf?: string;
+  numero_tva_intracommunautaire?: string;
+  chiffre_affaires?: number;
+  resultat?: number;
+  annee_comptes?: number;
+  effectif?: number;
+  forme_juridique?: string;
+  date_creation?: string;
+  capital?: number;
+  siege?: {
+    adresse_ligne_1?: string;
+    adresse_ligne_2?: string;
+    ville?: string;
+    code_postal?: string;
+    pays?: string;
+  };
+  finances?: PappersFinanceItem[];
+  dirigeants?: PappersDirigeant[];
+}
+
+// ============================================
 // TEXT AI (GROQ)
 // ============================================
 
@@ -284,7 +325,7 @@ export async function suggestValuation(args: {
   if (!groq) throw new Error("Groq API key not configured");
 
   // First, use our calculateMultiples for initial estimate
-  let baseValuation: any = null;
+  let baseValuation: Awaited<ReturnType<typeof calculateMultiples>> | null = null;
   if (args.revenue && args.ebitda) {
     baseValuation = await calculateMultiples({
       revenue: args.revenue,
@@ -462,7 +503,7 @@ export async function searchCompanyPappers(query: string) {
 
   const data = await response.json();
 
-  return data.resultats.map((company: any) => ({
+  return data.resultats.map((company: PappersCompany) => ({
     name: company.nom_entreprise || "",
     siren: company.siren,
     nafCode: company.code_naf,
@@ -502,7 +543,7 @@ export async function getCompanyBySirenPappers(siren: string) {
     throw new Error(`Pappers API error: ${response.statusText}`);
   }
 
-  const company = await response.json();
+  const company: PappersCompany = await response.json();
 
   return {
     name: company.nom_entreprise || "",
@@ -520,7 +561,7 @@ export async function getCompanyBySirenPappers(siren: string) {
     financials: {
       revenue: company.chiffre_affaires,
       ebitda: company.resultat,
-      history: company.finances?.map((f: any) => ({
+      history: company.finances?.map((f: PappersFinanceItem) => ({
         year: f.annee,
         revenue: f.chiffre_affaires,
         ebitda: f.resultat,
@@ -530,7 +571,7 @@ export async function getCompanyBySirenPappers(siren: string) {
     formeJuridique: company.forme_juridique,
     dateCreation: company.date_creation,
     capital: company.capital,
-    dirigeants: company.dirigeants?.map((d: any) => ({
+    dirigeants: company.dirigeants?.map((d: PappersDirigeant) => ({
       nom: d.nom,
       prenom: d.prenom,
       fonction: d.fonction,

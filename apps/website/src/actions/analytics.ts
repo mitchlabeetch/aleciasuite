@@ -275,7 +275,7 @@ export async function getSummary(args?: { days?: number }): Promise<AnalyticsSum
 /**
  * Get or set cached analytics data
  */
-export async function getCache(cacheKey: string): Promise<any | null> {
+export async function getCache(cacheKey: string): Promise<Record<string, unknown> | null> {
   const now = Date.now();
 
   const [cache] = await db
@@ -292,7 +292,7 @@ export async function getCache(cacheKey: string): Promise<any | null> {
 /**
  * Set cached analytics data
  */
-export async function setCache(cacheKey: string, data: any, ttlMs?: number) {
+export async function setCache(cacheKey: string, data: Record<string, unknown>, ttlMs?: number) {
   const ttl = ttlMs ?? 60 * 60 * 1000; // 1 hour default
   const now = Date.now();
   const expiresAt = now + ttl;
