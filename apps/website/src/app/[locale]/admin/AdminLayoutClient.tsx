@@ -14,6 +14,7 @@ import {
 	SidebarProvider,
 	defaultSidebarConfig,
 } from "@alepanel/ui";
+import { DEFAULT_LOCALE } from "@/lib/constants";
 
 /**
  * Admin Layout Client Component
@@ -47,7 +48,7 @@ export default function AdminLayoutClient({
 
 	// Not authenticated - redirect to sign-in
 	if (!session) {
-		const locale = pathname?.split('/')[1] || 'fr';
+		const locale = pathname?.split('/')[1] || DEFAULT_LOCALE;
 		router.push(`/${locale}/admin-sign-in`);
 		return null;
 	}

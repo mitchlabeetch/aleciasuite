@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
+import { getLocaleFromParams } from "@/lib/constants";
 
 /**
  * Documents Management Page - Redirects to Colab
@@ -11,11 +12,13 @@ import { useRouter } from "next/navigation";
  */
 export default function DocumentsPage() {
 	const router = useRouter();
+	const params = useParams();
+	const locale = getLocaleFromParams(params);
 
 	useEffect(() => {
 		// Redirect to Colab documents page
-		router.replace("/admin/colab?view=documents");
-	}, [router]);
+		router.replace(`/${locale}/admin/colab?view=documents`);
+	}, [router, locale]);
 
 	return (
 		<div className="flex items-center justify-center min-h-screen">
