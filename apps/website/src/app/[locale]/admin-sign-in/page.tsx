@@ -4,7 +4,7 @@ import { useState } from "react";
 import { signIn } from "@alepanel/auth/client";
 import { useRouter, useParams } from "next/navigation";
 import { Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
-import { DEFAULT_LOCALE } from "@/lib/constants";
+import { getLocaleFromParams } from "@/lib/constants";
 
 /**
  * Admin Sign In Page - Better Auth
@@ -15,7 +15,7 @@ import { DEFAULT_LOCALE } from "@/lib/constants";
 export default function AdminSignInPage() {
 	const router = useRouter();
 	const params = useParams();
-	const locale = Array.isArray(params?.locale) ? params.locale[0] : (params?.locale || DEFAULT_LOCALE);
+	const locale = getLocaleFromParams(params);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
