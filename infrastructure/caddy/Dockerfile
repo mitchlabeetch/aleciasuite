@@ -1,20 +1,10 @@
 # infrastructure/caddy/Dockerfile
-# Caddy reverse proxy with OVH DNS plugin for wildcard TLS certificates
+# Caddy reverse proxy with automatic HTTPS using HTTP-01 challenge
 #
-# This image provides automatic HTTPS for all *.alecia.fr subdomains
-# using DNS-01 challenge via OVH API
-
-FROM caddy:2-builder AS builder
-
-# Build Caddy with OVH DNS plugin for DNS-01 challenge
-# This allows us to get wildcard certificates for *.alecia.fr
-RUN xcaddy build \
-    --with github.com/caddy-dns/ovh
+# This image provides automatic HTTPS for all alecia.markets subdomains
+# using HTTP-01 challenge (requires DNS A records pointing to the VPS)
 
 FROM caddy:2-alpine
-
-# Copy the custom-built Caddy binary with OVH DNS support
-COPY --from=builder /usr/bin/caddy /usr/bin/caddy
 
 # Copy Caddyfile configuration
 COPY infrastructure/caddy/Caddyfile /etc/caddy/Caddyfile

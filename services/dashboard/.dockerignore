@@ -1,0 +1,49 @@
+# Node modules (installed during build)
+node_modules
+
+# Git files
+.git
+.gitignore
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Documentation
+*.md
+README*
+
+# Test files
+test
+tests
+*.test.js
+*.spec.js
+
+# Build artifacts
+dist
+build
+.cache
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp
+temp
+*.tmp
