@@ -208,7 +208,7 @@ export default function ExcelImportPage() {
 
 	// Load OneDrive files when on step 1
 	const loadFiles = useCallback(
-		async (folderId?: string) => {
+		async (_folderId?: string) => {
 			if (!accessToken) return;
 			setIsLoading(true);
 			try {

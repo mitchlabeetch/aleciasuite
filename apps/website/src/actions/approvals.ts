@@ -8,7 +8,7 @@
 
 "use server";
 
-import { db, shared, bi, eq, and, desc, sql, inArray, or } from "@alepanel/db";
+import { db, shared, bi, eq, and, desc, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -249,7 +249,7 @@ export async function listMyRequests(status?: ApprovalStatus, limit = 50) {
  * List approval requests for a specific deal
  */
 export async function listByDeal(dealId: string, status?: ApprovalStatus) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const conditions = [eq(bi.approvalRequests.dealId, dealId)];
 
@@ -277,7 +277,7 @@ export async function listByDeal(dealId: string, status?: ApprovalStatus) {
  * List approval requests for a specific entity
  */
 export async function listByEntity(entityType: EntityType, entityId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const requests = await db
     .select()
@@ -301,7 +301,7 @@ export async function listByEntity(entityType: EntityType, entityId: string) {
  * Get all available approval templates
  */
 export async function getTemplates(entityType?: EntityType, activeOnly = true) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const conditions = [];
 
@@ -349,8 +349,8 @@ export async function getDefaultTemplate(entityType: EntityType) {
  * Create a new approval request
  */
 export async function createApprovalRequest(input: CreateApprovalRequestInput) {
-  const user = await getAuthenticatedUser();
-  const now = Date.now();
+  const _user = await getAuthenticatedUser();
+  const _now = Date.now();
 
   // Validate reviewers exist
   for (const reviewerId of input.assignedReviewers) {
@@ -532,8 +532,8 @@ export async function createFromTemplate(input: CreateFromTemplateInput) {
  * Submit a review (approve/reject/request changes)
  */
 export async function submitReview(input: SubmitReviewInput) {
-  const user = await getAuthenticatedUser();
-  const now = Date.now();
+  const _user = await getAuthenticatedUser();
+  const _now = Date.now();
 
   // Get request
   const requests = await db
@@ -670,7 +670,7 @@ export async function submitReview(input: SubmitReviewInput) {
 /**
  * Cancel an approval request (only requester or admin)
  */
-export async function cancelRequest(requestId: string, reason?: string) {
+export async function cancelRequest(requestId: string, _reason?: string) {
   const user = await getAuthenticatedUser();
 
   // Get request

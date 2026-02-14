@@ -19,8 +19,7 @@
 		],
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"],
-			"convex/*": ["../../convex/*"]
+			"@/*": ["./src/*"]
 		},
 		"typeRoots": ["./src/types", "./node_modules/@types"],
 		"target": "ES2017"
@@ -33,6 +32,7 @@
 		"**/*.test.ts",
 		"**/*.test.tsx",
 		"**/*.spec.ts",
-		"**/*.spec.tsx"
+		"**/*.spec.tsx",
+		"../../convex"
 	]
 }

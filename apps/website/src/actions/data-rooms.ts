@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, desc, and } from "@alepanel/db";
+import { db, shared, eq, desc } from "@alepanel/db";
 import { sign as aleciaSign } from "@alepanel/db";
 import { auth } from "@alepanel/auth";
 import { revalidatePath } from "next/cache";
@@ -81,7 +81,7 @@ async function getAuthenticatedUser() {
  * Get deal room by deal ID
  */
 export async function getDealRoom(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const room = await db.query.dealRooms.findFirst({
     where: eq(aleciaSign.dealRooms.dealId, dealId),
@@ -178,7 +178,7 @@ export async function updateDealRoom(
   roomId: string,
   data: { name?: string; description?: string; watermarkEnabled?: boolean; isActive?: boolean }
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [room] = await db
     .update(aleciaSign.dealRooms)
@@ -208,7 +208,7 @@ export async function updateDealRoom(
  * Get all folders in a room
  */
 export async function getFolders(roomId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const folders = await db.query.dealRoomFolders.findMany({
     where: eq(aleciaSign.dealRoomFolders.roomId, roomId),
@@ -222,7 +222,7 @@ export async function getFolders(roomId: string) {
  * Create a new folder
  */
 export async function createFolder(data: CreateFolderInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [folder] = await db
     .insert(aleciaSign.dealRoomFolders)
@@ -246,7 +246,7 @@ export async function createFolder(data: CreateFolderInput) {
  * Get documents in a folder (or all documents in room if no folderId)
  */
 export async function getDocuments(roomId: string, folderId?: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   if (folderId) {
     const documents = await db.query.dealRoomDocuments.findMany({
@@ -337,7 +337,7 @@ export async function uploadDocument(data: UploadDocumentInput) {
  * Delete a document
  */
 export async function deleteDocument(documentId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const document = await db.query.dealRoomDocuments.findFirst({
     where: eq(aleciaSign.dealRoomDocuments.id, documentId),
@@ -382,7 +382,7 @@ export async function logAccess(params: {
   documentId?: string;
   action: "view" | "download" | "upload" | "delete";
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get user agent and IP from headers (Next.js server context)
   const headers = await import("next/headers").then((mod) => mod.headers());
@@ -404,7 +404,7 @@ export async function logAccess(params: {
  * Get access log for a room
  */
 export async function getAccessLog(roomId: string, limit = 100) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const logs = await db.query.dealRoomAccessLog.findMany({
     where: eq(aleciaSign.dealRoomAccessLog.roomId, roomId),
@@ -438,7 +438,7 @@ export async function getAccessLog(roomId: string, limit = 100) {
  * Get questions for a room
  */
 export async function getQuestions(roomId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const questions = await db.query.dealRoomQuestions.findMany({
     where: eq(aleciaSign.dealRoomQuestions.roomId, roomId),
@@ -566,7 +566,7 @@ export async function inviteToRoom(data: InviteToRoomInput) {
  * Get invitations for a room
  */
 export async function getRoomInvitations(roomId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const invitations = await db.query.dealRoomInvitations.findMany({
     where: eq(aleciaSign.dealRoomInvitations.roomId, roomId),

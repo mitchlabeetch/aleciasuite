@@ -36,7 +36,7 @@ export async function getThreads(args?: {
   category?: string;
   dealId?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const conditions = [];
 
@@ -96,7 +96,7 @@ export async function getThreads(args?: {
 }
 
 export async function getThread(threadId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const result = await db
     .select({
@@ -245,7 +245,7 @@ export async function deleteThread(threadId: string) {
 // ============================================
 
 export async function getPosts(threadId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const result = await db
     .select({

@@ -7,7 +7,7 @@
  * Ported from Convex to Drizzle ORM + PostgreSQL.
  */
 
-import { db, colab, eq, asc, sql } from "@alepanel/db";
+import { db, colab, eq, asc } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -26,7 +26,7 @@ export async function createProperty(args: {
   type: PropertyType;
   options?: PropertyOption[];
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get the highest sort_order to append at end
   const existingProps = await db
@@ -57,7 +57,7 @@ export async function createProperty(args: {
 
 // List all property definitions for a board (sorted by sort_order)
 export async function listProperties(boardId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const properties = await db
     .select()
@@ -74,7 +74,7 @@ export async function updateProperty(args: {
   name?: string;
   options?: PropertyOption[];
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const updates: Partial<typeof colab.propertyDefinitions.$inferInsert> = {};
   if (args.name !== undefined) updates.name = args.name;
@@ -93,7 +93,7 @@ export async function updateProperty(args: {
 
 // Delete a property definition
 export async function deleteProperty(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .delete(colab.propertyDefinitions)
@@ -104,7 +104,7 @@ export async function deleteProperty(id: string) {
 
 // Reorder properties
 export async function reorderProperties(propertyIds: string[]) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Update sort_order for each property
   for (let i = 0; i < propertyIds.length; i++) {
@@ -122,7 +122,7 @@ export async function addPropertyOption(args: {
   propertyId: string;
   option: PropertyOption;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const property = await db.query.propertyDefinitions.findFirst({
     where: eq(colab.propertyDefinitions.id, args.propertyId),

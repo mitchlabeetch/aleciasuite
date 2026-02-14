@@ -314,7 +314,7 @@ function ImageViewer({ url, _fileName }: { url: string; _fileName: string }) {
  */
 function UnsupportedViewer({
 	fileName,
-	fileType,
+	_fileType,
 	onDownload,
 }: {
 	fileName: string;

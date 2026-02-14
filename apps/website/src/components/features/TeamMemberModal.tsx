@@ -2,7 +2,6 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Linkedin } from "lucide-react";
 import Image from "next/image";
-import { deals } from "@/data/_deprecated/deals";
 
 interface TeamMemberModalProps {
 	member: any;
@@ -10,9 +9,8 @@ interface TeamMemberModalProps {
 
 export function TeamMemberModal({ member }: TeamMemberModalProps) {
 	// Filter deals based on member's dealIds
-	const memberDeals = deals.filter((deal) =>
-		member.dealIds.includes(deal.slug),
-	);
+	// TODO: Restore deal data from database when team member deals are implemented
+	const memberDeals: any[] = [];
 
 	return (
 		<Dialog>

@@ -10,8 +10,8 @@ export function LogoDisplay({
 	logo,
 	placeholder,
 	containerSize,
-	padding,
-	placeholderSize,
+	_padding,
+	_placeholderSize,
 }: LogoDisplayProps) {
 	return (
 		<div

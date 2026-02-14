@@ -40,7 +40,7 @@ export async function getTasks(args?: {
   assigneeId?: string;
   dealId?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const conditions = [];
 
@@ -124,7 +124,7 @@ export async function getMyTasks() {
  * Get task statistics
  */
 export async function getTaskStats() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tasks = await db.query.researchTasks.findMany();
 

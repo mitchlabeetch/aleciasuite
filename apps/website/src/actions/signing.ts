@@ -50,7 +50,7 @@ export interface RecordSignatureInput {
  * Get all signature requests for a deal
  */
 export async function getSignRequests(dealId?: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   if (dealId) {
     // Get requests for a specific deal
@@ -75,7 +75,7 @@ export async function getSignRequests(dealId?: string) {
  * Get signature requests by signer email
  */
 export async function getSignRequestsBySigner(signerEmail: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const requests = await db.query.signingAuditTrail.findMany({
     where: eq(sign.signingAuditTrail.signerEmail, signerEmail),
@@ -91,7 +91,7 @@ export async function getSignRequestsBySigner(signerEmail: string) {
  * would be done separately via API calls.
  */
 export async function createSignRequest(data: CreateSignRequestInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Require dealId
   if (!data.dealId) {
@@ -129,7 +129,7 @@ export async function createSignRequest(data: CreateSignRequestInput) {
  * Record a signature event (signed, declined, etc.)
  */
 export async function recordSignatureEvent(data: RecordSignatureInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Require dealId
   if (!data.dealId) {
@@ -173,7 +173,7 @@ export async function recordSignatureEvent(data: RecordSignatureInput) {
  * Get signature audit trail for a deal
  */
 export async function getSignatureAuditTrail(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const trail = await db.query.signingAuditTrail.findMany({
     where: eq(sign.signingAuditTrail.dealId, dealId),
@@ -187,7 +187,7 @@ export async function getSignatureAuditTrail(dealId: string) {
  * Get signature audit trail for a document
  */
 export async function getDocumentSignatureTrail(documentId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const trail = await db.query.signingAuditTrail.findMany({
     where: eq(sign.signingAuditTrail.documentId, documentId),
@@ -289,7 +289,7 @@ export async function handleDocuSealWebhook(
  * Get signature statistics for a deal
  */
 export async function getSignatureStats(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const trail = await db.query.signingAuditTrail.findMany({
     where: eq(sign.signingAuditTrail.dealId, dealId),
@@ -332,7 +332,7 @@ export async function getSignatureStats(dealId: string) {
  * Get all signers for a deal (unique emails)
  */
 export async function getDealSigners(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const trail = await db.query.signingAuditTrail.findMany({
     where: eq(sign.signingAuditTrail.dealId, dealId),

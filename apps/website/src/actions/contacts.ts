@@ -57,7 +57,7 @@ async function getAuthenticatedUser() {
  * Get all contacts with optional filtering
  */
 export async function getContacts(filters?: ContactFilters) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const conditions = [];
 
@@ -102,7 +102,7 @@ export async function getContacts(filters?: ContactFilters) {
  * Get a single contact by ID
  */
 export async function getContactById(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const contact = await db.query.contacts.findFirst({
     where: eq(shared.contacts.id, id),
@@ -122,7 +122,7 @@ export async function getContactById(id: string) {
  * Get a contact by email (for deduplication)
  */
 export async function getContactByEmail(email: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const contact = await db.query.contacts.findFirst({
     where: eq(shared.contacts.email, email),
@@ -138,7 +138,7 @@ export async function getContactByEmail(email: string) {
  * Get a contact by external ID (for OAuth sync)
  */
 export async function getContactByExternalId(externalId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const contact = await db.query.contacts.findFirst({
     where: eq(shared.contacts.externalId, externalId),
@@ -151,7 +151,7 @@ export async function getContactByExternalId(externalId: string) {
  * Create a new contact
  */
 export async function createContact(data: CreateContactInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check for duplicate email
   if (data.email) {
@@ -205,7 +205,7 @@ export async function createContact(data: CreateContactInput) {
  * Update an existing contact
  */
 export async function updateContact(id: string, data: Partial<CreateContactInput>) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existingContact = await db.query.contacts.findFirst({
     where: eq(shared.contacts.id, id),
@@ -263,7 +263,7 @@ export async function updateContact(id: string, data: Partial<CreateContactInput
  * Delete a contact
  */
 export async function deleteContact(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const contact = await db.query.contacts.findFirst({
     where: eq(shared.contacts.id, id),
@@ -286,7 +286,7 @@ export async function deleteContact(id: string) {
  * Used for autocomplete and quick lookup
  */
 export async function searchContacts(query: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   if (!query || query.length < 2) {
     return [];
@@ -323,7 +323,7 @@ export async function searchContacts(query: string) {
  * Get contacts for a specific company
  */
 export async function getContactsForCompany(companyId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const contacts = await db.query.contacts.findMany({
     where: eq(shared.contacts.companyId, companyId),
@@ -337,7 +337,7 @@ export async function getContactsForCompany(companyId: string) {
  * Bulk create contacts (for import/sync operations)
  */
 export async function bulkCreateContacts(contacts: CreateContactInput[]) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Implement proper bulk insert with deduplication
   // For now, we'll create one at a time with error handling

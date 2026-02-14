@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, and, desc, sql, isNull, or, ilike } from "@alepanel/db";
+import { db, shared, eq, and, desc, or, ilike } from "@alepanel/db";
 import { auth } from "@alepanel/auth";
 import { revalidatePath } from "next/cache";
 
@@ -88,7 +88,7 @@ async function getAuthenticatedUser() {
  * Get all deals with optional filtering and enriched data
  */
 export async function getDeals(filters?: DealFilters) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Build where conditions
   const conditions = [];
@@ -153,7 +153,7 @@ export async function getDeals(filters?: DealFilters) {
  * Get a single deal by ID with full enrichment
  */
 export async function getDealById(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, id),
@@ -224,7 +224,7 @@ export async function createDeal(data: CreateDealInput) {
  * Update an existing deal
  */
 export async function updateDeal(id: string, data: Partial<CreateDealInput>) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check if deal exists
   const existingDeal = await db.query.deals.findFirst({
@@ -258,7 +258,7 @@ export async function updateDealStage(
   stage: DealStage,
   reason?: string
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existingDeal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, id),
@@ -298,7 +298,7 @@ export async function updateDealStage(
  * Archive a deal (soft delete)
  */
 export async function archiveDeal(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .update(shared.deals)
@@ -316,7 +316,7 @@ export async function archiveDeal(id: string) {
  * Restore an archived deal
  */
 export async function restoreDeal(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .update(shared.deals)
@@ -334,7 +334,7 @@ export async function restoreDeal(id: string) {
  * Get pipeline statistics
  */
 export async function getPipelineStats(): Promise<PipelineStats> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get all active deals
   const activeDeals = await db.query.deals.findMany({
@@ -412,7 +412,7 @@ export async function getPipelineStats(): Promise<PipelineStats> {
  * Get deal stage history
  */
 export async function getDealStageHistory(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const history = await db.query.dealStageHistory.findMany({
     where: eq(shared.dealStageHistory.dealId, dealId),

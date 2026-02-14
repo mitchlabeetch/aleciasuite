@@ -4,7 +4,7 @@
 // Ported from convex/cms.ts
 // TODO: Migrate to Strapi CMS once deployed
 
-import { db, shared, eq, and, desc, sql } from "@alepanel/db";
+import { db, shared, eq, desc, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -18,7 +18,8 @@ interface SitePage {
   updatedAt?: Date;
 }
 
-interface Proposal {
+// Unused interface - kept for future use
+interface _Proposal {
   id: string;
   targetPageId: string;
   title: string;

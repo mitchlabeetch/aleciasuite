@@ -81,7 +81,7 @@ export interface ActivityItem {
  * Get deals for Numbers tool selector
  */
 export async function getDealsForNumbers(limit: number = 50): Promise<DealSummary[]> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deals = await db.query.deals.findMany({
     where: eq(shared.deals.isArchived, false),
@@ -103,7 +103,7 @@ export async function getDealsForNumbers(limit: number = 50): Promise<DealSummar
  * Get a single deal by ID for Numbers tools
  */
 export async function getDealById(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, dealId),
@@ -138,7 +138,7 @@ export async function getDealById(dealId: string) {
  * Get all Numbers data for a specific deal
  */
 export async function getDealNumbersData(dealId: string): Promise<DealNumbersData> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [
     feeCalculations,

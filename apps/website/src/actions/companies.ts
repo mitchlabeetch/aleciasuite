@@ -71,7 +71,7 @@ async function getAuthenticatedUser() {
  * Get all companies with optional filtering
  */
 export async function getCompanies(filters?: CompanyFilters) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const whereConditions = [];
 
@@ -102,7 +102,7 @@ export async function getCompanies(filters?: CompanyFilters) {
  * Get a single company by ID
  */
 export async function getCompanyById(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const company = await db.query.companies.findFirst({
     where: eq(shared.companies.id, id),
@@ -119,7 +119,7 @@ export async function getCompanyById(id: string) {
  * Get a company by SIREN (French company identifier)
  */
 export async function getCompanyBySiren(siren: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const company = await db.query.companies.findFirst({
     where: eq(shared.companies.siren, siren),
@@ -132,7 +132,7 @@ export async function getCompanyBySiren(siren: string) {
  * Create a new company
  */
 export async function createCompany(data: CreateCompanyInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [company] = await db
     .insert(shared.companies)
@@ -162,7 +162,7 @@ export async function createCompany(data: CreateCompanyInput) {
  * Update an existing company
  */
 export async function updateCompany(id: string, data: Partial<CreateCompanyInput>) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existingCompany = await db.query.companies.findFirst({
     where: eq(shared.companies.id, id),
@@ -191,7 +191,7 @@ export async function updateCompany(id: string, data: Partial<CreateCompanyInput
  * Delete a company
  */
 export async function deleteCompany(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check if company has associated deals
   const associatedDeals = await db.query.deals.findFirst({
@@ -219,7 +219,7 @@ export async function deleteCompany(id: string) {
  * - Credit scores and risk indicators
  */
 export async function enrichCompany(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const company = await db.query.companies.findFirst({
     where: eq(shared.companies.id, id),
@@ -329,7 +329,7 @@ export async function enrichCompany(id: string) {
  * Used for autocomplete and quick lookup
  */
 export async function searchCompanies(query: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   if (!query || query.length < 2) {
     return [];
@@ -357,7 +357,7 @@ export async function searchCompanies(query: string) {
  * Get companies related to a user's deals (for relationship mapping)
  */
 export async function getCompaniesForUser(userId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get all deals owned by this user
   const userDeals = await db.query.deals.findMany({

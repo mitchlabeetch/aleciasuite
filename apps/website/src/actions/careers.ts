@@ -4,7 +4,7 @@
 // Ported from convex/careers.ts
 // TODO: Migrate to Strapi CMS once deployed
 
-import { db, shared, eq, desc, sql } from "@alepanel/db";
+import { db, shared, eq, sql } from "@alepanel/db";
 import { revalidatePath } from "next/cache";
 
 interface JobOffer {

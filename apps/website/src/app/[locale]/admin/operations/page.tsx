@@ -188,7 +188,7 @@ export default function OperationsAdminPage() {
 		}
 	};
 
-	const handleDelete = async (id: string) => {
+	const handleDelete = async (_id: string) => {
 		if (!confirm("Êtes-vous sûr de vouloir supprimer cette transaction ?"))
 			return;
 

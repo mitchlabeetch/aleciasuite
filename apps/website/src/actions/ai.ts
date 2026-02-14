@@ -8,7 +8,6 @@
 "use server";
 
 import { db, shared, bi, eq } from "@alepanel/db";
-import { getAuthenticatedUser } from "./lib/auth";
 
 // ============================================
 // LAZY CLIENT INITIALIZATION
@@ -100,7 +99,7 @@ export async function generateDealEmbedding(dealId: string) {
     encoding_format: "float",
   });
 
-  const vector = response.data[0].embedding;
+  const _vector = response.data[0].embedding;
 
   await db.insert(bi.embeddings).values({
     dealId,

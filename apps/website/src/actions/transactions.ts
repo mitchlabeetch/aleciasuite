@@ -96,7 +96,7 @@ export async function getTransactionByDeal(dealId: string) {
  * Create a new transaction
  */
 export async function createTransaction(input: CreateTransactionInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get max display order
   const maxOrderResult = await db
@@ -145,7 +145,7 @@ export async function createTransaction(input: CreateTransactionInput) {
  * Update an existing transaction
  */
 export async function updateTransaction(input: UpdateTransactionInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const { id, ...updates } = input;
 
@@ -198,7 +198,7 @@ export async function updateTransaction(input: UpdateTransactionInput) {
  * Delete a transaction
  */
 export async function removeTransaction(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .delete(shared.transactions)
@@ -212,7 +212,7 @@ export async function removeTransaction(id: string) {
  * Reorder transactions
  */
 export async function reorderTransactions(orderedIds: string[]) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   for (let i = 0; i < orderedIds.length; i++) {
     await db
@@ -229,7 +229,7 @@ export async function reorderTransactions(orderedIds: string[]) {
  * Duplicate a transaction
  */
 export async function duplicateTransaction(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get original transaction
   const original = await getTransactionById(id);

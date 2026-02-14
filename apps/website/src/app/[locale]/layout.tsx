@@ -4,7 +4,6 @@ import React from 'react';
 
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Playfair_Display } from "next/font/google";
 import { Providers } from "@/components/providers";
 import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
@@ -45,13 +44,32 @@ const bierstadt = localFont({
 	display: "swap",
 });
 
-// Playfair Display substitute using local Bierstadt assets (avoid build-time fetches)
-const playfair = Playfair_Display({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-playfair",
-  display: "swap",
+// Playfair Display loaded locally (avoid build-time network fetches)
+const playfair = localFont({
+	src: [
+		{
+			path: "../../assets/fonts/PlayfairDisplay-Regular.ttf",
+			weight: "400",
+			style: "normal",
+		},
+		{
+			path: "../../assets/fonts/PlayfairDisplay-Bold.ttf",
+			weight: "700",
+			style: "normal",
+		},
+		{
+			path: "../../assets/fonts/PlayfairDisplay-Italic.ttf",
+			weight: "400",
+			style: "italic",
+		},
+		{
+			path: "../../assets/fonts/PlayfairDisplay-BoldItalic.ttf",
+			weight: "700",
+			style: "italic",
+		},
+	],
+	variable: "--font-playfair",
+	display: "swap",
 });
 
 // Required for static page generation with next-intl

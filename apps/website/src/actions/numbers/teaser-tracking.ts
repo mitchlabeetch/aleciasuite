@@ -59,7 +59,7 @@ export interface UpdateTeaserTrackingInput {
  * Create a new teaser tracking entry
  */
 export async function createTeaserTracking(data: CreateTeaserTrackingInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [tracking] = await db
     .insert(numbers.teaserTracking)
@@ -84,7 +84,7 @@ export async function createTeaserTracking(data: CreateTeaserTrackingInput) {
  * Update a teaser tracking entry
  */
 export async function updateTeaserTracking(id: string, data: UpdateTeaserTrackingInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existing = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -114,7 +114,7 @@ export async function updateTeaserTracking(id: string, data: UpdateTeaserTrackin
  * Get all teaser tracking entries for a deal
  */
 export async function getDealTeaserTracking(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findMany({
     where: eq(numbers.teaserTracking.dealId, dealId),
@@ -128,7 +128,7 @@ export async function getDealTeaserTracking(dealId: string) {
  * Get all teaser tracking entries (with optional limit)
  */
 export async function getAllTeaserTracking(limit: number = 50) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findMany({
     orderBy: [desc(numbers.teaserTracking.createdAt)],
@@ -142,7 +142,7 @@ export async function getAllTeaserTracking(limit: number = 50) {
  * Get a specific teaser tracking entry
  */
 export async function getTeaserTracking(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -159,7 +159,7 @@ export async function getTeaserTracking(id: string) {
  * Delete a teaser tracking entry
  */
 export async function deleteTeaserTracking(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -183,7 +183,7 @@ export async function deleteTeaserTracking(id: string) {
  * Mark teaser as opened
  */
 export async function markTeaserOpened(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -214,7 +214,7 @@ export async function markTeaserOpened(id: string) {
  * Mark NDA as signed
  */
 export async function markNdaSigned(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -245,7 +245,7 @@ export async function markNdaSigned(id: string) {
  * Mark IM as sent
  */
 export async function markImSent(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const tracking = await db.query.teaserTracking.findFirst({
     where: eq(numbers.teaserTracking.id, id),
@@ -283,7 +283,7 @@ export async function bulkCreateTeaserTracking(
     notes?: string;
   }>
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const now = new Date();
 

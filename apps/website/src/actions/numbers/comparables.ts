@@ -99,7 +99,7 @@ export async function getComparableAnalysis(id: string) {
  * Get all comparable analyses for a specific deal
  */
 export async function getDealComparables(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const analyses = await db
     .select()

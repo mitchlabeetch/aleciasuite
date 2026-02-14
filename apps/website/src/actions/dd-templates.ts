@@ -411,7 +411,7 @@ export async function createChecklistFromTemplate(
   templateCategory: DDTemplate["category"],
   checklistName?: string
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const template = await getTemplate(templateCategory);
   if (!template) {
@@ -443,7 +443,7 @@ export async function createChecklistFromTemplate(
  * Create all standard DD checklists for a deal
  */
 export async function createStandardDDPackage(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const createdChecklists = [];
 

@@ -384,7 +384,7 @@ function CreateFolderDialog({
 
 // Upload documents component
 function UploadDocuments({
-	roomId,
+	_roomId,
 	folderId,
 	onUploaded,
 }: {

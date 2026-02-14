@@ -45,7 +45,7 @@ export async function globalSearch(args: {
   types?: SearchResultType[];
   limit?: number;
 }): Promise<SearchResult[]> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const searchQuery = args.query.toLowerCase().trim();
   if (!searchQuery || searchQuery.length < 2) return [];
@@ -177,7 +177,7 @@ export async function quickSearch(args: {
     subtitle?: string;
   }>
 > {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const searchQuery = args.query.toLowerCase().trim();
   if (!searchQuery || searchQuery.length < 2) return [];
@@ -263,7 +263,7 @@ export async function getRecentItems(args?: {
     updatedAt: string;
   }>
 > {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
   const limit = args?.limit ?? 10;
   const perType = Math.ceil(limit / 3);
 

@@ -12,14 +12,14 @@
  * 3. Client calls saveFile to record metadata in PostgreSQL
  */
 
-import { db, colab, eq, and, desc, isNull } from "@alepanel/db";
+import { db, colab, eq, and, desc } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 
 // TODO: Implement Minio client for signed URL generation
 // This is a placeholder that shows the structure needed
 export async function generateUploadUrl() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Generate a signed Minio upload URL
   // Example with minio client:
