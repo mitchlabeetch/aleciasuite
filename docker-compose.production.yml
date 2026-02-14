@@ -9,22 +9,19 @@
 #   docker compose -f docker-compose.production.yml logs -f
 #   docker compose -f docker-compose.production.yml ps
 
-version: "3.8"
-
 services:
     # ============================================
     # INFRASTRUCTURE SERVICES
     # ============================================
 
     postgres:
-        image: postgres:16-alpine
+        image: pgvector/pgvector:pg16
         container_name: alecia-postgres
         restart: unless-stopped
         environment:
             POSTGRES_DB: alecia
             POSTGRES_USER: alecia
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_MULTIPLE_DATABASES: strapi,activepieces,keycloak
         volumes:
             - postgres_data:/var/lib/postgresql/data
             - ./infrastructure/postgres/init:/docker-entrypoint-initdb.d
@@ -46,7 +43,7 @@ services:
         ports:
             - "127.0.0.1:6379:6379"
         healthcheck:
-            test: ["CMD", "redis-cli", "ping"]
+            test: ["CMD", "redis-cli", "-a", "${REDIS_PASSWORD}", "ping"]
             interval: 10s
             timeout: 5s
             retries: 5
@@ -186,7 +183,7 @@ services:
         environment:
             NODE_ENV: production
             DATABASE_CLIENT: postgres
-            DATABASE_HOST: postgres
+            DATABASE_HOST: alecia-postgres
             DATABASE_PORT: 5432
             DATABASE_NAME: strapi
             DATABASE_USERNAME: alecia
@@ -245,7 +242,7 @@ services:
             AP_POSTGRES_USERNAME: alecia
             AP_POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             AP_POSTGRES_USE_SSL: "false"
-            AP_REDIS_HOST: redis
+            AP_REDIS_HOST: alecia-redis
             AP_REDIS_PORT: 6379
             AP_REDIS_PASSWORD: ${REDIS_PASSWORD}
             AP_ENCRYPTION_KEY: ${AP_ENCRYPTION_KEY}
@@ -425,18 +422,9 @@ services:
     # ============================================
 
     caddy:
-        image: alecia/caddy:latest
-        build:
-            context: .
-            dockerfile: infrastructure/caddy/Dockerfile
-        pull_policy: never
+        image: caddy:2-alpine
         container_name: alecia-caddy
         restart: unless-stopped
-        environment:
-            OVH_ENDPOINT: ${OVH_ENDPOINT}
-            OVH_APPLICATION_KEY: ${OVH_APPLICATION_KEY}
-            OVH_APPLICATION_SECRET: ${OVH_APPLICATION_SECRET}
-            OVH_CONSUMER_KEY: ${OVH_CONSUMER_KEY}
         ports:
             - "80:80"
             - "443:443"

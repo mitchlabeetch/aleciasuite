@@ -17,9 +17,7 @@ COPY package*.json ./
 RUN npm install --production
 
 # Copy application code
-COPY server.js ./
-COPY views/ ./views/
-COPY public/ ./public/
+COPY . .
 
 # Non-root user
 RUN addgroup --system --gid 1001 nodejs
