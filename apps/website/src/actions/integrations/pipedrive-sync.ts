@@ -10,14 +10,11 @@
  * - Company and contact upserts
  */
 
-import { db, shared, eq, and, sql } from "@alepanel/db";
+import { db, shared, eq, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 import { 
-  createPipedriveClient, 
-  type PipedriveDeal, 
-  type PipedrivePerson, 
-  type PipedriveOrganization 
+  createPipedriveClient
 } from "@alepanel/integrations";
 
 // ============================================
@@ -474,23 +471,30 @@ export async function syncFromPipedrive() {
         try {
           // 1. Upsert organization if present
           let companyId: string | null = null;
-          if (deal.org_id && deal.org_name) {
-            companyId = await upsertCompanyFromPipedrive({
-              pipedriveId: deal.org_id,
-              name: deal.org_name,
-            });
+          if (deal.org_id && typeof deal.org_id === 'object' && 'value' in deal.org_id) {
+            const orgId = deal.org_id.value;
+            const orgName = deal.org_id.name || deal.org_name;
+            if (orgId && orgName) {
+              companyId = await upsertCompanyFromPipedrive({
+                pipedriveId: orgId,
+                name: orgName,
+              });
+            }
           }
 
           // 2. Upsert person if present
-          if (deal.person_id && deal.person_name && companyId) {
-            await upsertContactFromPipedrive({
-              companyId,
-              fullName: deal.person_name,
-            });
+          if (deal.person_id && typeof deal.person_id === 'object' && 'value' in deal.person_id && companyId) {
+            const personName = deal.person_id.name || deal.person_name;
+            if (personName) {
+              await upsertContactFromPipedrive({
+                companyId,
+                fullName: personName,
+              });
+            }
           }
 
           // 3. Upsert deal
-          if (companyId) {
+          if (companyId && deal.id && deal.title) {
             const existingDeal = await db
               .select()
               .from(shared.deals)
@@ -582,14 +586,18 @@ export async function syncContactsFromPipedrive() {
         try {
           // Upsert organization first if present
           let companyId: string | null = null;
-          if (person.org_id && person.org_name) {
-            companyId = await upsertCompanyFromPipedrive({
-              pipedriveId: person.org_id,
-              name: person.org_name,
-            });
+          if (person.org_id && typeof person.org_id === 'object' && 'value' in person.org_id) {
+            const orgId = person.org_id.value;
+            const orgName = person.org_id.name;
+            if (orgId && orgName) {
+              companyId = await upsertCompanyFromPipedrive({
+                pipedriveId: orgId,
+                name: orgName,
+              });
+            }
           }
 
-          if (companyId) {
+          if (companyId && person.name) {
             const email = person.email?.[0]?.value || undefined;
             const phone = person.phone?.[0]?.value || undefined;
 
@@ -681,6 +689,11 @@ export async function syncCompaniesFromPipedrive() {
 
       for (const org of organizations) {
         try {
+          // Skip if missing required fields
+          if (!org.id || !org.name) {
+            continue;
+          }
+
           const existing = await db
             .select()
             .from(shared.companies)
