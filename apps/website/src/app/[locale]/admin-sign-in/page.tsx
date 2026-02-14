@@ -2,17 +2,19 @@
 
 import { useState } from "react";
 import { signIn } from "@alepanel/auth/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
 
 /**
  * Admin Sign In Page - Better Auth
  * 
  * Authenticates Alecia team members (sudo, partner, advisor roles)
- * Redirects to /admin/dashboard after successful login
+ * Redirects to /[locale]/admin/dashboard after successful login
  */
 export default function AdminSignInPage() {
 	const router = useRouter();
+	const params = useParams();
+	const locale = params?.locale || 'fr';
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
@@ -27,14 +29,14 @@ export default function AdminSignInPage() {
 			const result = await signIn.email({
 				email,
 				password,
-				callbackURL: "/admin/dashboard",
+				callbackURL: `/${locale}/admin/dashboard`,
 			});
 
 			if (result.error) {
 				setError(result.error.message || "Échec de la connexion");
 			} else {
 				// Success - redirect happens automatically via callbackURL
-				router.push("/admin/dashboard");
+				router.push(`/${locale}/admin/dashboard`);
 			}
 		} catch (err: any) {
 			setError(err.message || "Une erreur est survenue");

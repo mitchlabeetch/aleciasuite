@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 /**
  * Settings Page
@@ -26,6 +26,8 @@ import { useRouter } from "next/navigation";
 export default function SettingsPage() {
 	const { toast } = useToast();
 	const router = useRouter();
+	const params = useParams();
+	const locale = params?.locale || 'fr';
 
 	return (
 		<div className="p-6 space-y-6">
@@ -41,7 +43,7 @@ export default function SettingsPage() {
 
 			{/* Integrations Card - Featured */}
 			<Link
-				href="/admin/settings/integrations"
+				href={`/${locale}/admin/settings/integrations`}
 				className="block rounded-2xl border-2 border-alecia-mid-blue/50 bg-gradient-to-br from-[var(--alecia-mid-blue)]/5 to-transparent dark:from-[var(--alecia-mid-blue)]/10 p-6 hover:shadow-lg hover:border-[var(--alecia-mid-blue)] transition-all duration-200"
 			>
 				<div className="flex items-start gap-4">
@@ -128,7 +130,7 @@ export default function SettingsPage() {
 					</button>
 					<button
 						type="button"
-						onClick={() => router.push("/admin/settings/integrations")}
+						onClick={() => router.push(`/${locale}/admin/settings/integrations`)}
 						className="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-muted hover:bg-muted/80 rounded-lg transition-colors touch-target"
 					>
 						<RefreshCw className="w-4 h-4" />

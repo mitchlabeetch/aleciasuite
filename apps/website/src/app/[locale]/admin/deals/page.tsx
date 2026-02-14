@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
 /**
  * Deals Pipeline Page - Redirects to Colab
@@ -11,11 +11,13 @@ import { useRouter } from "next/navigation";
  */
 export default function DealsPage() {
 	const router = useRouter();
+	const params = useParams();
+	const locale = params?.locale || 'fr';
 
 	useEffect(() => {
 		// Redirect to Colab pipeline page
-		router.replace("/admin/colab?view=pipeline");
-	}, [router]);
+		router.replace(`/${locale}/admin/colab?view=pipeline`);
+	}, [router, locale]);
 
 	return (
 		<div className="flex items-center justify-center min-h-screen">

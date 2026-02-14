@@ -41,7 +41,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "@alepanel/auth/client";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams, useRouter, useParams } from "next/navigation";
 import { integrations } from "@/actions";
 
 export default function IntegrationsPage() {
@@ -51,6 +51,8 @@ export default function IntegrationsPage() {
 	const { toast } = useToast();
 	const searchParams = useSearchParams();
 	const router = useRouter();
+	const params = useParams();
+	const locale = params?.locale || 'fr';
 
 	// Microsoft Sync
 	const {
@@ -115,7 +117,7 @@ export default function IntegrationsPage() {
 				description: `${provider === "microsoft" ? "Microsoft 365" : "Pipedrive"} a été connecté avec succès.`,
 			});
 			// Clean URL parameters
-			router.replace("/admin/settings/integrations");
+			router.replace(`/${locale}/admin/settings/integrations`);
 		} else if (error) {
 			toast({
 				title: "Erreur de connexion",
@@ -123,9 +125,9 @@ export default function IntegrationsPage() {
 				variant: "destructive",
 			});
 			// Clean URL parameters
-			router.replace("/admin/settings/integrations");
+			router.replace(`/${locale}/admin/settings/integrations`);
 		}
-	}, [searchParams, toast, router]);
+	}, [searchParams, toast, router, locale]);
 
 	// Check connection status on mount
 	const checkConnections = useCallback(async () => {

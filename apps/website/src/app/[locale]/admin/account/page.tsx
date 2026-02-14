@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signOut } from "@alepanel/auth/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,6 +16,8 @@ import { LogOut, Mail, User, Shield } from "lucide-react";
 export default function AccountPage() {
 	const { data: session, isPending } = useSession();
 	const router = useRouter();
+	const params = useParams();
+	const locale = params?.locale || 'fr';
 
 	if (isPending) {
 		return (
@@ -26,7 +28,7 @@ export default function AccountPage() {
 	}
 
 	if (!session) {
-		router.push("/fr/connexion");
+		router.push(`/${locale}/admin-sign-in`);
 		return null;
 	}
 
@@ -86,7 +88,7 @@ export default function AccountPage() {
 							variant="destructive"
 							onClick={async () => {
 								await signOut();
-								router.push("/fr/connexion");
+								router.push(`/${locale}/admin-sign-in`);
 							}}
 							className="gap-2"
 						>
