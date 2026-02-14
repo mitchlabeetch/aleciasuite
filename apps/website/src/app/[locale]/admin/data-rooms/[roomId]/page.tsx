@@ -388,7 +388,7 @@ function UploadDocuments({
 	folderId,
 	onUploaded,
 }: {
-	roomId: string;
+	_roomId: string;
 	folderId: string;
 	onUploaded: () => void;
 }) {
@@ -692,7 +692,7 @@ export default function DataRoomDetailPage() {
 						</div>
 						{selectedFolderId && (
 							<UploadDocuments
-								roomId={roomId}
+								_roomId={roomId}
 								folderId={selectedFolderId}
 								onUploaded={() => {}}
 							/>

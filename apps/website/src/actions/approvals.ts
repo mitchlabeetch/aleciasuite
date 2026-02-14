@@ -153,14 +153,26 @@ export async function getApprovalRequest(requestId: string) {
   `);
 
   const reviews = reviewsResult.rows;
-  const reviewerMap = new Map(
-    reviewersResult.rows.map((r: any) => [r.id, r])
+  
+  interface ReviewerRow {
+    id: string;
+    name: string;
+    email?: string;
+  }
+  
+  const reviewerMap = new Map<string, ReviewerRow>(
+    reviewersResult.rows.map((r) => [r.id as string, r as unknown as ReviewerRow])
   );
+
+  interface ReviewRow {
+    reviewer_id: string;
+    decision: string;
+  }
 
   const reviewers = assignedReviewers.map((id: string) => {
     const reviewer = reviewerMap.get(id);
-    const hasReviewed = reviews.some((r: any) => r.reviewer_id === id);
-    const review = reviews.find((r: any) => r.reviewer_id === id);
+    const hasReviewed = reviews.some((r) => (r as unknown as ReviewRow).reviewer_id === id);
+    const review = reviews.find((r) => (r as unknown as ReviewRow).reviewer_id === id);
 
     return {
       _id: id,
@@ -177,8 +189,8 @@ export async function getApprovalRequest(requestId: string) {
     requesterEmail: requester?.email,
     reviews,
     reviewers,
-    approvalCount: reviews.filter((r: any) => r.decision === "approved").length,
-    rejectionCount: reviews.filter((r: any) => r.decision === "rejected").length,
+    approvalCount: reviews.filter((r) => (r as unknown as ReviewRow).decision === "approved").length,
+    rejectionCount: reviews.filter((r) => (r as unknown as ReviewRow).decision === "rejected").length,
   };
 }
 
@@ -349,7 +361,7 @@ export async function getDefaultTemplate(entityType: EntityType) {
  * Create a new approval request
  */
 export async function createApprovalRequest(input: CreateApprovalRequestInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
   const _now = Date.now();
 
   // Validate reviewers exist
@@ -487,7 +499,12 @@ export async function createFromTemplate(input: CreateFromTemplateInput) {
         WHERE role = ANY(${roleNames})
           AND is_active = true
       `);
-      reviewers.push(...rolesResult.rows.map((r: any) => r.id));
+      
+      interface UserIdRow {
+        id: string;
+      }
+      
+      reviewers.push(...rolesResult.rows.map((r) => (r as unknown as UserIdRow).id));
     }
   }
 
@@ -532,7 +549,7 @@ export async function createFromTemplate(input: CreateFromTemplateInput) {
  * Submit a review (approve/reject/request changes)
  */
 export async function submitReview(input: SubmitReviewInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
   const _now = Date.now();
 
   // Get request
@@ -754,7 +771,13 @@ export async function updateRequest(input: UpdateRequestInput) {
   }
 
   // Build update object
-  const updateData: any = {};
+  const updateData: Partial<{
+    title: string;
+    description: string | null;
+    priority: Priority;
+    dueDate: Date | null;
+    metadata: Record<string, unknown>;
+  }> = {};
 
   if (input.title) {
     updateData.title = input.title;
@@ -788,7 +811,7 @@ export async function updateRequest(input: UpdateRequestInput) {
       .where(eq(bi.approvalRequests.id, input.requestId))
       .limit(1);
 
-    const currentMetadata = (currentRequest[0]?.metadata ?? {}) as Record<string, any>;
+    const currentMetadata = (currentRequest[0]?.metadata ?? {}) as Record<string, unknown>;
     updateData.metadata = {
       ...currentMetadata,
       assignedReviewers: input.assignedReviewers,
@@ -874,7 +897,17 @@ export async function updateTemplate(input: UpdateTemplateInput) {
   }
 
   // Build update object
-  const updateData: any = {};
+  const updateData: Partial<{
+    name: string;
+    description: string | null;
+    entityType: EntityType;
+    requiredApprovals: number;
+    approvalType: ApprovalType;
+    defaultReviewers: string[];
+    autoAssignRules: Record<string, unknown> | null;
+    isDefault: boolean;
+    isActive: boolean;
+  }> = {};
 
   if (input.name) updateData.name = input.name;
   if (input.description !== undefined) updateData.description = input.description;

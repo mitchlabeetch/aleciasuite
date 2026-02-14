@@ -54,7 +54,7 @@ export interface EventFilters {
  * Get Kanban columns for a deal, sorted by order
  */
 export async function getKanbanColumns(dealId?: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const columns = await db
     .select()
@@ -73,7 +73,7 @@ export async function getKanbanColumns(dealId?: string) {
  * Create a new Kanban column
  */
 export async function createKanbanColumn(input: CreateKanbanColumnInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   // Get max order for this deal
   const maxOrderResult = await db
@@ -106,7 +106,7 @@ export async function createKanbanColumn(input: CreateKanbanColumnInput) {
  * Reorder Kanban columns
  */
 export async function reorderKanbanColumns(columnIds: string[]) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   // Build CASE statement for batch update
   const cases = columnIds
@@ -125,7 +125,7 @@ export async function reorderKanbanColumns(columnIds: string[]) {
  * Delete a Kanban column
  */
 export async function deleteKanbanColumn(columnId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   await db
     .delete(bi.kanbanColumns)
@@ -142,7 +142,7 @@ export async function deleteKanbanColumn(columnId: string) {
  * Get events with optional filtering
  */
 export async function getEvents(filters?: EventFilters) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const limit = filters?.limit ?? 20;
   const offset = filters?.offset ?? 0;
@@ -186,7 +186,7 @@ export async function getEvents(filters?: EventFilters) {
  * Get all events with advanced filtering for Activity Hub
  */
 export async function getAllEvents(filters?: EventFilters) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const limit = filters?.limit ?? 50;
   const offset = filters?.offset ?? 0;
@@ -245,7 +245,7 @@ export async function getAllEvents(filters?: EventFilters) {
  * Get active users who have logged events (for filter dropdown)
  */
 export async function getActiveUsers() {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const result = await db.execute(sql`
     SELECT DISTINCT

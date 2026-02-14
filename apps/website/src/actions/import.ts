@@ -278,7 +278,7 @@ export async function upsertTeamMember(args: {
   displayOrder: number;
   isActive: boolean;
 }) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const existing = await db
     .select({ id: shared.teamMembers.id })

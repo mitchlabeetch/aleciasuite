@@ -258,7 +258,7 @@ export async function updateDealStage(
   stage: DealStage,
   reason?: string
 ) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const existingDeal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, id),

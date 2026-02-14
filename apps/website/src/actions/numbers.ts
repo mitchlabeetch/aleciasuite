@@ -94,7 +94,7 @@ async function getAuthenticatedUser() {
  * Get all valuations for a deal
  */
 export async function getValuations(dealId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const valuations = await db.query.valuations.findMany({
     where: eq(aleciaNumbers.valuations.dealId, dealId),
@@ -156,7 +156,7 @@ export async function updateValuation(
   id: string,
   data: Partial<CreateValuationInput>
 ) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const [updatedValuation] = await db
     .update(aleciaNumbers.valuations)
@@ -186,7 +186,7 @@ export async function updateValuation(
  * Get all comparables for a deal
  */
 export async function getComparables(dealId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const comparables = await db.query.comparables.findMany({
     where: eq(aleciaNumbers.comparables.dealId, dealId),
@@ -200,7 +200,7 @@ export async function getComparables(dealId: string) {
  * Create a new comparable company
  */
 export async function createComparable(data: CreateComparableInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const [comparable] = await db
     .insert(aleciaNumbers.comparables)
@@ -228,7 +228,7 @@ export async function createComparable(data: CreateComparableInput) {
  * Bulk create comparables (for import from Excel/API)
  */
 export async function bulkCreateComparables(comparables: CreateComparableInput[]) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const insertedComparables = await db
     .insert(aleciaNumbers.comparables)
@@ -264,7 +264,7 @@ export async function bulkCreateComparables(comparables: CreateComparableInput[]
  * Get DD checklist for a deal
  */
 export async function getDDChecklist(dealId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const checklists = await db.query.ddChecklists.findMany({
     where: eq(aleciaNumbers.ddChecklists.dealId, dealId),
@@ -288,7 +288,7 @@ export async function getDDChecklist(dealId: string) {
  * Create a new DD checklist
  */
 export async function createDDChecklist(data: CreateDDChecklistInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const [checklist] = await db
     .insert(aleciaNumbers.ddChecklists)
@@ -314,7 +314,7 @@ export async function createDDChecklist(data: CreateDDChecklistInput) {
  * Get checklist items
  */
 export async function getDDChecklistItems(checklistId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const items = await db.query.ddChecklistItems.findMany({
     where: eq(aleciaNumbers.ddChecklistItems.checklistId, checklistId),
@@ -336,7 +336,7 @@ export async function getDDChecklistItems(checklistId: string) {
  * Create a DD checklist item
  */
 export async function createDDChecklistItem(data: CreateDDChecklistItemInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const [item] = await db
     .insert(aleciaNumbers.ddChecklistItems)
@@ -424,7 +424,7 @@ async function updateChecklistProgress(checklistId: string) {
  * Get fee calculation for a deal
  */
 export async function getFeeCalculation(dealId: string) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   const feeCalc = await db.query.feeCalculations.findFirst({
     where: eq(aleciaNumbers.feeCalculations.dealId, dealId),

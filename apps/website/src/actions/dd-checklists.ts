@@ -374,7 +374,7 @@ export async function bulkUpdateStatus(
   itemIds: string[],
   isCompleted: boolean
 ) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   let checklistId: string | null = null;
 
