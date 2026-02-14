@@ -6,12 +6,20 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const { exec } = require('child_process');
 const { promisify } = require('util');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 const docker = new Docker({ socketPath: '/var/run/docker.sock' });
 const PORT = process.env.PORT || 3100;
 const DOCKER_COMPOSE_FILE = process.env.DOCKER_COMPOSE_FILE || '/app/docker-compose.production.yml';
 const execPromise = promisify(exec);
+
+// Rate limiter for API endpoints
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 requests per windowMs
+  message: 'Trop de requêtes depuis cette IP, veuillez réessayer plus tard.'
+});
 
 // Configuration Handlebars
 app.engine('hbs', engine({ 
@@ -75,7 +83,7 @@ app.get('/', async (req, res) => {
 });
 
 // API: Démarrer tous les services
-app.post('/api/start-all', async (req, res) => {
+app.post('/api/start-all', apiLimiter, async (req, res) => {
   try {
     await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} up -d`);
     
@@ -86,7 +94,7 @@ app.post('/api/start-all', async (req, res) => {
 });
 
 // API: Arrêter tous les services
-app.post('/api/stop-all', async (req, res) => {
+app.post('/api/stop-all', apiLimiter, async (req, res) => {
   try {
     await execPromise(`docker-compose -f ${DOCKER_COMPOSE_FILE} down`);
     
@@ -167,7 +175,7 @@ app.get('/api/service/:name/logs', async (req, res) => {
 });
 
 // API: Mettre à jour depuis GitHub
-app.post('/api/update', async (req, res) => {
+app.post('/api/update', apiLimiter, async (req, res) => {
   try {
     // Pull latest changes
     await execPromise('cd /app && git pull origin main');
