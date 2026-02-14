@@ -105,7 +105,7 @@ async function importUsers() {
       [
         pgId,
         u.tokenIdentifier || u.clerkId,
-        u.email || `user-${pgId.slice(0, 8)}@alecia.fr`,
+        u.email || `user-${pgId.slice(0, 8)}@alecia.markets`,
         u.name || "Unknown",
         role,
         u.avatarUrl,

@@ -7,7 +7,7 @@ import { Pool } from "pg";
 import { readFileSync } from "fs";
 
 const s3 = new S3Client({
-  endpoint: process.env.MINIO_ENDPOINT || "https://s3.alecia.fr",
+  endpoint: process.env.MINIO_ENDPOINT || "https://s3.alecia.markets",
   region: "us-east-1",
   credentials: {
     accessKeyId: process.env.MINIO_ROOT_USER!,
@@ -51,7 +51,7 @@ async function migrateFile(
     })
   );
 
-  return `https://s3.alecia.fr/${bucket}/${key}`;
+  return `https://s3.alecia.markets/${bucket}/${key}`;
 }
 
 async function migrateDataRoomDocuments() {

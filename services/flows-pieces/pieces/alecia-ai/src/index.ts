@@ -15,7 +15,7 @@ export const aleciaAi = createPiece({
     required: true,
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-ai-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-ai-piece.svg",
   authors: ["alecia"],
   actions: [
     generateDealSummary,

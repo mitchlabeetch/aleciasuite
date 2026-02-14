@@ -63,7 +63,7 @@ export const uploadFile = createAction({
       bucket: context.propsValue.bucket,
       key: context.propsValue.key,
       size: fileBuffer.length,
-      url: `https://storage.alecia.fr/${context.propsValue.bucket}/${context.propsValue.key}`,
+      url: `https://storage.alecia.markets/${context.propsValue.bucket}/${context.propsValue.key}`,
       contentType: context.propsValue.contentType,
     };
   },

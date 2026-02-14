@@ -11,7 +11,7 @@ export const createBlogPost = createAction({
   props: {
     strapiUrl: Property.ShortText({
       displayName: 'Strapi URL',
-      defaultValue: 'https://cms.alecia.fr',
+      defaultValue: 'https://cms.alecia.markets',
       required: false,
     }),
     apiToken: Property.ShortText({

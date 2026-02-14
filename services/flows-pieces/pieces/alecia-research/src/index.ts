@@ -12,13 +12,13 @@ export const aleciaResearch = createPiece({
     required: true,
     props: {
       pappersApiKey: PieceAuth.SecretText({ displayName: "Pappers API Key", required: true }),
-      searxngUrl: Property.ShortText({ displayName: "SearXNG URL", required: false, defaultValue: "https://search.alecia.fr" }),
-      minifluxUrl: Property.ShortText({ displayName: "Miniflux URL", required: false, defaultValue: "https://feeds.alecia.fr" }),
+      searxngUrl: Property.ShortText({ displayName: "SearXNG URL", required: false, defaultValue: "https://search.alecia.markets" }),
+      minifluxUrl: Property.ShortText({ displayName: "Miniflux URL", required: false, defaultValue: "https://feeds.alecia.markets" }),
       minifluxApiKey: PieceAuth.SecretText({ displayName: "Miniflux API Key", required: false }),
     },
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-research-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-research-piece.svg",
   authors: ["alecia"],
   actions: [
     searchWeb,

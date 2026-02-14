@@ -2,7 +2,7 @@
 // Strapi CMS REST API client for the marketing site
 // Replaces Convex queries for public CMS content
 
-const STRAPI_URL = process.env.STRAPI_URL || "https://cms.alecia.fr";
+const STRAPI_URL = process.env.STRAPI_URL || "https://cms.alecia.markets";
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
 // Strapi response types

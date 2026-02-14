@@ -21,7 +21,7 @@ export const aleciaMicrosoft = createPiece({
     ],
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-microsoft-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-microsoft-piece.svg",
   authors: ["alecia"],
   actions: [
     readExcelRange,

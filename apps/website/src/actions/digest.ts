@@ -206,7 +206,7 @@ export async function generateDigestHtml(
     </div>
     <div style="text-align:center;padding:24px;color:#6b7280;font-size:12px;background:#f9fafb;border-radius:0 0 12px 12px;">
       <p>Alecia Panel • M&A Operating System</p>
-      <p><a href="https://app.alecia.fr/settings" style="color:#4f46e5;text-decoration:none;">Gérer mes préférences</a></p>
+      <p><a href="https://alecia.markets/admin/settings" style="color:#4f46e5;text-decoration:none;">Gérer mes préférences</a></p>
     </div>
   </div>
 </body>

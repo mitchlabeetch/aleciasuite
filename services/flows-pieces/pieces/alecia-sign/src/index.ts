@@ -20,12 +20,12 @@ export const aleciaSign = createPiece({
       baseUrl: Property.ShortText({
         displayName: "DocuSeal URL",
         required: true,
-        defaultValue: "https://sign.alecia.fr",
+        defaultValue: "https://sign.alecia.markets",
       }),
     },
   }),
   minimumSupportedRelease: "0.20.0",
-  logoUrl: "https://alecia.fr/alecia-sign-piece.svg",
+  logoUrl: "https://alecia.markets/alecia-sign-piece.svg",
   authors: ["alecia"],
   actions: [
     createSigningRequest,

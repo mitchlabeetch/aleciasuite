@@ -16,8 +16,8 @@ import { auth } from "../index";
  *
  * Caddy configuration example:
  * ```caddyfile
- * cms.alecia.fr {
- *   forward_auth app.alecia.fr:3000 {
+ * cms.alecia.markets {
+ *   forward_auth alecia-website:3000 {
  *     uri /api/auth/verify-session
  *     header_up X-Forwarded-Method {method}
  *     header_up X-Forwarded-Uri {uri}
