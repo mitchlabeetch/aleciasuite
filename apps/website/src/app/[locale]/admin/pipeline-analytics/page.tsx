@@ -680,7 +680,7 @@ export default function PipelineAnalyticsPage() {
 							</CardHeader>
 							<CardContent>
 								<div className="space-y-4">
-									{conversionData.funnelConversion.map((stage, index) => (
+									{conversionData.funnelConversion.map((stage, _index) => (
 										<div key={stage.stage} className="space-y-2">
 											<div className="flex items-center justify-between">
 												<div className="flex items-center gap-2">

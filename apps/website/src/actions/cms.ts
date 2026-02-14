@@ -18,7 +18,8 @@ interface SitePage {
   updatedAt?: Date;
 }
 
-interface Proposal {
+// Unused interface - kept for future use
+interface _Proposal {
   id: string;
   targetPageId: string;
   title: string;

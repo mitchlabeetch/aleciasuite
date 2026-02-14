@@ -116,7 +116,7 @@ export async function getActivitySummary(args?: {
 /**
  * Update digest preferences
  */
-export async function updateDigestPreferences(args: {
+export async function updateDigestPreferences(_args: {
   enabled: boolean;
   frequency: "daily" | "weekly" | "none";
 }) {

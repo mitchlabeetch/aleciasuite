@@ -527,7 +527,7 @@ export default function ReportingPage() {
 										(s) =>
 											s.stage !== "closed_won" && s.stage !== "closed_lost",
 									)
-									.map((stage, index) => {
+									.map((stage, _index) => {
 										const maxCount = Math.max(
 											...pipelineData.dealsByStage.map((s) => s.count),
 										);

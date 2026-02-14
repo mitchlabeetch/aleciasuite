@@ -258,7 +258,7 @@ export async function getItem(id: string) {
  * Add an item to a checklist
  */
 export async function addItem(data: CreateChecklistItemInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Verify checklist exists
   const checklist = await db.query.ddChecklists.findFirst({
@@ -439,7 +439,7 @@ export async function getChecklistStats(id: string) {
     overdue: 0,
   };
 
-  const now = new Date();
+  const _now = new Date();
 
   for (const item of items) {
     if (item.isCompleted) {
@@ -560,7 +560,7 @@ export async function getItemsByAssignee(userId: string, dealId?: string) {
   }
 
   // Get all items from these checklists
-  const items = await db.query.ddChecklistItems.findMany({
+  const _items = await db.query.ddChecklistItems.findMany({
     where: eq(numbers.ddChecklistItems.checklistId, checklistIds[0]), // Need to use inArray for multiple
   });
 

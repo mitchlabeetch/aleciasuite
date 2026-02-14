@@ -153,7 +153,7 @@ export async function getDeals(filters?: DealFilters) {
  * Get a single deal by ID with full enrichment
  */
 export async function getDealById(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, id),

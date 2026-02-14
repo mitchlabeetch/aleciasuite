@@ -160,7 +160,7 @@ function ScoreBadge({ score }: { score: number }) {
 
 // Buyer criteria form component
 function BuyerCriteriaForm({
-	contactId,
+	_contactId,
 	existingCriteria,
 	onSuccess,
 	onCancel,
@@ -583,7 +583,7 @@ export default function MatchmakerPage() {
 		null,
 	);
 
-	const handleDeleteCriteria = async (contactId: string) => {
+	const handleDeleteCriteria = async (_contactId: string) => {
 		try {
 			// TODO: Implement deleteBuyerCriteria server action
 			// await deleteBuyerCriteria({ contactId });

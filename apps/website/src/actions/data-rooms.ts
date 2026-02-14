@@ -438,7 +438,7 @@ export async function getAccessLog(roomId: string, limit = 100) {
  * Get questions for a room
  */
 export async function getQuestions(roomId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const questions = await db.query.dealRoomQuestions.findMany({
     where: eq(aleciaSign.dealRoomQuestions.roomId, roomId),

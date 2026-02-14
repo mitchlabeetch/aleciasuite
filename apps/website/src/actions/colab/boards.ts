@@ -94,7 +94,7 @@ export async function getBoard(boardId: string) {
   };
 }
 
-export async function listBoards(args?: { workspaceId?: string }) {
+export async function listBoards(_args?: { workspaceId?: string }) {
   const user = await getAuthenticatedUser();
 
   // Get boards owned by user

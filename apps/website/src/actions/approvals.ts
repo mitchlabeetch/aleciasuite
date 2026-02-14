@@ -670,7 +670,7 @@ export async function submitReview(input: SubmitReviewInput) {
 /**
  * Cancel an approval request (only requester or admin)
  */
-export async function cancelRequest(requestId: string, reason?: string) {
+export async function cancelRequest(requestId: string, _reason?: string) {
   const user = await getAuthenticatedUser();
 
   // Get request
