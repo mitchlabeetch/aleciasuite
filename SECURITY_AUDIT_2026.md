@@ -458,23 +458,19 @@ async function checkConvex(): Promise<ServiceStatus> {
   }
 }
 
-async function checkClerk(): Promise<ServiceStatus> {
+async function checkAuth(): Promise<ServiceStatus> {
   const start = Date.now();
   try {
-    // Check Clerk frontend API is reachable
-    const clerkDomain = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY?.includes(
-      "pk_live_"
-    )
-      ? "clerk.alecia.markets"
-      : "clerk.accounts.dev";
+    // Check BetterAuth endpoint is reachable
+    const authDomain = process.env.NEXT_PUBLIC_APP_URL || "https://alecia.markets";
 
-    const response = await fetch(`https://${clerkDomain}/v1/client`, {
+    const response = await fetch(`${authDomain}/api/auth/verify-session`, {
       method: "HEAD",
       signal: AbortSignal.timeout(5000),
     });
 
     return {
-      status: response.ok ? "up" : "degraded",
+      status: response.ok || response.status === 401 ? "up" : "degraded",
       latencyMs: Date.now() - start,
     };
   } catch (error) {

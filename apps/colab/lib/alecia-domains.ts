@@ -24,9 +24,9 @@ export const ALECIA_DOMAINS = {
 		process.env.NEXT_PUBLIC_ALECIA_COLAB_URL || "https://colab.alecia.markets",
 
 	/**
-	 * Clerk authentication domain
+	 * BetterAuth authentication - cross-subdomain SSO via .alecia.markets cookies
 	 */
-	auth: "https://clerk.alecia.markets",
+	auth: `${ALECIA_DOMAINS.marketing}/api/auth`,
 } as const;
 
 /**

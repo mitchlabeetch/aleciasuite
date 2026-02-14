@@ -501,8 +501,8 @@ curl -I https://alecia.markets | grep -i "content-security-policy"
 ### Success Criteria
 
 - [ ] CSP header present in all responses
-- [ ] Clerk authentication still works
-- [ ] Convex connections still work
+- [ ] BetterAuth authentication still works
+- [ ] PostgreSQL connections still work
 - [ ] Colab iframe embedding still works
 - [ ] No console errors about blocked resources
 

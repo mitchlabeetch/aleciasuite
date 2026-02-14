@@ -48,7 +48,6 @@ Security headers are configured to allow iframe embedding from trusted domains:
 
 - **X-Frame-Options**: `SAMEORIGIN`
 - **Content-Security-Policy**: Configured with `frame-ancestors` directive for:
-  - `alecia.fr` and `*.alecia.fr`
   - `alecia.markets` and `*.alecia.markets`
   - `colab.alecia.markets`
 
@@ -97,8 +96,8 @@ See `.env.example` for required environment variables.
 ## Shared Infrastructure
 
 Both applications share:
-- **Convex Backend**: Unified backend with tables prefixed with `colab_` for the colab app
-- **Clerk Authentication**: Custom domain at `clerk.alecia.markets`
+- **PostgreSQL + Drizzle ORM**: Unified database with schemas for shared data, business intelligence, collaboration, and more
+- **BetterAuth**: Cross-subdomain SSO authentication via `.alecia.markets` cookies
 - **Cross-Origin Support**: Properly configured CORS headers for iframe embedding
 
 ## Architecture Notes
