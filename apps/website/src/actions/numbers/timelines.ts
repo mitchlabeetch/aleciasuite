@@ -57,7 +57,7 @@ export interface SaveTimelineInput {
  * Save a timeline (create or update)
  */
 export async function saveTimeline(data: SaveTimelineInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const now = new Date();
 
@@ -113,7 +113,7 @@ export async function saveTimeline(data: SaveTimelineInput) {
  * Get user's timelines
  */
 export async function getUserTimelines(limit: number = 50) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get all timelines (no user filtering in schema)
   const timelines = await db.query.timelines.findMany({
@@ -128,7 +128,7 @@ export async function getUserTimelines(limit: number = 50) {
  * Get a specific timeline by ID
  */
 export async function getTimeline(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timeline = await db.query.timelines.findFirst({
     where: eq(numbers.timelines.id, id),
@@ -145,7 +145,7 @@ export async function getTimeline(id: string) {
  * Get timelines for a specific deal
  */
 export async function getDealTimelines(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timelines = await db.query.timelines.findMany({
     where: eq(numbers.timelines.dealId, dealId),
@@ -159,7 +159,7 @@ export async function getDealTimelines(dealId: string) {
  * Delete a timeline
  */
 export async function deleteTimeline(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timeline = await db.query.timelines.findFirst({
     where: eq(numbers.timelines.id, id),
@@ -187,7 +187,7 @@ export async function updateMilestone(
   milestoneId: string,
   updates: Partial<Milestone>
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timeline = await db.query.timelines.findFirst({
     where: eq(numbers.timelines.id, timelineId),
@@ -231,7 +231,7 @@ export async function updateMilestone(
  * Add a milestone to a timeline
  */
 export async function addMilestone(timelineId: string, milestone: Milestone) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timeline = await db.query.timelines.findFirst({
     where: eq(numbers.timelines.id, timelineId),
@@ -264,7 +264,7 @@ export async function addMilestone(timelineId: string, milestone: Milestone) {
  * Remove a milestone from a timeline
  */
 export async function removeMilestone(timelineId: string, milestoneId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const timeline = await db.query.timelines.findFirst({
     where: eq(numbers.timelines.id, timelineId),

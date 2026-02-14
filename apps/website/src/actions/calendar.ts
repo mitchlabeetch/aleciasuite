@@ -10,7 +10,7 @@
  * - Deal-linked events
  */
 
-import { db, shared, eq, and, gte, lte, desc, sql, inArray } from "@alepanel/db";
+import { db, shared, eq, and, gte, lte, inArray } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -147,8 +147,8 @@ export async function getEventsForDeal(dealId: string) {
 /**
  * Get upcoming events (next 7 days)
  */
-export async function getUpcomingEvents(limit: number = 10) {
-  const user = await getAuthenticatedUser();
+export async function getUpcomingEvents(_limit: number = 10) {
+  const _user = await getAuthenticatedUser();
   const now = Date.now();
   const weekFromNow = now + 7 * 24 * 60 * 60 * 1000;
 
@@ -546,7 +546,7 @@ export async function deleteEventsByExternalIds(args: {
     return { deleted: 0 };
   }
 
-  const result = await db
+  const _result = await db
     .delete(shared.calendarEvents)
     .where(
       and(

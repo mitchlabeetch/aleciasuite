@@ -54,7 +54,7 @@ export interface UpdateChecklistItemInput {
  * List checklists for a deal
  */
 export async function listChecklists(dealId?: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   if (dealId) {
     const checklists = await db.query.ddChecklists.findMany({
@@ -78,7 +78,7 @@ export async function listChecklists(dealId?: string) {
  * Get a single checklist with its items
  */
 export async function getChecklist(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const checklist = await db.query.ddChecklists.findFirst({
     where: eq(numbers.ddChecklists.id, id),
@@ -105,7 +105,7 @@ export async function getChecklist(id: string) {
  * Create a new checklist
  */
 export async function createChecklist(data: CreateChecklistInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Verify deal exists
   const deal = await db.query.deals.findFirst({
@@ -140,7 +140,7 @@ export async function createChecklist(data: CreateChecklistInput) {
  * Update checklist status/progress
  */
 export async function updateChecklist(id: string, data: UpdateChecklistInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [checklist] = await db
     .update(numbers.ddChecklists)
@@ -162,7 +162,7 @@ export async function updateChecklist(id: string, data: UpdateChecklistInput) {
  * Delete a checklist and its items
  */
 export async function deleteChecklist(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const checklist = await db.query.ddChecklists.findFirst({
     where: eq(numbers.ddChecklists.id, id),
@@ -189,7 +189,7 @@ export async function deleteChecklist(id: string) {
  * Recalculate checklist progress based on completed items
  */
 export async function recalculateProgress(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const items = await db.query.ddChecklistItems.findMany({
     where: eq(numbers.ddChecklistItems.checklistId, id),
@@ -232,7 +232,7 @@ export async function recalculateProgress(id: string) {
  * Get items for a checklist
  */
 export async function listItems(checklistId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const items = await db.query.ddChecklistItems.findMany({
     where: eq(numbers.ddChecklistItems.checklistId, checklistId),
@@ -245,7 +245,7 @@ export async function listItems(checklistId: string) {
  * Get a single item
  */
 export async function getItem(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const item = await db.query.ddChecklistItems.findFirst({
     where: eq(numbers.ddChecklistItems.id, id),
@@ -339,7 +339,7 @@ export async function updateItem(id: string, data: UpdateChecklistItemInput) {
  * Delete an item
  */
 export async function deleteItem(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const item = await db.query.ddChecklistItems.findFirst({
     where: eq(numbers.ddChecklistItems.id, id),
@@ -374,7 +374,7 @@ export async function bulkUpdateStatus(
   itemIds: string[],
   isCompleted: boolean
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   let checklistId: string | null = null;
 
@@ -426,7 +426,7 @@ export async function bulkUpdateStatus(
  * Get checklist statistics
  */
 export async function getChecklistStats(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const items = await db.query.ddChecklistItems.findMany({
     where: eq(numbers.ddChecklistItems.checklistId, id),
@@ -459,7 +459,7 @@ export async function getChecklistStats(id: string) {
  * Get overdue checklists
  */
 export async function getOverdueChecklists(dealId?: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const now = new Date();
 
@@ -485,7 +485,7 @@ export async function getOverdueChecklists(dealId?: string) {
  * Get checklist summary for a deal
  */
 export async function getDealChecklistSummary(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const checklists = await db.query.ddChecklists.findMany({
     where: eq(numbers.ddChecklists.dealId, dealId),
@@ -544,7 +544,7 @@ export async function getDealChecklistSummary(dealId: string) {
  * This is a placeholder for future enhancement
  */
 export async function getItemsByAssignee(userId: string, dealId?: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Get checklists assigned to this user
   const checklists = await db.query.ddChecklists.findMany({

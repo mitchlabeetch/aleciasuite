@@ -7,7 +7,7 @@
  * Ported from Convex to Drizzle ORM + PostgreSQL.
  */
 
-import { db, colab, eq, and, desc } from "@alepanel/db";
+import { db, colab, eq, desc } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 

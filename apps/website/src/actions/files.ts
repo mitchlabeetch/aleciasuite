@@ -138,7 +138,7 @@ export async function bulkUpdateLogos(
  * Clear all transaction logos (admin operation)
  */
 export async function clearAllTransactionLogos() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .update(shared.transactions)

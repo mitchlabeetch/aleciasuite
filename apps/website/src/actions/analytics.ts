@@ -1,8 +1,7 @@
 "use server";
 
-import { db, shared, bi, eq, gte, lt, desc, sql } from "@alepanel/db";
+import { db, shared, gte, lt, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
-import { revalidatePath } from "next/cache";
 
 /**
  * Analytics Functions for Alecia Analytics Hub
@@ -126,7 +125,7 @@ interface AnalyticsSummary {
  * Get analytics summary for a time period
  */
 export async function getSummary(args?: { days?: number }): Promise<AnalyticsSummary> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
   const days = args?.days ?? 7;
   const startTimestamp = Date.now() - days * 24 * 60 * 60 * 1000;
 
@@ -323,7 +322,7 @@ export async function setCache(cacheKey: string, data: any, ttlMs?: number) {
 export async function cleanupOldEvents() {
   const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000;
 
-  const result = await db
+  const _result = await db
     .delete(shared.analyticsEvents)
     .where(lt(shared.analyticsEvents.eventTimestamp, cutoff));
 
@@ -337,7 +336,7 @@ export async function cleanupOldEvents() {
 export async function cleanupExpiredCache() {
   const now = Date.now();
 
-  const result = await db
+  const _result = await db
     .delete(shared.analyticsCache)
     .where(lt(shared.analyticsCache.expiresAt, now));
 
@@ -367,7 +366,7 @@ interface DashboardStats {
  * Get dashboard statistics
  */
 export async function getDashboardStats(): Promise<DashboardStats | null> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Implement with Drizzle queries once schema is complete
   // Query deals, users, companies tables
@@ -419,8 +418,8 @@ export async function getUnifiedActivityFeed(args?: {
   limit?: number;
   dealId?: string;
 }): Promise<ActivityItem[]> {
-  const user = await getAuthenticatedUser();
-  const limit = args?.limit ?? 50;
+  const _user = await getAuthenticatedUser();
+  const _limit = args?.limit ?? 50;
 
   // TODO: Implement unified activity aggregation
   // Query recent deals, colab_documents, numbers_* tables

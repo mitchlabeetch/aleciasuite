@@ -61,7 +61,7 @@ export interface SavePostDealInput {
  * Save a post-deal integration plan (create or update)
  */
 export async function savePostDealIntegration(data: SavePostDealInput) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const now = new Date();
 
@@ -125,7 +125,7 @@ export async function savePostDealIntegration(data: SavePostDealInput) {
  * Get all post-deal integration plans (with optional limit)
  */
 export async function getAllPostDealIntegration(limit: number = 50) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plans = await db.query.postDealIntegration.findMany({
     orderBy: [desc(numbers.postDealIntegration.updatedAt)],
@@ -149,7 +149,7 @@ export async function getAllPostDealIntegration(limit: number = 50) {
  * Get a specific post-deal integration plan
  */
 export async function getPostDealIntegration(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, id),
@@ -176,7 +176,7 @@ export async function getPostDealIntegration(id: string) {
  * Get post-deal integration plans for a specific deal
  */
 export async function getDealPostDealIntegration(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plans = await db.query.postDealIntegration.findMany({
     where: eq(numbers.postDealIntegration.dealId, dealId),
@@ -200,7 +200,7 @@ export async function getDealPostDealIntegration(dealId: string) {
  * Delete a post-deal integration plan
  */
 export async function deletePostDealIntegration(id: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, id),
@@ -230,7 +230,7 @@ export async function updateIntegrationTask(
   taskId: string,
   updates: Partial<IntegrationTask>
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, planId),
@@ -274,7 +274,7 @@ export async function updateIntegrationTask(
  * Add a task to a post-deal integration plan
  */
 export async function addIntegrationTask(planId: string, task: IntegrationTask) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, planId),
@@ -307,7 +307,7 @@ export async function addIntegrationTask(planId: string, task: IntegrationTask) 
  * Remove a task from a post-deal integration plan
  */
 export async function removeIntegrationTask(planId: string, taskId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, planId),
@@ -343,7 +343,7 @@ export async function updatePostDealStatus(
   planId: string,
   status: "planning" | "in_progress" | "completed"
 ) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const plan = await db.query.postDealIntegration.findFirst({
     where: eq(numbers.postDealIntegration.id, planId),

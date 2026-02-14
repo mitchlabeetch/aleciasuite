@@ -287,7 +287,7 @@ export async function reviewChange(data: {
   approved: boolean;
   comment?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check if user already reviewed
   const [existingReview] = await db

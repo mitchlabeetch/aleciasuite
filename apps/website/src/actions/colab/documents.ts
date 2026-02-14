@@ -46,7 +46,7 @@ export async function getDocument(id: string) {
 
 // Get documents for a specific deal
 export async function getDocumentsByDeal(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this deal
   // For now, just check if they're authenticated
