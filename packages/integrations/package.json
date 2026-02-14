@@ -6,7 +6,8 @@
   "types": "./src/index.ts",
   "dependencies": {
     "@alepanel/db": "workspace:*",
-    "@microsoft/microsoft-graph-client": "^3.0.0"
+    "@microsoft/microsoft-graph-client": "^3.0.0",
+    "pipedrive": "^31.2.1"
   },
   "devDependencies": {
     "typescript": "^5.5.0"

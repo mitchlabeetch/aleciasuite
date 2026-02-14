@@ -308,7 +308,7 @@ export function usePipedriveSync() {
 	/**
 	 * Sync Pipedrive deals to database
 	 */
-	const syncDealsToConvex = useCallback(
+	const syncDealsToDatabase = useCallback(
 		async (
 			pipedriveDeals: PipedriveDeal[],
 			createDealMutation: (deal: {
@@ -357,7 +357,7 @@ export function usePipedriveSync() {
 	/**
 	 * Sync Pipedrive persons to database CRM contacts
 	 */
-	const syncPersonsToConvex = useCallback(
+	const syncPersonsToDatabase = useCallback(
 		async (
 			persons: PipedrivePerson[],
 			createContactMutation: (contact: {
@@ -402,7 +402,7 @@ export function usePipedriveSync() {
 	/**
 	 * Sync Pipedrive organizations to database CRM companies
 	 */
-	const syncOrganizationsToConvex = useCallback(
+	const syncOrganizationsToDatabase = useCallback(
 		async (
 			organizations: PipedriveOrganization[],
 			createCompanyMutation: (company: {
@@ -452,9 +452,9 @@ export function usePipedriveSync() {
 		fetchStages,
 
 		// Sync to database
-		syncDealsToConvex,
-		syncPersonsToConvex,
-		syncOrganizationsToConvex,
+		syncDealsToDatabase,
+		syncPersonsToDatabase,
+		syncOrganizationsToDatabase,
 
 		// State
 		isLoading,

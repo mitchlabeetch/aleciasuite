@@ -13,7 +13,12 @@
 import { db, shared, eq, and, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
-import { pipedrive } from "@alepanel/integrations";
+import { 
+  createPipedriveClient, 
+  type PipedriveDeal, 
+  type PipedrivePerson, 
+  type PipedriveOrganization 
+} from "@alepanel/integrations/pipedrive";
 
 // ============================================
 // TOKEN HELPERS
@@ -438,25 +443,292 @@ export async function getDealById(dealId: string) {
  */
 export async function syncFromPipedrive() {
   const accessToken = await getPipedriveAccessToken();
+  const client = createPipedriveClient(accessToken);
 
-  // TODO: Use @alepanel/integrations pipedrive client to fetch deals
-  // For now, just a placeholder
+  let created = 0;
+  let updated = 0;
+  let errors = 0;
+  let start = 0;
+  const limit = 100;
 
-  console.log("[Pipedrive] Sync started with token:", accessToken);
+  try {
+    // Fetch deals with pagination
+    let hasMore = true;
+    
+    while (hasMore) {
+      const response = await client.deals.getDeals({
+        start,
+        limit,
+        sort: "update_time DESC",
+      });
 
-  // Example flow:
-  // 1. Fetch all deals from Pipedrive
-  // 2. For each deal:
-  //    - Upsert company
-  //    - Upsert contacts
-  //    - Upsert deal
-  // 3. Return sync stats
+      const deals = response.data || [];
+      
+      if (deals.length === 0) {
+        hasMore = false;
+        break;
+      }
 
-  revalidatePath("/deals");
-  return {
-    success: true,
-    synced: 0,
-    created: 0,
-    updated: 0,
-  };
+      // Process each deal
+      for (const deal of deals) {
+        try {
+          // 1. Upsert organization if present
+          let companyId: string | null = null;
+          if (deal.org_id && deal.org_name) {
+            companyId = await upsertCompanyFromPipedrive({
+              pipedriveId: deal.org_id,
+              name: deal.org_name,
+            });
+          }
+
+          // 2. Upsert person if present
+          if (deal.person_id && deal.person_name && companyId) {
+            await upsertContactFromPipedrive({
+              companyId,
+              fullName: deal.person_name,
+            });
+          }
+
+          // 3. Upsert deal
+          if (companyId) {
+            const existingDeal = await db
+              .select()
+              .from(shared.deals)
+              .where(eq(shared.deals.pipedriveId, String(deal.id)))
+              .limit(1);
+
+            if (existingDeal.length > 0) {
+              updated++;
+            } else {
+              created++;
+            }
+
+            await upsertDealFromPipedrive({
+              pipedriveId: deal.id,
+              title: deal.title,
+              amount: deal.value || 0,
+              stage: deal.status === "won" ? "Won" : deal.status === "lost" ? "Lost" : "Lead",
+              companyId,
+            });
+          }
+        } catch (err) {
+          console.error(`[Pipedrive] Failed to sync deal ${deal.id}:`, err);
+          errors++;
+        }
+      }
+
+      // Check if there are more pages
+      if (deals.length < limit) {
+        hasMore = false;
+      } else {
+        start += limit;
+      }
+    }
+
+    revalidatePath("/deals");
+    revalidatePath("/companies");
+    revalidatePath("/admin/crm");
+
+    return {
+      success: true,
+      synced: created + updated,
+      created,
+      updated,
+      errors,
+    };
+  } catch (err) {
+    console.error("[Pipedrive] Sync failed:", err);
+    return {
+      success: false,
+      synced: 0,
+      created,
+      updated,
+      errors: errors + 1,
+    };
+  }
+}
+
+/**
+ * Sync contacts (persons) from Pipedrive
+ */
+export async function syncContactsFromPipedrive() {
+  const accessToken = await getPipedriveAccessToken();
+  const client = createPipedriveClient(accessToken);
+
+  let created = 0;
+  let updated = 0;
+  let errors = 0;
+  let start = 0;
+  const limit = 100;
+
+  try {
+    let hasMore = true;
+
+    while (hasMore) {
+      const response = await client.persons.getPersons({
+        start,
+        limit,
+        sort: "update_time DESC",
+      });
+
+      const persons = response.data || [];
+
+      if (persons.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      for (const person of persons) {
+        try {
+          // Upsert organization first if present
+          let companyId: string | null = null;
+          if (person.org_id && person.org_name) {
+            companyId = await upsertCompanyFromPipedrive({
+              pipedriveId: person.org_id,
+              name: person.org_name,
+            });
+          }
+
+          if (companyId) {
+            const email = person.email?.[0]?.value || undefined;
+            const phone = person.phone?.[0]?.value || undefined;
+
+            const existing = email
+              ? await db
+                  .select()
+                  .from(shared.contacts)
+                  .where(eq(shared.contacts.email, email))
+                  .limit(1)
+              : [];
+
+            if (existing.length > 0) {
+              updated++;
+            } else {
+              created++;
+            }
+
+            await upsertContactFromPipedrive({
+              companyId,
+              fullName: person.name,
+              email,
+              phone,
+            });
+          }
+        } catch (err) {
+          console.error(`[Pipedrive] Failed to sync person ${person.id}:`, err);
+          errors++;
+        }
+      }
+
+      if (persons.length < limit) {
+        hasMore = false;
+      } else {
+        start += limit;
+      }
+    }
+
+    revalidatePath("/admin/contacts");
+    revalidatePath("/admin/crm");
+
+    return {
+      success: true,
+      synced: created + updated,
+      created,
+      updated,
+      errors,
+    };
+  } catch (err) {
+    console.error("[Pipedrive] Contact sync failed:", err);
+    return {
+      success: false,
+      synced: 0,
+      created,
+      updated,
+      errors: errors + 1,
+    };
+  }
+}
+
+/**
+ * Sync companies (organizations) from Pipedrive
+ */
+export async function syncCompaniesFromPipedrive() {
+  const accessToken = await getPipedriveAccessToken();
+  const client = createPipedriveClient(accessToken);
+
+  let created = 0;
+  let updated = 0;
+  let errors = 0;
+  let start = 0;
+  const limit = 100;
+
+  try {
+    let hasMore = true;
+
+    while (hasMore) {
+      const response = await client.organizations.getOrganizations({
+        start,
+        limit,
+        sort: "update_time DESC",
+      });
+
+      const organizations = response.data || [];
+
+      if (organizations.length === 0) {
+        hasMore = false;
+        break;
+      }
+
+      for (const org of organizations) {
+        try {
+          const existing = await db
+            .select()
+            .from(shared.companies)
+            .where(eq(shared.companies.pipedriveId, String(org.id)))
+            .limit(1);
+
+          if (existing.length > 0) {
+            updated++;
+          } else {
+            created++;
+          }
+
+          await upsertCompanyFromPipedrive({
+            pipedriveId: org.id,
+            name: org.name,
+            address: org.address,
+          });
+        } catch (err) {
+          console.error(`[Pipedrive] Failed to sync organization ${org.id}:`, err);
+          errors++;
+        }
+      }
+
+      if (organizations.length < limit) {
+        hasMore = false;
+      } else {
+        start += limit;
+      }
+    }
+
+    revalidatePath("/companies");
+    revalidatePath("/admin/crm");
+
+    return {
+      success: true,
+      synced: created + updated,
+      created,
+      updated,
+      errors,
+    };
+  } catch (err) {
+    console.error("[Pipedrive] Company sync failed:", err);
+    return {
+      success: false,
+      synced: 0,
+      created,
+      updated,
+      errors: errors + 1,
+    };
+  }
 }

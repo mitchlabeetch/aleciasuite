@@ -62,7 +62,7 @@ export default function AdminLayoutClient({
 					appContext="panel"
 					currentPath={pathname || ""}
 					locale="fr"
-					userRole="sudo"
+					userRole={(session?.user as any)?.role || "sudo"}
 				/>
 
 				{/* Main content area */}
