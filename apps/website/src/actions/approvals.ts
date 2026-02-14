@@ -161,7 +161,7 @@ export async function getApprovalRequest(requestId: string) {
   }
   
   const reviewerMap = new Map<string, ReviewerRow>(
-    reviewersResult.rows.map((r) => [r.id as string, r as ReviewerRow])
+    reviewersResult.rows.map((r) => [r.id as string, r as unknown as ReviewerRow])
   );
 
   interface ReviewRow {
@@ -171,8 +171,8 @@ export async function getApprovalRequest(requestId: string) {
 
   const reviewers = assignedReviewers.map((id: string) => {
     const reviewer = reviewerMap.get(id);
-    const hasReviewed = reviews.some((r) => (r as ReviewRow).reviewer_id === id);
-    const review = reviews.find((r) => (r as ReviewRow).reviewer_id === id);
+    const hasReviewed = reviews.some((r) => (r as unknown as ReviewRow).reviewer_id === id);
+    const review = reviews.find((r) => (r as unknown as ReviewRow).reviewer_id === id);
 
     return {
       _id: id,
@@ -189,8 +189,8 @@ export async function getApprovalRequest(requestId: string) {
     requesterEmail: requester?.email,
     reviews,
     reviewers,
-    approvalCount: reviews.filter((r) => (r as ReviewRow).decision === "approved").length,
-    rejectionCount: reviews.filter((r) => (r as ReviewRow).decision === "rejected").length,
+    approvalCount: reviews.filter((r) => (r as unknown as ReviewRow).decision === "approved").length,
+    rejectionCount: reviews.filter((r) => (r as unknown as ReviewRow).decision === "rejected").length,
   };
 }
 
@@ -361,7 +361,7 @@ export async function getDefaultTemplate(entityType: EntityType) {
  * Create a new approval request
  */
 export async function createApprovalRequest(input: CreateApprovalRequestInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
   const _now = Date.now();
 
   // Validate reviewers exist
@@ -504,7 +504,7 @@ export async function createFromTemplate(input: CreateFromTemplateInput) {
         id: string;
       }
       
-      reviewers.push(...rolesResult.rows.map((r) => (r as UserIdRow).id));
+      reviewers.push(...rolesResult.rows.map((r) => (r as unknown as UserIdRow).id));
     }
   }
 
@@ -549,7 +549,7 @@ export async function createFromTemplate(input: CreateFromTemplateInput) {
  * Submit a review (approve/reject/request changes)
  */
 export async function submitReview(input: SubmitReviewInput) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
   const _now = Date.now();
 
   // Get request

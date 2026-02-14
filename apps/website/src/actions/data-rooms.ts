@@ -382,7 +382,7 @@ export async function logAccess(params: {
   documentId?: string;
   action: "view" | "download" | "upload" | "delete";
 }) {
-  const _user = await getAuthenticatedUser();
+  const user = await getAuthenticatedUser();
 
   // Get user agent and IP from headers (Next.js server context)
   const headers = await import("next/headers").then((mod) => mod.headers());

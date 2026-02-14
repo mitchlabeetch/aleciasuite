@@ -286,7 +286,7 @@ export async function getCache(cacheKey: string): Promise<Record<string, unknown
     )
     .limit(1);
 
-  return cache?.data || null;
+  return (cache?.data as Record<string, unknown>) || null;
 }
 
 /**
