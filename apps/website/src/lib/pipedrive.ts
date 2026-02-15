@@ -46,13 +46,18 @@ async function refreshPipedriveToken(refreshToken: string): Promise<PipedriveTok
 
   const tokens = await response.json();
   
+  // Validate expires_in is a number to prevent SQL injection
+  const expiresIn = typeof tokens.expires_in === 'number' && tokens.expires_in > 0 
+    ? tokens.expires_in 
+    : 3600;
+  
   await db.execute(
     `UPDATE shared.oauth_tokens SET 
       access_token = $1, refresh_token = $2, 
-      expires_at = NOW() + INTERVAL '${tokens.expires_in || 3600} seconds',
-      api_domain = $3, updated_at = NOW()
+      expires_at = NOW() + INTERVAL '1 second' * $3,
+      api_domain = $4, updated_at = NOW()
      WHERE provider = 'pipedrive'`,
-    [tokens.access_token, tokens.refresh_token, tokens.api_domain || null]
+    [tokens.access_token, tokens.refresh_token, expiresIn, tokens.api_domain || null]
   );
 
   return {

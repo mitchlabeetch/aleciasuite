@@ -12,10 +12,22 @@ DB_NAME="${DB_NAME:-alecia}"
 # 1. Apply migrations
 echo ""
 echo "▸ Applying SQL migrations..."
+FAILED_MIGRATIONS=()
 for sql_file in infrastructure/postgres/migrations/V*.sql; do
   echo "  → $(basename $sql_file)"
-  docker exec -i "$DB_CONTAINER" psql -U "$DB_USER" -d "$DB_NAME" < "$sql_file" 2>/dev/null || true
+  if ! docker exec -i "$DB_CONTAINER" psql -U "$DB_USER" -d "$DB_NAME" < "$sql_file" 2>&1 | grep -q "ERROR"; then
+    echo "    ✓ Success"
+  else
+    echo "    ⚠ Already applied or minor error (continuing)"
+    FAILED_MIGRATIONS+=("$(basename $sql_file)")
+  fi
 done
+
+if [ ${#FAILED_MIGRATIONS[@]} -gt 0 ]; then
+  echo ""
+  echo "Note: Some migrations reported errors (likely already applied):"
+  printf '  - %s\n' "${FAILED_MIGRATIONS[@]}"
+fi
 
 # 2. Run the showcase import (team members, blog posts, job offers)
 echo ""

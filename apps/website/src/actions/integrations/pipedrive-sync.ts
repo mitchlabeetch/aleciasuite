@@ -112,7 +112,7 @@ async function getPipedriveAccessToken() {
  */
 export async function isPipedriveConnected() {
   try {
-    // Check both the new oauth_tokens table and the old account table for backward compatibility
+    // Check the new oauth_tokens table first
     const result = await db.execute(sql`
       SELECT 1 FROM shared.oauth_tokens WHERE provider = 'pipedrive'
       LIMIT 1
@@ -122,7 +122,7 @@ export async function isPipedriveConnected() {
       return true;
     }
     
-    // Fallback to old method for backward compatibility
+    // Fallback: check the BetterAuth account table for backward compatibility
     const tokens = await getPipedriveTokens();
     return tokens !== null;
   } catch {

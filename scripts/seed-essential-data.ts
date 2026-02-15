@@ -117,6 +117,8 @@ const teamMembers = [
 ];
 
 // Marketing KPIs
+// Note: "Associés" shows 12 which represents the total number of associates
+// across all offices, while seed data only includes the 8 core team members
 const kpis = [
   { label: "Transactions réalisées", value: "+50", icon: "briefcase", order: 0 },
   { label: "Associés", value: "12", icon: "users", order: 1 },

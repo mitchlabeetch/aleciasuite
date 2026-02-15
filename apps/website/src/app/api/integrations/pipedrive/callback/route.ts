@@ -33,19 +33,24 @@ export async function GET(request: NextRequest) {
 
   const tokens = await tokenResponse.json();
   
+  // Validate expires_in is a number to prevent SQL injection
+  const expiresIn = typeof tokens.expires_in === 'number' && tokens.expires_in > 0 
+    ? tokens.expires_in 
+    : 3600;
+  
   // Store tokens in DB — use raw SQL to INSERT/UPDATE into a simple table
   // The table shared.oauth_tokens should be created by the migration V014
   try {
     await db.execute(
       `INSERT INTO shared.oauth_tokens (provider, access_token, refresh_token, expires_at, api_domain, created_at, updated_at)
-       VALUES ('pipedrive', $1, $2, NOW() + INTERVAL '${tokens.expires_in || 3600} seconds', $3, NOW(), NOW())
+       VALUES ('pipedrive', $1, $2, NOW() + INTERVAL '1 second' * $3, $4, NOW(), NOW())
        ON CONFLICT (provider) DO UPDATE SET
          access_token = EXCLUDED.access_token,
          refresh_token = EXCLUDED.refresh_token,
          expires_at = EXCLUDED.expires_at,
          api_domain = EXCLUDED.api_domain,
          updated_at = NOW()`,
-      [tokens.access_token, tokens.refresh_token, tokens.api_domain || null]
+      [tokens.access_token, tokens.refresh_token, expiresIn, tokens.api_domain || null]
     );
   } catch (err) {
     console.error("Failed to store Pipedrive tokens:", err);
