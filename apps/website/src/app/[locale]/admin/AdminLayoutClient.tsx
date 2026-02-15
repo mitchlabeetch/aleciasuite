@@ -59,7 +59,7 @@ export default function AdminLayoutClient({
 	}
 
 	// Extract user role with type safety
-	const userRole = (session.user as UserWithRole)?.role || "sudo";
+	const userRole = (session.user as UserWithRole)?.role || "user";
 
 	return (
 		<SidebarProvider>

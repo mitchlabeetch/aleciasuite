@@ -112,6 +112,17 @@ async function getPipedriveAccessToken() {
  */
 export async function isPipedriveConnected() {
   try {
+    // Check the new oauth_tokens table first
+    const result = await db.execute(sql`
+      SELECT 1 FROM shared.oauth_tokens WHERE provider = 'pipedrive'
+      LIMIT 1
+    `);
+    
+    if (result.rows.length > 0) {
+      return true;
+    }
+    
+    // Fallback: check the BetterAuth account table for backward compatibility
     const tokens = await getPipedriveTokens();
     return tokens !== null;
   } catch {
@@ -128,15 +139,8 @@ export async function getPipedriveAuthUrl() {
     throw new Error("Pipedrive OAuth is not configured");
   }
 
-  const redirectUri =
-    (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000") +
-    "/api/auth/pipedrive/callback";
-
-  const authUrl = new URL("https://oauth.pipedrive.com/oauth/authorize");
-  authUrl.searchParams.set("client_id", clientId);
-  authUrl.searchParams.set("redirect_uri", redirectUri);
-
-  return authUrl.toString();
+  // Use the new OAuth route that stores tokens in oauth_tokens table
+  return "/api/integrations/pipedrive/authorize";
 }
 
 /**
