@@ -52,7 +52,7 @@ export async function heartbeat(args: {
 
 // Get active users for a document (active within last 30 seconds)
 export async function getActiveUsers(documentName: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const cutoff = new Date(Date.now() - 30000); // 30 seconds ago
 
