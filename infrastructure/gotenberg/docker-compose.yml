@@ -9,4 +9,4 @@ services:
       - "--api-timeout=120s"
       - "--chromium-auto-start"
     ports:
-      - "3000:3000"
+      - "3003:3000"

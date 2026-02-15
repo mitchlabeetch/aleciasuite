@@ -13,3 +13,6 @@ CREATE TABLE IF NOT EXISTS shared.oauth_tokens (
 );
 
 CREATE INDEX IF NOT EXISTS idx_oauth_tokens_provider ON shared.oauth_tokens(provider);
+
+-- Grant permissions to alecia_app user
+GRANT SELECT, INSERT, UPDATE, DELETE ON shared.oauth_tokens TO alecia_app;

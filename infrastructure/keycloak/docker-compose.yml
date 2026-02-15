@@ -20,4 +20,4 @@ services:
       - ./themes/alecia:/opt/keycloak/themes/alecia
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
     ports:
-      - "8080:8080"
+      - "8081:8080"
