@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, sql } from "@alepanel/db";
+import { db, shared, eq } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -278,7 +278,7 @@ export async function upsertTeamMember(args: {
   displayOrder: number;
   isActive: boolean;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existing = await db
     .select({ id: shared.teamMembers.id })

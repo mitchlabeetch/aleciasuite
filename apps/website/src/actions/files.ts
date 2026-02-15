@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, sql } from "@alepanel/db";
+import { db, shared, eq } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -18,7 +18,7 @@ import { revalidatePath } from "next/cache";
 /**
  * Generate a presigned upload URL for S3/Minio
  */
-export async function generateUploadUrl(fileName: string, fileType: string) {
+export async function generateUploadUrl(fileName: string, _fileType: string) {
   await getAuthenticatedUser();
 
   // TODO: Use @aws-sdk/client-s3 + @aws-sdk/s3-request-presigner

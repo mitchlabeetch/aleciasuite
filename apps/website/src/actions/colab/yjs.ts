@@ -15,7 +15,7 @@ import { revalidatePath } from "next/cache";
 
 // Get the current Yjs document state for initial sync
 export async function getYjsState(documentName: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this document
   // For now, just check authentication
@@ -39,7 +39,7 @@ export async function saveYjsState(args: {
   documentName: string;
   state: Buffer;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has write access to this document
   // For now, just check authentication
@@ -71,7 +71,7 @@ export async function saveYjsState(args: {
 
 // Delete Yjs state for a document
 export async function deleteYjsState(documentName: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has delete access to this document
   // For now, just check authentication
@@ -85,7 +85,7 @@ export async function deleteYjsState(documentName: string) {
 
 // List all Yjs documents (for admin/debugging)
 export async function listYjsDocuments() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Add admin check here
 
@@ -107,7 +107,7 @@ export async function getYjsUpdates(args: {
   documentName: string;
   since?: Date;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this document
   // For now, just check authentication
@@ -154,7 +154,7 @@ export async function pushYjsUpdate(args: {
   updateData: Buffer;
   clientId?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has write access to this document
   // For now, just check authentication
@@ -173,7 +173,7 @@ export async function pushYjsUpdate(args: {
 
 // Get Yjs awareness states for a document (active users/cursors)
 export async function getYjsAwareness(documentName: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this document
   // For now, just check authentication
@@ -236,7 +236,7 @@ export async function removeYjsAwareness(args: {
   documentName: string;
   clientId: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this document
   // For now, just check authentication

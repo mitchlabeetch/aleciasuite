@@ -148,7 +148,7 @@ export async function getEventsForDeal(dealId: string) {
  * Get upcoming events (next 7 days)
  */
 export async function getUpcomingEvents(_limit: number = 10) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
   const now = Date.now();
   const weekFromNow = now + 7 * 24 * 60 * 60 * 1000;
 

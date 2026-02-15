@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, and, desc, sql } from "@alepanel/db";
+import { db, shared, eq, and, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 

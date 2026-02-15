@@ -10,7 +10,7 @@
  * - Calendar integration
  */
 
-import { db, shared, sql } from "@alepanel/db";
+import { db, shared } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 
