@@ -22,3 +22,8 @@ services:
       JWT_SECRET: ${STRAPI_JWT_SECRET}
     ports:
       - "1337:1337"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

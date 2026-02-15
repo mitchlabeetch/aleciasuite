@@ -19,3 +19,8 @@ services:
       REVALIDATION_SECRET: ${REVALIDATION_SECRET}
     ports:
       - "3000:3000"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

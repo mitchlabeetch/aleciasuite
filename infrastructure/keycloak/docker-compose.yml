@@ -21,3 +21,8 @@ services:
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
     ports:
       - "8081:8080"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

@@ -27,3 +27,8 @@ services:
       AP_TELEMETRY_ENABLED: "false"
     ports:
       - "8080:80"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true
