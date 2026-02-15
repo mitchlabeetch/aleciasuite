@@ -4,10 +4,19 @@
 
 export { pappers } from "./pappers";
 export {
-  pipedrive,
+  createPipedriveClient,
   getPipedriveAuthUrl,
-  exchangePipedriveCode,
-  refreshPipedriveToken,
+  exchangeCodeForTokens,
+  refreshAccessToken,
+  type PipedriveDeal,
+  type PipedrivePerson,
+  type PipedriveOrganization,
+  type PipedriveClient,
+  type DealsApi,
+  type PersonsApi,
+  type OrganizationsApi,
+  type Configuration,
+  type OAuth2Configuration,
 } from "./pipedrive";
 export { microsoft, createGraphClient } from "./microsoft";
 export { google } from "./google";

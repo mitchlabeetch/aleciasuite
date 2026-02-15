@@ -1,21 +1,17 @@
 // services/flows-pieces/pieces/alecia-pipedrive/src/actions/sync-deal-to-pipedrive.ts
-// Sync Alecia deal to Pipedrive
+// Sync Alecia deal to Pipedrive using OAuth2
 
 import { createAction, Property } from '@activepieces/pieces-framework';
-import axios from 'axios';
+import * as pipedrive from 'pipedrive';
 
 export const syncDealToPipedrive = createAction({
   name: 'sync-deal-to-pipedrive',
   displayName: 'Sync Deal to Pipedrive',
-  description: 'Create or update deal in Pipedrive CRM',
+  description: 'Create or update deal in Pipedrive CRM using OAuth2',
   props: {
-    apiToken: Property.ShortText({
-      displayName: 'Pipedrive API Token',
-      required: true,
-    }),
-    companyDomain: Property.ShortText({
-      displayName: 'Company Domain',
-      description: 'Your Pipedrive company domain (e.g., mycompany)',
+    accessToken: Property.ShortText({
+      displayName: 'Pipedrive OAuth Access Token',
+      description: 'OAuth2 access token from environment or Activepieces connection',
       required: true,
     }),
     dealTitle: Property.ShortText({
@@ -52,12 +48,17 @@ export const syncDealToPipedrive = createAction({
     }),
   },
   async run(context) {
-    const baseUrl = `https://${context.propsValue.companyDomain}.pipedrive.com/api/v1`;
+    // Configure Pipedrive SDK client with OAuth2
+    const config = new pipedrive.v1.Configuration({
+      accessToken: context.propsValue.accessToken,
+    });
+
+    const dealsApi = new pipedrive.v1.DealsApi(config);
 
     const dealData: any = {
       title: context.propsValue.dealTitle,
       value: context.propsValue.value,
-      currency: context.propsValue.currency,
+      currency: context.propsValue.currency || 'EUR',
     };
 
     if (context.propsValue.stageId) {
@@ -76,24 +77,17 @@ export const syncDealToPipedrive = createAction({
       Object.assign(dealData, context.propsValue.customFields);
     }
 
-    const response = await axios.post(
-      `${baseUrl}/deals`,
-      dealData,
-      {
-        params: {
-          api_token: context.propsValue.apiToken,
-        },
-      }
-    );
+    // Use the official SDK to create the deal
+    const response = await dealsApi.addDeal(dealData);
 
     return {
       success: true,
-      pipedriveId: response.data.data.id,
-      title: response.data.data.title,
-      value: response.data.data.value,
-      currency: response.data.data.currency,
-      stageId: response.data.data.stage_id,
-      url: `https://${context.propsValue.companyDomain}.pipedrive.com/deal/${response.data.data.id}`,
+      pipedriveId: response.data.id,
+      title: response.data.title,
+      value: response.data.value,
+      currency: response.data.currency,
+      stageId: response.data.stage_id,
+      url: `https://app.pipedrive.com/deal/${response.data.id}`,
     };
   },
 });

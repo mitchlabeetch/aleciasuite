@@ -1,7 +1,6 @@
 // packages/integrations/src/pipedrive.ts
-// Pipedrive CRM — Bidirectional sync via official OAuth connection
+// Pipedrive CRM — Bidirectional sync via official OAuth connection using the official Pipedrive SDK
 // Uses Pipedrive's OAuth2 flow (github.com/pipedrive/client-nodejs)
-// No custom API wrapper — connect via their standard OAuth dance
 //
 // OAuth flow:
 // 1. User clicks "Connect Pipedrive" in Alecia BI
@@ -12,9 +11,65 @@
 // 6. Use tokens for API calls, auto-refresh when expired
 //
 // Register your app: https://developers.pipedrive.com/docs/api/v1
-// TODO: Port sync logic from convex/pipedrive.ts
 
-const PIPEDRIVE_API_BASE = "https://api.pipedrive.com/v1";
+import * as pipedrive from "pipedrive";
+
+// Re-export types for convenience
+export type DealsApi = pipedrive.v1.DealsApi;
+export type PersonsApi = pipedrive.v1.PersonsApi;
+export type OrganizationsApi = pipedrive.v1.OrganizationsApi;
+export type Configuration = pipedrive.v1.Configuration;
+export type OAuth2Configuration = pipedrive.v1.OAuth2Configuration;
+
+// ============================================
+// TYPES
+// ============================================
+
+export interface PipedriveDeal {
+  id: number;
+  title: string;
+  value: number;
+  currency: string;
+  status: "open" | "won" | "lost" | "deleted";
+  stage_id: number;
+  person_id: number | null;
+  org_id: number | null;
+  org_name?: string;
+  person_name?: string;
+  add_time: string;
+  update_time: string;
+}
+
+export interface PipedrivePerson {
+  id: number;
+  name: string;
+  email: Array<{ value: string; primary: boolean }> | null;
+  phone: Array<{ value: string; primary: boolean }> | null;
+  org_id: number | null;
+  org_name?: string;
+  add_time: string;
+  update_time: string;
+}
+
+export interface PipedriveOrganization {
+  id: number;
+  name: string;
+  address?: string;
+  people_count?: number;
+  open_deals_count?: number;
+  add_time: string;
+  update_time: string;
+}
+
+export interface PipedriveClient {
+  deals: DealsApi;
+  persons: PersonsApi;
+  organizations: OrganizationsApi;
+}
+
+// ============================================
+// OAUTH HELPERS
+// ============================================
 
 /** Generate the Pipedrive OAuth authorization URL */
 export function getPipedriveAuthUrl(redirectUri: string): string {
@@ -26,7 +81,7 @@ export function getPipedriveAuthUrl(redirectUri: string): string {
 }
 
 /** Exchange authorization code for access + refresh tokens */
-export async function exchangePipedriveCode(
+export async function exchangeCodeForTokens(
   code: string,
   redirectUri: string
 ): Promise<{ access_token: string; refresh_token: string; expires_in: number }> {
@@ -44,12 +99,16 @@ export async function exchangePipedriveCode(
       redirect_uri: redirectUri,
     }),
   });
-  if (!response.ok) throw new Error(`Pipedrive token exchange failed: ${response.status}`);
+
+  if (!response.ok) {
+    throw new Error(`Pipedrive token exchange failed: ${response.status}`);
+  }
+
   return response.json();
 }
 
 /** Refresh an expired access token */
-export async function refreshPipedriveToken(
+export async function refreshAccessToken(
   refreshToken: string
 ): Promise<{ access_token: string; refresh_token: string; expires_in: number }> {
   const response = await fetch("https://oauth.pipedrive.com/oauth/token", {
@@ -65,73 +124,38 @@ export async function refreshPipedriveToken(
       refresh_token: refreshToken,
     }),
   });
-  if (!response.ok) throw new Error(`Pipedrive token refresh failed: ${response.status}`);
+
+  if (!response.ok) {
+    throw new Error(`Pipedrive token refresh failed: ${response.status}`);
+  }
+
   return response.json();
 }
 
-export const pipedrive = {
-  /** Fetch all deals from Pipedrive */
-  async getDeals(accessToken: string, start = 0, limit = 100) {
-    const response = await fetch(
-      `${PIPEDRIVE_API_BASE}/deals?start=${start}&limit=${limit}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-    if (!response.ok) throw new Error(`Pipedrive API error: ${response.status}`);
-    return response.json();
-  },
+// ============================================
+// SDK CLIENT FACTORY
+// ============================================
 
-  /** Fetch all contacts (persons) from Pipedrive */
-  async getPersons(accessToken: string, start = 0, limit = 100) {
-    const response = await fetch(
-      `${PIPEDRIVE_API_BASE}/persons?start=${start}&limit=${limit}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-    if (!response.ok) throw new Error(`Pipedrive API error: ${response.status}`);
-    return response.json();
-  },
+/**
+ * Create a Pipedrive API client with OAuth2 authentication
+ *
+ * @param accessToken - The OAuth2 access token
+ * @returns Typed API client instances for deals, persons, and organizations
+ */
+export function createPipedriveClient(accessToken: string): PipedriveClient {
+  // Create configuration with OAuth2 access token
+  const config = new pipedrive.v1.Configuration({
+    accessToken,
+  });
 
-  /** Push a deal to Pipedrive */
-  async createDeal(
-    deal: { title: string; value?: number; currency?: string; org_id?: number },
-    accessToken: string
-  ) {
-    const response = await fetch(`${PIPEDRIVE_API_BASE}/deals`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(deal),
-    });
-    if (!response.ok) throw new Error(`Pipedrive API error: ${response.status}`);
-    return response.json();
-  },
+  // Create API instances with the configured client
+  const deals = new pipedrive.v1.DealsApi(config);
+  const persons = new pipedrive.v1.PersonsApi(config);
+  const organizations = new pipedrive.v1.OrganizationsApi(config);
 
-  /** Update an existing deal in Pipedrive */
-  async updateDeal(
-    dealId: number,
-    updates: Record<string, unknown>,
-    accessToken: string
-  ) {
-    const response = await fetch(`${PIPEDRIVE_API_BASE}/deals/${dealId}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updates),
-    });
-    if (!response.ok) throw new Error(`Pipedrive API error: ${response.status}`);
-    return response.json();
-  },
-
-  /** Get recent changes (for incremental sync) */
-  async getRecentChanges(accessToken: string, sinceTimestamp: string) {
-    const response = await fetch(
-      `${PIPEDRIVE_API_BASE}/recents?since_timestamp=${sinceTimestamp}&items=deal,person,organization`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
-    if (!response.ok) throw new Error(`Pipedrive API error: ${response.status}`);
-    return response.json();
-  },
-};
+  return {
+    deals,
+    persons,
+    organizations,
+  };
+}

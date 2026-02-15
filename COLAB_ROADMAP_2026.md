@@ -3,7 +3,7 @@
 > **Vision**: Transform Colab from a Notion-like collaboration tool into the definitive M&A deal execution platform for boutique advisory firms.
 
 **Last Updated**: February 2026  
-**Tech Stack**: Next.js 15 + Convex + Clerk + Vercel AI SDK + Vercel Blob Storage  
+**Tech Stack**: Next.js 15 + PostgreSQL + Drizzle ORM + BetterAuth + Vercel AI SDK + Vercel Blob Storage  
 **Target Users**: M&A Partners, Advisors, Analysts at Alecia
 
 ---
@@ -35,7 +35,7 @@ Alecia's deal team currently uses 5+ disconnected tools:
 A unified platform where:
 - Documents, deals, and data rooms live in one place
 - Real-time collaboration eliminates version conflicts
-- Microsoft/Pipedrive sync keeps external systems updated
+- Microsoft/Pipedrive sync keeps external systems updated via OAuth2 and server actions
 - AI accelerates document creation and analysis
 
 ### Key Differentiators
@@ -54,8 +54,8 @@ A unified platform where:
 - Document editor with templates (IM, Teaser, LOI, DD Checklist)
 - Deal pipeline with Kanban stages
 - Presence tracking (who's online)
-- Clerk authentication with role-based access
-- Convex real-time database
+- BetterAuth authentication with role-based access
+- PostgreSQL + Drizzle ORM for real-time database
 - Vercel Blob for file storage
 
 ### Critical Gaps
@@ -345,15 +345,12 @@ export async function GET(request: Request) {
 }
 ```
 
-**Pipedrive OAuth Callback**:
+**Pipedrive OAuth Callback** (Updated to Server Actions):
 ```typescript
 // apps/website/src/app/api/auth/pipedrive/callback/route.ts
 
 import { NextResponse } from "next/server";
-import { ConvexHttpClient } from "convex/browser";
-import { api } from "@/convex/_generated/api";
-
-const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+import { exchangePipedriveCode } from "@/actions/integrations/pipedrive-sync";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -366,11 +363,17 @@ export async function GET(request: Request) {
   }
   
   try {
-    await convex.action(api.pipedrive.exchangeCodeForToken, { code });
+    const result = await exchangePipedriveCode(code);
     
-    return NextResponse.redirect(
-      `/admin/settings/integrations?success=pipedrive_connected`
-    );
+    if (result.success) {
+      return NextResponse.redirect(
+        `/admin/settings/integrations?success=pipedrive_connected`
+      );
+    } else {
+      return NextResponse.redirect(
+        `/admin/settings/integrations?error=${result.error}`
+      );
+    }
   } catch (err) {
     console.error("Pipedrive OAuth error:", err);
     return NextResponse.redirect(

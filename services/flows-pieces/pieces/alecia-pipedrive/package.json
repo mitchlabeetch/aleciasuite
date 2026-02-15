@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "dependencies": {
     "@activepieces/pieces-framework": "^0.3.0",
-    "axios": "^1.6.0"
+    "axios": "^1.6.0",
+    "pipedrive": "^31.2.1"
   }
 }
