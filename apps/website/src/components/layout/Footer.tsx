@@ -29,7 +29,7 @@ export function Footer() {
 			{ href: "/actualites", label: t("company.news") },
 			{ href: "/nous-rejoindre", label: t("company.careers") },
 			{ href: "/connexion", label: t("company.privateAccess") },
-			{ href: "/admin", label: "Espace Admin", icon: Lock },
+			{ href: "/admin/dashboard", label: "Espace Admin", icon: Lock },
 		],
 		offices: [
 			{ label: "Paris", city: "Île-de-France" },
@@ -245,7 +245,7 @@ export function Footer() {
 							{t("privacy")}
 						</Link>
 						<Link
-							href="/admin"
+							href="/admin/dashboard"
 							aria-label="Accès Panel"
 							className="text-muted-foreground/50 hover:text-muted-foreground transition-colors"
 							title="Accès Administrateur"

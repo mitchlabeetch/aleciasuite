@@ -74,6 +74,7 @@
 		"openai": "^4.0.0",
 		"papaparse": "^5.5.3",
 		"pg": "^8.18.0",
+		"pipedrive": "^24.0.0",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
 		"react-dropzone": "^14.3.8",
