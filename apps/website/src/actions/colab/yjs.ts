@@ -204,7 +204,7 @@ export async function getYjsAwareness(documentName: string) {
 export async function updateYjsAwareness(args: {
   documentName: string;
   clientId: string;
-  awarenessData: any;
+  awarenessData: unknown;
 }) {
   const user = await getAuthenticatedUser();
 

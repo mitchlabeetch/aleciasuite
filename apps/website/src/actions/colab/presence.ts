@@ -14,7 +14,7 @@ import { revalidatePath } from "next/cache";
 // Update presence (called periodically by clients)
 export async function heartbeat(args: {
   documentName: string;
-  cursorPosition?: any;
+  cursorPosition?: unknown;
 }) {
   const user = await getAuthenticatedUser();
 

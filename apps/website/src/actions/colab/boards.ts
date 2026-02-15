@@ -469,7 +469,7 @@ export async function updateCard(args: {
   description?: string;
   dueDate?: Date;
   assigneeId?: string;
-  labels?: any[];
+  labels?: unknown[];
 }) {
   const user = await getAuthenticatedUser();
 

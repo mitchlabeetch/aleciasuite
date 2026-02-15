@@ -39,10 +39,10 @@ export interface SaveFinancialModelInput {
     projectionYears?: number;
     growthRate?: number;
     marginImprovement?: number;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   results?: {
-    [key: string]: any;
+    [key: string]: unknown;
   };
   version?: number;
 }

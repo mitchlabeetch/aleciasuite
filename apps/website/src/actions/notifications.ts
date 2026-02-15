@@ -47,7 +47,7 @@ export async function getNotifications(args?: { limit?: number }) {
     LIMIT ${limit}
   `);
 
-  return result.rows.map((row: any) => ({
+  return result.rows.map((row: Record<string, unknown>) => ({
     id: row.id,
     recipientId: row.recipient_id,
     triggerId: row.trigger_id,

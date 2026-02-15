@@ -61,7 +61,7 @@ export async function getDocumentsByDeal(dealId: string) {
 // Create a new document
 export async function createDocument(args: {
   title: string;
-  content?: any;
+  content?: unknown;
   dealId?: string;
 }) {
   const user = await getAuthenticatedUser();
@@ -89,7 +89,7 @@ export async function createDocument(args: {
 export async function updateDocument(args: {
   id: string;
   title?: string;
-  content?: any;
+  content?: unknown;
   dealId?: string;
   icon?: string;
   coverImageUrl?: string;

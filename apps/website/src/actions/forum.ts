@@ -191,7 +191,7 @@ export async function updateThread(
     throw new Error("Permission refusée");
   }
 
-  const updates: Record<string, any> = {};
+  const updates: Record<string, unknown> = {};
 
   if (data.title !== undefined) updates.title = data.title;
   if (data.isPinned !== undefined) updates.isPinned = data.isPinned;

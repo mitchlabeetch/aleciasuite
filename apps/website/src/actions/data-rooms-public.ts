@@ -199,7 +199,7 @@ export async function listDocumentsPublic(token: string, folderId: string) {
 
   // Map to public-safe format
   return documents.map((doc) => {
-    const uploader = doc.uploadedBy as any;
+    const uploader = doc.uploadedBy as Record<string, unknown> | null;
     return {
       id: doc.id,
       filename: doc.filename,
@@ -255,7 +255,7 @@ export async function listAllDocumentsPublic(token: string) {
   const enrichedDocs = await Promise.all(
     documents.map(async (doc) => {
       const folder = folders.find((f) => f.id === doc.folderId);
-      const uploader = doc.uploadedBy as any;
+      const uploader = doc.uploadedBy as Record<string, unknown> | null;
 
       return {
         id: doc.id,
@@ -322,8 +322,8 @@ export async function listQuestionsPublic(token: string) {
   );
 
   return sortedQuestions.map((q) => {
-    const asker = q.askedBy as any;
-    const answerer = q.answeredBy as any;
+    const asker = q.askedBy as Record<string, unknown> | null;
+    const answerer = q.answeredBy as Record<string, unknown> | null;
     return {
       id: q.id,
       question: q.question,
@@ -445,7 +445,7 @@ export async function downloadDocumentPublic(token: string, documentId: string) 
   }
 
   // Verify document belongs to the room
-  const folder = document.folder as any;
+  const folder = document.folder as Record<string, unknown> | null;
   if (!folder || folder.roomId !== validation.invitation.roomId) {
     return { success: false, error: "Access denied" };
   }

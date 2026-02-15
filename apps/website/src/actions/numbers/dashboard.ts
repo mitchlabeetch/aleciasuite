@@ -39,12 +39,12 @@ export interface DealSummary {
 }
 
 export interface DealNumbersData {
-  feeCalculations: any[];
-  financialModels: any[];
-  comparables: any[];
-  timelines: any[];
-  teaserTracking: any[];
-  postDeal: any[];
+  feeCalculations: unknown[];
+  financialModels: unknown[];
+  comparables: unknown[];
+  timelines: unknown[];
+  teaserTracking: unknown[];
+  postDeal: unknown[];
   counts: {
     feeCalculations: number;
     financialModels: number;
@@ -281,7 +281,7 @@ export async function getRecentActivity() {
       id: item.id,
       type: "timeline" as const,
       title: item.name || "Timeline",
-      description: `${(item.milestones as any[])?.length || 0} tâches`,
+      description: `${(item.milestones as unknown[])?.length || 0} tâches`,
       createdAt: item.createdAt ?? new Date(),
       href: "/admin/numbers/timeline",
     })),
@@ -297,7 +297,7 @@ export async function getRecentActivity() {
       id: item.id,
       type: "post-deal" as const,
       title: item.workstream || "Intégration post-deal",
-      description: `${(item.tasks as any[])?.length || 0} tâches`,
+      description: `${(item.tasks as unknown[])?.length || 0} tâches`,
       createdAt: item.createdAt ?? new Date(),
       href: "/admin/numbers/post-deal",
     })),

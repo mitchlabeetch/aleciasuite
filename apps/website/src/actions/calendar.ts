@@ -253,7 +253,7 @@ export async function updateEvent(args: {
   const user = await getAuthenticatedUser();
   const now = Date.now();
 
-  const updateData: Record<string, any> = {
+  const updateData: Record<string, unknown> = {
     updatedAt: now,
   };
 
@@ -466,7 +466,7 @@ export async function updateSyncStateInternal(args: {
 }) {
   const now = Date.now();
 
-  const updateData: Record<string, any> = {
+  const updateData: Record<string, unknown> = {
     lastSyncedAt: args.lastSyncedAt,
     updatedAt: now,
   };

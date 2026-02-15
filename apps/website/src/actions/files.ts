@@ -79,7 +79,7 @@ export async function updateTransactionLogos(args: {
 }) {
   await getAuthenticatedUser();
 
-  const updateData: any = {};
+  const updateData: Record<string, unknown> = {};
 
   if (args.clientLogoUrl !== undefined) {
     updateData.clientLogo = args.clientLogoUrl;

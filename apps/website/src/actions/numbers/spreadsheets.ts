@@ -34,7 +34,7 @@ export interface SaveSpreadsheetInput {
   id?: string;
   dealId?: string;
   title: string;
-  sheetData: Record<string, any>; // FortuneSheet JSON data
+  sheetData: Record<string, unknown>; // FortuneSheet JSON data
   isTemplate?: boolean;
 }
 

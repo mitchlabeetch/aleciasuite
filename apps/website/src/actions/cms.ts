@@ -272,7 +272,7 @@ export async function mergeProposal(proposalId: string) {
     .limit(1);
 
   const quorumPercent =
-    (settings?.value as any)?.quorumPercentage ?? 50;
+    (settings?.value as Record<string, unknown>)?.quorumPercentage ?? 50;
 
   // Fetch all voting eligible users
   const partners = await db

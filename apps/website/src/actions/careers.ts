@@ -121,7 +121,7 @@ export async function updateJobOffer(
     displayOrder?: number;
   }
 ) {
-  const updates: Record<string, any> = {};
+  const updates: Record<string, unknown> = {};
 
   if (data.slug !== undefined) updates.slug = data.slug;
   if (data.title !== undefined) updates.title = data.title;

@@ -14,7 +14,7 @@ import { revalidatePath } from "next/cache";
 // Save a new version of a document
 export async function saveVersion(args: {
   documentId: string;
-  content: any;
+  content: unknown;
   changeDescription?: string;
 }) {
   const user = await getAuthenticatedUser();

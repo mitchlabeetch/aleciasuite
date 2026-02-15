@@ -82,11 +82,11 @@ export async function listFlags(args?: {
         eq(shared.featureFlags.enabled, true),
         eq(shared.featureFlags.category, args.category)
       )
-    ) as any;
+    ) as typeof query;
   } else if (args?.enabledOnly) {
-    query = query.where(eq(shared.featureFlags.enabled, true)) as any;
+    query = query.where(eq(shared.featureFlags.enabled, true)) as typeof query;
   } else if (args?.category) {
-    query = query.where(eq(shared.featureFlags.category, args.category)) as any;
+    query = query.where(eq(shared.featureFlags.category, args.category)) as typeof query;
   }
 
   const result = await query;
@@ -124,7 +124,7 @@ export async function isFlagEnabled(key: string): Promise<boolean> {
     .where(eq(shared.featureFlags.key, key))
     .limit(1);
 
-  const flag = result[0] as any;
+  const flag = result[0] as Record<string, unknown> | undefined;
 
   if (!flag || !flag.enabled) return false;
 
@@ -150,7 +150,7 @@ export async function isFlagEnabled(key: string): Promise<boolean> {
     case "users":
       return flag.allowedUserIds?.includes(user.id) ?? false;
     case "roles":
-      return flag.allowedRoles?.includes((user as any).role) ?? false;
+      return flag.allowedRoles?.includes((user as Record<string, unknown>).role as string) ?? false;
     case "domains": {
       const userDomain = user.email?.split("@")[1];
       return flag.allowedDomains?.includes(userDomain) ?? false;
@@ -200,7 +200,7 @@ export async function getEnabledFlags(): Promise<Record<string, boolean>> {
         flagMap[flag.key] = flag.allowedUserIds?.includes(user.id) ?? false;
         break;
       case "roles":
-        flagMap[flag.key] = flag.allowedRoles?.includes((user as any).role) ?? false;
+        flagMap[flag.key] = flag.allowedRoles?.includes((user as Record<string, unknown>).role as string) ?? false;
         break;
       case "domains": {
         const domain = user.email?.split("@")[1];
@@ -289,7 +289,7 @@ export async function updateFlag(
   await getAuthenticatedUser();
 
   // Build update object dynamically
-  const updateData: any = {};
+  const updateData: Record<string, unknown> = {};
 
   if (updates.name !== undefined) updateData.name = updates.name;
   if (updates.description !== undefined) updateData.description = updates.description;
