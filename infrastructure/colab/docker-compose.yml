@@ -22,3 +22,8 @@ services:
       MINIO_BUCKET: alecia-documents
     ports:
       - "3001:3001"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

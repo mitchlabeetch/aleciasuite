@@ -148,7 +148,7 @@ export async function getEventsForDeal(dealId: string) {
  * Get upcoming events (next 7 days)
  */
 export async function getUpcomingEvents(_limit: number = 10) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
   const now = Date.now();
   const weekFromNow = now + 7 * 24 * 60 * 60 * 1000;
 
@@ -253,7 +253,7 @@ export async function updateEvent(args: {
   const user = await getAuthenticatedUser();
   const now = Date.now();
 
-  const updateData: Record<string, any> = {
+  const updateData: Record<string, unknown> = {
     updatedAt: now,
   };
 
@@ -466,7 +466,7 @@ export async function updateSyncStateInternal(args: {
 }) {
   const now = Date.now();
 
-  const updateData: Record<string, any> = {
+  const updateData: Record<string, unknown> = {
     lastSyncedAt: args.lastSyncedAt,
     updatedAt: now,
   };

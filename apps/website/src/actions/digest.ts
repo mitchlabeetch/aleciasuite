@@ -18,7 +18,7 @@ import { getAuthenticatedUser } from "./lib/auth";
  * Get user's digest preferences
  */
 export async function getDigestPreferences() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Read from user_preferences table when available
   return {
@@ -39,7 +39,7 @@ export async function getActivitySummary(args?: {
   since?: number;
   frequency?: "daily" | "weekly";
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const hoursBack = args?.frequency === "weekly" ? 7 * 24 : 24;
   const since = args?.since || Date.now() - hoursBack * 60 * 60 * 1000;

@@ -34,7 +34,7 @@ export interface SaveSpreadsheetInput {
   id?: string;
   dealId?: string;
   title: string;
-  sheetData: Record<string, any>; // FortuneSheet JSON data
+  sheetData: Record<string, unknown>; // FortuneSheet JSON data
   isTemplate?: boolean;
 }
 
@@ -158,7 +158,7 @@ export async function getSpreadsheet(id: string) {
  * Get spreadsheets for a specific deal
  */
 export async function getDealSpreadsheets(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const spreadsheets = await db.query.spreadsheets.findMany({
     where: eq(numbers.spreadsheets.dealId, dealId),
@@ -206,7 +206,7 @@ export async function deleteSpreadsheet(id: string) {
  * Get spreadsheet templates
  */
 export async function getSpreadsheetTemplates() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const templates = await db.query.spreadsheets.findMany({
     where: eq(numbers.spreadsheets.isTemplate, true),

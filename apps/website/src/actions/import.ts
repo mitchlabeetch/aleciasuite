@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, sql } from "@alepanel/db";
+import { db, shared, eq } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -43,7 +43,7 @@ export async function importTransactions(
   }>
 ) {
   const user = await getAuthenticatedUser();
-  if ((user as any).role !== "sudo") throw new Error("Unauthorized: sudo role required");
+  if ((user as Record<string, unknown>).role !== "sudo") throw new Error("Unauthorized: sudo role required");
 
   let imported = 0;
   let skipped = 0;
@@ -110,7 +110,7 @@ export async function importTeamMembers(
   }>
 ) {
   const user = await getAuthenticatedUser();
-  if ((user as any).role !== "sudo") throw new Error("Unauthorized: sudo role required");
+  if ((user as Record<string, unknown>).role !== "sudo") throw new Error("Unauthorized: sudo role required");
 
   let imported = 0;
   let skipped = 0;
@@ -166,7 +166,7 @@ export async function importBlogPosts(
   }>
 ) {
   const user = await getAuthenticatedUser();
-  if ((user as any).role !== "sudo") throw new Error("Unauthorized: sudo role required");
+  if ((user as Record<string, unknown>).role !== "sudo") throw new Error("Unauthorized: sudo role required");
 
   let imported = 0;
   let skipped = 0;
@@ -221,7 +221,7 @@ export async function importJobOffers(
   }>
 ) {
   const user = await getAuthenticatedUser();
-  if ((user as any).role !== "sudo") throw new Error("Unauthorized: sudo role required");
+  if ((user as Record<string, unknown>).role !== "sudo") throw new Error("Unauthorized: sudo role required");
 
   let imported = 0;
   let skipped = 0;
@@ -278,7 +278,7 @@ export async function upsertTeamMember(args: {
   displayOrder: number;
   isActive: boolean;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const existing = await db
     .select({ id: shared.teamMembers.id })

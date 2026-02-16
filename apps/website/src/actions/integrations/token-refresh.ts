@@ -10,7 +10,7 @@
  * - Uses BetterAuth account table for token storage
  */
 
-import { db, shared, sql } from "@alepanel/db";
+import { db, shared } from "@alepanel/db";
 
 // Buffer time: refresh tokens 10 minutes before expiry
 const REFRESH_BUFFER_MS = 10 * 60 * 1000;

@@ -8,9 +8,19 @@ services:
     container_name: alecia-marketing
     restart: unless-stopped
     environment:
+      DATABASE_URL: postgresql://alecia:${POSTGRES_PASSWORD}@alecia-postgres:5432/alecia
       STRAPI_URL: http://alecia-strapi:1337
       STRAPI_API_TOKEN: ${STRAPI_API_TOKEN}
       NEXT_PUBLIC_SITE_URL: https://alecia.fr
+      NEXT_PUBLIC_ALECIA_MARKETING_URL: https://alecia.markets
+      NEXT_PUBLIC_ALECIA_COLAB_URL: https://colab.alecia.markets
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      BETTER_AUTH_URL: https://alecia.markets
       REVALIDATION_SECRET: ${REVALIDATION_SECRET}
     ports:
       - "3000:3000"
+    networks:
+      - alecia-network
+networks:
+  alecia-network:
+    external: true

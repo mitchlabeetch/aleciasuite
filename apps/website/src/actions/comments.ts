@@ -29,7 +29,7 @@ export async function getComments(data: {
   entityType: "deal" | "company" | "contact" | "document" | "card" | "board";
   entityId: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const result = await db
     .select({
@@ -67,7 +67,7 @@ export async function getCommentCount(data: {
   entityType: "deal" | "company" | "contact" | "document" | "card" | "board";
   entityId: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const result = await db
     .select({ count: sql<number>`count(*)` })

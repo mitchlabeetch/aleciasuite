@@ -232,7 +232,7 @@ export async function upsertCompanyFromPipedrive(args: {
   name: string;
   address?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check if company exists by Pipedrive ID
   const existing = await db
@@ -278,7 +278,7 @@ export async function upsertContactFromPipedrive(args: {
   email?: string;
   phone?: string;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // Check if contact exists by email
   let existing: typeof shared.contacts.$inferSelect[] = [];
@@ -398,7 +398,7 @@ export async function linkDealToPipedrive(args: {
   dealId: string;
   pipedriveId: number;
 }) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   await db
     .update(shared.deals)

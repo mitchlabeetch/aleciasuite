@@ -12,10 +12,10 @@
  * - Calendar integration
  */
 
-import { db, shared, eq, and, sql } from "@alepanel/db";
+import { db, shared, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
-import { microsoft, createGraphClient } from "@alepanel/integrations";
+import { createGraphClient } from "@alepanel/integrations";
 
 // ============================================
 // OAUTH CONFIGURATION

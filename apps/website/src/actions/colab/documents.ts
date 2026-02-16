@@ -46,7 +46,7 @@ export async function getDocument(id: string) {
 
 // Get documents for a specific deal
 export async function getDocumentsByDeal(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Verify user has access to this deal
   // For now, just check if they're authenticated
@@ -61,7 +61,7 @@ export async function getDocumentsByDeal(dealId: string) {
 // Create a new document
 export async function createDocument(args: {
   title: string;
-  content?: any;
+  content?: unknown;
   dealId?: string;
 }) {
   const user = await getAuthenticatedUser();
@@ -89,7 +89,7 @@ export async function createDocument(args: {
 export async function updateDocument(args: {
   id: string;
   title?: string;
-  content?: any;
+  content?: unknown;
   dealId?: string;
   icon?: string;
   coverImageUrl?: string;

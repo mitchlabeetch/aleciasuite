@@ -18,8 +18,8 @@ export interface CreateComparableAnalysisInput {
   name: string;
   targetName?: string;
   dealId?: string;
-  comparables: any[];
-  targetMetrics?: any;
+  comparables: unknown[];
+  targetMetrics?: unknown;
   notes?: string;
 }
 
@@ -99,7 +99,7 @@ export async function getComparableAnalysis(id: string) {
  * Get all comparable analyses for a specific deal
  */
 export async function getDealComparables(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const analyses = await db
     .select()
@@ -131,7 +131,7 @@ export async function updateComparableAnalysis(id: string, data: Partial<CreateC
   }
 
   // Merge new data into existing sheetData
-  const currentSheetData = (existing.sheetData as any) || {};
+  const currentSheetData = (existing.sheetData as Record<string, unknown>) || {};
   const newSheetData = {
     ...currentSheetData,
     targetName: data.targetName ?? currentSheetData.targetName,
@@ -140,7 +140,7 @@ export async function updateComparableAnalysis(id: string, data: Partial<CreateC
     notes: data.notes ?? currentSheetData.notes,
   };
 
-  const updateValues: any = {
+  const updateValues: Record<string, unknown> = {
     sheetData: newSheetData,
     updatedAt: new Date(),
   };

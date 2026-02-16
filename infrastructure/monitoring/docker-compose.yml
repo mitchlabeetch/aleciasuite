@@ -8,6 +8,6 @@ services:
     volumes:
       - uptime_data:/app/data
     ports:
-      - "3001:3001"
+      - "3002:3001"
 volumes:
   uptime_data:

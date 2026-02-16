@@ -226,7 +226,7 @@ export async function updatePost(
   }
 
   // Build update object
-  const updates: Record<string, any> = {};
+  const updates: Record<string, unknown> = {};
 
   if (data.title !== undefined) updates.title = data.title;
   if (data.slug !== undefined) updates.slug = data.slug;

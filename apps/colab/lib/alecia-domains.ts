@@ -8,25 +8,26 @@
  * - Production (alecia.markets, colab.alecia.markets)
  */
 
+const marketingUrl = process.env.NEXT_PUBLIC_ALECIA_MARKETING_URL || "https://alecia.markets";
+const colabUrl = process.env.NEXT_PUBLIC_ALECIA_COLAB_URL || "https://colab.alecia.markets";
+
 export const ALECIA_DOMAINS = {
 	/**
 	 * Main marketing website and admin panel
 	 * Routes: /, /admin/*, /expertises, /operations, etc.
 	 */
-	marketing:
-		process.env.NEXT_PUBLIC_ALECIA_MARKETING_URL || "https://alecia.markets",
+	marketing: marketingUrl,
 
 	/**
 	 * Colab collaboration workspace
 	 * Routes: /dashboard, /documents, /pipeline, /presentations
 	 */
-	colab:
-		process.env.NEXT_PUBLIC_ALECIA_COLAB_URL || "https://colab.alecia.markets",
+	colab: colabUrl,
 
 	/**
 	 * BetterAuth authentication - cross-subdomain SSO via .alecia.markets cookies
 	 */
-	auth: `${ALECIA_DOMAINS.marketing}/api/auth`,
+	auth: `${marketingUrl}/api/auth`,
 } as const;
 
 /**

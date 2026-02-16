@@ -305,7 +305,7 @@ export async function updateItem(id: string, data: UpdateChecklistItemInput) {
   }
 
   // If marking as completed, record who completed it and when
-  const updates: any = { ...data };
+  const updates: Record<string, unknown> = { ...data };
   if (data.isCompleted && !existingItem.isCompleted) {
     updates.completedBy = user.id;
     updates.completedAt = new Date();
@@ -387,7 +387,7 @@ export async function bulkUpdateStatus(
 
     checklistId = item.checklistId;
 
-    const updates: any = { isCompleted };
+    const updates: Record<string, unknown> = { isCompleted };
     if (isCompleted && !item.isCompleted) {
       updates.completedBy = user.id;
       updates.completedAt = new Date();

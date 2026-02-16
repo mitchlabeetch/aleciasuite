@@ -5,7 +5,6 @@
 // TODO: Migrate to Strapi CMS once deployed
 
 import { db, shared, eq, and, desc, sql } from "@alepanel/db";
-import { revalidatePath } from "next/cache";
 
 // ============================================
 // TRANSACTIONS (Track Record)
@@ -48,13 +47,13 @@ export async function getTransactions(args?: {
   }
 
   if (conditions.length > 0) {
-    query = query.where(and(...conditions)) as any;
+    query = query.where(and(...conditions)) as typeof query;
   }
 
-  query = query.orderBy(shared.transactions.displayOrder, desc(shared.transactions.year)) as any;
+  query = query.orderBy(shared.transactions.displayOrder, desc(shared.transactions.year)) as typeof query;
 
   if (args?.limit) {
-    query = query.limit(args.limit) as any;
+    query = query.limit(args.limit) as typeof query;
   }
 
   const result = await query;
@@ -145,7 +144,7 @@ export async function getForumCategories(includePrivate = false) {
   let query = db.select().from(shared.forumCategories);
 
   if (!includePrivate) {
-    query = query.where(eq(shared.forumCategories.isPrivate, false)) as any;
+    query = query.where(eq(shared.forumCategories.isPrivate, false)) as typeof query;
   }
 
   const result = await query.orderBy(shared.forumCategories.order);
@@ -155,13 +154,6 @@ export async function getForumCategories(includePrivate = false) {
 // ============================================
 // GLOBAL CONFIG
 // ============================================
-
-interface GlobalConfig {
-  id: string;
-  key: string;
-  value: unknown;
-  updatedAt?: Date;
-}
 
 export async function getConfig(key: string) {
   const result = await db
@@ -193,19 +185,6 @@ export async function getAllConfig() {
 // ============================================
 // MARKETING KPIS (Admin Configurable) - Board Requirement
 // ============================================
-
-interface MarketingKPI {
-  id: string;
-  key: string;
-  icon: string;
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  labelFr: string;
-  labelEn: string;
-  displayOrder: number;
-  isActive: boolean;
-}
 
 export async function getMarketingKPIs(locale = "fr") {
   const kpis = await db

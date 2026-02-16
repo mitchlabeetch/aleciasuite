@@ -18,5 +18,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - alecia-network
 volumes:
   postgres_data:
+networks:
+  alecia-network:
+    external: true

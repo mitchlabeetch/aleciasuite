@@ -15,5 +15,10 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    networks:
+      - alecia-network
 volumes:
   minio_data:
+networks:
+  alecia-network:
+    external: true

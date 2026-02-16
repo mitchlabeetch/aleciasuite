@@ -6,8 +6,7 @@
 
 "use server";
 
-import { db, numbers, shared, eq, desc, and, gte } from "@alepanel/db";
-import { revalidatePath } from "next/cache";
+import { db, numbers, shared, eq, desc } from "@alepanel/db";
 import { auth } from "@alepanel/auth";
 
 // ============================================
@@ -40,12 +39,12 @@ export interface DealSummary {
 }
 
 export interface DealNumbersData {
-  feeCalculations: any[];
-  financialModels: any[];
-  comparables: any[];
-  timelines: any[];
-  teaserTracking: any[];
-  postDeal: any[];
+  feeCalculations: unknown[];
+  financialModels: unknown[];
+  comparables: unknown[];
+  timelines: unknown[];
+  teaserTracking: unknown[];
+  postDeal: unknown[];
   counts: {
     feeCalculations: number;
     financialModels: number;
@@ -81,7 +80,7 @@ export interface ActivityItem {
  * Get deals for Numbers tool selector
  */
 export async function getDealsForNumbers(limit: number = 50): Promise<DealSummary[]> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deals = await db.query.deals.findMany({
     where: eq(shared.deals.isArchived, false),
@@ -103,7 +102,7 @@ export async function getDealsForNumbers(limit: number = 50): Promise<DealSummar
  * Get a single deal by ID for Numbers tools
  */
 export async function getDealById(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const deal = await db.query.deals.findFirst({
     where: eq(shared.deals.id, dealId),
@@ -138,7 +137,7 @@ export async function getDealById(dealId: string) {
  * Get all Numbers data for a specific deal
  */
 export async function getDealNumbersData(dealId: string): Promise<DealNumbersData> {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const [
     feeCalculations,
@@ -282,7 +281,7 @@ export async function getRecentActivity() {
       id: item.id,
       type: "timeline" as const,
       title: item.name || "Timeline",
-      description: `${(item.milestones as any[])?.length || 0} tâches`,
+      description: `${(item.milestones as unknown[])?.length || 0} tâches`,
       createdAt: item.createdAt ?? new Date(),
       href: "/admin/numbers/timeline",
     })),
@@ -298,7 +297,7 @@ export async function getRecentActivity() {
       id: item.id,
       type: "post-deal" as const,
       title: item.workstream || "Intégration post-deal",
-      description: `${(item.tasks as any[])?.length || 0} tâches`,
+      description: `${(item.tasks as unknown[])?.length || 0} tâches`,
       createdAt: item.createdAt ?? new Date(),
       href: "/admin/numbers/post-deal",
     })),

@@ -39,10 +39,10 @@ export interface SaveFinancialModelInput {
     projectionYears?: number;
     growthRate?: number;
     marginImprovement?: number;
-    [key: string]: any;
+    [key: string]: unknown;
   };
   results?: {
-    [key: string]: any;
+    [key: string]: unknown;
   };
   version?: number;
 }
@@ -162,7 +162,7 @@ export async function getFinancialModel(id: string) {
  * Get financial models for a specific deal
  */
 export async function getDealFinancialModels(dealId: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const models = await db.query.financialModels.findMany({
     where: eq(numbers.financialModels.dealId, dealId),

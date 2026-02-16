@@ -342,7 +342,7 @@ export async function bulkCreateContacts(contacts: CreateContactInput[]) {
   // TODO: Implement proper bulk insert with deduplication
   // For now, we'll create one at a time with error handling
   const results = {
-    created: [] as any[],
+    created: [] as unknown[],
     skipped: [] as { email: string; reason: string }[],
     errors: [] as { data: CreateContactInput; error: string }[],
   };

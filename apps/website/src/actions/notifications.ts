@@ -7,7 +7,7 @@
 
 "use server";
 
-import { db, shared, eq, and, desc, sql } from "@alepanel/db";
+import { db, shared, eq, and, sql } from "@alepanel/db";
 import { getAuthenticatedUser } from "./lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -47,7 +47,7 @@ export async function getNotifications(args?: { limit?: number }) {
     LIMIT ${limit}
   `);
 
-  return result.rows.map((row: any) => ({
+  return result.rows.map((row: Record<string, unknown>) => ({
     id: row.id,
     recipientId: row.recipient_id,
     triggerId: row.trigger_id,

@@ -10,7 +10,7 @@
  * - Signature request notifications
  */
 
-import { db, shared, eq, sql } from "@alepanel/db";
+import { db, shared, eq } from "@alepanel/db";
 import { getAuthenticatedUser } from "../lib/auth";
 import { revalidatePath } from "next/cache";
 
@@ -22,7 +22,7 @@ import { revalidatePath } from "next/cache";
  * Get Slack integration status
  */
 export async function getSlackStatus() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const config = await db.query.globalConfig.findFirst({
     where: eq(shared.globalConfig.key, "slack_config"),
@@ -57,7 +57,7 @@ export async function getSlackStatus() {
  * Get notification preferences for Slack
  */
 export async function getSlackNotificationPrefs() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   return {
     newDeal: true,

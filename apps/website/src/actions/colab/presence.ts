@@ -14,7 +14,7 @@ import { revalidatePath } from "next/cache";
 // Update presence (called periodically by clients)
 export async function heartbeat(args: {
   documentName: string;
-  cursorPosition?: any;
+  cursorPosition?: unknown;
 }) {
   const user = await getAuthenticatedUser();
 
@@ -52,7 +52,7 @@ export async function heartbeat(args: {
 
 // Get active users for a document (active within last 30 seconds)
 export async function getActiveUsers(documentName: string) {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   const cutoff = new Date(Date.now() - 30000); // 30 seconds ago
 
@@ -86,7 +86,7 @@ export async function leaveDocument(documentName: string) {
 
 // Cleanup stale presence entries (called by cron or admin)
 export async function cleanupStalePresence() {
-  const user = await getAuthenticatedUser();
+  const _user = await getAuthenticatedUser();
 
   // TODO: Add admin check here
   // For now, anyone can call this (should be restricted to cron/admin)

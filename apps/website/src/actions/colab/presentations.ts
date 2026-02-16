@@ -68,7 +68,7 @@ export async function createPresentation(args: {
 export async function updatePresentation(args: {
   id: string;
   title?: string;
-  slides?: any[];
+  slides?: unknown[];
   dealId?: string;
 }) {
   const user = await getAuthenticatedUser();
