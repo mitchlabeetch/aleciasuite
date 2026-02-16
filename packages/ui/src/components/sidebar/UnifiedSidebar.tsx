@@ -155,6 +155,7 @@ export function UnifiedSidebar({
 						</a>
 					)}
 					<button
+						type="button"
 						onClick={() => setIsCollapsed(!isCollapsed)}
 						className={cn(
 							"p-2 rounded-lg hover:bg-muted transition-colors",
@@ -383,6 +384,7 @@ function SidebarItemComponent({
 		return (
 			<div>
 				<button
+					type="button"
 					onClick={handleClick}
 					disabled={item.disabled}
 					className={className}
@@ -391,7 +393,7 @@ function SidebarItemComponent({
 				</button>
 				{isOpen && (
 					<div className="pl-4 mt-1 space-y-1 border-l border-border ml-3">
-						{item.children!.map((child) => (
+						{item.children?.map((child) => (
 							<SidebarItemComponent
 								key={child.id}
 								item={child}
@@ -426,6 +428,7 @@ function SidebarItemComponent({
 
 	return (
 		<button
+			type="button"
 			onClick={handleClick}
 			disabled={item.disabled}
 			className={className}
